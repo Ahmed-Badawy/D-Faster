@@ -82,6 +82,8 @@
     <div class="col-sm-6">
         <label>Json Text (String) (input)</label>
         <textarea rows="15" cols="60" class='form-control' ng-model='json_text' style='width:100%'></textarea>
+        <br>
+    <button type='submit' ng-click='compileIt()' class='btn btn-primary btn-lg btn-block'>Prettify Json Code <span class='fa fa-arrow-right'></span></button>
         
         
     </div>
@@ -90,10 +92,8 @@
         <pre  class='well well-sm' id='output'></pre> 
     </div>
 
-<div class="clearfix"></div>
-<br>
 
-    <button type='submit' ng-click='compileIt()' class='btn btn-primary btn-lg btn-block'>Prettify Json Code</button>
+
 <form>
 
 <div class="clearfix"></div><br>

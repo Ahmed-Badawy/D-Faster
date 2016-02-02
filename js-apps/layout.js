@@ -48,7 +48,7 @@ toastr.options = {
 
 
   // var base_url = "http://ahmed-badawy.com/projects/dev-tools/";
-  var base_url = "http://localhost/_websites/ahmed-badawy.com/projects/dev-tools/";
+  var base_url = "http://localhost/_websites/ahmed-badawy.com/projects/Develop-Faster/";
   function goProject(project,h){
     console.log(project);
     window.location = base_url+"projects/"+project+".html?h="+h;
