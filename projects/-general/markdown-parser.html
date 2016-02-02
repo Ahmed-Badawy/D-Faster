@@ -1,0 +1,183 @@
+<!doctype html>
+<html ng-app>
+<head>
+
+<title>Markdown Parser</title>
+<meta charset='utf-8'>
+<link rel="icon" type="image/x-icon" href="../../images/icon.png" />
+
+<link rel="stylesheet" href="../../_assets/css/bootstrap.min.css">
+<link href="../../css/simple-sidebar.css" rel="stylesheet">
+<link rel="stylesheet" href="../../_assets/plugins/font-awesome-4.5.0/css/font-awesome.min.css">
+
+<script  type="text/javascript" src="../../_assets/angular/angular.min.js"></script>
+<script  type="text/javascript" src="../../_assets/angular/angular-route.min.js"></script>
+
+<script src="../../_assets/js/jquery-2.1.4.min.js"></script>
+
+<script type="text/javascript" src='../../_assets/plugins/clipboard.js/clipboard.min.js'></script>
+<link href="../../_assets/plugins/toastr/toastr.min.css" rel="stylesheet">
+<script type="text/javascript" src='../../_assets/plugins/toastr/toastr.min.js'></script>
+
+
+<script type="text/javascript" src='../../_assets/plugins/bytesize.min.js'></script>
+
+
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
+    <style type="text/css">
+        body{
+            font-family: 'Open Sans','Lato', Helvetica, sans-serif;
+            color:#222;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+
+    <div id="wrapper">
+
+<div ng-include src='"../../templates/sidebar.html"'></div>
+<a href="#menu-toggle" class="btn btn-default btn-xs fa fa-arrow-right" id="menu-toggle"></a> 
+
+
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+
+<div ng-include src='"../../templates/headerarea.html"'></div>
+
+
+<legend><h2><span class='fa fa-reorder'></span> MarkDown Parser: <small>Write Faster With Markdown</small></h2></legend>
+
+
+    <div class="col-sm-6">
+        <textarea id="text-input" oninput="this.editor.update()" rows="30" cols="60" class='form-control'>
+
+#Header 1
+##Header 2
+### Header 3
+####Header 4
+####Header 5
+#####Header 6
+
+# أحمد بدوى السيد
+
+
+Page Header    
+---
+
+normal paragraph  **Bold Text** here
+
+    this is a pre tag
+
+```this is how we write code ```
+
+Link:  [ahmed-badawy.com](http://ahmed-badawy.com)
+
+---
+____
+
+
+- list item 1
+- list item 2
+- list item 3
+
+
+####links array
+- [google](http://google.com)
+- [ahmed-badawy.com](http://ahmed-badawy.com)
+- [github.com](http://github.com)
+- [stackoverflow.com](http://stackoverflow.com)
+
+
+*  list 2 item 1
+*  list 2 item 2
+
+
+Markdown is a lightweight markup language based on the formatting conventions that people naturally use in email.  As [John Gruber] writes on the [Markdown site][df1]
+
+> The overriding design goal for Markdown's
+> formatting syntax is to make it as readable
+> as possible. The idea is that a
+> Markdown-formatted document should be
+> publishable as-is, as plain text, without
+> looking like it's been marked up with tags
+> or formatting instructions.
+
+* [plugins/dropbox/README.md] (PlDb)
+* [plugins/github/README.md] (PlGh)
+
+
+
+</textarea>
+        
+        
+    </div>
+    <div id="preview" class='col-sm-6'></div>
+
+
+
+
+
+
+
+
+<div class="clearfix"></div>
+<br>
+
+
+
+<div ng-include src='"../../templates/footerarea.html"'></div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+
+    <script type="text/javascript" src='js/markdown.min.js'></script>
+
+    <script>
+      function Editor(input, preview) {
+        this.update = function () {
+          preview.innerHTML = markdown.toHTML(input.value);
+        };
+        input.editor = this;
+        this.update();
+      }
+      var get_id = function (id) { return document.getElementById(id); };
+      new Editor(get_id("text-input"), get_id("preview"));
+    </script>
+
+
+    <script  type="text/javascript" src="../../js-apps/layout.js"></script>
+
+    <script type="text/javascript">
+        // var myApp=angular.module('myApp',['ngRoute']);
+        // myApp.filter('markdownFilter',function( ){
+        //     return function(string){
+        //         return markdown.toHTML(string);    
+        //     }
+        // });
+        // myApp.controller('MainController',function($scope){
+
+        // });
+    </script>
+
+</body>
+</html>

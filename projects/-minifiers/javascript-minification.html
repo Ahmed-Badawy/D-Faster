@@ -1,0 +1,157 @@
+<!doctype html>
+<html ng-app='myApp'>
+<head>
+
+<title>JavaScript Minification</title>
+<meta charset='utf-8'>
+<link rel="icon" type="image/x-icon" href="../../images/icon.png" />
+
+<link rel="stylesheet" href="../../_assets/css/bootstrap.min.css">
+<link href="../../css/simple-sidebar.css" rel="stylesheet">
+<link rel="stylesheet" href="../../_assets/plugins/font-awesome-4.5.0/css/font-awesome.min.css">
+
+<script  type="text/javascript" src="../../_assets/angular/angular.min.js"></script>
+<script  type="text/javascript" src="../../_assets/angular/angular-route.min.js"></script>
+
+<script src="../../_assets/js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src='../../_assets/plugins/bytesize.min.js'></script>
+
+<script type="text/javascript" src='../../_assets/plugins/clipboard.js/clipboard.min.js'></script>
+<link href="../../_assets/plugins/toastr/toastr.min.css" rel="stylesheet">
+<script type="text/javascript" src='../../_assets/plugins/toastr/toastr.min.js'></script>
+
+    <script  type="text/javascript" src="minification-apps.js"></script>
+    <script  type="text/javascript" src="../../js-apps/layout.js"></script>
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
+    <style type="text/css">
+        body{
+            font-family: 'Open Sans','Lato', Helvetica, sans-serif;
+            color:#222;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+    </style>
+
+</head>
+<body ng-controller='MainController'>
+
+
+    <div id="wrapper">
+
+<div ng-include src='"../../templates/sidebar.html"'></div>
+<a href="#menu-toggle" class="btn btn-default btn-xs fa fa-arrow-right" id="menu-toggle"></a> 
+
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+
+<div ng-include src='"../../templates/headerarea.html"'></div>
+
+
+<legend><h2><span class='fa fa-file-text-o'></span> JavaScript Minification: <small>Minify Your JavaScript Code</small></h2></legend>
+
+
+<div class="row">
+
+
+<div id='textarea1' class='col-sm-6'>
+    <p>Before (input)</p>
+    <textarea class='form-control mytextarea' rows='15' ng-model='beforeMinify'></textarea>
+    <input type='file' class='hidden upload_input' />
+    <span class='fa fa-file-code-o btn file_btn' title='Import a File'></span>
+    <span class='fa fa-copy btn copy_btn' title='Copy Text'></span>
+    <span class='fa fa-cut btn cut_btn' title='Cut Text'></span>
+    <span class='fa fa-th-list btn selectAll' title='Select All Text'></span>
+    <span class='fa fa-trash btn emptyAll' title='Empty All Text'></span>
+
+    <a href='' download="script.js" style="display:none" class='hidden download_content_link'></a>
+    <span class='fa fa-save btn download_content' title='Download Content'></span>
+
+
+    <span class='fa fa-hand-lizard-o fa-lg pull-right'></span>
+    <span class='pull-right txtsize' style='color:#aaa;font-weight:bolder'></span>
+    <span class='pull-right'>&nbsp;&nbsp;</span>
+    <span class='fa fa-hand-peace-o fa-lg pull-right'></span>
+    <span class='pull-right txtlength' style='color:#aaa;font-weight:bolder'></span>
+</div>
+
+<div id='textarea2' class='col-sm-6'>
+    <p>After (output)</p>
+    <textarea class='form-control mytextarea' rows='15' readonly>{{beforeMinify | minifyJS:prams}}</textarea>
+    <input type='file' class='hidden upload_input' />
+    <span class='fa fa-file-code-o btn file_btn hidden' title='Import a File'></span>
+    <span class='fa fa-copy btn copy_btn' title='Copy Text'></span>
+    <span class='fa fa-cut btn cut_btn hidden' title='Cut Text'></span>
+    <span class='fa fa-th-list btn selectAll' title='Select All Text'></span>
+    <span class='fa fa-trash btn emptyAll hidden' title='Empty All Text'></span>
+
+    <a href='' download="script.js" style="display:none" class='hidden download_content_link'></a>
+    <span class='fa fa-save btn download_content' title='Download Content'></span>
+
+
+    <span class='fa fa-hand-lizard-o fa-lg pull-right'></span>
+    <span class='pull-right txtsize' style='color:#aaa;font-weight:bolder'>size: </span>
+    <span class='pull-right'>&nbsp;&nbsp;</span>
+    <span class='fa fa-hand-peace-o fa-lg pull-right'></span>
+    <span class='pull-right txtlength' style='color:#aaa;font-weight:bolder'></span>
+
+</div>
+</div>
+
+<div class="clearfix"></div> <br>
+
+<div class="alert alert-warning col-sm-9">
+    <p>
+    Does every line end with semicolon ? &nbsp; 
+    <label>Yes <input type='radio' name='pram_newline' value='yes' ng-model='prams.newline'></label>
+    <label>No <input type='radio' name='pram_newline' value='no' ng-model='prams.newline'></label>
+
+    </p>
+    <p class='help-block'>
+    - javascript allows the lines to end with a return break but it isn't recommended. <br>
+    <span style='color:red'>Why am i telling you this ?</span> our minifier assumes all lines end with semicolon if you end a line without the ; it will gets appended to the next line & that produces an error in your code. so we gave you the option to remove the (return key) or remove it for minifications purposes.<br>
+    </p>
+    <p>- <span style='color:red'>Alert: </span> if you use regex expression in your code please review the output of the minification because it might be an error in the regex expression area.</p>
+    <p>- Recommended JS Validator: <a href="http://www.jslint.com/" target='_blank'>jsLint.COM</a> </p>
+</div>
+
+<div class="alert alert-warning col-sm-3">
+    <label><input type='checkbox' ng-model='prams.comments' > <small>remove comments</small> </label><br>
+    <label><input type='checkbox' ng-model='prams.dnewline' > <small>remove double newlines</small> </label><br>
+    <label><input type='checkbox' ng-model='prams.spaces' > <small>remove spaces</small> </label><br>
+    <label><input type='checkbox' ng-model='prams.bracketspace' > <small>remove bracket Spaces</small> </label><br>
+    <label><input type='checkbox' ng-model='prams.semicolonspace' > <small>remove semicolon spaces</small> </label><br>
+    <label><input type='checkbox' ng-model='prams.equalspaces' > <small>remove equal spaces</small> </label><br>
+    <label><input type='checkbox' ng-model='prams.commaspaces' > <small>remove comma spaces</small> </label><br>
+</div>
+
+
+
+
+
+<div class="clearfix"></div>
+
+
+
+<div ng-include src='"../../templates/minification-footer.html"'></div>
+<div ng-include src='"../../templates/footerarea.html"'></div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+
+
+</body>
+</html>

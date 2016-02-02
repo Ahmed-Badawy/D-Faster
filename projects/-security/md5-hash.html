@@ -1,0 +1,140 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+
+<title>MD5 Hash Encoder</title>
+<meta charset='utf-8'>
+<link rel="icon" type="image/x-icon" href="../../images/favicon.ico" />
+
+
+<link rel="stylesheet" href="../../_assets/css/bootstrap.min.css">
+<link href="../../css/simple-sidebar.css" rel="stylesheet">
+<link rel="stylesheet" href="../../_assets/plugins/font-awesome-4.5.0/css/font-awesome.min.css">
+
+<script  type="text/javascript" src="../../_assets/angular/angular.min.js"></script>
+<script  type="text/javascript" src="../../_assets/angular/angular-route.min.js"></script>
+
+<script src="../../_assets/js/jquery-2.1.4.min.js"></script>
+
+
+<script type="text/javascript" src='../../_assets/plugins/clipboard.js/clipboard.min.js'></script>
+<link href="../../_assets/plugins/toastr/toastr.min.css" rel="stylesheet">
+<script type="text/javascript" src='../../_assets/plugins/toastr/toastr.min.js'></script>
+
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
+    <style type="text/css">
+        body{
+            font-family: 'Open Sans','Lato', Helvetica, sans-serif;
+            color:#222;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+    </style>
+
+
+    <script  type="text/javascript" src="../../js-apps/layout.js"></script>
+</head>
+
+<body>
+
+
+
+    <div id="wrapper" ng-controller='MainController'>
+
+<div ng-include src='"../../templates/sidebar.html"'></div>
+<a href="#menu-toggle" class="btn btn-default btn-xs fa fa-arrow-right" id="menu-toggle"></a> 
+
+
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+
+<div ng-include src='"../../templates/headerarea.html"'></div>
+
+
+<legend><h2> <span class='fa fa-hashtag'></span> MD5 Hash Encoder: <small>Generate a MD5 or (HMAC-MD5) Hash in a second</small></h2></legend>
+
+
+<div class='row well'>
+    <div class="col-sm-7">
+        <legend>Input</legend>
+        <label>Input string (input)</label>
+        <textarea id="text-input" rows="2" class='form-control' ng-model='hash_text'></textarea>
+        <br>
+        <label>HMAC-MD5 key (optional) (input)</label>
+        <input type='text' class='form-control' ng-model='hmac'/>  
+    </div>
+    <div class="col-sm-5">
+        <legend>Output</legend>
+        <label>MD5 Hash (output)</label>
+        <br>
+        <button class='btn btn-default'>{{hash_text | md5}}</button>
+        <small style='color:#888'>click to copy</small>
+        <br>
+        <br>
+        <label>HMAC-MD5 Hash (output)</label>
+        <br>
+        <button class='btn btn-default'>{{hash_text | hmd5:hmac}}</button>
+        <small style='color:#888'>click to copy</small>
+    </div>
+</div>
+
+
+
+
+
+
+<div class="clearfix"></div>
+<br>
+
+
+
+<div ng-include src='"../../templates/footerarea.html"'></div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+
+    <script type="text/javascript">
+
+    var clipboard_copy = new Clipboard('button', {
+        text: function(e) {
+            toastr.warning('Hash Was Copied: '+e.innerHTML);
+            return e.innerHTML;
+        }
+    });
+
+        var myApp=angular.module('myApp',['ngRoute']);
+        myApp.filter('md5',function(){
+            return function(string){
+                if(string) return md5(string);
+                else return "MD5 hash";
+            }
+        });
+        myApp.filter('hmd5',function(){
+            return function(string,hash){
+                if(string) return md5(string,hash);   
+                else return "HMD5 hash";
+            }
+        });
+        myApp.controller('MainController',function($scope){
+            // console.log("hello");
+        });
+    </script>
+
+    <script  type="text/javascript" src="js/md5.min.js"></script>
+
+</body>
+</html>

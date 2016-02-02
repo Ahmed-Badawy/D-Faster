@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!-- <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" /> -->
+<!-- <link rel="icon" type="image/x-icon" href="images/favicon.ico" /> -->
+<link href="index.css" rel="stylesheet" type="text/css">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<title>colorPicker_new</title>
+</head>
+<body class='container'>
+
+
+<div style='margin-top:1%'></div>
+
+
+
+<div id="testPatch">.</div>
+
+<div id="contrastPatch"><div></div><i>-Test-</i></div>
+
+<div id="colorValues">.</div>
+
+<div id="sliders" class="sliders">
+  <div id="rgbR"><div></div></div>
+  <div id="rgbG"><div></div></div>
+  <div id="rgbB"><div></div></div>
+
+  <div id="hslH"><div></div></div>
+  <div id="hslS"><div></div></div>
+  <div id="hslL"><div></div></div>
+
+  <!-- <div id="cmyC"><div></div></div>
+  <div id="cmyM"><div></div></div>
+  <div id="cmyY"><div></div></div> -->
+</div>
+
+<div id="hsv_map">
+  <canvas id="surface" width="200" height="200"></canvas>
+  <div class="cover"></div>
+  <div class="hsv-cursor"></div>
+  <div class="bar-bg"></div>
+  <div class="bar-white"></div>
+  <canvas id="luminanceBar" width="25" height="200"></canvas>
+  <div class="hsv-barcursors" id="hsv_cursors">
+    <div class="hsv-barcursor-l"></div>
+    <div class="hsv-barcursor-r"></div>
+  </div>
+</div>
+
+<div id="color_squares">
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
+
+
+
+<div id="description" class='hidden'>Demo patches: demonstrate how to build color pickers and how Colors' / ColorPicker's API work. Patches are linked to 
+<select >
+  <option value="Colors">Colors</option>
+  <option value="ColorPicker" id='selectthis'>ColorPicker</option>
+</select>
+
+<script type="text/javascript">
+  $('#selectthis').attr('selected');
+</script>
+
+<p>See a simple jQuery implementation <a href="jQuery_implementation/">preview here</a> or a simple javaScript implementation <a href="javaScript_implementation/">preview here</a></p></div>
+
+<!-- <div id="model_display"></div> -->
+<!--canvas style="position: absolute; left: 500px; width: 255px; height: 255px" id="canvas"></canvas-->
+
+<script type="text/javascript" src="colors.js"></script>
+<script type="text/javascript" src="colorPicker.data.js"></script>
+<script type="text/javascript" src="colorPicker.js"></script>
+<script type="text/javascript" src="index.js"></script>
+
+
+
+
+<div class="clearfix"></div>
+<br>
+<div style='margin-top:5%'></div>
+
+<div class='well'>
+  <legend style='margin-top:1%'><h1>Color Picker <small></small></h1></legend>
+  <div>
+    <label>Hex Color:</label> <button class='btn btn-default' id='c_hex'></button>
+    <br><br> 
+    <label>RGBA Color:</label> <button class='btn btn-default' id='c_rgba'></button>
+    <br> <br> 
+    <label>HSLA Color:</label> <button class='btn btn-default' id='c_hlsa'></button>
+    <br>
+  </div>
+  
+  <!-- <button onclick="out_color()">Out Color</button> -->
+</div>
+
+
+
+
+</body>
+</html>

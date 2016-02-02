@@ -1,0 +1,131 @@
+<!doctype html>
+<html ng-app='myApp'>
+<head>
+
+<title>HTML Sanitizer</title>
+<meta charset='utf-8'>
+<link rel="icon" type="image/x-icon" href="../../images/icon.png" />
+
+<link rel="stylesheet" href="../../_assets/css/bootstrap.min.css">
+<link href="../../css/simple-sidebar.css" rel="stylesheet">
+<link rel="stylesheet" href="../../_assets/plugins/font-awesome-4.5.0/css/font-awesome.min.css">
+
+<script  type="text/javascript" src="../../_assets/angular/angular.min.js"></script>
+<script  type="text/javascript" src="../../_assets/angular/angular-route.min.js"></script>
+
+<script src="../../_assets/js/jquery-2.1.4.min.js"></script>
+
+<script type="text/javascript" src='../../_assets/plugins/clipboard.js/clipboard.min.js'></script>
+<link href="../../_assets/plugins/toastr/toastr.min.css" rel="stylesheet">
+<script type="text/javascript" src='../../_assets/plugins/toastr/toastr.min.js'></script>
+
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
+    <style type="text/css">
+        body{
+            font-family: 'Open Sans','Lato', Helvetica, sans-serif;
+            color:#222;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+    </style>
+
+</head>
+<body ng-controller='MainController'>
+
+
+
+    <div id="wrapper">
+
+<div ng-include src='"../../templates/sidebar.html"'></div>
+<a href="#menu-toggle" class="btn btn-default btn-xs fa fa-arrow-right" id="menu-toggle"></a> 
+
+
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+
+<div ng-include src='"../../templates/headerarea.html"'></div>
+<legend><h2><span class='fa fa-barcode'></span> Generate a Sanitized HTML <small>write safe html without any hazard</small></h2></legend>
+
+
+<div class="row">
+
+<div class="col-sm-6">
+    <label>HTML To Sanitize (string) (input)</label>
+    <textarea class='form-control' ng-model='html_text' rows='10'></textarea>
+</div>
+<div class="col-sm-6" data-clipboard-text='{{html_text | sanitize_html}}' id='safe_html'>
+    <label>Safe Sanitized HTML (string) (output)</label>
+    <textarea class='form-control' readonly rows='10'>{{html_text | sanitize_html}}</textarea>
+<small style='color:#888'>click to copy</small>
+</div>
+
+<div class='col-sm-12'>
+    <h3>In Page Test <small>(what get's printed in the html)</small></h3>
+    <pre id='preview'></pre>
+</div>
+
+
+
+    <div class="clearfix"></div><br>
+
+
+</div>
+
+
+
+<div ng-include src='"../../templates/footerarea.html"'></div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+
+    <script type="text/javascript">
+var myApp=angular.module('myApp',['ngRoute']);
+
+myApp.filter('sanitize_html',function(){
+    return function( str ){
+        window.document.getElementById("preview").innerHTML = sanitize(str);
+        var output = sanitize(sanitize(str));
+        return output;
+        // $scope.after = str;   
+    }
+});
+
+function sanitize(str) {
+    return $('<div></div>').text(str).html().replace(/"/gi,'&quot;').replace(/'/gi,'&apos;');   
+}
+
+myApp.controller('MainController',function($scope){
+    $scope.html_text = '<link rel="stylesheet" href="this is a normal css link">\n<style>\nh1{\ncolor:red;\n}\n</style>';
+
+    // $scope.sanitize_html = function(){
+
+    // }
+    // $scope.sanitize_html();
+
+});
+
+    var clipboard_copy = new Clipboard('#safe_html');
+    clipboard_copy.on('success', function(e) { toastr.warning('Clipboard: Sanitized Text Was Copied.') });
+    clipboard_copy.on('error', function(e) { console.log(e); });
+
+
+    </script>
+    <script  type="text/javascript" src="../../js-apps/layout.js"></script>
+
+
+</body>
+</html>
