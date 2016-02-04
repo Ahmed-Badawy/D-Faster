@@ -2,7 +2,7 @@
 <html ng-app="myApp">
 <head>
 
-<title>MD5 Hash Encoder</title>
+<title>Nubmer Systems Converter</title>
 <meta charset='utf-8'>
 <link rel="icon" type="image/x-icon" href="../../images/icon.png" />
 
@@ -17,7 +17,6 @@
 <script src="../../_assets/js/jquery-2.1.4.min.js"></script>
 
 
-<script type="text/javascript" src='../../_assets/plugins/clipboard.js/clipboard.min.js'></script>
 <link href="../../_assets/plugins/toastr/toastr.min.css" rel="stylesheet">
 <script type="text/javascript" src='../../_assets/plugins/toastr/toastr.min.js'></script>
 
@@ -56,41 +55,27 @@
 <div ng-include src='"../../templates/headerarea.html"'></div>
 
 
-<legend><h2> <span class='fa fa-hashtag'></span> MD5 Hash Encoder: <small>Generate a MD5 or (HMAC-MD5) Hash in a second</small></h2></legend>
+<legend><h2> <span class='fa fa-hashtag'></span> Number System Converter: <small>Convets Between different Numbering systems with ease</small></h2></legend>
 
 
-<div class='row well'>
-    <div class="col-sm-7">
-        <legend>Input</legend>
-        <label>Input string (input)</label>
-        <textarea id="text-input" rows="2" class='form-control' ng-model='hash_text'></textarea>
-        <br>
-        <label>HMAC-MD5 key (optional) (input)</label>
-        <input type='text' class='form-control' ng-model='hmac'/>  
-    </div>
-    <div class="col-sm-5">
-        <legend>Output</legend>
-        <label>MD5 Hash (output)</label>
-        <br>
-        <button class='btn btn-default'>{{hash_text | md5}}</button>
-        <small style='color:#888'>click to copy</small>
-        <br>
-        <br>
-        <label>HMAC-MD5 Hash (output)</label>
-        <br>
-        <button class='btn btn-default'>{{hash_text | hmd5:hmac}}</button>
-        <small style='color:#888'>click to copy</small>
-    </div>
+<div class='row well col-sm-12'>
+
+    <label class='col-sm-12'><span class='fa fa-arrow-right'></span> Decimal (base 10) <input ng-change='calc(dec,10)' class='form-control' ng-model='dec'/></label><div class="clearfix"></div><br>
+    
+    <label class='col-sm-12'><span class='fa fa-arrow-right'></span> Binary (base 2) <input ng-change='calc(bin,2)' class='form-control' ng-model='bin'/></label>
+    <div class="clearfix"></div><br>
+    
+    <label class='col-sm-12'><span class='fa fa-arrow-right'></span> Octadecimal (base 8) <input ng-change='calc(oct,8)' class='form-control' ng-model='oct'/></label><div class="clearfix"></div><br>
+    
+    <label class='col-sm-12'><span class='fa fa-arrow-right'></span> Hexadecimal (base 16) <input ng-change='calc(hex,16)' class='form-control' ng-model='hex'/></label><div class="clearfix"></div><br>
+
 </div>
-
-
 
 
 
 
 <div class="clearfix"></div>
 <br>
-
 
 
 <div ng-include src='"../../templates/footerarea.html"'></div>
@@ -108,33 +93,25 @@
 
 
     <script type="text/javascript">
-
-    var clipboard_copy = new Clipboard('button', {
-        text: function(e) {
-            toastr.warning('Hash Was Copied: '+e.innerHTML);
-            return e.innerHTML;
-        }
-    });
-
         var myApp=angular.module('myApp',['ngRoute']);
-        myApp.filter('md5',function(){
-            return function(string){
-                if(string) return md5(string);
-                else return "MD5 hash";
-            }
-        });
-        myApp.filter('hmd5',function(){
-            return function(string,hash){
-                if(string) return md5(string,hash);   
-                else return "HMD5 hash";
-            }
-        });
         myApp.controller('MainController',function($scope){
-            // console.log("hello");
+            var num=0 ; var from=null;
+            $scope.calc = function(num,from){
+                num = num.trim();
+                if(num=='' || num==null || num==0) num=0;
+                dec = window.parseInt(num,from).toString(10);
+                bin = window.parseInt(num,from).toString(2);
+                oct = window.parseInt(num,from).toString(8);
+                hex = window.parseInt(num,from).toString(16);
+                $scope.dec = dec;
+                $scope.bin = bin;
+                $scope.oct = oct;
+                $scope.hex = hex;
+            };
+
         });
     </script>
 
-    <script  type="text/javascript" src="js/md5.min.js"></script>
 
 </body>
 </html>

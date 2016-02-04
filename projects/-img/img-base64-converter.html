@@ -74,14 +74,19 @@
 <div ng-show='showing=="c1"'>
 <legend><h4>Converting Image to Base-64 Data format</h4></legend>
 <div class="col-sm-6">
-    <label>Image File (Image File) (input)</label>
-    <div id='show_img'></div>
+    <label>Image File (Image File) (input)</label><br>
+    <img id='show_img'>
     <input type='file' class='form-control' id='img_upload'/>
 </div>
 <div class="col-sm-6">
     <label>Base-64 Data (string) (output)</label>
     <textarea class='form-control' readonly rows='20' id='img_data'></textarea>
-    <Button class='btn btn-default' id='copy_box'>Copy Data</Button>
+    <Button class='btn btn-default btn-xs' id='copy_box'>Copy Data</Button>
+<div class="clearfix"></div><br>
+    <pre>
+<b>How to use this data ?</b>
+- just include it inside the img tag as src attribute. &amp;lt;img src=&amp;apos;{64data}&amp;apos;&amp;gt;
+    </pre>
 </div>
     <div class="clearfix"></div><br>
 </div>
@@ -134,15 +139,14 @@ myApp.controller('MainController',function($scope){
     // }
 });
 
+
     function read_img_file(file){
         if(!file.type.match("image.*")) return;
         var reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = function(evt){
             res = evt.target.result;
-            var img = new Image();
-            img.src = evt.target.result;
-            document.getElementById('show_img').appendChild(img);
+            document.getElementById('show_img').src = evt.target.result;
             document.getElementById("img_data").innerHTML = reader.result;
         }
     }
@@ -150,6 +154,9 @@ myApp.controller('MainController',function($scope){
         var file1 = evt.target.files[0];
         var output = read_img_file(file1);
     }   
+    document.getElementById("show_img").addEventListener('click',function(){
+        document.getElementById("img_upload").click();
+    });
     document.getElementById("img_upload").addEventListener('change',onFileChange);
 
 

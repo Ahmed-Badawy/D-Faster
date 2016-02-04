@@ -58,17 +58,17 @@
     <label>HTML To Sanitize (string) (input)</label>
     <textarea class='form-control' ng-model='html_text' rows='10'></textarea>
 </div>
-<div class="col-sm-6" data-clipboard-text='{{html_text | sanitize_html}}' id='safe_html'>
+<div class="col-sm-6" id='safe_html'>
     <label>Safe Sanitized HTML (string) (output)</label>
-    <textarea class='form-control' readonly rows='10'>{{html_text | sanitize_html}}</textarea>
+    <textarea class='form-control' readonly rows='10' id='textview'></textarea>
 <small style='color:#888'>click to copy</small>
 </div>
 
 <div class='col-sm-12'>
     <h3>In Page Test <small>(what get's printed in the html)</small></h3>
     <pre id='preview'></pre>
+    <pre class='hidden'>{{html_text | sanitize_html}}</pre>
 </div>
-
 
 
     <div class="clearfix"></div><br>
@@ -93,13 +93,21 @@
 
 
     <script type="text/javascript">
+    var preview = "",
+    output = "";
+
+
 var myApp=angular.module('myApp',['ngRoute']);
 
 myApp.filter('sanitize_html',function(){
-    return function( str ){
-        window.document.getElementById("preview").innerHTML = sanitize(str);
-        var output = sanitize(sanitize(str));
-        return output;
+    return function( str,preview_pram ){
+        console.log("filter run");
+
+        var output = sanitize(str);
+        var preview = sanitize(sanitize(str));
+        window.document.getElementById("textview").innerHTML = preview;
+        window.document.getElementById("preview").innerHTML = output;
+        // return (preview_pram) ? output : preview ;
         // $scope.after = str;   
     }
 });
@@ -110,15 +118,13 @@ function sanitize(str) {
 
 myApp.controller('MainController',function($scope){
     $scope.html_text = '<link rel="stylesheet" href="this is a normal css link">\n<style>\nh1{\ncolor:red;\n}\n</style>';
-
-    // $scope.sanitize_html = function(){
-
-    // }
-    // $scope.sanitize_html();
-
 });
 
-    var clipboard_copy = new Clipboard('#safe_html');
+    var clipboard_copy = new Clipboard('#safe_html', {
+        text: function() {
+            return window.document.getElementById("preview").innerHTML;
+        }
+    });    
     clipboard_copy.on('success', function(e) { toastr.warning('Clipboard: Sanitized Text Was Copied.') });
     clipboard_copy.on('error', function(e) { console.log(e); });
 

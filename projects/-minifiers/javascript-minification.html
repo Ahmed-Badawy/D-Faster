@@ -102,13 +102,16 @@
 </div>
 </div>
 
-<div class="clearfix"></div> <br>
+
+<div class="clearfix"></div><br>
+
+
+<div class="row">
 
 <div class="alert alert-warning col-sm-9">
     <p>
     Does every line end with semicolon ? &nbsp; 
-    <label>Yes <input type='radio' name='pram_newline' value='yes' ng-model='prams.newline'></label>
-    <label>No <input type='radio' name='pram_newline' value='no' ng-model='prams.newline'></label>
+    <label><input type='checkbox' value='true' ng-model='prams.newline'> Yes</label>
 
     </p>
     <p class='help-block'>
@@ -120,14 +123,18 @@
 </div>
 
 <div class="alert alert-warning col-sm-3">
-    <label><input type='checkbox' ng-model='prams.comments' > <small>remove comments</small> </label><br>
     <label><input type='checkbox' ng-model='prams.dnewline' > <small>remove double newlines</small> </label><br>
+    <label><input type='checkbox' ng-model='prams.newline' > <small>remove newlines</small> </label><br>
+    <label><input type='checkbox' ng-model='prams.comments' > <small>remove comments</small> </label><br>
     <label><input type='checkbox' ng-model='prams.spaces' > <small>remove spaces</small> </label><br>
     <label><input type='checkbox' ng-model='prams.bracketspace' > <small>remove bracket Spaces</small> </label><br>
     <label><input type='checkbox' ng-model='prams.semicolonspace' > <small>remove semicolon spaces</small> </label><br>
     <label><input type='checkbox' ng-model='prams.equalspaces' > <small>remove equal spaces</small> </label><br>
     <label><input type='checkbox' ng-model='prams.commaspaces' > <small>remove comma spaces</small> </label><br>
 </div>
+
+</div>
+
 
 
 
@@ -136,6 +143,22 @@
 <div class="clearfix"></div>
 
 
+
+<script type="text/javascript">
+    myApp.controller('MainController',function($scope){
+        // console.log("hello");
+        $scope.prams = {
+            comments: true,
+            dnewline: true,
+            newline :false,
+            spaces: true,
+            bracketspace: true,
+            semicolonspace: true,
+            equalspaces: true,
+            commaspaces: true,
+        }
+    });
+</script>
 
 <div ng-include src='"../../templates/minification-footer.html"'></div>
 <div ng-include src='"../../templates/footerarea.html"'></div>

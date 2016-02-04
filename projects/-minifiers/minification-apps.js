@@ -39,7 +39,7 @@ var myApp=angular.module('myApp',['ngRoute']);
                 output = str;
                 if(prams.comments) output = Strip(str,"//comments");
                 if(prams.comments) output = Strip(output,"multipleLineComments");
-                if(prams.newline == 'yes') output = Strip(output,"newlines"); 
+                if(prams.newline) output = Strip(output,"newlines"); 
                 if(prams.dnewline) output = Strip(output,"newdoublelines"); 
                 if(prams.spaces) output = Strip(output,"spaces");
                 if(prams.bracketspace) output = Strip(output,"bracketSpace");
@@ -50,23 +50,6 @@ var myApp=angular.module('myApp',['ngRoute']);
             return output;
         }
     });
-
-
-myApp.controller('MainController',function($scope){
-	// console.log("hello");
-    $scope.prams = {
-        newline :'yes',
-        comments: true,
-        dnewline: true,
-        spaces: true,
-        bracketspace: true,
-        semicolonspace: true,
-        equalspaces: true,
-        commaspaces: true,
-    }
-
-});
-
 
 
 
@@ -92,7 +75,7 @@ function Strip(str,type){
     // else if(type=="semicolonSpace")         new_txt = str.replace(/[\s]*;[\s]*/gm,";"); //remove space after semicolom
     else if(type=="semicolonSpace")         new_txt = str.replace(/[\s]*;(?=(?:[^"\\]*(?:\\.|"(?:[^"\\]*\\.)*[^"\\]*"))*[^"]*$)(?=(?:[^'\\]*(?:\\.|'(?:[^'\\]*\\.)*[^'\\]*'))*[^']*$)[\s]*$/gm,";"); //remove space before & after ; but not inside a "" or a ''
     else if(type=="equalSpaces")         new_txt = str.replace(/[\s]*=(?=(?:[^"\\]*(?:\\.|"(?:[^"\\]*\\.)*[^"\\]*"))*[^"]*$)(?=(?:[^'\\]*(?:\\.|'(?:[^'\\]*\\.)*[^'\\]*'))*[^']*$)[\s]*/gm,"="); //remove space before & after = but not inside a ""  or a ''
-    else if(type=="commaSpaces")         new_txt = str.replace(/[ ]*,(?=(?:[^"\\]*(?:\\.|"(?:[^"\\]*\\.)*[^"\\]*"))*[^"]*$)(?=(?:[^'\\]*(?:\\.|'(?:[^'\\]*\\.)*[^'\\]*'))*[^']*$)[ ]*/gm,","); //remove space before & after , but not inside a "" or a ''
+    else if(type=="commaSpaces")         new_txt = str.replace(/[ ]*,(?=(?:[^"\\]*(?:\\.|"(?:[^"\\]*\\.)*[^"\\]*"))*[^"]*$)(?=(?:[^'\\]*(?:\\.|'(?:[^'\\]*\\.)*[^'\\]*'))*[^']*$)[\s]*/gm,","); //remove space before & after , but not inside a "" or a ''
     // else if(type=="bracketSpace") { new_txt = str.replace(/[\s]*\{[\s]*/gm,"{"); new_txt = new_txt.replace(/[\s]*\}[\s]*/gm,"}"); console.log(new_txt);}
     else if(type=="bracketSpace") { new_txt = str.replace(/[\s]*\{[ ]*/gm,"{"); new_txt = new_txt.replace(/[\s]*\}[ ]*/gm,"}"); }
     // else if(type=="colSpace")               new_txt = str.replace(/[\s]*\:[\s]*/gm,":");
