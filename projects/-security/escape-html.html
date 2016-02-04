@@ -2,7 +2,7 @@
 <html ng-app='myApp'>
 <head>
 
-<title>HTML Sanitizer</title>
+<title>Escape HTML</title>
 <meta charset='utf-8'>
 <link rel="icon" type="image/x-icon" href="../../images/icon.png" />
 
@@ -49,17 +49,17 @@
                     <div class="col-lg-12">
 
 <div ng-include src='"../../templates/headerarea.html"'></div>
-<legend><h2><span class='fa fa-barcode'></span> Generate a Sanitized HTML <small>write safe html without any hazard</small></h2></legend>
+<legend><h2><span class='fa fa-barcode'></span> Escape HTML <small>write safe html without any hazard</small></h2></legend>
 
 
 <div class="row">
 
 <div class="col-sm-6">
-    <label>HTML To Sanitize (string) (input)</label>
+    <label>HTML To Escape (html) (input)</label>
     <textarea class='form-control' ng-model='html_text' rows='10'></textarea>
 </div>
 <div class="col-sm-6" id='safe_html'>
-    <label>Safe Sanitized HTML (string) (output)</label>
+    <label>Safe HTML (string) (output)</label>
     <textarea class='form-control' readonly rows='10' id='textview'></textarea>
 <small style='color:#888'>click to copy</small>
 </div>
@@ -67,14 +67,31 @@
 <div class='col-sm-12'>
     <h3>In Page Test <small>(what get's printed in the html)</small></h3>
     <pre id='preview'></pre>
-    <pre class='hidden'>{{html_text | sanitize_html}}</pre>
+    <pre class='hidden'>{{html_text | escape_html}}</pre>
 </div>
-
 
     <div class="clearfix"></div><br>
 
-
 </div>
+
+
+
+
+<div class="row">
+    <div class="col-sm-6">
+        <label>Escaped Safe HTML (string) (input)</label>
+        <textarea class='form-control' ng-model='safe_text' rows='10'></textarea>
+    </div>
+    <div class="col-sm-6" id='safe_html'>
+        <label>HTML (html) (output)</label>
+        <textarea class='form-control' readonly rows='10' id='textview'></textarea>
+    <small style='color:#888'>click to copy</small>
+    </div>
+    <pre class='hidden'>{{safe_text | unescape_html}}</pre>
+    <div class="clearfix"></div><br>
+</div>
+
+
 
 
 
@@ -99,12 +116,12 @@
 
 var myApp=angular.module('myApp',['ngRoute']);
 
-myApp.filter('sanitize_html',function(){
+myApp.filter('escape_html',function(){
     return function( str,preview_pram ){
         console.log("filter run");
 
-        var output = sanitize(str);
-        var preview = sanitize(sanitize(str));
+        var output = escapeHtml(str);
+        var preview = escapeHtml(escapeHtml(str));
         window.document.getElementById("textview").innerHTML = preview;
         window.document.getElementById("preview").innerHTML = output;
         // return (preview_pram) ? output : preview ;
@@ -112,9 +129,27 @@ myApp.filter('sanitize_html',function(){
     }
 });
 
-function sanitize(str) {
-    return $('<div></div>').text(str).html().replace(/"/gi,'&quot;').replace(/'/gi,'&apos;');   
-}
+myApp.filter('unescape_html',function(){
+    return function( str,preview_pram ){
+        console.log("filter run");
+
+        var output = escapeHtml(str);
+        var preview = escapeHtml(escapeHtml(str));
+        window.document.getElementById("textview").innerHTML = preview;
+        // return (preview_pram) ? output : preview ;
+        // $scope.after = str;   
+    }
+});
+
+function escapeHtml(unsafe) {
+    return unsafe
+         .replace(/&/g, "&amp;")
+         .replace(/</g, "&lt;")
+         .replace(/>/g, "&gt;")
+         .replace(/"/g, "&quot;")
+         .replace(/'/g, "&#039;");
+ }
+
 
 myApp.controller('MainController',function($scope){
     $scope.html_text = '<link rel="stylesheet" href="this is a normal css link">\n<style>\nh1{\ncolor:red;\n}\n</style>';
@@ -125,7 +160,7 @@ myApp.controller('MainController',function($scope){
             return window.document.getElementById("preview").innerHTML;
         }
     });    
-    clipboard_copy.on('success', function(e) { toastr.warning('Clipboard: Sanitized Text Was Copied.') });
+    clipboard_copy.on('success', function(e) { toastr.warning('Clipboard: Escaped Text Was Copied.') });
     clipboard_copy.on('error', function(e) { console.log(e); });
 
 

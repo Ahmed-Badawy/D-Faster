@@ -51,12 +51,6 @@
 
 
 
-<div class="clearfix"></div>
-  <br><br>
-
-
-
-
 <div ng-include src='"../../templates/headerarea.html"'></div>
 
 
@@ -81,6 +75,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
+        <li><a href="#" ng-click='set_itirator("iti_time")'>Time - الزمن</a></li>
         <li><a href="#" ng-click='set_itirator("iti_acceleration")'>Acceleration - السرعة</a></li>
         <li><a href="#" ng-click='set_itirator("iti_area")'>Area - المساحة</a></li>
         <li><a href="#" ng-click='set_itirator("iti_length")'>Length - الطول</a></li>
@@ -99,7 +94,7 @@
   <section>
 
 
-  <div ng-repeat='n in itiration_array' class="col-sm-4 pull-right">    
+  <div ng-repeat='n in itiration_array' class="col-sm-4">    
   <label class="input-group">{{n.name}}</label>
   <div class="input-group">
       <input type="text" autofocus="autofocus" placeholder="Enter Number" class="form-control input-sm" 
