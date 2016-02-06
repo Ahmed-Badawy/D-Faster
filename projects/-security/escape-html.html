@@ -163,10 +163,7 @@ function unescapeHtml(text_text) {
  }
 
 myApp.controller('MainController',function($scope){
-    $scope.show_what = 1;
-    if( (show_what = getParameterByName('show_what')) != "" ){
-        $scope.show_what = show_what;
-    }
+    $scope.show_what = getParameterByName('show_what');;
     $scope.html_text = '<link rel="stylesheet" href="this is a normal css link">\n<style>\nh1{\ncolor:red;\n}\n</style>';
 });
 

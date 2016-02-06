@@ -41,6 +41,10 @@ myApp.controller('MainController',function($scope){
     clipboard_copy.on('success', function(e) { toastr.warning('Icon To Clipboard: '+sanitize(e.text)) });
     clipboard_copy.on('error', function(e) { console.log(e); });
 
+    var copy_cdn = new Clipboard('#copy_cdn');
+    copy_cdn.on('success', function(e) { toastr.warning('CDN Link Was Copied') });
+    copy_cdn.on('error', function(e) { console.log(e); });
+
 
 /********************************Notify me**************************************/
     function notifyUser(msgHeader,img,msg){

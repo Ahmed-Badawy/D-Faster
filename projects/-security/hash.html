@@ -59,29 +59,52 @@
 <legend><h2> <span class='fa fa-hashtag'></span> MD5 Hash Encoder: <small>Generate a MD5 or (HMAC-MD5) Hash in a second</small></h2></legend>
 
 
-<div class='row well'>
+<div class='row'>
+  <ul class="nav nav-tabs">
+    <li ng-class='{active:show_what==1}'><a href='#' ng-click='show_what=1'>MD5 Hash</a></li>
+    <li ng-class='{active:show_what==2}'><a href='#' ng-click='show_what=2'>HMAC-MD5 Hash</a></li>
+  </ul>
+</div>
+    <div class="clearfix"></div><br>
+
+
+
+<div class='row' ng-show='show_what==1'>
     <div class="col-sm-7">
-        <legend>Input</legend>
         <label>Input string (input)</label>
-        <textarea id="text-input" rows="2" class='form-control' ng-model='hash_text'></textarea>
-        <br>
-        <label>HMAC-MD5 key (optional) (input)</label>
-        <input type='text' class='form-control' ng-model='hmac'/>  
+        <textarea id="text-input" rows="2" class='form-control' ng-model='md5_hash_text'></textarea>
     </div>
     <div class="col-sm-5">
-        <legend>Output</legend>
         <label>MD5 Hash (output)</label>
         <br>
-        <button class='btn btn-default'>{{hash_text | md5}}</button>
-        <small style='color:#888'>click to copy</small>
-        <br>
-        <br>
-        <label>HMAC-MD5 Hash (output)</label>
-        <br>
-        <button class='btn btn-default'>{{hash_text | hmd5:hmac}}</button>
-        <small style='color:#888'>click to copy</small>
+        <div class="input-group">
+          <input type="text" class="form-control" value='{{md5_hash_text | md5}}'>
+          <div class="input-group-addon copy_cdn" style='color:#888' data-clipboard-text='{{md5_hash_text | md5}}'>Copy to Clipboard</div>
+        </div>
     </div>
 </div>
+
+
+
+<div class='row' ng-show='show_what==2'>
+    <div class='col-sm-12 alert alert-info'>MD5 Hashing Using preshared keyword system.
+    <br>means hash md5 but salt the hashed-text with this key.</div>
+    <div class="col-sm-7">
+        <label>Input string (input)</label>
+        <textarea id="text-input" rows="2" class='form-control' ng-model='hmac_hash_text'></textarea>
+        <label>HMAC-MD5 key (optional) (input)</label>
+        <input type='text' class='form-control' ng-model='hmac_key_word'/>  
+    </div>
+    <div class="col-sm-5">
+        <label>HMAC-MD5 Hash (output)</label>
+        <br>
+        <div class="input-group">
+          <input type="text" class="form-control" value='{{hmac_hash_text | hmd5:hmac_key_word}}'>
+          <div class="input-group-addon copy_cdn" style='color:#888' data-clipboard-text='{{hmac_hash_text | hmd5:hmac_key_word}}'>Copy to Clipboard</div>
+        </div>
+    </div>
+</div>
+
 
 
 
@@ -107,14 +130,11 @@
     <!-- /#wrapper -->
 
 
+    <script  type="text/javascript" src="js/md5.min.js"></script>
     <script type="text/javascript">
 
-    var clipboard_copy = new Clipboard('button', {
-        text: function(e) {
-            toastr.warning('Hash Was Copied: '+e.innerHTML);
-            return e.innerHTML;
-        }
-    });
+    var clipboard_copy = new Clipboard('.copy_cdn');
+    clipboard_copy.on('success', function(e) { toastr.warning('Clipboard: Hash Was Copied.') });
 
         var myApp=angular.module('myApp',['ngRoute']);
         myApp.filter('md5',function(){
@@ -130,11 +150,10 @@
             }
         });
         myApp.controller('MainController',function($scope){
-            // console.log("hello");
+            $scope.show_what = getParameterByName('show_what');;
         });
     </script>
 
-    <script  type="text/javascript" src="js/md5.min.js"></script>
 
 </body>
 </html>

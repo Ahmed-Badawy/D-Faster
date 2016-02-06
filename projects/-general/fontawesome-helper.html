@@ -84,10 +84,11 @@ var allIcons = [
 
 
 <h3>CDN : </h3>
-<button class='btn btn-default' data-clipboard-text='{{cdn}}'>
-    <div>{{cdn}}</div>
-</button>
-<small style='color:#888'>click to copy</small>
+
+    <div class="input-group">
+      <input type="text" class="form-control" ng-model='cdn'>
+      <div class="input-group-addon" style='color:#888' data-clipboard-text='{{cdn}}' id='copy_cdn'>Copy to Clipboard</div>
+    </div>
 
 
 
