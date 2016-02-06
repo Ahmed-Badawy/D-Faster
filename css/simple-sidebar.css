@@ -26,9 +26,10 @@
     height: 100%;
     margin-left: -250px;
     overflow-y: auto;
-    background: #000;
+    background: #111;
 
-    background-image: url("Elegant_Background-12.jpg") !important;
+    /*background-image: url("Elegant_Background-12.jpg") !important;*/
+    background-image: url("dark.jpg") !important;
 
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
