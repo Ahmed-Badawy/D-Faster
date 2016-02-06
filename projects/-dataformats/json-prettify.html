@@ -138,7 +138,7 @@
 
     $scope.json_text = '{"a":1,"b":"foo","c":[false,"false",null,"null",{"d":{"e":130000,"f":"1.3e5"}},{"name":"ahmed","age":22,"job":"programer"}]}';
 
-   $scope.compileIt = function(){
+    $scope.compileIt = function(){
                 if($scope.json_text){
                     try {
                         var json_txt = JSON.parse($scope.json_text);
@@ -150,7 +150,13 @@
                     }
                 }
             }
-            $scope.compileIt();
+    $scope.compileIt();
+
+    $scope.watch('json_text',function(){
+        console.log("hello");
+        $scope.compileIt();
+    });
+
 
         });
 

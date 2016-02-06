@@ -53,14 +53,21 @@
 <legend><h2><span class='fa fa-recycle'></span> CSS Preprocessor Compiler: <small>Don't Write CSS any more. Just compile to it.</small></h2></legend>
 
 
+<div class='row'>
+  <ul class="nav nav-tabs">
+    <li ng-class='{active:show_what==1}'><a href='#' ng-click='show_what=1;type="scss"'>SCSS Compiler</a></li>
+    <li ng-class='{active:show_what==2}'><a href='#' ng-click='show_what=2;type="sass"'>Sass Compiler</a></li>
+    <li ng-class='{active:show_what==3}'><a href='#' ng-click='show_what=3;type="less"'>LESS Compiler</a></li>
+    <li ng-class='{active:show_what==4}'><a href='#' ng-click='show_what=4;type="stylus"'>Stylus Compiler</a></li>
+  </ul>
+</div>
+    <div class="clearfix"></div><br>
+
+
+
+
 <div class="row">
 
-<button class='btn btn-default btn-lg col-sm-3' ng-class='{"btn-primary" : (type=="scss") }' ng-click='type="scss"'>SCSS</button>
-<button class='btn btn-default btn-lg col-sm-3' ng-class='{"btn-primary" : (type=="sass") }'  ng-click='type="sass"'>Sass</button>
-<button class='btn btn-default btn-lg col-sm-3' ng-class='{"btn-primary" : (type=="less") }'  ng-click='type="less"'>LESS</button>
-<button class='btn btn-default btn-lg col-sm-3' ng-class='{"btn-primary" : (type=="stylus") }'  ng-click='type="stylus"'>Stylus</button>
-<div class="clearfix"></div>
-<br>
 
 
 <div id='textarea1' class='col-sm-6'>
@@ -125,7 +132,7 @@
 
 <div class="clearfix"></div>
 <br>
-<button class='btn btn-primary btn-lg btn-block' ng-click='compile()'>Compile</button>
+<button class='btn btn-primary btn-lg btn-block' ng-click='compile()'>{{button_text}}</button>
 
 <div class="clearfix"></div><br>
 </div>
@@ -152,17 +159,25 @@
 var myApp=angular.module('myApp',['ngRoute']);
 
 myApp.controller('MainController',function($scope,$http){
-    console.log("you are in the controller");
-    $scope.type = 'scss';
+    $scope.show_what = getParameterByName('show_what');;
+    if($scope.show_what==1) $scope.type = 'scss';
+    if($scope.show_what==2) $scope.type = 'sass';
+    if($scope.show_what==3) $scope.type = 'less';
+    if($scope.show_what==4) $scope.type = 'stylus';
+
+    $scope.button_text = "Compile";
+
     $scope.minify = 'no';
-    $scope.compiler_api_link = "http://ahmed-badawy.com/site/api/send-post";
+    $scope.compiler_api_link = server_link+"site/api/send-post";
     $scope.before = '';
     $scope.after = '';
 
     $scope.compile = function(){
+        $scope.button_text = "Loading";
         $http.post($scope.compiler_api_link,{type:$scope.type,source:$scope.before,url:"http://alloy.divshot.com/compile"}).then(function(data){
             console.log(data);
             $scope.after = data.data;
+            $scope.button_text = "Compile";
         }, function(){
             console.log("error has happend");
         });

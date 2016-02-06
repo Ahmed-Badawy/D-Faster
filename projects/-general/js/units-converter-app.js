@@ -134,7 +134,6 @@ var myApp = angular.module('myApp',[]);
       ];
 
 
-
 		var iti_heat = [
 {	name:"watt",									unit:"W",						val:"1"					},
 {	name:"BTU [IT] per hour",						unit:"BTUIT/h",					val:"0.2930711"			},
@@ -211,16 +210,16 @@ var myApp = angular.module('myApp',[]);
       var iti_time = [
 {	name:"Second",									unit:"Sec",						val:"1"					},			
 {	name:"Minute",									unit:"Min",						val:"60"				},			
-{	name:"Nanosecond",									unit:"NanoSec",					val:"1e-9"				},			
-{	name:"Microsecond",									unit:"MicroSec",					val:"1e-6"				},			
-{	name:"MilliSecond",									unit:"MilliSec",					val:"0.001"				},			
 {	name:"Hour",									unit:"Hour",					val:"3600"				},			
 {	name:"Day",									unit:"Day",					val:"86400"				},			
 {	name:"Week",									unit:"Week",					val:"604800"				},			
 {	name:"Month",									unit:"Month",					val:"2.628e+6"				},			
 {	name:"Year",									unit:"Year",					val:"3.154e+7"				},			
 {	name:"Decade",									unit:"Decade",					val:"3.154e+8"				},			
+{	name:"Nanosecond",									unit:"NanoSec",					val:"1e-9"				},			
 {	name:"Century",									unit:"Century",					val:"3.154e+9"				},			
+{	name:"Microsecond",									unit:"MicroSec",					val:"1e-6"				},			
+{	name:"MilliSecond",									unit:"MilliSec",					val:"0.001"				},			
       ];
 
 

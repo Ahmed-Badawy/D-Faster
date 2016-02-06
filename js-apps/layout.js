@@ -32,8 +32,7 @@ toastr.options = {
   	if(h) $("#"+h).addClass('highlight') 
   	// if(sh) $("#"+sh).addClass('subhighlight');
     console.log(h);
-  },1000)
-
+  },500)
 
 });
 
@@ -47,6 +46,7 @@ toastr.options = {
   }
 
   // var base_url = "http://ahmed-badawy.com/projects/dev-tools/";
+  var server_link = "http://localhost/_websites/ahmed-badawy.com/";
   var base_url = "http://localhost/_websites/ahmed-badawy.com/projects/Develop-Faster/";
   function goProject(project,h,show_what){
     show_what = (show_what) ? show_what : 1;

@@ -6,7 +6,7 @@
 
 /* Toggle Styles */
 
-#wrapper {
+#wrapper {  
     padding-left: 0;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
@@ -151,7 +151,7 @@
     background: #0792CF !important;
     border-top:1px solid white;
     border-bottom:1px solid white;
-    padding: 2px;
+    padding: 1px;
 }
 .subhighlight{
     text-decoration: none;
@@ -186,7 +186,6 @@
     background-color: #222;
     border-left: 10px solid white;
 }
-
 
 
 

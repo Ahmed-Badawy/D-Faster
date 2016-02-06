@@ -63,6 +63,10 @@
   <ul class="nav nav-tabs">
     <li ng-class='{active:show_what==1}'><a href='#' ng-click='show_what=1'>MD5 Hash</a></li>
     <li ng-class='{active:show_what==2}'><a href='#' ng-click='show_what=2'>HMAC-MD5 Hash</a></li>
+    <li ng-class='{active:show_what==3}'><a href='#' ng-click='show_what=3'>SHA-512 Hash</a></li>
+    <li ng-class='{active:show_what==4}'><a href='#' ng-click='show_what=4'>SHA-384 Hash</a></li>
+    <li ng-class='{active:show_what==5}'><a href='#' ng-click='show_what=5'>SHA-512/256 Hash</a></li>
+    <li ng-class='{active:show_what==6}'><a href='#' ng-click='show_what=6'>SHA-512/224 Hash</a></li>
   </ul>
 </div>
     <div class="clearfix"></div><br>
@@ -106,6 +110,74 @@
 </div>
 
 
+<div class='row' ng-show='show_what==3'>
+    <div class="col-sm-7">
+        <label>Input string (input)</label>
+        <textarea id="text-input" rows="2" class='form-control' ng-model='sha512_hash_text'></textarea>
+    </div>
+    <div class="col-sm-5">
+        <label>SHA-512 Hash (output)</label>
+        <br>
+        <div class="input-group">
+          <input type="text" class="form-control" value='{{sha512_hash_text | sha512_filter}}'>
+          <div class="input-group-addon copy_cdn" style='color:#888' data-clipboard-text='{{sha512_hash_text | sha512_filter}}'>Copy to Clipboard</div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class='row' ng-show='show_what==4'>
+    <div class="col-sm-7">
+        <label>Input string (input)</label>
+        <textarea id="text-input" rows="2" class='form-control' ng-model='sha384_hash_text'></textarea>
+    </div>
+    <div class="col-sm-5">
+        <label>SHA-384 Hash (output)</label>
+        <br>
+        <div class="input-group">
+          <input type="text" class="form-control" value='{{sha384_hash_text | sha384_filter}}'>
+          <div class="input-group-addon copy_cdn" style='color:#888' data-clipboard-text='{{sha384_hash_text | sha384_filter}}'>Copy to Clipboard</div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class='row' ng-show='show_what==5'>
+    <div class="col-sm-7">
+        <label>Input string (input)</label>
+        <textarea id="text-input" rows="2" class='form-control' ng-model='sha256_hash_text'></textarea>
+    </div>
+    <div class="col-sm-5">
+        <label>SHA-256 Hash (output)</label>
+        <br>
+        <div class="input-group">
+          <input type="text" class="form-control" value='{{sha256_hash_text | sha256_filter}}'>
+          <div class="input-group-addon copy_cdn" style='color:#888' data-clipboard-text='{{sha256_hash_text | sha256_filter}}'>Copy to Clipboard</div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class='row' ng-show='show_what==6'>
+    <div class="col-sm-7">
+        <label>Input string (input)</label>
+        <textarea id="text-input" rows="2" class='form-control' ng-model='sha224_hash_text'></textarea>
+    </div>
+    <div class="col-sm-5">
+        <label>SHA-224 Hash (output)</label>
+        <br>
+        <div class="input-group">
+          <input type="text" class="form-control" value='{{sha224_hash_text | sha224_filter}}'>
+          <div class="input-group-addon copy_cdn" style='color:#888' data-clipboard-text='{{sha224_hash_text | sha224_filter}}'>Copy to Clipboard</div>
+        </div>
+    </div>
+</div>
+
+
+
 
 
 
@@ -131,6 +203,7 @@
 
 
     <script  type="text/javascript" src="js/md5.min.js"></script>
+    <script  type="text/javascript" src="js/sha512.min.js"></script>
     <script type="text/javascript">
 
     var clipboard_copy = new Clipboard('.copy_cdn');
@@ -149,6 +222,34 @@
                 else return "HMD5 hash";
             }
         });
+
+        myApp.filter('sha512_filter',function(){
+            return function(string){
+                if(string) return sha512(string);   
+                else return "SHA-512 Hash";
+            }
+        });
+        myApp.filter('sha384_filter',function(){
+            return function(string){
+                if(string) return sha384(string);   
+                else return "SHA-384 Hash";
+            }
+        });
+        myApp.filter('sha256_filter',function(){
+            return function(string){
+                if(string) return sha512_256(string);   
+                else return "SHA-256 Hash";
+            }
+        });
+        myApp.filter('sha224_filter',function(){
+            return function(string){
+                if(string) return sha512_224(string);   
+                else return "SHA-224 Hash";
+            }
+        });
+
+
+
         myApp.controller('MainController',function($scope){
             $scope.show_what = getParameterByName('show_what');;
         });
