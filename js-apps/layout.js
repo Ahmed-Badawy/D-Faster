@@ -26,15 +26,6 @@ toastr.options = {
     });
 
 
-
-	// function get_id(id_name){ return document.getElementById(id_name); }
-	function getParameterByName(name) {
-	    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-	    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-	    results = regex.exec(location.search);
-	    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-	}
-
   setTimeout(function(){
   	var h = getParameterByName('h');
   	// var sh = getParameterByName('sh');
@@ -47,11 +38,19 @@ toastr.options = {
 });
 
 
+  // function get_id(id_name){ return document.getElementById(id_name); }
+  function getParameterByName(name) {
+      name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+      var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+      results = regex.exec(location.search);
+      return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+  }
+
   // var base_url = "http://ahmed-badawy.com/projects/dev-tools/";
   var base_url = "http://localhost/_websites/ahmed-badawy.com/projects/Develop-Faster/";
-  function goProject(project,h){
+  function goProject(project,h,show_what){
     console.log(project);
-    window.location = base_url+"projects/"+project+".html?h="+h;
+    window.location = base_url+"projects/"+project+".html?h="+h+"&show_what="+show_what;
   }
 
 
