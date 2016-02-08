@@ -1,0 +1,332 @@
+<!doctype html>
+<html ng-app='myApp'>
+<head>
+
+<title>Data Formats Converter</title>
+<meta charset='utf-8'>
+<link rel="icon" type="image/x-icon" href="../../images/icon.png" />
+
+<link rel="stylesheet" href="../../_assets/css/bootstrap.min.css">
+<link href="../../css/simple-sidebar.css" rel="stylesheet">
+<link rel="stylesheet" href="../../_assets/plugins/font-awesome-4.5.0/css/font-awesome.min.css">
+
+<script  type="text/javascript" src="../../_assets/angular/angular.min.js"></script>
+<script  type="text/javascript" src="../../_assets/angular/angular-route.min.js"></script>
+
+<script src="../../_assets/js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src='../../_assets/plugins/bytesize.min.js'></script>
+
+<script type="text/javascript" src='../../_assets/plugins/clipboard.js/clipboard.min.js'></script>
+<link href="../../_assets/plugins/toastr/toastr.min.css" rel="stylesheet">
+<script type="text/javascript" src='../../_assets/plugins/toastr/toastr.min.js'></script>
+
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
+    <style type="text/css">
+        body{
+            font-family: 'Open Sans','Lato', Helvetica, sans-serif;
+            color:#222;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+    </style>
+
+</head>
+<body ng-controller='MainController'>
+
+
+
+    <div id="wrapper">
+
+<div ng-include src='"../../templates/sidebar.html"'></div>
+<a href="#menu-toggle" class="btn btn-default btn-xs fa fa-arrow-right" id="menu-toggle"></a> 
+
+
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+
+<div ng-include src='"../../templates/headerarea.html"'></div>
+<legend><h2><span class='fa fa-recycle'></span> Data Formats Converter: <small>Convert Between Data Formats With Ease (JSON , XML , CSV , YAML , PHP_arrays , PHP_Objects)</small></h2></legend>
+
+
+<div class="row">
+
+<div id='textarea1' class='col-sm-6'>
+
+<label>Data Format</label>
+<SELECT class='form-control' ng-model='from_type'>
+    <option value='json'>JSON</option>
+    <option value='xml'>XML</option>
+    <option value='yaml'>YAML</option> 
+    <option value='csv'>CSV</option>
+    <option value='php_array'>PHP Arrays</option>
+    <option value='php_object'>PHP Objects</option>
+</SELECT>
+<br>
+
+    <p>Before (input)</p>
+    <textarea class='form-control mytextarea' rows='23' ng-model='before'></textarea>
+    <input type='file' class='hidden upload_input' />
+    <span class='fa fa-file-code-o btn file_btn' title='Import a File'></span>
+    <span class='fa fa-copy btn copy_btn' title='Copy Text'></span>
+    <span class='fa fa-cut btn cut_btn' title='Cut Text'></span>
+    <span class='fa fa-th-list btn selectAll' title='Select All Text'></span>
+    <span class='fa fa-trash btn emptyAll' title='Empty All Text'></span>
+
+    <a href='' download="style.css" style="display:none" class='hidden download_content_link'></a>
+    <span class='fa fa-save btn download_content' title='Download Content'></span>
+
+
+    <span class='fa fa-hand-lizard-o fa-lg pull-right'></span>
+    <span class='pull-right txtsize' style='color:#aaa;font-weight:bolder'></span>
+    <span class='pull-right'>&nbsp;&nbsp;</span>
+    <span class='fa fa-hand-peace-o fa-lg pull-right'></span>
+    <span class='pull-right txtlength' style='color:#aaa;font-weight:bolder'></span>
+</div>
+
+<div id='textarea2' class='col-sm-6'>
+
+<label>Convert to Data Format</label>
+<SELECT class='form-control' ng-model='to_type'>
+    <option value='json'>JSON</option>
+    <option value='xml'>XML</option>
+    <option value='yaml'>YAML</option> 
+    <option value='csv'>CSV</option>
+    <option value='php_array'>PHP Arrays</option>
+    <option value='php_object'>PHP Objects</option>
+</SELECT>
+<br>
+
+    <p>After (output)</p>
+    <textarea class='form-control mytextarea' rows='23' readonly>{{after}}</textarea>
+    <input type='file' class='hidden upload_input' />
+    <span class='fa fa-file-code-o btn file_btn hidden' title='Import a File'></span>
+    <span class='fa fa-copy btn copy_btn' title='Copy Text'></span>
+    <span class='fa fa-cut btn cut_btn hidden' title='Cut Text'></span>
+    <span class='fa fa-th-list btn selectAll' title='Select All Text'></span>
+    <span class='fa fa-trash btn emptyAll hidden' title='Empty All Text'></span>
+
+    <a href='' download="style.css" style="display:none" class='hidden download_content_link'></a>
+    <span class='fa fa-save btn download_content' title='Download Content'></span>
+
+
+    <span class='fa fa-hand-lizard-o fa-lg pull-right'></span>
+    <span class='pull-right txtsize' style='color:#aaa;font-weight:bolder'></span>
+    <span class='pull-right'>&nbsp;&nbsp;</span>
+    <span class='fa fa-hand-peace-o fa-lg pull-right'></span>
+    <span class='pull-right txtlength' style='color:#aaa;font-weight:bolder'></span>
+
+</div>
+
+<div class="clearfix"></div>
+<br>
+<button class='btn btn-primary btn-lg btn-block' ng-click='convert()'>{{button_text}}</button>
+
+<div class="clearfix"></div><br>
+</div>
+
+
+
+<div ng-include src='"../../templates/footerarea.html"'></div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+
+
+    <script type="text/javascript">
+
+var myApp=angular.module('myApp',['ngRoute']);
+
+myApp.controller('MainController',function($scope,$http){
+    $scope.from_type = "json";
+    $scope.to_type = "php_array";
+
+    $scope.button_text = "Convert";
+    $scope.compiler_api_link = server_link+"site/api/data-types-converter";
+    $scope.before = '{"persons":[{"id":1,"name":"ahmed","age":12,"height":190,"phone":585,"img":"1.png"},{"id":2,"name":"mohamed","age":40,"height":160,"phone":3040,"img":"2.png"},{"id":3,"name":"ali","age":50,"height":180,"phone":8080,"img":"3.png"}],"company":{"name":"spidro","working_age":2},"layout":"normal"}';
+    $scope.after = '';
+
+    $scope.convert = function(){
+        $scope.button_text = "Loading";
+        $http.post($scope.compiler_api_link,{"from-type":$scope.from_type,"to-type":$scope.to_type,"data-content":$scope.before}).then(function(data){
+            console.log(data);
+            if(data.data && data.data!="NULL") {
+                $scope.after = data.data;
+            }else $scope.output_failure();
+                $scope.button_text = "Convert";
+        }, function(){
+            $scope.output_failure();
+        });
+    }
+    $scope.convert();
+    $scope.output_failure = function(){
+        console.log("error has happend");
+        $scope.after = "Sorry! Error Has Happened (Maybe Inserted Text isn't Valid)";
+    }
+
+
+});
+
+
+
+window.onload = function(){
+
+/********************************Notify me**************************************/
+    function notifyUser(msgHeader,img,msg){
+        if(Notification.permission=='default'){
+            alert('please allow notification for our website...')
+        }else{
+            // alert("hi");
+            notify = new Notification(msgHeader,{
+                body: msg,
+                icon: (img) ? img : "1.jpg",
+                tag: Math.floor((Math.random() * 100) + 1)
+            });
+            notify.onclick = function(){
+                // console.log(this);
+                window.location = 'http://ahmed-badawy.com';
+            }
+        }
+    }
+/**********************************************************************/    
+
+function id(id){ return window.document.getElementById(id); }
+function get_id_class(id_name,class_name){ 
+    if(window.document.getElementById(id_name)==null) { console.log(id_name); console.log(class_name);}
+    return window.document.getElementById(id_name).getElementsByClassName(class_name)[0]; 
+}
+
+
+function apply_text_area(area_name,mime_type){
+    var txtarea = get_id_class(area_name,'mytextarea');
+
+/*********************************Read Text File*************************************/  
+    function read_text_file(file){
+        if(file.type != "text/plain"){ //stop if it'sn't a text file
+            alert("No Text File Inputed.");
+            // return;
+            // console.log(file);
+        }
+        var reader = new FileReader(); //call the FileReader class.
+        reader.readAsText(file); //then call the readAsText functnion
+        reader.onload = function(evt){ //what happens on loading the textfile.
+            // console.log(evt);
+            res = evt.target.result;
+            handle_onread(res);
+        }
+    }
+    function read_file_actions(evt){
+        evt.stopPropagation();
+        evt.preventDefault();
+
+        console.log(evt);
+
+        files = (evt.srcElement) ? evt.srcElement.files : evt.originalTarget.files;
+        var total_size= 0;
+        for(i=0; i<files.length ;i++){
+            total_size += files[i].size;
+        }
+        console.log("Total Size is: "+total_size+" Bytes...");
+        console.log("Files Count is: "+files.length+" Files...");
+
+        read_text_file(files[0]);
+    }
+    function handle_onread(file_text){
+        txtarea.value = file_text;
+        count_chars();
+        notifyUser('File Imported');
+    }
+    get_id_class(area_name,"upload_input").addEventListener('change',read_file_actions,false);
+    get_id_class(area_name,"file_btn").addEventListener('click',function(){ get_id_class(area_name,"upload_input").click(); },false);
+
+/********************************Copy TextArea Value**************************************/
+    var clipboard_copy = new Clipboard('#'+area_name+' .copy_btn', {
+        text: function() {
+            // notifyUser('Text Was Copied');
+            count_chars();
+            return txtarea.value;
+        }
+    });
+    clipboard_copy.on('success', function(e) { console.log(e); });
+    clipboard_copy.on('error', function(e) { console.log(e); });
+
+/********************************Cut TextArea Value**************************************/
+    var clipboard_cut = new Clipboard('#'+area_name+' .cut_btn', {
+        text: function() {
+            // notifyUser('Text Was Cut');
+            var return_text = txtarea.value;
+            txtarea.value = "";
+            count_chars();
+            return return_text;
+        }
+    });
+    clipboard_cut.on('success', function(e) { console.log(e); });
+    clipboard_cut.on('error', function(e) { console.log(e); });
+/********************************Select All TextArea Value**************************************/
+    get_id_class(area_name,'selectAll').addEventListener('click',(function(){
+        txtarea.setSelectionRange(0,txtarea.value.length);
+    }),false);
+/********************************Empty All**************************************/
+    get_id_class(area_name,'emptyAll').addEventListener('click',(function(){
+        txtarea.value = "";
+        count_chars();
+        notifyUser('Empty All TextArea');
+    }),false);
+/********************************Count Number Of Chars**************************************/
+    // txtarea.addEventListener('keyup',function(){ count_chars() },false);
+    function count_chars(){
+        get_id_class(area_name,"txtlength").innerHTML = txtarea.value.length;    
+        var Windowstxtsize = ByteSize.format(ByteSize.count(txtarea.value,{lineBreaks:2}));
+        get_id_class(area_name,"txtsize").innerHTML = "size: "+Windowstxtsize;
+    }
+    function timeout() { setTimeout(function(){ count_chars(); timeout(); },5000); }
+    timeout(); count_chars();
+/********************************Create Textarea Download**************************************/    
+    var textFile = false;
+    function makeTextFile(text) {
+        var data = new Blob([text], {type: mime_type});
+        console.log(data);
+// If we are replacing a previously generated file we need to manually revoke the object URL to avoid memory leaks :
+        if (textFile) window.URL.revokeObjectURL(textFile);
+        textFile = window.URL.createObjectURL(data);
+        return textFile;
+    };
+    get_id_class(area_name,"download_content").addEventListener('click', function () {
+        get_id_class(area_name,"download_content_link").href = makeTextFile(txtarea.value);
+        get_id_class(area_name,"download_content_link").click();
+    },false);   
+/**********************************************************************/
+}
+
+apply_text_area('textarea1','text/css');
+apply_text_area('textarea2','text/css');
+
+
+
+
+};
+
+
+
+
+
+
+    </script>
+    <script  type="text/javascript" src="../../js-apps/layout.js"></script>
+
+
+</body>
+</html>
