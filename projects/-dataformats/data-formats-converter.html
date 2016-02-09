@@ -54,6 +54,10 @@
 
 
 <div class="row">
+<p class='well well-sm'>- This APP isn't perfect but it will do it's best to convert between data formats. <br>
+- Sorry! we still have some problems in converting to XML.(working on it) 
+</p>
+
 
 <div id='textarea1' class='col-sm-6'>
 
@@ -68,8 +72,8 @@
 </SELECT>
 <br>
 
-    <p>Before (input)</p>
-    <textarea class='form-control mytextarea' rows='23' ng-model='before'></textarea>
+    <p>{{from_type}} Data (input)</p>
+    <textarea class='form-control mytextarea' rows='20' ng-model='before' ng-change='convert()'></textarea>
     <input type='file' class='hidden upload_input' />
     <span class='fa fa-file-code-o btn file_btn' title='Import a File'></span>
     <span class='fa fa-copy btn copy_btn' title='Copy Text'></span>
@@ -91,7 +95,7 @@
 <div id='textarea2' class='col-sm-6'>
 
 <label>Convert to Data Format</label>
-<SELECT class='form-control' ng-model='to_type'>
+<SELECT class='form-control' ng-model='to_type' ng-change='convert()'>
     <option value='json'>JSON</option>
     <option value='xml'>XML</option>
     <option value='yaml'>YAML</option> 
@@ -101,8 +105,8 @@
 </SELECT>
 <br>
 
-    <p>After (output)</p>
-    <textarea class='form-control mytextarea' rows='23' readonly>{{after}}</textarea>
+    <p>{{to_type}} After (output)</p>
+    <textarea class='form-control mytextarea' rows='20' readonly>{{after}}</textarea>
     <input type='file' class='hidden upload_input' />
     <span class='fa fa-file-code-o btn file_btn hidden' title='Import a File'></span>
     <span class='fa fa-copy btn copy_btn' title='Copy Text'></span>
@@ -152,11 +156,11 @@ var myApp=angular.module('myApp',['ngRoute']);
 
 myApp.controller('MainController',function($scope,$http){
     $scope.from_type = "json";
-    $scope.to_type = "php_array";
+    $scope.to_type = "csv";
 
     $scope.button_text = "Convert";
     $scope.compiler_api_link = server_link+"site/api/data-types-converter";
-    $scope.before = '{"persons":[{"id":1,"name":"ahmed","age":12,"height":190,"phone":585,"img":"1.png"},{"id":2,"name":"mohamed","age":40,"height":160,"phone":3040,"img":"2.png"},{"id":3,"name":"ali","age":50,"height":180,"phone":8080,"img":"3.png"}],"company":{"name":"spidro","working_age":2},"layout":"normal"}';
+    $scope.before = '[{"id":1,"name":"ahmed","age":12,"height":190,"phone":585,"img":"1.png"},{"id":2,"name":"mohamed","age":40,"height":160,"phone":3040,"img":"2.png"},{"id":3,"name":"ali","age":50,"height":180,"phone":8080,"img":"3.png"}]';
     $scope.after = '';
 
     $scope.convert = function(){
@@ -169,6 +173,7 @@ myApp.controller('MainController',function($scope,$http){
                 $scope.button_text = "Convert";
         }, function(){
             $scope.output_failure();
+            $scope.button_text = "Convert";
         });
     }
     $scope.convert();
