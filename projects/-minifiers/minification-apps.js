@@ -2,17 +2,19 @@ var myApp=angular.module('myApp',['ngRoute']);
 
 	myApp.filter('minifySQL',function( ){
 		return function(str){
-			output = "";
-			array = ['select','update','insert','delete','from','where','as','GROUP BY','ORDER BY','on','in','join','having','like','BEGIN','end','do','DISTINCT','FOREIGN','if','MODIFY'];
-			if(str){
-				output = Strip(str,"#comments");
-				output = Strip(output,"--comments");
-				output = Strip(output,"multipleLineComments");
-				output = Strip(output,"newlines"); 
-				output = Strip(output,"spaces");
-				output = Strip(output,"semicolonSpace");
-			} 
-			return output;
+			// output = "";
+			// array = ['select','update','insert','delete','from','where','as','GROUP BY','ORDER BY','on','in','join','having','like','BEGIN','end','do','DISTINCT','FOREIGN','if','MODIFY'];
+			// if(str){
+			// 	output = Strip(str,"#comments");
+			// 	output = Strip(output,"--comments");
+			// 	output = Strip(output,"multipleLineComments");
+			// 	output = Strip(output,"newlines"); 
+			// 	output = Strip(output,"spaces");
+			// 	output = Strip(output,"semicolonSpace");
+			// } 
+			// return output;
+
+            
 		}
 	});
 
