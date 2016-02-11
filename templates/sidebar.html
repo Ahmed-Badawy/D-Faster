@@ -1,54 +1,78 @@
+
+<span ng-init="
+side_links_array = [
+    {name:'FontAwesome Helper',location:'-general/fontawesome-helper',icon:'ra'},
+
+    {name:'Data Formats Converter',location:'-dataformats/data-formats-converter',icon:'list-ul'},
+
+    {name:'Minify JavaScript',location:'-minifiers/javascript-minification',icon:'hand-lizard-o'},
+
+    {hr:true},
+
+    {name:'Markdown Parser',location:'-general/markdown-parser',icon:'reorder'}, 
+    {name:'Color Picker',location:'-general/color-picker',icon:'eyedropper'}, 
+    {name:'Units Converter',location:'-general/units-converter',icon:'list-ul'}, 
+    {name:'Number Systems',location:'-general/number-system-converter',icon:'list-ul'}, 
+
+    {hr:true},
+
+    {name:'Escape Html',location:'-security/escape-html',icon:'list-ul',show_what:1}, 
+    {name:'UnEscape Html',location:'-security/escape-html',icon:'list-ul',show_what:2}, 
+
+    {hr:true},
+
+    {name:'MD5 Hash',location:'-security/hash',icon:'hashtag',show_what:1}, 
+    {name:'HMAC-MD5 Hash',location:'-security/hash',icon:'hashtag',show_what:2}, 
+    {name:'SHA-512 Hash',location:'-security/hash',icon:'hashtag',show_what:3}, 
+    {name:'SHA-384 Hash',location:'-security/hash',icon:'hashtag',show_what:4}, 
+    {name:'SHA-256 Hash',location:'-security/hash',icon:'hashtag',show_what:5}, 
+    {name:'SHA-224 Hash',location:'-security/hash',icon:'hashtag',show_what:6}, 
+    {name:'Random Password',location:'-security/hash',icon:'hashtag',show_what:7},
+
+    {hr:true},
+
+    {name:'QR Generator',location:'-apis/QR-generator',icon:'qrcode'},
+    {name:'UPC Barcode Generator',location:'-apis/UPC-code-generator',icon:'barcode'},
+    {name:'Captcha Generator',location:'-apis/captcha-generator',icon:'image'},
+
+    {hr:true},
+
+    {name:'SCSS Compiler',location:'-css/css-compilers',icon:'recycle',show_what:1},
+    {name:'Sass Compiler',location:'-css/css-compilers',icon:'recycle',show_what:2},
+    {name:'LESS Compiler',location:'-css/css-compilers',icon:'recycle',show_what:3},
+    {name:'Stylus Compiler',location:'-css/css-compilers',icon:'recycle',show_what:4},
+
+    {hr:true},
+
+    {name:'Img To Base64 Converter',location:'-img/img-base64-converter',icon:'list-ul',show_what:1},
+    {name:'Base64 To Img Converter',location:'-img/img-base64-converter',icon:'list-ul',show_what:2},
+
+    {hr:true},
+
+    {name:'Pretty Print JSON',location:'-dataformats/prettify',icon:'list-ul',show_what:1},
+    {name:'Pretty Print CSS',location:'-dataformats/prettify',icon:'list-ul',show_what:2},
+    {name:'Pretty Print XML',location:'-dataformats/prettify',icon:'list-ul',show_what:3},
+    {name:'Pretty Print SQL',location:'-dataformats/prettify',icon:'list-ul',show_what:4},
+    {name:'Pretty Print HTML',location:'-dataformats/prettify',icon:'list-ul',show_what:5},
+
+
+];
+base_url = 'http://localhost/_websites/ahmed-badawy.com/projects/Develop-Faster/'
+">
+</span>
+
+
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand"> Develop Faster</li>
 
 
-    <li><a href="#" onclick='goProject("-general/fontawesome-helper","side_fontawesome")' id='side_fontawesome'><span class='fa fa-ra'></span> FontAwesome Helper</a></li> 
+    <li ng-repeat='link in side_links_array'><a href='{{base_url}}projects/{{link.location}}.html?show_what={{link.show_what}}' ng-if='!link.hr'><span class='fa fa-{{link.icon}}'></span> {{link.name}}</a>
+    <hr ng-if='link.hr'>
+    </li>
 
-    <li><a href="#" onclick='goProject("-minifiers/javascript-minification","side_minifyjs")' id='side_minifyjs'><span class='fa fa-file-text-o'></span> Minify JavaScript</a></li>   
 
-    <li><a href="#" onclick='goProject("-general/markdown-parser","side_markdown")' id='side_markdown'><span class='fa fa-reorder'></span> Markdown Parser</a></li>  
-
-    <li><a href="#" onclick='goProject("-general/color-picker","side_colorpicker")' id='side_colorpicker'><span class='fa fa-eyedropper'></span> Color Picker</a></li>  
-
-    <li><a href="#" onclick='goProject("-general/units-converter","side_unitsconverter")' id='side_unitsconverter'><span class='fa fa-list-ul'></span> Units Converter</a></li> 
-
-    <li><a href="#" onclick='goProject("-general/number-system-converter","side_number_system_converter")' id='side_number_system_converter'><span class='fa fa-list-ul'></span> Number Systems</a></li> 
-
-<hr>
-    <li><a href="#" onclick='goProject("-security/escape-html","side_htmlescape",1)' id='side_htmlescape'><span class='fa fa-barcode'></span> Escape HTML</a></li> 
-    <li><a href="#" onclick='goProject("-security/escape-html","side_htmlunescape",2)' id='side_htmlunescape'><span class='fa fa-barcode'></span> UnEscape HTML</a></li> 
-<hr>
-    <li><a href="#" onclick='goProject("-security/hash","side_md5_hash",1)' id='side_md5_hash'><span class='fa fa-hashtag'></span> MD5 Hash</a></li>   
-    <li><a href="#" onclick='goProject("-security/hash","side_hmac_hash",2)' id='side_hmac_hash'><span class='fa fa-hashtag'></span> HMAC-MD5 Hash</a></li>   
-    <li><a href="#" onclick='goProject("-security/hash","side_sha512_hash",3)' id='side_sha512_hash'><span class='fa fa-hashtag'></span> SHA-512 Hash</a></li>   
-    <li><a href="#" onclick='goProject("-security/hash","side_384_hash",4)' id='side_384_hash'><span class='fa fa-hashtag'></span> SHA-384 Hash</a></li>   
-    <li><a href="#" onclick='goProject("-security/hash","side_256_hash",5)' id='side_256_hash'><span class='fa fa-hashtag'></span> SHA-256 Hash</a></li>   
-    <li><a href="#" onclick='goProject("-security/hash","side_224_hash",6)' id='side_224_hash'><span class='fa fa-hashtag'></span> SHA-224 Hash</a></li>   
-
-    <li><a href="#" onclick='goProject("-security/password-generator","side_passGenerator")' id='side_passGenerator'><span class='fa fa-barcode'></span> Random Password</a></li> 
-<hr>
-    <li><a href="#" onclick='goProject("-apis/QR-generator","side_qrgenerator")' id='side_qrgenerator'><span class='fa fa-qrcode'></span> QR Generator</a></li> 
-
-    <li><a href="#" onclick='goProject("-apis/UPC-code-generator","side_barcodeGenerator")' id='side_barcodeGenerator'><span class='fa fa-barcode'></span> UPC Barcode Generator</a></li> 
-
-    <li><a href="#" onclick='goProject("-apis/captcha-generator","side_captchaGenerator")' id='side_captchaGenerator'><span class='fa fa-image'></span> Captcha Generator</a></li> 
-<hr>   
-    <li><a href="#" onclick='goProject("-css/css-compilers","side_scssCompilers",1)' id='side_scssCompilers'><span class='fa fa-recycle'></span> SCSS Compiler</a></li>   
-    <li><a href="#" onclick='goProject("-css/css-compilers","side_sassCompilers",2)' id='side_sassCompilers'><span class='fa fa-recycle'></span> Sass Compiler</a></li>   
-    <li><a href="#" onclick='goProject("-css/css-compilers","side_lessCompilers",3)' id='side_lessCompilers'><span class='fa fa-recycle'></span> LESS Compiler</a></li>   
-    <li><a href="#" onclick='goProject("-css/css-compilers","side_stylusCompilers",4)' id='side_stylusCompilers'><span class='fa fa-recycle'></span> Stylus Compiler</a></li>   
-<hr>
-    <li><a href="#" onclick='goProject("-img/img-base64-converter","side_img2base64",1)' id='side_img2base64'><span class='fa fa-list-ul'></span> Img To Base64 Converter</a></li> 
-    <li><a href="#" onclick='goProject("-img/img-base64-converter","side_base642img",2)' id='side_base642img'><span class='fa fa-list-ul'></span> Base64 To Img Converter</a></li> 
-<hr>
-    <li><a href="#" onclick='goProject("-dataformats/prettify","side_prettyjson",1)' id='side_prettyjson'><span class='fa fa-list-ul'></span> Pretty Print JSON</a></li>  
-    <li><a href="#" onclick='goProject("-dataformats/prettify","side_prettyCss",2)' id='side_prettyCss'><span class='fa fa-list-ul'></span> Pretty Print CSS</a></li>
-    <li><a href="#" onclick='goProject("-dataformats/prettify","side_prettyxml",3)' id='side_prettyxml'><span class='fa fa-list-ul'></span> Pretty Print XML</a></li>     <li><a href="#" onclick='goProject("-dataformats/prettify","side_prettySql",4)' id='side_prettySql'><span class='fa fa-list-ul'></span> Pretty Print SQL</a></li>    <li><a href="#" onclick='goProject("-dataformats/prettify","side_prettyhtml",5)' id='side_prettyhtml'><span class='fa fa-list-ul'></span> Pretty Print HTML</a></li>    
-<hr>
-    <li><a href="#" onclick='goProject("-dataformats/data-formats-converter","side_jsonPrettify")' id='side_jsonPrettify'><span class='fa fa-list-ul'></span> Data Formats Converter</a></li>    
-<hr>
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->
