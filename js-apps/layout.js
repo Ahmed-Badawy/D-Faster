@@ -26,13 +26,13 @@ toastr.options = {
     });
 
 
-  setTimeout(function(){
-  	var h = getParameterByName('h');
-  	// var sh = getParameterByName('sh');
-  	if(h) $("#"+h).addClass('highlight') 
-  	// if(sh) $("#"+sh).addClass('subhighlight');
-    console.log(h);
-  },500)
+  // setTimeout(function(){
+  // 	var h = getParameterByName('h');
+  // 	// var sh = getParameterByName('sh');
+  // 	if(h) $("#"+h).addClass('highlight') 
+  // 	// if(sh) $("#"+sh).addClass('subhighlight');
+  //   console.log(h);
+  // },500)
 
 });
 

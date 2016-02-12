@@ -20,18 +20,25 @@ var myApp=angular.module('myApp',['ngRoute']);
 
     myApp.filter('minifyCSS',function( ){
         return function(str){
-            output = "";
-            if(str){
-                output = Strip(str,"multipleLineComments");
-                output = Strip(output,"newlines"); 
-                output = Strip(output,"spaces");
-                output = Strip(output,"semicolonSpace");
-                output = Strip(output,"bracketSpace");
-                output = Strip(output,"colSpace");
-            } 
-            return output;
+            if(str) return vkbeautify.cssmin(str);
         }
     });
+    myApp.filter('minifyJSON',function( ){
+        return function(str){
+            if(str) return vkbeautify.jsonmin(str);
+        }
+    });
+    myApp.filter('minifyXML',function( ){
+        return function(str){
+            if(str) return vkbeautify.xmlmin(str);
+        }
+    });
+    myApp.filter('minifySQL',function( ){
+        return function(str){
+            if(str) return vkbeautify.sqlmin(str);
+        }
+    });
+    
 
 
     myApp.filter('minifyJS',function( ){
