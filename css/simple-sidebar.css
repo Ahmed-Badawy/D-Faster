@@ -1,3 +1,24 @@
+@font-face {
+  font-family: 'Open Sans';
+  /*src: url('OpenSans/OpenSans-Regular.ttf') format('truetype');*/
+  /*src: url('OpenSans/OpenSans-BoldItalic.ttf') format('truetype');*/
+  /*src: url('OpenSans/OpenSans-ExtraBold.ttf') format('truetype');*/
+  /*src: url('OpenSans/OpenSans-ExtraBoldItalic.ttf') format('truetype');*/
+  /*src: url('OpenSans/OpenSans-Italic.ttf') format('truetype');*/
+  /*src: url('OpenSans/OpenSans-Light.ttf') format('truetype');*/
+  /*src: url('OpenSans/OpenSans-LightItalic.ttf') format('truetype');*/
+  src: url('OpenSans/OpenSans-Semibold.ttf') format('truetype');
+  /*src: url('OpenSans/OpenSans-SemiboldItalic.ttf') format('truetype');*/
+}
+
+body{
+    font-family: 'Open Sans','Lato', Helvetica, sans-serif;
+    color:#222;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
 /* Toggle Styles */
 
 #wrapper {  
@@ -135,6 +156,13 @@
 
 
 
+
+
+.input-group-addon.copy_btn{
+    color: white;
+    background-color: #2e6da4;
+    cursor: pointer;
+}
 
 hr{
     margin-top: 5px;

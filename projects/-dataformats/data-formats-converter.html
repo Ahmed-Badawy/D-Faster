@@ -96,6 +96,7 @@
 
 <label>Convert to Data Format</label>
 <SELECT class='form-control' ng-model='to_type' ng-change='convert()'>
+    <!-- <option value='javascript'>JavaScript</option> -->
     <option value='json'>JSON</option>
     <option value='xml'>XML</option>
     <option value='yaml'>YAML</option> 
@@ -164,11 +165,20 @@ myApp.controller('MainController',function($scope,$http){
     $scope.after = '';
 
     $scope.convert = function(){
+        if($scope.to_type=="javascript"){
+            $scope.after = JSON.stringify($scope.before);
+            return;
+        }else if($scope.to_type==$scope.from_type){
+            $scope.after = $scope.before;
+            return;
+        }
+
         $scope.button_text = "Loading";
         $http.post($scope.compiler_api_link,{"from-type":$scope.from_type,"to-type":$scope.to_type,"data-content":$scope.before}).then(function(data){
             console.log(data);
             if(data.data && data.data!="NULL") {
                 $scope.after = data.data;
+                toastr.success("Converting Data Done");
             }else $scope.output_failure();
                 $scope.button_text = "Convert";
         }, function(){
