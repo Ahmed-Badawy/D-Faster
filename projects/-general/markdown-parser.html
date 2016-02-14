@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app>
+<html ng-app='myApp'>
 <head>
 
 <title>Markdown Parser</title>
@@ -25,7 +25,7 @@
 
 </head>
 
-<body>
+<body ng-controller='MainController'>
 
 
 
@@ -49,8 +49,14 @@
 
 
     <div class="col-sm-6">
-        <textarea id="text-input" oninput="this.editor.update()" rows="30" cols="60" class='form-control'>
+        <textarea id="text-input" ng-model='txt1' ng-change='markdownConverter()' rows="25" class='form-control'></textarea>
+<div class="clearfix"></div><br>
+        <a target='_blank' href="https://github.com/Ahmed-Badawy/Learning-Markdown" class='btn btn-primary btn-block'>Learn How to Write MarkDown</a>
+        
+    </div>
+    <div id="preview" class='col-sm-6'></div>
 
+    <div id='hidden' class='hidden'>
 #Header 1
 ##Header 2
 ### Header 3
@@ -116,15 +122,7 @@ Markdown is a lightweight markup language based on the formatting conventions th
 * [plugins/github/README.md] (PlGh)
 
 
-
-</textarea>
-<div class="clearfix"></div><br>
-        <a target='_blank' href="https://github.com/Ahmed-Badawy/Learning-Markdown" class='btn btn-primary btn-block'>Learn How to Write MarkDown</a>
-        
-    </div>
-    <div id="preview" class='col-sm-6'></div>
-
-
+</div>
 
 
 
@@ -151,32 +149,27 @@ Markdown is a lightweight markup language based on the formatting conventions th
 
 
     <script type="text/javascript" src='js/markdown.min.js'></script>
-
-    <script>
-      function Editor(input, preview) {
-        this.update = function () {
-          preview.innerHTML = markdown.toHTML(input.value);
-        };
-        input.editor = this;
-        this.update();
-      }
-      var get_id = function (id) { return document.getElementById(id); };
-      new Editor(get_id("text-input"), get_id("preview"));
-    </script>
-
-
     <script  type="text/javascript" src="../../js-apps/layout.js"></script>
 
     <script type="text/javascript">
-        // var myApp=angular.module('myApp',['ngRoute']);
+        var myApp=angular.module('myApp',['ngRoute']);
         // myApp.filter('markdownFilter',function( ){
         //     return function(string){
-        //         return markdown.toHTML(string);    
+        //         if(string) return markdown.toHTML(string);    
+        //         else return "";
         //     }
         // });
-        // myApp.controller('MainController',function($scope){
+        myApp.controller('MainController',function($scope){
+            var preview = document.getElementById("preview");
+            var hidden = document.getElementById("hidden");
+            $scope.txt1 = hidden.innerHTML;
 
-        // });
+            $scope.markdownConverter = function(){
+                if($scope.txt1) preview.innerHTML = markdown.toHTML($scope.txt1);    
+            }
+            $scope.markdownConverter();
+
+        });
     </script>
 
 </body>
