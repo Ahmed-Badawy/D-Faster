@@ -11,6 +11,7 @@
   /*src: url('OpenSans/OpenSans-SemiboldItalic.ttf') format('truetype');*/
 }
 
+
 body{
     font-family: 'Open Sans','Lato', Helvetica, sans-serif;
     color:#222;
@@ -35,12 +36,13 @@ body{
 #sidebar-wrapper {
     z-index: 1000;
     position: fixed;
-    left: 250px;
+    left: 240px;
     width: 0;
     height: 100%;
     margin-left: -250px;
     overflow-y: auto;
     background: #111;
+
 
     /*background-image: url("Elegant_Background-12.jpg") !important;*/
     background-image: url("dark.jpg") !important;
