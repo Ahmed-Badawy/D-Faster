@@ -6,8 +6,6 @@
 <meta charset='utf-8'>
 <link rel="icon" type="image/x-icon" href="../../images/icon.png" />
 
-
-
 <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
 <link href="../../css/simple-sidebar.css" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/plugins/font-awesome-4.5.0/css/font-awesome.min.css">
@@ -16,6 +14,8 @@
 <script  type="text/javascript" src="../../assets/angular/angular-route.min.js"></script>
 
 <script src="../../assets/js/jquery-2.1.4.min.js"></script>
+<script src="../../assets/js/bootstrap.min.js"></script>
+
 
 <script type="text/javascript" src='../../assets/plugins/clipboard.js/clipboard.min.js'></script>
 <link href="../../assets/plugins/toastr/toastr.min.css" rel="stylesheet">
@@ -70,14 +70,46 @@ var allIcons = [
 <div ng-include src='"../../templates/headerarea.html"'></div>
 
 
-<legend><h2><span class='fa fa-ra'></span> FontAwesome 4.5.0 Helper: <small>FontAwesome icons in a second</small></h2></legend>
+<legend><h2><span class='fa fa-flag'></span> FontAwesome Helper: <small>FontAwesome icons in a second (fontAwsome 4.5)
+
+<a class="btn btn-default btn-sm pull-right" data-toggle="modal" data-target=".bs-example-modal-lg">Project Info & How To ?</a>
+
+</small></h2></legend>
+
+
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-body">
+
+        <h3 class='page-header'>What is this project ?</h3>
+        <p>it's a developer/designer helper to use fontawesome icons faster. it helps you to search & copy the icons fast. </p>
+
+        <h3 class='page-header'>What is Font Aweseom ?</h3>
+        <p>it's a very popular iconic font. Font Awesome gives you scalable vector icons that can instantly be customized — size, color, drop shadow, and anything that can be done with the power of CSS. 
+        There Website: <a href="https://fortawesome.github.io/Font-Awesome" target="_blank">Font Aweseom</a>
+        </p>
+
+<!--           <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>     -->  
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
 
 
 <h3>CDN : </h3>
 
     <div class="input-group">
       <input type="text" class="form-control" ng-model='cdn'>
-      <div class="input-group-addon" style='color:#888' data-clipboard-text='{{cdn}}' id='copy_cdn'>Copy to Clipboard</div>
+      <div class="input-group-addon copy_btn" data-clipboard-text='{{cdn}}' id='copy_cdn'>Copy to Clipboard</div>
     </div>
 
 

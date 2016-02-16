@@ -1,4 +1,6 @@
 
+
+
 <span ng-init="
 side_links_array = [
 
@@ -14,7 +16,7 @@ side_links_array = [
 
     {hr:true},
 
-    {name:'FontAwesome Helper',location:'-general/fontawesome-helper',icon:'ra'},
+    {name:'FontAwesome Helper',location:'-general/fontawesome-helper',icon:'flag'},
     {name:'Color Picker',location:'-general/color-picker',icon:'eyedropper'}, 
 
     {hr:true},
@@ -100,8 +102,9 @@ base_url = 'http://localhost/_websites/ahmed-badawy.com/projects/Develop-Faster/
             <ul class="sidebar-nav">
                 <li class="sidebar-brand"> Develop Faster</li>
 
+    <li><input ng-model='search_q' class='form-control'></li>
 
-    <li ng-repeat='link in side_links_array'><a href='{{base_url}}projects/{{link.location}}.html?show_what={{link.show_what}}' ng-if='!link.hr'><span class='fa fa-{{link.icon}}'></span> {{link.name}}</a>
+    <li ng-repeat='link in side_links_array | filter:search_q'><a href='{{base_url}}projects/{{link.location}}.html?show_what={{link.show_what}}' ng-if='!link.hr'><span class='fa fa-{{link.icon}}'></span> {{link.name}}</a>
     <hr ng-if='link.hr'>
     </li>
 
