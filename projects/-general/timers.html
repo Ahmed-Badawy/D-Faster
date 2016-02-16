@@ -234,15 +234,23 @@ function start() {
     clocktimer = setInterval("update()",100);
     x.start();
 }
+function reset() {
+    stop();
+    x.reset();
+    update();
+}
+
 function stop() {
     x.stop();
     clearInterval(clocktimer);
     toastr.info("Stop Watch Has Stopped");
 }
-function reset() {
+document.onkeypress = function(key_dtl) {
+    // key_dtl = key_dtl || window.event;
+    // var uni_code = key_dtl.keyCode || key_dtl.which;
+    // var key_name = String.fromCharCode(uni_code);
+    // alert(key_name);
     stop();
-    x.reset();
-    update();
 }
 function save_time() {
     var cur_time_obj = {
