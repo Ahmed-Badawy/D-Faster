@@ -83,7 +83,7 @@
 <div class="clearfix"></div><br>
 
         <input type="button" class='btn btn-default btn-lg col-sm-3' value="Start" onclick="start();">
-        <input type="button" class='btn btn-default btn-lg col-sm-3' value="Pause" onclick="stop();">
+        <input type="button" class='btn btn-default btn-lg col-sm-3' id='stop_btn' value="Pause" onclick="stop();">
         <input type="button" class='btn btn-danger btn-lg col-sm-3' value="Reset" onclick="reset()">
         <button class='btn btn-primary btn-lg col-sm-3' onclick="save_time()">Save Time</button>
 
@@ -245,12 +245,15 @@ function stop() {
     clearInterval(clocktimer);
     toastr.info("Stop Watch Has Stopped");
 }
-document.onkeypress = function(key_dtl) {
+document.onkeypress = function() {
     // key_dtl = key_dtl || window.event;
     // var uni_code = key_dtl.keyCode || key_dtl.which;
     // var key_name = String.fromCharCode(uni_code);
     // alert(key_name);
-    stop();
+    x.stop();
+    clearInterval(clocktimer);
+    // document.getElementById("stop_btn").click();
+    // stop();
 }
 function save_time() {
     var cur_time_obj = {

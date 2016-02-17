@@ -84,13 +84,14 @@ body{
     line-height: 22px;
 }
 
-.sidebar-nav > li a {
+.sidebar-nav li a {
     display: block;
     text-decoration: none;
-    color: #999999;
+    color: #fff;
+    font-weight: lighter;
     transition:all .1s linear;
 }
-.sidebar-nav > li a:hover {
+.sidebar-nav li a:hover {
     text-decoration: none;
     color: #fff !important;
     background: #286090 !important;
@@ -184,6 +185,11 @@ body{
         color:white;
         font-size: 120%;
         background-color: #333 !important;
+    }
+
+    li.sidebar_header{
+        color:#9E9E9E !important;
+        font-size: 90%;
     }
 
 

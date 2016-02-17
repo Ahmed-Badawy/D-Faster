@@ -1,0 +1,99 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+
+<title>Color Palettes</title>
+<meta charset='utf-8'>
+<link rel="icon" type="image/x-icon" href="../../images/icon.png" />
+
+
+<link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
+<link href="../../css/simple-sidebar.css" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/plugins/font-awesome-4.5.0/css/font-awesome.min.css">
+
+<script  type="text/javascript" src="../../assets/angular/angular.min.js"></script>
+<script  type="text/javascript" src="../../assets/angular/angular-route.min.js"></script>
+
+<script src="../../assets/js/jquery-2.1.4.min.js"></script>
+
+<script type="text/javascript" src='../../assets/plugins/clipboard.js/clipboard.min.js'></script>
+<link href="../../assets/plugins/toastr/toastr.min.css" rel="stylesheet">
+<script type="text/javascript" src='../../assets/plugins/toastr/toastr.min.js'></script>
+
+<script  type="text/javascript" src="../../js-apps/layout.js"></script>
+
+</head>
+
+<body ng-controller='MainController' style='background-color:#{{cur_color}}'>
+
+
+
+    <div id="wrapper">
+
+<div ng-include src='"../../templates/sidebar.html"'></div>
+<a href="#menu-toggle" class="btn btn-default btn-xs fa fa-arrow-right" id="menu-toggle"></a> 
+
+
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+
+<div ng-include src='"../../templates/headerarea.html"'></div>
+
+
+<legend><h2> <span class='fa fa-hashtag'></span> Color Palettes: <small>The Fast way to choose your color theme</small></h2></legend>
+
+
+<div class='row' id='color-palets'>
+    <table class='table table-bordered'>
+        <tr ng-repeat='color in colors_pallets'>
+            <th style="background-color:#{{color.base_color}}" class='cf-white'>{{color.name}}</th>
+            <td ng-repeat='deg in color.degs' style='background-color:#{{deg}}' ng-click='get_color(deg)' ng-mouseenter='hovered(deg)'>{{deg}}</td>
+        </tr>
+    </table>
+</div>
+
+
+
+<div class="clearfix"></div>
+<br>
+
+
+
+<div ng-include src='"../../templates/footerarea.html"'></div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+
+    <script type="text/javascript">
+        var myApp=angular.module('myApp',['ngRoute']);
+        myApp.controller('MainController',function($scope){
+            
+            $scope.get_color = function(color){
+                console.log(color);
+                $scope.cur_color = color;
+                toastr.info("You Copied The Color "+color);
+            }
+            $scope.hovered = function(color){
+                $scope.cur_color = color;
+            }
+
+
+        });
+    </script>
+
+
+</body>
+</html>
