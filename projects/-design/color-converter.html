@@ -22,6 +22,13 @@
 
 <script  type="text/javascript" src="../../js-apps/layout.js"></script>
 
+<style type="text/css">
+    .if{
+        width:150px;
+        /*display: inline;*/
+    }
+</style>
+
 </head>
 
 <body ng-controller='MainController' style='background-color:#{{cur_color}}'>
@@ -44,16 +51,44 @@
 <div ng-include src='"../../templates/headerarea.html"'></div>
 
 
-<legend><h2> <span class='fa fa-hashtag'></span> Color Palettes: <small>The Fast way to choose your color theme</small></h2></legend>
+<legend><h2> <span class='fa fa-hashtag'></span> Color Converter: <small>The Fastest way to Convert a color</small></h2></legend>
 
 
-<div class='row' id='color-palets'>
-    <table class='table table-bordered'>
-        <tr ng-repeat='color in colors_pallets'>
-            <th style="background-color:#{{color.base_color}}" class='cf-white'>{{color.name}}</th>
-            <td ng-repeat='deg in color.degs' style='background-color:#{{deg}}' ng-click='get_color(deg)' ng-mouseenter='hovered(deg)'>{{deg}}</td>
-        </tr>
-    </table>
+<div class='row'>
+
+<table class='table'>
+    <tr>
+        <th>RGB</th>
+        <td>
+        Red: <input class='form-control input-sm' type='text' ng-model='color.rgb.r'> 
+        Green: <input class='form-control input-sm' type='text' ng-model='color.rgb.g'>
+        Blue: <input class='form-control input-sm' type='text' ng-model='color.rgb.b'>
+        </td>
+        <td>
+        Red:{{color.rgb.r}} <input class='form-control input-sm if' type='range' min='0' max='255' ng-model='color.rgb.r'>
+        Green:{{color.rgb.g}} <input class='form-control input-sm if' type='range' min='0' max='255' ng-model='color.rgb.g'>
+        Blue:{{color.rgb.b}} <input class='form-control input-sm if' type='range' min='0' max='255' ng-model='color.rgb.b'>
+        </td>
+        <td>RGB(40,40,40)</td>
+    </tr>
+    <tr>
+        <th>HEX</th>
+        <td>
+        #<input class='form-control input-sm' style='width:50px;display:inline;' >
+        </td>
+        <td>#666666</td>
+    </tr>
+    <tr>
+        <th>HSL</th>
+        <td>
+        Hue: <input class='form-control input-sm if' type='number'> °  , 
+        Saturation: <input class='form-control input-sm if' type='number'> % , 
+        Lightness: <input class='form-control input-sm if' type='number'> %
+        </td>
+        <td>#666666</td>
+    </tr>   
+</table>
+
 </div>
 
 
@@ -76,21 +111,14 @@
     </div>
     <!-- /#wrapper -->
 
-
+    <script type="text/javascript" src='js/tinycolor-min.js'></script>
     <script type="text/javascript">
         var myApp=angular.module('myApp',['ngRoute']);
         myApp.controller('MainController',function($scope){
-            
-            $scope.get_color = function(color){
-                console.log(color);
-                $scope.cur_color = color;
-                toastr.info("You Copied The Color "+color);
+            $scope.color = {
+                rgb: {r:0,g:0,b:0}
             }
-            $scope.hovered = function(color){
-                $scope.cur_color = color;
-            }
-
-
+            // var color = tinycolor("red");
         });
     </script>
 
