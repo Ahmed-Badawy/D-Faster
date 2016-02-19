@@ -18,16 +18,29 @@ function sanitize(str) {
 myApp.controller('MainController',function($scope){
     $scope.icons = array_unique(allIcons);
     $scope.copy_format = 1;
+    $scope.icon_size = 'fa-2x';
+    $scope.icon_range = '3';
+
+    $scope.$watch('icon_range',function(value){
+        if(value==1) $scope.icon_size = '';
+        if(value==2) $scope.icon_size = 'fa-lg';
+        if(value==3) $scope.icon_size = 'fa-2x';
+        if(value==4) $scope.icon_size = 'fa-3x';
+        if(value==5) $scope.icon_size = 'fa-4x';
+        if(value==6) $scope.icon_size = 'fa-5x';
+    });
     
     $scope.cdn = '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">';
 
     $scope.format3 = '<span class="fa fa-user"></span>';
     $scope.sanitize = function(str){ return sanitize(str) }
-    $scope.format_class = function(num){ return ($scope.copy_format==num) ? "btn btn-default active" : "btn btn-default" }
+    $scope.check_style = function(num,var_name){ 
+        return ($scope[var_name]==num) ? "btn btn-default active" : "btn btn-default" 
+    }
     $scope.get_copy_format = function(icon){ 
-        if($scope.copy_format==1) ans = "fa fa-"+icon;
+        if($scope.copy_format==1) ans = 'fa '+$scope.icon_size+' fa-'+icon;
         if($scope.copy_format==2) ans = icon;
-        if($scope.copy_format==3) ans = '<span class="fa fa-'+icon+'"></span>';
+        if($scope.copy_format==3) ans = '<span class="fa '+$scope.icon_size+' fa-'+icon+'"></span>';
         // console.log(ans);
         return ans;
     }

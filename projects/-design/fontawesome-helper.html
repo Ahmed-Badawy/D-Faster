@@ -119,24 +119,34 @@ var allIcons = [
 <div class="clearfix"></div>
 
 
-<h3>Copy Format : </h3>
+<h3>Options : ( Example: fa-{icon_name} ) </h3>
 
-    <div class="row">
-        <div class="col-sm-3">Copy Format (Example: fa-user <span class='fa fa-user'></span>)</div>
+    <div class="col-sm-6">
+        <div class="col-sm-3">Copy Format: </div>
         <div class="col-sm-9">
             <div class="btn-group" data-toggle="buttons">
-                <label ng-class="format_class(1)" ng-click='copy_format=1'>
+                <label ng-class="check_style(1,'copy_format')" ng-click='copy_format=1'>
                     <input type="radio" name="show_style" value="1" /> fa fa-user
                 </label> 
-                <label ng-class="format_class(2)" ng-click='copy_format=2'>
+                <label ng-class="check_style(2,'copy_format')" ng-click='copy_format=2'>
                     <input type="radio" name="show_style" value="3" /> user
                 </label> 
-                <label ng-class="format_class(3)" ng-click='copy_format=3'>
+                <label ng-class="check_style(3,'copy_format')" ng-click='copy_format=3'>
                     <input type="radio" name="show_style" value="2" /> {{ format3 }}
                 </label> 
             </div>
         </div>
     </div>
+
+
+    <div class="col-sm-6">
+        <div class="col-sm-3">Icon Size: {{icon_size}}</div>
+        <div class="col-sm-9">
+            <input class='form-control input-sm' type='range' min='1' max='6' ng-model='icon_range'>
+        </div>
+    </div>
+
+
 
 <div class="clearfix"></div>
 <br>
@@ -147,8 +157,7 @@ var allIcons = [
 <input ng-model='q' class='form-control' placeholder='Filter Results'/>
 <br>
 
-<button ng-repeat='n in icons | filter:q' class='btn btn-default col-sm-2' data-clipboard-text='{{get_copy_format(n)}}'><i class="fa fa-{{n}} fa-lg pull-left"></i> {{n}}</button>
-
+<button ng-repeat='n in icons | filter:q' class='btn btn-default col-sm-2' data-clipboard-text='{{get_copy_format(n)}}'><i class="fa fa-{{n}} {{icon_size}} pull-left"></i>{{n}}</button>
 
 
 
@@ -156,6 +165,348 @@ var allIcons = [
 <br>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        
+<h3 class='page-header'>Example 1: fixed width icons</h3>
+
+
+<div class="row">
+<div class="list-group col-sm-3">
+  <a class="list-group-item" href="#"><i class="fa fa-home fa-fw"></i>&nbsp; Home</a>
+  <a class="list-group-item" href="#"><i class="fa fa-book fa-fw"></i>&nbsp; Library</a>
+  <a class="list-group-item" href="#"><i class="fa fa-pencil fa-fw"></i>&nbsp; Applications</a>
+  <a class="list-group-item" href="#"><i class="fa fa-cog fa-fw"></i>&nbsp; Settings</a>
+</div>
+<div class="col-md-9 col-sm-8">
+      <p>
+        Use <code>fa-fw</code> to set icons at a fixed width. Great to use when different icon widths throw off alignment.
+        Especially useful in things like nav lists &amp; list groups.
+      </p>
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"list-group"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"list-group-item"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-home fa-fw"</span><span class="nt">&gt;&lt;/i&gt;</span><span class="ni">&amp;nbsp;</span> Home<span class="nt">&lt;/a&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"list-group-item"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-book fa-fw"</span><span class="nt">&gt;&lt;/i&gt;</span><span class="ni">&amp;nbsp;</span> Library<span class="nt">&lt;/a&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"list-group-item"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-pencil fa-fw"</span><span class="nt">&gt;&lt;/i&gt;</span><span class="ni">&amp;nbsp;</span> Applications<span class="nt">&lt;/a&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"list-group-item"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-cog fa-fw"</span><span class="nt">&gt;&lt;/i&gt;</span><span class="ni">&amp;nbsp;</span> Settings<span class="nt">&lt;/a&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div>
+    </div>
+
+</div>
+
+
+
+
+
+
+<h3 class="page-header">Example 2: List Icons </h3>
+
+<div class="row">
+    <div class="col-md-3 col-sm-4">
+      <ul class="fa-ul">
+        <li><i class="fa-li fa fa-check-square"></i>List icons</li>
+        <li><i class="fa-li fa fa-check-square"></i>can be used</li>
+        <li><i class="fa-li fa fa-spinner fa-spin"></i>as bullets</li>
+        <li><i class="fa-li fa fa-square"></i>in lists</li>
+      </ul>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <p>Use <code>fa-ul</code> and <code>fa-li</code> to easily replace default bullets in unordered lists.</p>
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"fa-ul"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;li&gt;&lt;i</span> <span class="na">class=</span><span class="s">"fa-li fa fa-check-square"</span><span class="nt">&gt;&lt;/i&gt;</span>List icons<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;&lt;i</span> <span class="na">class=</span><span class="s">"fa-li fa fa-check-square"</span><span class="nt">&gt;&lt;/i&gt;</span>can be used<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;&lt;i</span> <span class="na">class=</span><span class="s">"fa-li fa fa-spinner fa-spin"</span><span class="nt">&gt;&lt;/i&gt;</span>as bullets<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;&lt;i</span> <span class="na">class=</span><span class="s">"fa-li fa fa-square"</span><span class="nt">&gt;&lt;/i&gt;</span>in lists<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</code></pre></div>
+    </div>
+  </div>
+
+
+
+
+
+<h3 class="page-header">Example 3: Bordered & Pulled Icons </h3>
+
+
+
+
+<div class="row">
+    <div class="col-md-3 col-sm-4">
+      <p>
+        <i class="fa fa-quote-left fa-3x fa-pull-left fa-border"></i>
+        …tomorrow we will run faster, stretch out our arms farther… And then one fine morning&mdash;
+        So we beat on, boats against the current, borne back ceaselessly into the past.
+      </p>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <p>
+        Use <code>fa-border</code> and <code>fa-pull-right</code> or <code>fa-pull-left</code> for easy pull quotes or
+        article icons.
+      </p>
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-quote-left fa-3x fa-pull-left fa-border"</span><span class="nt">&gt;&lt;/i&gt;</span>
+...tomorrow we will run faster, stretch out our arms farther...
+And then one fine morning&mdash; So we beat on, boats against the
+current, borne back ceaselessly into the past.
+</code></pre></div>
+    </div>
+  </div>
+
+
+
+
+<h3 class="page-header">Example 4: Animated Icons</h3>
+<div class="row">
+    <div class="col-md-3 col-sm-4">
+      <p>
+        <i class="fa fa-spinner fa-spin fa-3x fa-fw margin-bottom"></i>
+        <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw margin-bottom"></i>
+        <i class="fa fa-refresh fa-spin fa-3x fa-fw margin-bottom"></i>
+        <i class="fa fa-cog fa-spin fa-3x fa-fw margin-bottom"></i>
+        <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>
+      </p>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <p>
+        Use the <code>fa-spin</code> class to get any icon to rotate, and use <code>fa-pulse</code> to have it rotate
+        with 8 steps. Works well with <code>fa-spinner</code>, <code>fa-refresh</code>, and <code>fa-cog</code>.
+      </p>
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-spinner fa-spin"</span><span class="nt">&gt;&lt;/i&gt;</span>
+<span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-circle-o-notch fa-spin"</span><span class="nt">&gt;&lt;/i&gt;</span>
+<span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-refresh fa-spin"</span><span class="nt">&gt;&lt;/i&gt;</span>
+<span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-cog fa-spin"</span><span class="nt">&gt;&lt;/i&gt;</span>
+<span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-spinner fa-pulse"</span><span class="nt">&gt;&lt;/i&gt;</span>
+</code></pre></div>
+      <p class="alert alert-success">
+        <i class="fa fa-exclamation-triangle fa-lg"></i> 
+        Some browsers on some platforms have issues with animated icons resulting in a jittery wobbling effect. See 
+        <a target="_blank" class="alert-link" href="https://github.com/FortAwesome/Font-Awesome/issues/671">issue #671</a> 
+        for examples and possible workarounds.
+      </p>
+      <p class="alert alert-success">
+        <i class="fa fa-info-circle fa-lg"></i> CSS3 animations aren't supported in IE8 - IE9.
+      </p>
+    </div>
+  </div>
+
+
+
+
+
+
+<h3 class="page-header">Example 5: Rotated & Flipped </h3>
+<div class="row">
+    <div class="col-md-3 col-sm-4">
+      <p style="font-size: 18px;">
+        <i class="fa fa-shield"></i>&nbsp; normal<br>
+        <i class="fa fa-shield fa-rotate-90"></i>&nbsp; fa-rotate-90<br>
+        <i class="fa fa-shield fa-rotate-180"></i>&nbsp; fa-rotate-180<br>
+        <i class="fa fa-shield fa-rotate-270"></i>&nbsp; fa-rotate-270<br>
+        <i class="fa fa-shield fa-flip-horizontal"></i>&nbsp; fa-flip-horizontal<br>
+        <i class="fa fa-shield fa-flip-vertical"></i>&nbsp; fa-flip-vertical
+      </p>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <p>
+        To arbitrarily rotate and flip icons, use the <code>fa-rotate-*</code> and <code>fa-flip-*</code> classes.
+      </p>
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-shield"</span><span class="nt">&gt;&lt;/i&gt;</span> normal<span class="nt">&lt;br&gt;</span>
+<span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-shield fa-rotate-90"</span><span class="nt">&gt;&lt;/i&gt;</span> fa-rotate-90<span class="nt">&lt;br&gt;</span>
+<span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-shield fa-rotate-180"</span><span class="nt">&gt;&lt;/i&gt;</span> fa-rotate-180<span class="nt">&lt;br&gt;</span>
+<span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-shield fa-rotate-270"</span><span class="nt">&gt;&lt;/i&gt;</span> fa-rotate-270<span class="nt">&lt;br&gt;</span>
+<span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-shield fa-flip-horizontal"</span><span class="nt">&gt;&lt;/i&gt;</span> fa-flip-horizontal<span class="nt">&lt;br&gt;</span>
+<span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-shield fa-flip-vertical"</span><span class="nt">&gt;&lt;/i&gt;</span> fa-flip-vertical
+</code></pre></div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+<h3 class="page-header">Example 6: Stacked Icons </h3>
+<div class="row">
+    <div class="col-md-3 col-sm-4">
+      <div class="margin-bottom">
+        <span class="fa-stack fa-lg">
+          <i class="fa fa-square-o fa-stack-2x"></i>
+          <i class="fa fa-twitter fa-stack-1x"></i>
+        </span>
+        fa-twitter on fa-square-o<br>
+        <span class="fa-stack fa-lg">
+          <i class="fa fa-circle fa-stack-2x"></i>
+          <i class="fa fa-flag fa-stack-1x fa-inverse"></i>
+        </span>
+        fa-flag on fa-circle<br>
+        <span class="fa-stack fa-lg">
+          <i class="fa fa-square fa-stack-2x"></i>
+          <i class="fa fa-terminal fa-stack-1x fa-inverse"></i>
+        </span>
+        fa-terminal on fa-square<br>
+        <span class="fa-stack fa-lg">
+          <i class="fa fa-camera fa-stack-1x"></i>
+          <i class="fa fa-ban fa-stack-2x text-danger"></i>
+        </span>
+        fa-ban on fa-camera
+      </div>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <p>
+        To stack multiple icons, use the <code>fa-stack</code> class on the parent, the <code>fa-stack-1x</code>
+        for the regularly sized icon, and <code>fa-stack-2x</code> for the larger icon. <code>fa-inverse</code>
+        can be used as an alternative icon color. You can even throw <a href="#larger">larger icon</a> classes on the parent
+        to get further control of sizing.
+      </p>
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"fa-stack fa-lg"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-square-o fa-stack-2x"</span><span class="nt">&gt;&lt;/i&gt;</span>
+  <span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-twitter fa-stack-1x"</span><span class="nt">&gt;&lt;/i&gt;</span>
+<span class="nt">&lt;/span&gt;</span>
+fa-twitter on fa-square-o<span class="nt">&lt;br&gt;</span>
+<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"fa-stack fa-lg"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-circle fa-stack-2x"</span><span class="nt">&gt;&lt;/i&gt;</span>
+  <span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-flag fa-stack-1x fa-inverse"</span><span class="nt">&gt;&lt;/i&gt;</span>
+<span class="nt">&lt;/span&gt;</span>
+fa-flag on fa-circle<span class="nt">&lt;br&gt;</span>
+<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"fa-stack fa-lg"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-square fa-stack-2x"</span><span class="nt">&gt;&lt;/i&gt;</span>
+  <span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-terminal fa-stack-1x fa-inverse"</span><span class="nt">&gt;&lt;/i&gt;</span>
+<span class="nt">&lt;/span&gt;</span>
+fa-terminal on fa-square<span class="nt">&lt;br&gt;</span>
+<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"fa-stack fa-lg"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-camera fa-stack-1x"</span><span class="nt">&gt;&lt;/i&gt;</span>
+  <span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-ban fa-stack-2x text-danger"</span><span class="nt">&gt;&lt;/i&gt;</span>
+<span class="nt">&lt;/span&gt;</span>
+fa-ban on fa-camera
+</code></pre></div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+<h3 class="page-header">Example 7: Bootstrap 3 Examples</h3>
+<div class="row">
+    <div class="col-md-3 col-sm-4">
+      <p>
+        <a href="#" class="btn btn-danger">
+          <i class="fa fa-trash-o fa-lg"></i> Delete</a>
+        <a href="#" class="btn btn-default btn-sm">
+          <i class="fa fa-cog"></i> Settings</a>
+      </p>
+      <p>
+        <a href="#" class="btn btn-lg btn-success">
+          <i class="fa fa-flag fa-2x pull-left"></i> Font Awesome<br>Version 4.5.0</a>
+      </p>
+      <div class="margin-bottom">
+        <div class="btn-group">
+          <a href="#" class="btn btn-default"><i class="fa fa-align-left"></i></a>
+          <a href="#" class="btn btn-default"><i class="fa fa-align-center"></i></a>
+          <a href="#" class="btn btn-default"><i class="fa fa-align-right"></i></a>
+          <a href="#" class="btn btn-default"><i class="fa fa-align-justify"></i></a>
+        </div>
+      </div>
+      <div class="margin-bottom">
+        <div class="input-group margin-bottom-sm">
+          <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+          <input type="text" placeholder="Email address" class="form-control">
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+          <input type="password" placeholder="Password" class="form-control">
+        </div>
+      </div>
+      <div class="margin-bottom">
+        <div class="btn-group">
+          <a href="#" class="btn btn-primary"><i class="fa fa-user fa-fw"></i> User</a>
+          <a href="#" data-toggle="dropdown" class="btn btn-primary dropdown-toggle" aria-expanded="false">
+            <span class="fa fa-caret-down"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#"><i class="fa fa-pencil fa-fw"></i> Edit</a></li>
+            <li><a href="#"><i class="fa fa-trash-o fa-fw"></i> Delete</a></li>
+            <li><a href="#"><i class="fa fa-ban fa-fw"></i> Ban</a></li>
+            <li class="divider"></li>
+            <li><a href="#"><i class="i"></i> Make admin</a></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <p>
+        Font Awesome works great with the full range of Bootstrap components.
+      </p>
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"btn btn-danger"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-trash-o fa-lg"</span><span class="nt">&gt;&lt;/i&gt;</span> Delete<span class="nt">&lt;/a&gt;</span>
+<span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"btn btn-default btn-sm"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-cog"</span><span class="nt">&gt;&lt;/i&gt;</span> Settings<span class="nt">&lt;/a&gt;</span>
+
+<span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"btn btn-lg btn-success"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-flag fa-2x pull-left"</span><span class="nt">&gt;&lt;/i&gt;</span> Font Awesome<span class="nt">&lt;br&gt;</span>Version 4.5.0<span class="nt">&lt;/a&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"btn-group"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"btn btn-default"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-align-left"</span><span class="nt">&gt;&lt;/i&gt;&lt;/a&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"btn btn-default"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-align-center"</span><span class="nt">&gt;&lt;/i&gt;&lt;/a&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"btn btn-default"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-align-right"</span><span class="nt">&gt;&lt;/i&gt;&lt;/a&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"btn btn-default"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-align-justify"</span><span class="nt">&gt;&lt;/i&gt;&lt;/a&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"input-group margin-bottom-sm"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"input-group-addon"</span><span class="nt">&gt;&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-envelope-o fa-fw"</span><span class="nt">&gt;&lt;/i&gt;&lt;/span&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">"form-control"</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">placeholder=</span><span class="s">"Email address"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"input-group"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"input-group-addon"</span><span class="nt">&gt;&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-key fa-fw"</span><span class="nt">&gt;&lt;/i&gt;&lt;/span&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">"form-control"</span> <span class="na">type=</span><span class="s">"password"</span> <span class="na">placeholder=</span><span class="s">"Password"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"btn-group open"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"btn btn-primary"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-user fa-fw"</span><span class="nt">&gt;&lt;/i&gt;</span> User<span class="nt">&lt;/a&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"btn btn-primary dropdown-toggle"</span> <span class="na">data-toggle=</span><span class="s">"dropdown"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"fa fa-caret-down"</span><span class="nt">&gt;&lt;/span&gt;&lt;/a&gt;</span>
+  <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"dropdown-menu"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-pencil fa-fw"</span><span class="nt">&gt;&lt;/i&gt;</span> Edit<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-trash-o fa-fw"</span><span class="nt">&gt;&lt;/i&gt;</span> Delete<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;&lt;i</span> <span class="na">class=</span><span class="s">"fa fa-ban fa-fw"</span><span class="nt">&gt;&lt;/i&gt;</span> Ban<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+    <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"divider"</span><span class="nt">&gt;&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;&lt;i</span> <span class="na">class=</span><span class="s">"i"</span><span class="nt">&gt;&lt;/i&gt;</span> Make admin<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+  <span class="nt">&lt;/ul&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div>
+    </div>
+  </div>
+
+
+
+
+    </div>
+</div>
+
+
+
+
+
+
+
+<div class="clearfix"></div>
+<br>
 
 <div ng-include src='"../../templates/footerarea.html"'></div>
 
