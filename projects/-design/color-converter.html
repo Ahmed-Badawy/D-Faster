@@ -58,6 +58,8 @@
 
 <div class='row'>
 
+
+<div class="col-sm-10" style='border:3px dashed {{color.hex}};padding:5px'>
 <table class='table'>
 
     <tr>
@@ -67,10 +69,10 @@
         </td>
         <td>
             <select ng-model='color.hex' class='form-control'>
-                <option ng-repeat='(named_color,hex_color) in named_colors' value='{{hex_color}}'>{{named_color}}</option>
+                <option ng-repeat='(named_color,hex_color) in named_colors' value='{{hex_color|lowercase}}'>{{named_color}}</option>
             </select>
         </td>
-        <td class='text-center'>red</td>
+        <td class='text-center' style='background-color:{{color.hex}};color:#ccc;'>{{color.name|ucfirst}}</td>
     </tr>
 
     <tr>
@@ -81,7 +83,7 @@
         <td>
             <input class='form-control input-sm' type='color' ng-model="color.hex">
         </td>
-        <td class='text-center'>#666666</td>
+        <td class='text-center' style='background-color:{{color.hex}};color:#ccc;'>{{color.hex}}</td>
     </tr>
 
     <tr>
@@ -96,7 +98,7 @@
         Green:{{color.rgb.g}} <input class='form-control input-sm if' type='range' min='0' max='255' ng-model='color.rgb.g'>
         Blue:{{color.rgb.b}} <input class='form-control input-sm if' type='range' min='0' max='255' ng-model='color.rgb.b'>
         </td>
-        <td class='text-center'>rgb(40,40,40) <br>rgba(40,40,40,1.0)</td>
+        <td class='text-center' style='background-color:{{color.hex}};color:#ccc;'>rgb({{color.rgb.r}},{{color.rgb.g}},{{color.rgb.b}}) <br>rgba({{color.rgb.r}},{{color.rgb.g}},{{color.rgb.b}},{{color.rgb.a}})</td>
     </tr>
 
     <tr>
@@ -107,16 +109,26 @@
         Lightness: <input class='form-control input-sm' type='text' ng-model='color.hsl.l'>
         </td>
         <td>
-        Hue:{{color.hsl.h}} ° <input class='form-control input-sm if' type='range' min='0' max='359' ng-model='color.hsl.h'>
-        Saturation:{{color.hsl.s}} % <input class='form-control input-sm if' type='range' min='0' max='100' ng-model='color.hsl.s'>
-        Lightness:{{color.hsl.l}} % <input class='form-control input-sm if' type='range' min='0' max='100' ng-model='color.hsl.l'>
+<!--         Hue:{{color.hsl.h}} ° <input class='form-control input-sm if' type='range' min='0' max='359' ng-model='color.hsl.h'>
+        Saturation:{{color.hsl.s}} <input class='form-control input-sm if' type='range' min='0' max='100' ng-model='color.hsl.s'>
+        Lightness:{{color.hsl.l}} <input class='form-control input-sm if' type='range' min='0' max='100' ng-model='color.hsl.l'> -->
         </td>
-        <td class='text-center'>hsl(40,40,40) <br>hsla(40,40,40,1.0)</td>
+        <td class='text-center' style='background-color:{{color.hex}};color:#ccc;'>{{color.hsl_name}} </td>
     </tr>
 
 </table>
+</div>
 
-<button ng-click='cout()'>output</button>
+<div class="col-sm-2">
+    <table class='table'>
+        <tr ng-repeat='n in lightness_array track by $index' style='background-color:{{n}}' ng-if='n!="#ffffff" && n!="#000000"'><th style='color:#333'>{{n}} <span ng-if='$index==7'>- Selected Color</span></th></tr>
+    </table>
+</div>
+
+
+
+
+<!-- <button ng-click='cout()'>output</button> -->
 
 </div>
 
@@ -143,18 +155,88 @@
     <script type="text/javascript" src='js/tinycolor-min.js'></script>
     <script type="text/javascript">
         var myApp=angular.module('myApp',['ngRoute']);
+
+        myApp.filter('ucfirst', function() {
+            return function(input,arg) {
+                return input.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
+            };
+        });
+
         myApp.controller('MainController',function($scope){
 
             $scope.color = {
                 rgb: {r:0,g:0,b:0},
                 hex: "#000000",
-                hsl: {h:0,s:0,l:0}
+                hsl: {h:0,s:0,l:0},
+                hsl_name: "hsl(0,0,0)" ,
+                name: "black",
+                is_dark: true
             }
 
             $scope.cout = function(){
                 console.log($scope.hex);
                 // console.log(out);
             }
+
+    $scope.color_calc = function(color,type){
+        // console.log(color);
+        if(type!='hex') $scope.color.hex = color.toHexString();
+        if(type!='rgb') $scope.color.rgb = color.toRgb();
+        $scope.color.is_dark = color.isDark();
+        $scope.color.hsl_name = color.toHslString();
+        $scope.color.name = (color.toName()) ? color.toName() : "";
+        if(type=='hex'){
+            console.log("--------------");
+            var org_color = color.toHexString();
+            lightness_array = [];
+            lightness_array.push( tinycolor(org_color).lighten(70).toHexString() );
+            lightness_array.push( tinycolor(org_color).lighten(50).toHexString() );
+            lightness_array.push( tinycolor(org_color).lighten(35).toHexString() );
+            lightness_array.push( tinycolor(org_color).lighten(25).toHexString() );
+            lightness_array.push( tinycolor(org_color).lighten(15).toHexString() );
+            lightness_array.push( tinycolor(org_color).lighten(10).toHexString() );
+            lightness_array.push( tinycolor(org_color).lighten(5).toHexString() );
+
+            lightness_array.push( tinycolor(org_color).toHexString() );
+
+            lightness_array.push( tinycolor(org_color).darken(5).toHexString() );
+            lightness_array.push( tinycolor(org_color).darken(10).toHexString() );
+            lightness_array.push( tinycolor(org_color).darken(15).toHexString() );
+            lightness_array.push( tinycolor(org_color).darken(25).toHexString() );
+            lightness_array.push( tinycolor(org_color).darken(35).toHexString() );
+            lightness_array.push( tinycolor(org_color).darken(50).toHexString() );
+            lightness_array.push( tinycolor(org_color).darken(70).toHexString() );
+
+            // console.log(lightness_array);
+            $scope.lightness_array = lightness_array;
+            // console.log( color.lighten(10).toHexString() );
+        }
+    }
+
+
+    $scope.$watch('color.hex',function(){
+        color = tinycolor($scope.color.hex);
+        $scope.color_calc(color,"hex");
+    });
+    $scope.$watchGroup(['color.rgb.r','color.rgb.g','color.rgb.b'],function(){
+        color = tinycolor($scope.color.rgb);
+        $scope.color_calc(color,"rgb");
+    });
+    $scope.$watchGroup(['color.hsl.h','color.hsl.s','color.hsl.l'],function(){
+        // color = tinycolor("hsl("+$scope.color.hsl.h+","
+        //                     +$scope.color.hsl.s+"%,"
+        //                     +$scope.color.hsl.l+"%)");
+        if($scope.color.hsl.h==0 && 
+            $scope.color.hsl.s==0 &&
+            $scope.color.hsl.l==0) return;
+        color = tinycolor($scope.color.hsl);
+        // console.log(color);
+
+        $scope.color_calc(color,"hsl");
+    });
+
+
+
             // var color = tinycolor("red");
             $scope.named_colors = {
 Black : "#000000",
@@ -307,6 +389,10 @@ Ivory : "#FFFFF0",
 White : "#FFFFFF"
             }
         });
+
+
+
+
     </script>
 
 

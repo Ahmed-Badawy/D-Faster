@@ -126,14 +126,32 @@ Demo patches: demonstrate how to build color pickers and how Colors' / ColorPick
 
 <div style='margin-top:50px'></div>
 
-<div class='panel panel-default well col-sm-9 col-sm-offset-3' id='color_copier'>
+<div class='panel panel-default col-sm-9 col-sm-offset-3' id='color_copier'>
   <legend style='margin-top:1%'><h2><span class='fa fa-eyedropper'></span> Color Picker</h2></legend>
   <div>
-    <label>Hex Color:</label> <button class='btn btn-default' id='c_hex'></button> <small style='color:#888'>click to copy</small>
-    <br><br> 
-    <label>RGBA Color:</label> <button class='btn btn-default' id='c_rgba'></button> <small style='color:#888'>click to copy</small>
-    <br> <br> 
-    <label>HSLA Color:</label> <button class='btn btn-default' id='c_hsla'></button> <small style='color:#888'>click to copy</small>
+
+    <div class="input-group">
+      <div class="input-group-addon">Hex Color:</div>
+      <input type="text" class="form-control" id='c_hex'>
+      <div class="input-group-addon copy_btn" type='1'>Copy to Clipboard</div>
+    </div>
+    <br> 
+    <div class="input-group">
+      <div class="input-group-addon">RGBA Color:</div>
+      <input type="text" class="form-control" id='c_rgba'>
+      <div class="input-group-addon copy_btn" type='2'>Copy to Clipboard</div>
+    </div>
+    <br> 
+    <div class="input-group">
+      <div class="input-group-addon">HSLA Color:</div>
+      <input type="text" class="form-control" id='c_hsla'>
+      <div class="input-group-addon copy_btn" type='3'>Copy to Clipboard</div>
+    </div>
+    <br> 
+
+
+    <p class='well well-sm'>if you aren't satisfied with our color picker please consider using This Great Color Picker: <a href="http://colorizer.org/">colorizer.org/</a></p>
+
     <br>
   </div>
   
@@ -150,11 +168,15 @@ Demo patches: demonstrate how to build color pickers and how Colors' / ColorPick
 
     <script type="text/javascript">
 
-        var clipboard_copy = new Clipboard('#color_copier button', {
+        var clipboard_copy = new Clipboard('#color_copier .copy_btn', {
             text: function(e) {
-                console.log(e.innerHTML);
-                toastr.warning("Color In Clipboard: "+e.innerHTML);
-                return e.innerHTML;
+                console.log();
+                var type = e.getAttribute('type');
+                if(type==1) copy_text = document.getElementById("c_hex").value;
+                if(type==2) copy_text = document.getElementById("c_rgba").value;
+                if(type==3) copy_text = document.getElementById("c_hsla").value;
+                toastr.warning("Color In Clipboard: "+copy_text);
+                return copy_text;
             }
         });
         clipboard_copy.on('success', function(e) { console.log(e); });

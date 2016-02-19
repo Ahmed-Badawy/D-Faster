@@ -100,9 +100,9 @@
 				var c_hex = window.document.getElementById("c_hex");
 				var c_rgba = window.document.getElementById("c_rgba");
 				var c_hsla = window.document.getElementById("c_hsla");
-				if(c_hex) c_hex.innerHTML = "#"+color.HEX;
-				if(c_hex) c_rgba.innerHTML = "rgba("+outer_value.rgba+")";
-				if(c_hsla) c_hsla.innerHTML = "hsla("+outer_value.hsla+")";
+				if(c_hex) c_hex.value = "#"+color.HEX;
+				if(c_hex) c_rgba.value = "rgba("+outer_value.rgba+")";
+				if(c_hsla) c_hsla.value = "hsla("+outer_value.hsla+")";
 		};
 
 	/* ---------------------------------- */
