@@ -2,7 +2,7 @@
 <html ng-app='myApp'>
 <head>
 
-<title>Data Formats Converter</title>
+<title>Tables Converter (Excel-GoogleSheets-HTML tables)</title>
 <meta charset='utf-8'>
 <link rel="icon" type="image/x-icon" href="../../images/icon.png" />
 
@@ -39,13 +39,13 @@
                     <div class="col-lg-12">
 
 <div ng-include src='"../../templates/headerarea.html"'></div>
-<legend><h2><span class='fa fa-recycle'></span> Data Formats Converter: <small>Convert Between Data Formats With Ease (JSON , XML , CSV , YAML , HTML tables , SQL Statements , PHP_arrays , PHP_Objects)</small></h2></legend>
+<legend><h2><span class='fa fa-recycle'></span> Table Converter: <small>Convert Any table based data like (Excel - Google Sheets - HTML Tables) into most of the known formats like (JSON , XML , CSV , YAML , HTML tables , SQL Statements , PHP_arrays , PHP_Objects)</small></h2></legend>
 
 
 <div class="row">
 <p class='well well-sm'>
 - This APP will do it's Best to convert between data formats. if it couldn't convert you will get an error Message. <br>
-- ps: Both CSV & SQL formats doesn't allow multidimensional arrays. <br>
+- Just copy the wanted data then past here in plain text. <br>
 - Sorry! we still have some problems in converting to XML.(working on it)
 </p>
 
@@ -54,16 +54,30 @@
 
 <label>Data Format</label>
 <SELECT class='form-control' ng-model='from_type'>
-    <option value='json'>JSON</option>
-    <option value='xml'>XML</option>
-    <option value='yaml'>YAML</option> 
-    <option value='csv'>CSV</option>
-    <option value='php_array'>PHP Arrays</option>
-    <option value='php_object'>PHP Objects</option>
+    <option value='excel'>Excel Data</option>
+    <option value='google_sheets'>Google Sheets</option> 
+    <option value='html_table'>HTML Table</option>
 </SELECT>
 <br>
+   
 
-    <p>{{from_type}} Data (input)</p>
+<!-- <div class="row">
+    <div class="col-sm-6">
+        <div class="input-group">
+          <div class="input-group-addon">Data Seperator:</div>
+          <input type="text" class="form-control" ng-model='split_seperator'>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="input-group">
+          <div class="input-group-addon">Line Seperator:</div>
+          <input type="text" class="form-control" ng-model='line_seperator'>
+        </div>
+    </div>
+</div> -->
+
+
+    <p>Data in table format (input)</p>
     <textarea class='form-control mytextarea' rows='20' ng-model='before' ng-change='convert()'></textarea>
     <input type='file' class='hidden upload_input' />
     <span class='fa fa-file-code-o btn file_btn' title='Import a File'></span>
@@ -148,38 +162,72 @@
 
     <script type="text/javascript">
 
+
+    function get_text_elms(text,split_delemeter,line_delemeter){
+        if(text){
+            var final_output = [];
+            var lines = text.split(line_delemeter);
+            
+            console.log(lines.length);
+
+            for(var i=0;i<lines.length;i++){
+                var line_array = lines[i].split(split_delemeter);
+                inline_obj = {};
+
+                console.log("we only support up to six fields");
+
+                // console.log(line_array);
+
+                if(line_array[0]) inline_obj.f0 = line_array[0].trim(); 
+                if(line_array[1]) inline_obj.f1 = line_array[1].trim(); 
+                if(line_array[2]) inline_obj.f2 = line_array[2].trim(); 
+                if(line_array[3]) inline_obj.f3 = line_array[3].trim(); 
+                if(line_array[4]) inline_obj.f4 = line_array[4].trim(); 
+                if(line_array[5]) inline_obj.f5 = line_array[5].trim(); 
+
+                final_output.push(inline_obj);
+            }
+            return final_output;
+        }
+        return [];
+    }
+
+
+
 var myApp=angular.module('myApp',['ngRoute']);
 
 myApp.controller('MainController',function($scope,$http){
-    $scope.from_type = "json";
-    $scope.to_type = "csv";
+    $scope.from_type = "excel";
+    $scope.to_type = "sql";
+
+    $scope.split_seperator = '[\t]+';
+    $scope.line_seperator = '\n';
 
     $scope.button_text = "Convert";
     $scope.compiler_api_link = server_link+"site/api/data-types-converter";
-    $scope.before = '[{"id":1,"name":"ahmed","age":12,"height":190,"phone":585,"img":"1.png"},{"id":2,"name":"mohamed","age":40,"height":160,"phone":3040,"img":"2.png"},{"id":3,"name":"ali","age":50,"height":180,"phone":8080,"img":"3.png"}]';
+    $scope.before = '';
     $scope.after = '';
 
     $scope.convert = function(){
-        if($scope.to_type=="javascript"){
-            $scope.after = JSON.stringify($scope.before);
-            return;
-        }else if($scope.to_type==$scope.from_type){
-            $scope.after = $scope.before;
-            return;
+        if($scope.before) {
+            $scope.button_text = "Loading";
+            var split_delemeter = new RegExp($scope.split_seperator,'g');
+            var line_delemeter = new RegExp($scope.line_seperator,'g');
+            outter_data = get_text_elms($scope.before,split_delemeter,line_delemeter);
+            console.log(outter_data);
         }
 
-        $scope.button_text = "Loading";
-        $http.post($scope.compiler_api_link,{"from-type":$scope.from_type,"to-type":$scope.to_type,"data-content":$scope.before}).then(function(data){
-            console.log(data);
-            if(data.data && data.data!="NULL") {
-                $scope.after = data.data;
-                toastr.success("Converting Data Done");
-            }else $scope.output_failure();
-                $scope.button_text = "Convert";
-        }, function(){
-            $scope.output_failure();
-            $scope.button_text = "Convert";
-        });
+        // $http.post($scope.compiler_api_link,{"from-type":$scope.from_type,"to-type":$scope.to_type,"data-content":$scope.before}).then(function(data){
+        //     console.log(data);
+        //     if(data.data && data.data!="NULL") {
+        //         $scope.after = data.data;
+        //         toastr.success("Converting Data Done");
+        //     }else $scope.output_failure();
+        //         $scope.button_text = "Convert";
+        // }, function(){
+        //     $scope.output_failure();
+        //     $scope.button_text = "Convert";
+        // });
     }
     $scope.convert();
     $scope.output_failure = function(){
@@ -193,6 +241,7 @@ myApp.controller('MainController',function($scope,$http){
 
 
 window.onload = function(){
+
 
 /********************************Notify me**************************************/
     function notifyUser(msgHeader,img,msg){

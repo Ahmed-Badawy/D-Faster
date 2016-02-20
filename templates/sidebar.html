@@ -4,13 +4,17 @@
 <span ng-init="
 side_links = {
         general: {name:'General Helpers' , in_array:[
-{name:'Data Formats Converter',location:'-dataformats/data-formats-converter',icon:'list-ul'},
 {name:'Markdown Parser',location:'-general/markdown-parser',icon:'reorder'}, 
 {name:'B-PasswordKeeper',location:'-general/password-keeper',icon:'list-ul'}, 
 {name:'B-Notes',location:'-general/b-notes',icon:'list-ul'}, 
-{name:'Fake Data Generator',location:'-general/fake-data-generator',icon:'cubes'}, 
         ]},
         
+        data_conversions: {name:'Data Operations' , in_array:[
+{name:'Fake Data Generator',location:'-dataformats/fake-data-generator',icon:'cubes'}, 
+{name:'Data Formats Converter',location:'-dataformats/data-formats-converter',icon:'list-ul'},
+{name:'Table Data Converter',location:'-dataformats/tables-converter',icon:'spinner'}, 
+        ]},
+
 
         design: {name:'Design Tools',in_array:[
 {name:'FontAwesome Faster',location:'-design/fontawesome-helper',icon:'flag'},
@@ -44,7 +48,7 @@ side_links = {
 {name:'UnEscape Html',location:'-security/escape-html',icon:'list-ul',show_what:2}, 
         ]},    
 
-        css: {name:'CSS Converters',in_array:[
+        css: {name:'CSS Operations',in_array:[
 {name:'SCSS Compiler',location:'-css/css-compilers',icon:'recycle',show_what:1},
 {name:'Sass Compiler',location:'-css/css-compilers',icon:'recycle',show_what:2},
 {name:'LESS Compiler',location:'-css/css-compilers',icon:'recycle',show_what:3},

@@ -121,7 +121,7 @@
 
 <div class="col-sm-2">
     <table class='table'>
-        <tr ng-repeat='n in lightness_array track by $index' style='background-color:{{n}}' ng-if='n!="#ffffff" && n!="#000000"'><th style='color:#333'>{{n}} <span ng-if='$index==7'>- Selected Color</span></th></tr>
+        <tr ng-repeat='n in lightness_array track by $index' style='background-color:{{n}}'><th style='color:#444'>{{n}} <span ng-if='n==color.hex'>- Selected Color</span></th></tr>
     </table>
 </div>
 
@@ -182,14 +182,16 @@
         // console.log(color);
         if(type!='hex') $scope.color.hex = color.toHexString();
         if(type!='rgb') $scope.color.rgb = color.toRgb();
+        if(type!='hsl') $scope.color.hsl = color.toHsl();
         $scope.color.is_dark = color.isDark();
         $scope.color.hsl_name = color.toHslString();
         $scope.color.name = (color.toName()) ? color.toName() : "";
-        if(type=='hex'){
-            console.log("--------------");
+
+        function get_degres(){
+            // console.log("--------------");
             var org_color = color.toHexString();
             lightness_array = [];
-            lightness_array.push( tinycolor(org_color).lighten(70).toHexString() );
+            lightness_array.push( tinycolor(org_color).lighten(60).toHexString() );
             lightness_array.push( tinycolor(org_color).lighten(50).toHexString() );
             lightness_array.push( tinycolor(org_color).lighten(35).toHexString() );
             lightness_array.push( tinycolor(org_color).lighten(25).toHexString() );
@@ -205,18 +207,22 @@
             lightness_array.push( tinycolor(org_color).darken(25).toHexString() );
             lightness_array.push( tinycolor(org_color).darken(35).toHexString() );
             lightness_array.push( tinycolor(org_color).darken(50).toHexString() );
-            lightness_array.push( tinycolor(org_color).darken(70).toHexString() );
+            lightness_array.push( tinycolor(org_color).darken(60).toHexString() );
 
             // console.log(lightness_array);
-            $scope.lightness_array = lightness_array;
+            $scope.lightness_array = arrayUnique(lightness_array);
             // console.log( color.lighten(10).toHexString() );
         }
+        get_degres();
     }
 
 
-    $scope.$watch('color.hex',function(){
-        color = tinycolor($scope.color.hex);
-        $scope.color_calc(color,"hex");
+
+    $scope.$watch('color.hex',function(newValue, oldValue){
+        if (typeof newValue !== 'undefined' && newValue !== oldValue) {
+            color = tinycolor($scope.color.hex);
+            $scope.color_calc(color,"hex");
+        }        
     });
     $scope.$watchGroup(['color.rgb.r','color.rgb.g','color.rgb.b'],function(){
         color = tinycolor($scope.color.rgb);
@@ -392,6 +398,12 @@ White : "#FFFFFF"
 
 
 
+var arrayUnique = function(a) {
+    return a.reduce(function(p, c) {
+        if (p.indexOf(c) < 0) p.push(c);
+        return p;
+    }, []);
+};
 
     </script>
 
