@@ -2,11 +2,12 @@
 <span ng-init="
 side_links = {
         general: {name:'General Helpers' , in_array:[
-{name:'Markdown Parser',location:'-general/markdown-parser',icon:'reorder'}, 
-{name:'B-PasswordKeeper',location:'-general/password-keeper',icon:'list-ul'}, 
-{name:'B-Notes',location:'-general/b-notes',icon:'list-ul'}, 
 {name:'SandBox Project',location:'-general/sandbox',icon:'list-ul'}, 
 {name:'HTML Requests',location:'-general/requests',icon:'list-ul'}, 
+{name:'Markdown Parser',location:'-general/markdown-parser',icon:'reorder'}, 
+{name:'B-PasswordKeeper',location:'-general/password-keeper',icon:'list-ul'}, 
+{name:'B-Markup Notes',location:'-general/b-notes',icon:'list-ul'}, 
+{name:'B-Websites Saver',location:'-general/websites-saver',icon:'list-ul'}, 
         ]},
         
         data_conversions: {name:'Data Operations' , in_array:[
@@ -111,9 +112,9 @@ base_url = 'http://localhost/_websites/ahmed-badawy.com/projects/Develop-Faster/
 
 <li style='margin-bottom:10px'><input ng-model='search_q' class='form-control' placeholder='Search Text'></li>
 
-<span ng-repeat="value in side_links">
+<span ng-repeat="value in side_links" ng-mouseenter='view_pram=value.name'>
     <li class='sidebar_header'>{{value.name}}</li>
-    <li ng-repeat='link in value.in_array | filter:search_q'>
+    <li ng-repeat='link in value.in_array | filter:search_q' ng-class='{"hidden":(view_pram==value.name)}'>
         <a href='{{base_url}}projects/{{link.location}}.html?show_what={{link.show_what}}'><span class='fa fa-{{link.icon}}'></span> {{link.name}}</a>
     </li>
     <hr>

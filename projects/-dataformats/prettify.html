@@ -72,7 +72,7 @@
 <form>
     <div class="col-sm-6">
         <label>Text (String) ({{directed_code}} code)</label>
-        <textarea rows="15" cols="60" class='form-control' ng-model='json_text' style='width:100%'></textarea>
+        <textarea rows="15" cols="60" class='form-control' ng-model='before_text' style='width:100%'></textarea>
         <br>
     <button type='submit' ng-click='compileIt()' class='btn btn-primary btn-lg btn-block'>Prettify Code <span class='fa fa-arrow-right'></span></button>
         
@@ -131,26 +131,26 @@
         $scope.show_what = getParameterByName('show_what');
 
 
-    $scope.json_text = '{"a":1,"b":"foo","c":[false,"false",null,"null",{"d":{"e":130000,"f":"1.3e5"}},{"name":"ahmed","age":22,"job":"programer"}]}';
+    $scope.before_text = '{"a":1,"b":"foo","c":[false,"false",null,"null",{"d":{"e":130000,"f":"1.3e5"}},{"name":"ahmed","age":22,"job":"programer"}]}';
     $scope.directed_code = "json";
 
     $scope.compileIt = function(){
-                if($scope.json_text){
+                if($scope.before_text){
                     // try {
-                        // var json_txt = JSON.parse($scope.json_text);
+                        // var json_txt = JSON.parse($scope.before_text);
                         // var str2 = JSON.stringify(json_txt, undefined, 4);
                         var output;
                         if($scope.directed_code=="json"){
-                            output = vkbeautify.json($scope.json_text);
+                            output = vkbeautify.json($scope.before_text);
                             // output = json_syntaxHighlight(output);
                         }else if($scope.directed_code=="xml"){
-                            output = vkbeautify.xml($scope.json_text);
+                            output = vkbeautify.xml($scope.before_text);
                         }else if($scope.directed_code=="css"){
-                            output = vkbeautify.css($scope.json_text);
+                            output = vkbeautify.css($scope.before_text);
                         }else if($scope.directed_code=="sql"){
-                            output = vkbeautify.sql($scope.json_text);
+                            output = vkbeautify.sql($scope.before_text);
                         }else if($scope.directed_code=="html"){
-                            output = vkbeautify.xml($scope.json_text);
+                            output = vkbeautify.xml($scope.before_text);
                         }        
 
                         // console.log(PR);    
@@ -171,8 +171,8 @@
             }
     $timeout(function(){
         $scope.compileIt();
-        $scope.$watchGroup(["json_text","show_what"],function(){
-            if($scope.json_text) $scope.compileIt();
+        $scope.$watchGroup(["before_text","show_what"],function(){
+            if($scope.before_text) $scope.compileIt();
             console.log("hi");
         });
     },1000);

@@ -51,6 +51,7 @@
 
 
     <div class="col-sm-4">
+        <label>Write Markup:</label>
         <textarea id="text-input" ng-model='txt1' ng-change='markdownConverter()' rows="25" class='form-control'></textarea>
 <div class="clearfix"></div><br>
 
@@ -110,7 +111,7 @@
             }
         });       
 
-        myApp.controller('MainController',function($scope,$timeout,$localStorage,ngStorageControlService){
+        myApp.controller('MainController',function($scope,$timeout,$interval,$localStorage,ngStorageControlService){
             var preview = document.getElementById("preview");
             var hidden = document.getElementById("hidden");
             $scope.txt1 = hidden.innerHTML;
@@ -134,6 +135,11 @@ $scope.saveData = function(){
     ngStorageControlService.save($scope.txt1);
     toastr.success("Your Data Was Saved");
 }
+$interval(function(){
+    toastr.info('Automatic Save every 10 seconds');
+    $scope.saveData();
+},10000);
+
 
 $scope.loadData();
 $timeout(function(){

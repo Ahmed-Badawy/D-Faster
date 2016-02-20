@@ -1,0 +1,13 @@
+
+
+
+.sweet-alert p,.sweet-alert h2,.sweet-alert input{
+  font-family: 'Noto Kufi Arabic','Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  direction: rtl;
+}
+.sweet-alert button.cancel,.sweet-alert button.confirm{
+  font-family: 'Noto Kufi Arabic','Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  direction: rtl;
+  font-size: 90%;
+  color:white;
+}
