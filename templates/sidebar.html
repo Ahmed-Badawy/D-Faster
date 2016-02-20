@@ -112,9 +112,9 @@ base_url = 'http://localhost/_websites/ahmed-badawy.com/projects/Develop-Faster/
 
 <li style='margin-bottom:10px'><input ng-model='search_q' class='form-control' placeholder='Search Text'></li>
 
-<span ng-repeat="value in side_links" ng-mouseenter='view_pram=value.name'>
+<span ng-repeat="value in side_links">
     <li class='sidebar_header'>{{value.name}}</li>
-    <li ng-repeat='link in value.in_array | filter:search_q' ng-class='{"hidden":(view_pram==value.name)}'>
+    <li ng-repeat='link in value.in_array | filter:search_q'>
         <a href='{{base_url}}projects/{{link.location}}.html?show_what={{link.show_what}}'><span class='fa fa-{{link.icon}}'></span> {{link.name}}</a>
     </li>
     <hr>

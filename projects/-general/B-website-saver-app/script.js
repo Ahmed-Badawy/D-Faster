@@ -417,37 +417,37 @@ function makeid(char_num){
 
 function timeAgo(time){
 
-    //var templates = {
-    //    prefix: "",
-    //    suffix: " ago",
-    //    seconds: "less than a minute",
-    //    minute: "about a minute",
-    //    minutes: "%d minutes",
-    //    hour: "about an hour",
-    //    hours: "about %d hours",
-    //    day: "a day",
-    //    days: "%d days",
-    //    month: "about a month",
-    //    months: "%d months",
-    //    year: "about a year",
-    //    years: "%d years"
-    //};
-
     var templates = {
-        prefix: " منذ ",
-        suffix: "",
-        seconds: "أقل من دقيقة",
-        minute: "حوالى دقيقة",
-        minutes: "%d دقائق",
-        hour: "حوالى ساعة",
-        hours: "حوالى %d ساعة",
-        day: "يوم",
-        days: "%d أيام",
-        month: "حوالى شهر",
-        months: "%d شهور",
-        year: "حوالى سنة",
-        years: "%d سنوات"
+       prefix: "",
+       suffix: " ago",
+       seconds: "less than a minute",
+       minute: "about a minute",
+       minutes: "%d minutes",
+       hour: "about an hour",
+       hours: "about %d hours",
+       day: "a day",
+       days: "%d days",
+       month: "about a month",
+       months: "%d months",
+       year: "about a year",
+       years: "%d years"
     };
+
+    // var templates = {
+    //     prefix: " منذ ",
+    //     suffix: "",
+    //     seconds: "أقل من دقيقة",
+    //     minute: "حوالى دقيقة",
+    //     minutes: "%d دقائق",
+    //     hour: "حوالى ساعة",
+    //     hours: "حوالى %d ساعة",
+    //     day: "يوم",
+    //     days: "%d أيام",
+    //     month: "حوالى شهر",
+    //     months: "%d شهور",
+    //     year: "حوالى سنة",
+    //     years: "%d سنوات"
+    // };
 
     var template = function(t, n) {
         return templates[t] && templates[t].replace(/%d/i, Math.abs(Math.round(n)));

@@ -105,13 +105,7 @@
 <div class="clearfix"></div>
     <br>
 
-
-    <!-- name,links,created at,desc,passwords  - serverVersionFile - dbname,dbhost,dbuser,dbpass -->
-
-
 <div class="col-md-12 ">
-    <pre>Sorting predicate = {{predicate}}; reverse = {{reverse}}</pre>
-
 
     [ <a href="" ng-click="predicate=''">No Order</a> ]
     <table class="table table-striped table-hover" border="2" style='margin-bottom:2px'>
@@ -324,27 +318,11 @@ Edit Modal
 
             <div class="clearfix"></div><br>
 
-
-<p>- We Have a utility that helps you backup your site's files & databases (php websites only) <br> <b>Do you want to use it ?</b> &nbsp; &nbsp; 
-<label>Yes <input type='radio' name='use_backups' value='yes' ng-model='edit_item.use_backups' ng-init='edit_item.use_backups="no"' ></label> &nbsp; &nbsp; 
-<label>No <input type='radio' name='use_backups' value='no' ng-model='edit_item.use_backups' ></label>
-</p>
-
-
-
-<div class="well well-sm" ng-show='edit_item.use_backups=="yes"'>
-        <div class="col-sm-12">        
-            <label>B-backup utility file link </label>
-            <input type='text' ng-model='edit_item.f3' class='form-control'/>
-        </div>
-
-        <div class="col-sm-12">
+         <div class="col-sm-12">
             <label>Databases</label>
             <textarea type='text' ng-model='edit_item.f6' class='form-control' rows='3' ng-focus='focus="f6"'></textarea> 
             <p class='help-block' style='color:#F45959' ng-show='focus=="f6"'>just type the (db name , db user , db password , db host) seperated by comma (,) <br> each line is considered a new database </p>
         </div>
-        <div class="clearfix"></div>
-</div>
 
 
         <br>
