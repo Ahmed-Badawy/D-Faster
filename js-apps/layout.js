@@ -19,6 +19,11 @@ toastr.options = {
   "hideMethod": "fadeOut"
 }
 
+toastr.info('<a href="http://ahmed-badawy.com">Star Us On Github</a>');
+
+
+
+
 
     $("#menu-toggle").click(function(e) {
         e.preventDefault();

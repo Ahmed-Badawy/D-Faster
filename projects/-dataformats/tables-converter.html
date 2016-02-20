@@ -169,21 +169,36 @@
             var lines = text.split(line_delemeter);
             
             console.log(lines.length);
+            alert("number of lines that we read: "+lines.length);
 
             for(var i=0;i<lines.length;i++){
                 var line_array = lines[i].split(split_delemeter);
                 inline_obj = {};
 
-                console.log("we only support up to six fields");
-
+                // console.log("we only support up to six fields");
                 // console.log(line_array);
 
-                if(line_array[0]) inline_obj.f0 = line_array[0].trim(); 
-                if(line_array[1]) inline_obj.f1 = line_array[1].trim(); 
-                if(line_array[2]) inline_obj.f2 = line_array[2].trim(); 
-                if(line_array[3]) inline_obj.f3 = line_array[3].trim(); 
-                if(line_array[4]) inline_obj.f4 = line_array[4].trim(); 
-                if(line_array[5]) inline_obj.f5 = line_array[5].trim(); 
+                if(line_array[0])  inline_obj.column0  = line_array[0].trim(); 
+                if(line_array[1])  inline_obj.column1  = line_array[1].trim(); 
+                if(line_array[2])  inline_obj.column2  = line_array[2].trim(); 
+                if(line_array[3])  inline_obj.column3  = line_array[3].trim(); 
+                if(line_array[4])  inline_obj.column4  = line_array[4].trim(); 
+                if(line_array[5])  inline_obj.column5  = line_array[5].trim(); 
+                if(line_array[6])  inline_obj.column6  = line_array[6].trim(); 
+                if(line_array[7])  inline_obj.column7  = line_array[7].trim(); 
+                if(line_array[8])  inline_obj.column8  = line_array[8].trim(); 
+                if(line_array[9])  inline_obj.column9  = line_array[9].trim(); 
+                if(line_array[10]) inline_obj.column10 = line_array[10].trim();
+                if(line_array[11]) inline_obj.column11 = line_array[11].trim();
+                if(line_array[12]) inline_obj.column12 = line_array[12].trim();
+                if(line_array[13]) inline_obj.column13 = line_array[13].trim();
+                if(line_array[14]) inline_obj.column14 = line_array[14].trim();
+                if(line_array[15]) inline_obj.column15 = line_array[15].trim();
+                if(line_array[16]) inline_obj.column16 = line_array[16].trim();
+                if(line_array[17]) inline_obj.column17 = line_array[17].trim();
+                if(line_array[18]) inline_obj.column18 = line_array[18].trim();
+                if(line_array[19]) inline_obj.column19 = line_array[19].trim();
+                if(line_array[20]) inline_obj.column20 = line_array[20].trim(); 
 
                 final_output.push(inline_obj);
             }
@@ -209,30 +224,29 @@ myApp.controller('MainController',function($scope,$http){
     $scope.after = '';
 
     $scope.convert = function(){
-        if($scope.before) {
-            $scope.button_text = "Loading";
-            var split_delemeter = new RegExp($scope.split_seperator,'g');
-            var line_delemeter = new RegExp($scope.line_seperator,'g');
-            outter_data = get_text_elms($scope.before,split_delemeter,line_delemeter);
-            console.log(outter_data);
-        }
-
-        // $http.post($scope.compiler_api_link,{"from-type":$scope.from_type,"to-type":$scope.to_type,"data-content":$scope.before}).then(function(data){
-        //     console.log(data);
-        //     if(data.data && data.data!="NULL") {
-        //         $scope.after = data.data;
-        //         toastr.success("Converting Data Done");
-        //     }else $scope.output_failure();
-        //         $scope.button_text = "Convert";
-        // }, function(){
-        //     $scope.output_failure();
-        //     $scope.button_text = "Convert";
-        // });
+        // if($scope.from_type=="excel" || $scope.from_type=="google_sheets" || $scope.from_type=="html_table" ) {
+        $scope.button_text = "Loading";
+        var split_delemeter = new RegExp($scope.split_seperator,'g');
+        var line_delemeter = new RegExp($scope.line_seperator,'g');
+        outter_data = get_text_elms($scope.before,split_delemeter,line_delemeter);
+        json_before_data = JSON.stringify(outter_data);
+        // }
+        $http.post($scope.compiler_api_link,{"from-type":'json',"to-type":$scope.to_type,"data-content":json_before_data}).then(function(data){
+            console.log(data);
+            if(data.data && data.data!="NULL") {
+                $scope.after = data.data;
+                toastr.success("Converting Data Done");
+            }else $scope.output_failure();
+                $scope.button_text = "Convert";
+        }, function(){
+            $scope.output_failure();
+            $scope.button_text = "Convert";
+        });
     }
     $scope.convert();
     $scope.output_failure = function(){
         console.log("error has happend");
-        $scope.after = "Sorry! Error Has Happened (Maybe Inserted Text isn't Valid)";
+        $scope.after = "Sorry! Error Has Happened. we couldn't convert this data. if you want to fix this please contact the developer";
     }
 
 
