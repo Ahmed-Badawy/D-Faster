@@ -1,8 +1,8 @@
 <!doctype html>
-<html ng-app='myApp'>
+<html ng-app='myApp' ng-controller='MainController'>
 <head>
 
-<title>Tables Converter (Excel-GoogleSheets-HTML tables)</title>
+<title>SandBox</title>
 <meta charset='utf-8'>
 <link rel="icon" type="image/x-icon" href="../../images/icon.png" />
 
@@ -14,17 +14,25 @@
 <script  type="text/javascript" src="../../assets/angular/angular-route.min.js"></script>
 
 <script src="../../assets/js/jquery-2.1.4.min.js"></script>
-<script type="text/javascript" src='../../assets/plugins/bytesize.min.js'></script>
 
 <script type="text/javascript" src='../../assets/plugins/clipboard.js/clipboard.min.js'></script>
 <link href="../../assets/plugins/toastr/toastr.min.css" rel="stylesheet">
 <script type="text/javascript" src='../../assets/plugins/toastr/toastr.min.js'></script>
 
+<script type="text/javascript" src='../../assets/plugins/bytesize.min.js'></script>
+
+<script type="text/javascript" src='../../assets/plugins/FileSaver.js'></script>
+<script  type="text/javascript" src="../../assets/plugins/ngStorage.min.js"></script>
 <script  type="text/javascript" src="../../js-apps/layout.js"></script>
 
 
+<style type="text/css">
+    {{css_model}}
+</style>
+
 </head>
-<body ng-controller='MainController'>
+
+<body>
 
 
 
@@ -42,46 +50,19 @@
                     <div class="col-lg-12">
 
 <div ng-include src='"../../templates/headerarea.html"'></div>
-<legend><h2><span class='fa fa-recycle'></span> Table Converter: <small>Convert Any table based data like (Excel - Google Sheets - HTML Tables) into most of the known formats like (JSON , XML , CSV , YAML , HTML tables , SQL Statements , PHP_arrays , PHP_Objects)</small></h2></legend>
+
+
+<legend><h2><span class='fa fa-reorder'></span> SandBox: <small>the fastest way to examine html/css/js code</small></h2></legend>
+
+
+
 
 
 <div class="row">
-<p class='well well-sm'>
-- This APP will do it's Best to convert between data formats. if it couldn't convert you will get an error Message. <br>
-- Just copy the wanted data then past here in plain text. <br>
-- Sorry! we still have some problems in converting to XML.(working on it)
-</p>
-
 
 <div id='textarea1' class='col-sm-6'>
-
-<label>Data Format</label>
-<SELECT class='form-control' ng-model='from_type'>
-    <option value='excel'>Excel Data</option>
-    <option value='google_sheets'>Google Sheets</option> 
-    <option value='html_table'>HTML Table</option>
-</SELECT>
-<br>
-   
-
-<!-- <div class="row">
-    <div class="col-sm-6">
-        <div class="input-group">
-          <div class="input-group-addon">Data Seperator:</div>
-          <input type="text" class="form-control" ng-model='split_seperator'>
-        </div>
-    </div>
-    <div class="col-sm-6">
-        <div class="input-group">
-          <div class="input-group-addon">Line Seperator:</div>
-          <input type="text" class="form-control" ng-model='line_seperator'>
-        </div>
-    </div>
-</div> -->
-
-
-    <p>Data in table format (input)</p>
-    <textarea class='form-control mytextarea' rows='20' ng-model='before' ng-change='convert()'></textarea>
+    <p>HTML (input)</p>
+    <textarea class='form-control mytextarea' rows='15' ng-model='html_model'></textarea>
     <input type='file' class='hidden upload_input' />
     <span class='fa fa-file-code-o btn file_btn' title='Import a File'></span>
     <span class='fa fa-copy btn copy_btn' title='Copy Text'></span>
@@ -89,7 +70,7 @@
     <span class='fa fa-th-list btn selectAll' title='Select All Text'></span>
     <span class='fa fa-trash btn emptyAll' title='Empty All Text'></span>
 
-    <a href='' download="style.css" style="display:none" class='hidden download_content_link'></a>
+    <a href='' download="script.js" style="display:none" class='hidden download_content_link'></a>
     <span class='fa fa-save btn download_content' title='Download Content'></span>
 
 
@@ -101,31 +82,16 @@
 </div>
 
 <div id='textarea2' class='col-sm-6'>
-
-<label>Convert to Data Format</label>
-<SELECT class='form-control' ng-model='to_type' ng-change='convert()'>
-    <!-- <option value='javascript'>JavaScript</option> -->
-    <option value='json'>JSON</option>
-    <option value='xml'>XML</option>
-    <option value='yaml'>YAML</option> 
-    <option value='csv'>CSV</option>
-    <option value='sql'>SQL Statement</option>
-    <option value='html_table'>HTML Table</option>
-    <option value='php_array'>PHP Arrays</option>
-    <option value='php_object'>PHP Objects</option>
-</SELECT>
-<br>
-
-    <p>{{to_type}} Data (output)</p>
-    <textarea class='form-control mytextarea' rows='20' readonly>{{after}}</textarea>
+    <p>CSS (input)</p>
+    <textarea class='form-control mytextarea' rows='15' ng-model='css_model'></textarea>
     <input type='file' class='hidden upload_input' />
-    <span class='fa fa-file-code-o btn file_btn hidden' title='Import a File'></span>
+    <span class='fa fa-file-code-o btn file_btn' title='Import a File'></span>
     <span class='fa fa-copy btn copy_btn' title='Copy Text'></span>
-    <span class='fa fa-cut btn cut_btn hidden' title='Cut Text'></span>
+    <span class='fa fa-cut btn cut_btn' title='Cut Text'></span>
     <span class='fa fa-th-list btn selectAll' title='Select All Text'></span>
-    <span class='fa fa-trash btn emptyAll hidden' title='Empty All Text'></span>
+    <span class='fa fa-trash btn emptyAll' title='Empty All Text'></span>
 
-    <a href='' download="style.css" style="display:none" class='hidden download_content_link'></a>
+    <a href='' download="script.js" style="display:none" class='hidden download_content_link'></a>
     <span class='fa fa-save btn download_content' title='Download Content'></span>
 
 
@@ -134,6 +100,49 @@
     <span class='pull-right'>&nbsp;&nbsp;</span>
     <span class='fa fa-hand-peace-o fa-lg pull-right'></span>
     <span class='pull-right txtlength' style='color:#aaa;font-weight:bolder'></span>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<div class="row">
+
+<div id='textarea3' class='col-sm-6'>
+    <p>JavaScript (input)</p>
+    <textarea class='form-control mytextarea' rows='15' ng-model='js_model'></textarea>
+    <input type='file' class='hidden upload_input' />
+    <span class='fa fa-file-code-o btn file_btn' title='Import a File'></span>
+    <span class='fa fa-copy btn copy_btn' title='Copy Text'></span>
+    <span class='fa fa-cut btn cut_btn' title='Cut Text'></span>
+    <span class='fa fa-th-list btn selectAll' title='Select All Text'></span>
+    <span class='fa fa-trash btn emptyAll' title='Empty All Text'></span>
+
+    <a href='' download="script.js" style="display:none" class='hidden download_content_link'></a>
+    <span class='fa fa-save btn download_content' title='Download Content'></span>
+
+
+    <span class='fa fa-hand-lizard-o fa-lg pull-right'></span>
+    <span class='pull-right txtsize' style='color:#aaa;font-weight:bolder'></span>
+    <span class='pull-right'>&nbsp;&nbsp;</span>
+    <span class='fa fa-hand-peace-o fa-lg pull-right'></span>
+    <span class='pull-right txtlength' style='color:#aaa;font-weight:bolder'></span>
+</div>
+
+
+<div class="col-sm-6 panel panel-default panel-body" id='final_output'>
+</div>
+
+
+<button ng-click='compile()' class='btn btn-primary btn-block btn-lg'>Force Compile</button>
+</div>
+
+
+
 
 </div>
 
@@ -141,16 +150,10 @@
 
 <div class="clearfix"></div>
 <br>
-<button class='btn btn-primary btn-lg btn-block' ng-click='convert()'>{{button_text}}</button>
-
-<div class="clearfix"></div><br>
-</div>
 
 
 
 <div ng-include src='"../../templates/footerarea.html"'></div>
-
-
 
                     </div>
                 </div>
@@ -161,103 +164,29 @@
     </div>
     <!-- /#wrapper -->
 
+<script  type="text/javascript" src="../../assets/plugins/ngStorage.min.js"></script>
+<script type="text/javascript">
+    var myApp=angular.module('myApp',['ngRoute','ngStorage']);
+    myApp.controller('MainController',function($scope,$timeout,$localStorage){ 
+        var promise = false;
 
-
-    <script type="text/javascript">
-
-
-    function get_text_elms(text,split_delemeter,line_delemeter){
-        if(text){
-            var final_output = [];
-            var lines = text.split(line_delemeter);
-            
-            console.log(lines.length);
-            alert("number of lines that we read: "+lines.length);
-
-            for(var i=0;i<lines.length;i++){
-                var line_array = lines[i].split(split_delemeter);
-                inline_obj = {};
-
-                // console.log("we only support up to six fields");
-                // console.log(line_array);
-
-                if(line_array[0])  inline_obj.column0  = line_array[0].trim(); 
-                if(line_array[1])  inline_obj.column1  = line_array[1].trim(); 
-                if(line_array[2])  inline_obj.column2  = line_array[2].trim(); 
-                if(line_array[3])  inline_obj.column3  = line_array[3].trim(); 
-                if(line_array[4])  inline_obj.column4  = line_array[4].trim(); 
-                if(line_array[5])  inline_obj.column5  = line_array[5].trim(); 
-                if(line_array[6])  inline_obj.column6  = line_array[6].trim(); 
-                if(line_array[7])  inline_obj.column7  = line_array[7].trim(); 
-                if(line_array[8])  inline_obj.column8  = line_array[8].trim(); 
-                if(line_array[9])  inline_obj.column9  = line_array[9].trim(); 
-                if(line_array[10]) inline_obj.column10 = line_array[10].trim();
-                if(line_array[11]) inline_obj.column11 = line_array[11].trim();
-                if(line_array[12]) inline_obj.column12 = line_array[12].trim();
-                if(line_array[13]) inline_obj.column13 = line_array[13].trim();
-                if(line_array[14]) inline_obj.column14 = line_array[14].trim();
-                if(line_array[15]) inline_obj.column15 = line_array[15].trim();
-                if(line_array[16]) inline_obj.column16 = line_array[16].trim();
-                if(line_array[17]) inline_obj.column17 = line_array[17].trim();
-                if(line_array[18]) inline_obj.column18 = line_array[18].trim();
-                if(line_array[19]) inline_obj.column19 = line_array[19].trim();
-                if(line_array[20]) inline_obj.column20 = line_array[20].trim(); 
-
-                final_output.push(inline_obj);
-            }
-            return final_output;
-        }
-        return [];
-    }
-
-
-
-var myApp=angular.module('myApp',['ngRoute']);
-
-myApp.controller('MainController',function($scope,$http){
-    $scope.from_type = "excel";
-    $scope.to_type = "sql";
-
-    $scope.split_seperator = '[\t]+';
-    $scope.line_seperator = '\n';
-
-    $scope.button_text = "Convert";
-    $scope.compiler_api_link = server_link+"site/api/data-types-converter";
-    $scope.before = '';
-    $scope.after = '';
-
-    $scope.convert = function(){
-        if(!$scope.before) return;
-        // if($scope.from_type=="excel" || $scope.from_type=="google_sheets" || $scope.from_type=="html_table" ) {
-        $scope.button_text = "Loading";
-        var split_delemeter = new RegExp($scope.split_seperator,'g');
-        var line_delemeter = new RegExp($scope.line_seperator,'g');
-        outter_data = get_text_elms($scope.before,split_delemeter,line_delemeter);
-        json_before_data = JSON.stringify(outter_data);
-        // }
-        $http.post($scope.compiler_api_link,{"from-type":'json',"to-type":$scope.to_type,"data-content":json_before_data}).then(function(data){
-            console.log(data);
-            if(data.data && data.data!="NULL") {
-                $scope.after = data.data;
-                toastr.success("Converting Data Done");
-            }else $scope.output_failure();
-                $scope.button_text = "Convert";
-        }, function(){
-            $scope.output_failure();
-            $scope.button_text = "Convert";
+        $scope.$watchGroup(['html_model','css_model','js_model'],function(){
+            if(promise) $timeout.cancel(promise);
+            promise = $timeout(function(){
+                $scope.compile();
+            },1000);
         });
-    }
-    $scope.convert();
-    $scope.output_failure = function(){
-        console.log("error has happend");
-        $scope.after = "Sorry! Error Has Happened. we couldn't convert this data. if you want to fix this please contact the developer";
-    }
 
+        $scope.compile = function(){
+            console.log("you are here");
+            if($scope.html_model) document.getElementById('final_output').innerHTML = $scope.html_model;
+            eval($scope.js_model);
+        }
+    });
+</script>
 
-});
-
-
-
+<script type="text/javascript">
+    
 window.onload = function(){
 
 
@@ -375,7 +304,6 @@ function apply_text_area(area_name,mime_type){
     var textFile = false;
     function makeTextFile(text) {
         var data = new Blob([text], {type: mime_type});
-        console.log(data);
 // If we are replacing a previously generated file we need to manually revoke the object URL to avoid memory leaks :
         if (textFile) window.URL.revokeObjectURL(textFile);
         textFile = window.URL.createObjectURL(data);
@@ -388,21 +316,16 @@ function apply_text_area(area_name,mime_type){
 /**********************************************************************/
 }
 
-apply_text_area('textarea1','text/css');
-apply_text_area('textarea2','text/css');
+apply_text_area('textarea1','text/javascript');
+apply_text_area('textarea2','text/javascript');
+apply_text_area('textarea3','text/javascript');
 
 
 
 
 };
 
-
-
-
-
-
-    </script>
-
+</script>
 
 </body>
 </html>
