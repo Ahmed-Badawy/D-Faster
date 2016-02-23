@@ -5,10 +5,10 @@ toastr.options = {
   "closeButton": false,
   "debug": false,
   "newestOnTop": false,
-  "progressBar": false,
+  "progressBar": true,
   "positionClass": "toast-top-right",
   "preventDuplicates": false,
-  "onclick": null,
+  "onclick": false,
   "showDuration": "300",
   "hideDuration": "1000",
   "timeOut": "2000",
@@ -19,7 +19,9 @@ toastr.options = {
   "hideMethod": "fadeOut"
 }
 
-toastr.info('<a href="http://ahmed-badawy.com">Star Us On Github</a>');
+toastr.warning('<a target="_blank" href="http://cv.ahmed-badawy.com"><span class="fa fa-2x fa-briefcase"></span> Help Me get A Job</a>');
+toastr.warning('<a target="_blank" href="https://github.com/Ahmed-Badawy/Develop-Faster"><span class="fa fa-2x fa-github"></span> Star Us on Github</a>');
+toastr.warning('<a target="_blank" href=""><span class="fa fa-2x fa-google"></span> Star Us on Google Play</a>');
 
 
 

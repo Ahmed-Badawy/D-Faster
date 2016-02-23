@@ -202,6 +202,15 @@ myApp.controller('MainController',function($scope,$http,$timeout){
         $scope.final_prepare();
     }
 
+    $scope.delete_pram = function(request_type,index){
+        if(request_type=="get"){
+            $scope.get_prams.splice(index,1);
+        }
+        if(request_type=="post"){
+            $scope.post_prams.splice(index,1);
+        }        
+        $scope.final_prepare();
+    }
 
     $scope.$watchGroup(['webpate_url','request_type'],function(){$scope.final_prepare()});
     $scope.final_prepare = function(){

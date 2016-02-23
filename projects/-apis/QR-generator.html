@@ -64,12 +64,12 @@
     <br>
 
     <div class="col-sm-6">    
-        <label>Size of Image - حجم الصورة</label>
-      <input type="number" class="form-control widthfix" ng-model='size'>
+        <label>Size of Image [ {{size}}px ]</label>
+      <input type="range" class="form-control widthfix" ng-model='size' min='40' max='800' step='10'>
     </div>
     <div class="col-sm-6">    
-        <label>Image Padding - الفراغ المحيط بالصورة</label>
-      <input type="number" class="form-control widthfix" ng-model='padding'>
+        <label>Image Padding [ {{padding}}px ]</label>
+      <input type="range" class="form-control widthfix" ng-model='padding' min='0' max='30'>
     </div>    
 </div>
 

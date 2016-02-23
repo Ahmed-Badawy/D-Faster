@@ -192,6 +192,16 @@ body{
         font-size: 90%;
     }
 
+/**********************************************************************/
+    .dropdown-menu{
+        margin-left: 50px;
+        padding:10px;
+    }
+    .dropdown-menu li a{
+        color:#333;
+        padding:0;
+        text-indent: 0px;
+    }
 
 
 

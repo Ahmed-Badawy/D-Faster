@@ -102,6 +102,9 @@
 
 <div id='textarea2' class='col-sm-6'>
 
+
+<div class="row">
+<div class='col-sm-6'>
 <label>Convert to Data Format</label>
 <SELECT class='form-control' ng-model='to_type' ng-change='convert()'>
     <!-- <option value='javascript'>JavaScript</option> -->
@@ -114,7 +117,15 @@
     <option value='php_array'>PHP Arrays</option>
     <option value='php_object'>PHP Objects</option>
 </SELECT>
-<br>
+</div>
+<div class='col-sm-6'>
+    <label>Column (CSV format)</label>
+    <input type="text" class="form-control" ng-model='columns' style='width:100%'>
+</div>
+</div>
+
+<div class="clearfix"></div><br>
+
 
     <p>{{to_type}} Data (output)</p>
     <textarea class='form-control mytextarea' rows='20' readonly>{{after}}</textarea>
@@ -139,8 +150,7 @@
 
 
 
-<div class="clearfix"></div>
-<br>
+<div class="clearfix"></div><br>
 <button class='btn btn-primary btn-lg btn-block' ng-click='convert()'>{{button_text}}</button>
 
 <div class="clearfix"></div><br>
@@ -166,42 +176,20 @@
     <script type="text/javascript">
 
 
-    function get_text_elms(text,split_delemeter,line_delemeter){
+    function get_text_elms(text,split_delemeter,line_delemeter,columns){
         if(text){
             var final_output = [];
             var lines = text.split(line_delemeter);
-            
-            console.log(lines.length);
-            alert("number of lines that we read: "+lines.length);
+            console.log("number of lines that we read: "+lines.length);
 
             for(var i=0;i<lines.length;i++){
                 var line_array = lines[i].split(split_delemeter);
                 inline_obj = {};
 
-                // console.log("we only support up to six fields");
-                // console.log(line_array);
-
-                if(line_array[0])  inline_obj.column0  = line_array[0].trim(); 
-                if(line_array[1])  inline_obj.column1  = line_array[1].trim(); 
-                if(line_array[2])  inline_obj.column2  = line_array[2].trim(); 
-                if(line_array[3])  inline_obj.column3  = line_array[3].trim(); 
-                if(line_array[4])  inline_obj.column4  = line_array[4].trim(); 
-                if(line_array[5])  inline_obj.column5  = line_array[5].trim(); 
-                if(line_array[6])  inline_obj.column6  = line_array[6].trim(); 
-                if(line_array[7])  inline_obj.column7  = line_array[7].trim(); 
-                if(line_array[8])  inline_obj.column8  = line_array[8].trim(); 
-                if(line_array[9])  inline_obj.column9  = line_array[9].trim(); 
-                if(line_array[10]) inline_obj.column10 = line_array[10].trim();
-                if(line_array[11]) inline_obj.column11 = line_array[11].trim();
-                if(line_array[12]) inline_obj.column12 = line_array[12].trim();
-                if(line_array[13]) inline_obj.column13 = line_array[13].trim();
-                if(line_array[14]) inline_obj.column14 = line_array[14].trim();
-                if(line_array[15]) inline_obj.column15 = line_array[15].trim();
-                if(line_array[16]) inline_obj.column16 = line_array[16].trim();
-                if(line_array[17]) inline_obj.column17 = line_array[17].trim();
-                if(line_array[18]) inline_obj.column18 = line_array[18].trim();
-                if(line_array[19]) inline_obj.column19 = line_array[19].trim();
-                if(line_array[20]) inline_obj.column20 = line_array[20].trim(); 
+                for(j=0;j<line_array.length;j++){
+                    col_name = (columns && columns[j]) ? columns[j].trim() : "column"+j;
+                    if(line_array[j])  inline_obj[col_name]  = line_array[j].trim(); 
+                }
 
                 final_output.push(inline_obj);
             }
@@ -225,14 +213,17 @@ myApp.controller('MainController',function($scope,$http){
     $scope.compiler_api_link = server_link+"site/api/data-types-converter";
     $scope.before = '';
     $scope.after = '';
+    $scope.columns = '';
 
     $scope.convert = function(){
         if(!$scope.before) return;
         // if($scope.from_type=="excel" || $scope.from_type=="google_sheets" || $scope.from_type=="html_table" ) {
         $scope.button_text = "Loading";
+
         var split_delemeter = new RegExp($scope.split_seperator,'g');
         var line_delemeter = new RegExp($scope.line_seperator,'g');
-        outter_data = get_text_elms($scope.before,split_delemeter,line_delemeter);
+        var cols = $scope.columns.split(",");
+        outter_data = get_text_elms($scope.before,split_delemeter,line_delemeter,cols);
         json_before_data = JSON.stringify(outter_data);
         // }
         $http.post($scope.compiler_api_link,{"from-type":'json',"to-type":$scope.to_type,"data-content":json_before_data}).then(function(data){

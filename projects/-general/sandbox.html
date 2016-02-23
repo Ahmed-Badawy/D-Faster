@@ -60,9 +60,10 @@
 
 <div class="row">
 
-<div id='textarea1' class='col-sm-6'>
+
+<div id='textarea1' class='col-sm-4'>
     <p>HTML (input)</p>
-    <textarea class='form-control mytextarea' rows='15' ng-model='html_model'></textarea>
+    <textarea class='form-control mytextarea' rows='12' ng-model='html_model'></textarea>
     <input type='file' class='hidden upload_input' />
     <span class='fa fa-file-code-o btn file_btn' title='Import a File'></span>
     <span class='fa fa-copy btn copy_btn' title='Copy Text'></span>
@@ -81,9 +82,9 @@
     <span class='pull-right txtlength' style='color:#aaa;font-weight:bolder'></span>
 </div>
 
-<div id='textarea2' class='col-sm-6'>
+<div id='textarea2' class='col-sm-4'>
     <p>CSS (input)</p>
-    <textarea class='form-control mytextarea' rows='15' ng-model='css_model'></textarea>
+    <textarea class='form-control mytextarea' rows='12' ng-model='css_model'></textarea>
     <input type='file' class='hidden upload_input' />
     <span class='fa fa-file-code-o btn file_btn' title='Import a File'></span>
     <span class='fa fa-copy btn copy_btn' title='Copy Text'></span>
@@ -101,42 +102,37 @@
     <span class='fa fa-hand-peace-o fa-lg pull-right'></span>
     <span class='pull-right txtlength' style='color:#aaa;font-weight:bolder'></span>
 </div>
+
+<div id='textarea3' class='col-sm-4'>
+    <p>JavaScript (input)</p>
+    <textarea class='form-control mytextarea' rows='12' ng-model='js_model'></textarea>
+    <input type='file' class='hidden upload_input' />
+    <span class='fa fa-file-code-o btn file_btn' title='Import a File'></span>
+    <span class='fa fa-copy btn copy_btn' title='Copy Text'></span>
+    <span class='fa fa-cut btn cut_btn' title='Cut Text'></span>
+    <span class='fa fa-th-list btn selectAll' title='Select All Text'></span>
+    <span class='fa fa-trash btn emptyAll' title='Empty All Text'></span>
+
+    <a href='' download="script.js" style="display:none" class='hidden download_content_link'></a>
+    <span class='fa fa-save btn download_content' title='Download Content'></span>
+
+
+    <span class='fa fa-hand-lizard-o fa-lg pull-right'></span>
+    <span class='pull-right txtsize' style='color:#aaa;font-weight:bolder'></span>
+    <span class='pull-right'>&nbsp;&nbsp;</span>
+    <span class='fa fa-hand-peace-o fa-lg pull-right'></span>
+    <span class='pull-right txtlength' style='color:#aaa;font-weight:bolder'></span>
+</div>
+
 </div>
 
 
-
-
-
-
+<div class="clearfix"></div><br>
 
 
 <div class="row">
 
-<div id='textarea3' class='col-sm-6'>
-    <p>JavaScript (input)</p>
-    <textarea class='form-control mytextarea' rows='15' ng-model='js_model'></textarea>
-    <input type='file' class='hidden upload_input' />
-    <span class='fa fa-file-code-o btn file_btn' title='Import a File'></span>
-    <span class='fa fa-copy btn copy_btn' title='Copy Text'></span>
-    <span class='fa fa-cut btn cut_btn' title='Cut Text'></span>
-    <span class='fa fa-th-list btn selectAll' title='Select All Text'></span>
-    <span class='fa fa-trash btn emptyAll' title='Empty All Text'></span>
-
-    <a href='' download="script.js" style="display:none" class='hidden download_content_link'></a>
-    <span class='fa fa-save btn download_content' title='Download Content'></span>
-
-
-    <span class='fa fa-hand-lizard-o fa-lg pull-right'></span>
-    <span class='pull-right txtsize' style='color:#aaa;font-weight:bolder'></span>
-    <span class='pull-right'>&nbsp;&nbsp;</span>
-    <span class='fa fa-hand-peace-o fa-lg pull-right'></span>
-    <span class='pull-right txtlength' style='color:#aaa;font-weight:bolder'></span>
-</div>
-
-
-<div class="col-sm-6 panel panel-default panel-body" id='final_output'>
-</div>
-
+<div class="panel panel-default panel-body" id='final_output'></div>
 
 <button ng-click='compile()' class='btn btn-primary btn-block btn-lg'>Force Compile</button>
 </div>
