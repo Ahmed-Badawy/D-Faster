@@ -1,0 +1,156 @@
+<!doctype html>
+<html ng-app='myApp'>
+<head>
+
+<title>Regex Tester</title>
+<meta charset='utf-8'>
+<link rel="icon" type="image/x-icon" href="../../images/icon.png" />
+
+<link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
+<link href="../../css/simple-sidebar.css" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/plugins/font-awesome-4.5.0/css/font-awesome.min.css">
+
+<script  type="text/javascript" src="../../assets/angular/angular.min.js"></script>
+<script  type="text/javascript" src="../../assets/angular/angular-route.min.js"></script>
+
+<script src="../../assets/js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src='../../assets/plugins/bytesize.min.js'></script>
+
+<script type="text/javascript" src='../../assets/plugins/clipboard.js/clipboard.min.js'></script>
+<link href="../../assets/plugins/toastr/toastr.min.css" rel="stylesheet">
+<script type="text/javascript" src='../../assets/plugins/toastr/toastr.min.js'></script>
+
+<script  type="text/javascript" src="../../js-apps/layout.js"></script>
+
+<style type="text/css">
+        #output{
+            font-size: 200%;
+            border:1px solid #999;
+            padding:10px;
+            height: 500px;
+        }
+        #output span{
+            background-color: #eee;
+            padding:1px;
+            border:1px solid #999;
+            /*margin:1px;*/
+        }
+</style>
+
+</head>
+<body ng-controller='MainController'>
+
+
+
+    <div id="wrapper">
+
+<div ng-include src='"../../templates/sidebar.html"'></div>
+<a href="#menu-toggle" class="btn btn-default btn-xs fa fa-arrow-right" id="menu-toggle"></a> 
+
+
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+
+<div ng-include src='"../../templates/headerarea.html"'></div>
+<legend><h2><span class='fa fa-recycle'></span> Regex Tester: <small>this is where you can test your regex expressions.</small></h2></legend>
+
+<p class='well well-sm'>if you aren't satisfied with our (Regex Tester) Application Please use the <a href='http://www.regexpal.com' target='_blank'>RegexPal.com</a> </p>
+
+<div class="row">
+
+<div class="row">
+
+    <div class='col-sm-12'>
+            <label><input type='checkbox'>&nbsp;Global</label> &nbsp; &nbsp; 
+            <label><input type='checkbox'>&nbsp;Multiline</label> &nbsp; &nbsp; 
+            <label><input type='checkbox'>&nbsp;Ignore Case</label>
+    </div>
+
+<div class="clearfix"></div>
+<hr>
+
+    <div class='col-sm-8'>
+        <label>Regex Expression</label>
+        <input class='form-control'>
+    </div>
+    <div class='col-sm-4'>
+        <label>Common Cases</label>
+        <select class='form-control'>
+            <option>one</option>
+            <option>two</option>
+        </select>
+    </div>
+
+</div>
+
+<div class='col-sm-12' id='output' contentEditable='true'></div>
+
+
+<div class="clearfix"></div><br>
+
+</div>
+
+
+
+
+
+<div class='hidden'>
+    <form name='get_form' method='get' action='' target='_blank'></form>
+    <form name='post_form' method='post' action='' target='_blank'>
+        <input ng-repeat='pram in post_prams' name='{{pram.name}}' value='{{pram.value}}'>
+    </form>    
+</div>
+
+
+
+
+
+<div ng-include src='"../../templates/footerarea.html"'></div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+
+
+    <script type="text/javascript">
+var myApp=angular.module('myApp',['ngRoute']);
+
+myApp.controller('MainController',function($scope,$http,$timeout){
+
+});
+
+
+const output = (str,regex,target) => {
+    str = str.replace(/[\n\r]/gm,"<br>");
+    target.innerHTML = str.replace(regex, str => `<span>${str}</span>` );
+}
+
+var str = `Is this this ?
+hello world this is what i mean of 
+this string 
+
+ok...
+`;
+var regex = /is/gi;
+
+
+output( str, regex, document.querySelector('#output') );
+
+
+    </script>
+
+
+</body>
+</html>
