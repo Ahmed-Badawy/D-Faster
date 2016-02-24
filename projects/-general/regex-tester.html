@@ -65,9 +65,9 @@
 <div class="row">
 
     <div class='col-sm-12'>
-            <label><input type='checkbox'>&nbsp;Global</label> &nbsp; &nbsp; 
-            <label><input type='checkbox'>&nbsp;Multiline</label> &nbsp; &nbsp; 
-            <label><input type='checkbox'>&nbsp;Ignore Case</label>
+            <label><input type='checkbox' ng-model='regex.g'>&nbsp;Global</label> &nbsp; &nbsp; 
+            <label><input type='checkbox' ng-model='regex.m'>&nbsp;Multiline</label> &nbsp; &nbsp; 
+            <label><input type='checkbox' ng-model='regex.i'>&nbsp;Ignore Case</label>
     </div>
 
 <div class="clearfix"></div>
@@ -75,11 +75,11 @@
 
     <div class='col-sm-8'>
         <label>Regex Expression</label>
-        <input class='form-control'>
+        <input class='form-control' style='width:100%' ng-model='regex.regex'>
     </div>
     <div class='col-sm-4'>
         <label>Common Cases</label>
-        <select class='form-control'>
+        <select class='form-control' style='width:100%'>
             <option>one</option>
             <option>two</option>
         </select>
@@ -128,25 +128,50 @@
 var myApp=angular.module('myApp',['ngRoute']);
 
 myApp.controller('MainController',function($scope,$http,$timeout){
+    $scope.regex = {
+        regex:'',
+        g:'',
+        m:'',
+        i:'',
+    }
+    var output = document.getElementById("output");
+
+    $scope.output = (str,regex,target) => {
+        // console.log(str);
+        // console.log(regex);
+        // str = str.replace(/[\n\r]/gm,"<br>");
+        // target.innerHTML = str.replace(regex, str => `<span>${str}</span>` );
+        target.innerHTML = str.replace(regex, str => `${str}` );
+    }
+
+    $scope.eval_regex = function() {
+        str = output.innerHTML;
+        // console.log(str);
+        $scope.output( str, $scope.regex.regex , output ); 
+    }
+    $scope.eval_regex();
+
+    output.addEventListener('input',function(){
+        $scope.eval_regex();
+    },false);
 
 });
 
 
-const output = (str,regex,target) => {
-    str = str.replace(/[\n\r]/gm,"<br>");
-    target.innerHTML = str.replace(regex, str => `<span>${str}</span>` );
-}
+// const output = (str,regex,target) => {
+//     str = str.replace(/[\n\r]/gm,"<br>");
+//     target.innerHTML = str.replace(regex, str => `<span>${str}</span>` );
+// }
 
-var str = `Is this this ?
-hello world this is what i mean of 
-this string 
+// var str = `Is this this ?
+// hello world this is what i mean of 
+// this string 
 
-ok...
-`;
-var regex = /is/gi;
+// ok...
+// `;
+// var regex = /is/gi;
 
-
-output( str, regex, document.querySelector('#output') );
+// output( str, regex, document.querySelector('#output') );
 
 
     </script>
