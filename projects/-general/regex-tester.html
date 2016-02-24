@@ -27,7 +27,7 @@
             font-size: 200%;
             border:1px solid #999;
             padding:10px;
-            height: 500px;
+            height: 300px;
         }
         #output span{
             background-color: #eee;
@@ -88,6 +88,7 @@
 </div>
 
 <div class='col-sm-12' id='output' contentEditable='true'></div>
+<button class='btn btn-primary btn-lg btn-block' ng-click='do_regex()'>Evaluate Regex</button>
 
 
 <div class="clearfix"></div><br>
@@ -127,7 +128,7 @@
     <script type="text/javascript">
 var myApp=angular.module('myApp',['ngRoute']);
 
-myApp.controller('MainController',function($scope,$http,$timeout){
+myApp.controller('MainController',function($scope,$timeout){
     $scope.regex = {
         regex:'',
         g:'',
@@ -135,22 +136,35 @@ myApp.controller('MainController',function($scope,$http,$timeout){
         i:'',
     }
     var output = document.getElementById("output");
+    var promise = false;
 
     $scope.output = (str,regex,target) => {
         // console.log(str);
         // console.log(regex);
-        // str = str.replace(/[\n\r]/gm,"<br>");
-        // target.innerHTML = str.replace(regex, str => `<span>${str}</span>` );
-        target.innerHTML = str.replace(regex, str => `${str}` );
+        // console.log(regex.test(str));
+        str = str.replace(/[\n\r]/gm,"<br>");
+        target.innerHTML = str.replace(regex, str => `<span>${str}</span>` );
+        // target.innerHTML = str.replace(regex, str => `${str}` );
     }
+
+    $scope.do_regex = function(){
+        str = output.innerHTML.replace(/<[^>]*>/g,"");
+        // console.log(str);
+        regex = new RegExp($scope.regex.regex,"g");
+        $scope.output( str, regex , output ); 
+    }
+    $scope.do_regex();
+
 
     $scope.eval_regex = function() {
-        str = output.innerHTML;
-        // console.log(str);
-        $scope.output( str, $scope.regex.regex , output ); 
+        if(promise) $timeout.cancel(promise);
+        promise = $timeout(function(){
+            $scope.do_regex();
+        },1000);
     }
-    $scope.eval_regex();
-
+    $scope.$watch("regex.regex",function(){
+        $scope.eval_regex();
+    });
     output.addEventListener('input',function(){
         $scope.eval_regex();
     },false);
