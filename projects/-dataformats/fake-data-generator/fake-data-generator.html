@@ -1,0 +1,628 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+
+<title>Fake Data Generator</title>
+<meta charset='utf-8'>
+<link rel="icon" type="image/x-icon" href="../../../images/icon.png" />
+
+
+<link rel="stylesheet" href="../../../assets/css/bootstrap.min.css">
+<link href="../../../css/simple-sidebar.css" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/plugins/font-awesome-4.5.0/css/font-awesome.min.css">
+
+<script  type="text/javascript" src="../../../assets/angular/angular.min.js"></script>
+<script  type="text/javascript" src="../../../assets/angular/angular-route.min.js"></script>
+
+<script src="../../../assets/js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src='../../../assets/plugins/bytesize.min.js'></script>
+
+<script type="text/javascript" src='../../../assets/plugins/clipboard.js/clipboard.min.js'></script>
+<link href="../../../assets/plugins/toastr/toastr.min.css" rel="stylesheet">
+<script type="text/javascript" src='../../../assets/plugins/toastr/toastr.min.js'></script>
+
+<script  type="text/javascript" src="../../../js-apps/layout.js"></script>
+
+<style type="text/css">
+    .col_row{
+        float:left;
+        display: inline;
+    }
+</style>
+
+</head>
+
+<body ng-controller='MainController'>
+
+
+
+    <div id="wrapper">
+
+<div ng-include src='"../../../templates/sidebar.html"'></div>
+<a href="#menu-toggle" class="btn btn-default btn-xs fa fa-arrow-right" id="menu-toggle"></a> 
+
+
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+
+<div ng-include src='"../../../templates/headerarea.html"'></div>
+
+
+<legend><h2> <span class='fa fa-hashtag'></span> Fake Data Generator: <small>The Fastest Way to Generate Fake Data</small></h2></legend>
+
+
+<div class='row'>
+  <ul class="nav nav-bills">
+    <li><a class='btn btn-default btn-sm col-sm-2' onclick='set_before("json")'>Generate Fake JSON</a></li>
+    <li><a class='btn btn-default btn-sm col-sm-2' onclick='set_before("yaml")'>Generate Fake Yaml</a></li>
+    <li><a class='btn btn-default btn-sm col-sm-2' onclick='set_before("xml")'>Generate Fake XML</a></li>
+    <li><a class='btn btn-default btn-sm col-sm-2' onclick='set_before("csv")'>Generate Fake CSV</a></li>
+    <li><a class='btn btn-default btn-sm col-sm-2' onclick='set_before("sql")'>Generate Fake SQL</a></li>
+    <li><a class='btn btn-default btn-sm col-sm-2' onclick='set_before("php_array")'>Generate Fake PHP Array</a></li>
+  </ul>
+</div>
+    <div class="clearfix"></div><br>
+
+
+
+<div class="row">
+
+
+<div id='textarea1' class='col-sm-6'>
+    <p>Before (input)</p>
+    <textarea class='form-control mytextarea' rows='25' id='before' oninput='generate_fake_data()'></textarea>
+    <input type='file' class='hidden upload_input' />
+    <span class='fa fa-file-code-o btn file_btn' title='Import a File'></span>
+    <span class='fa fa-copy btn copy_btn' title='Copy Text'></span>
+    <span class='fa fa-cut btn cut_btn' title='Cut Text'></span>
+    <span class='fa fa-th-list btn selectAll' title='Select All Text'></span>
+    <span class='fa fa-trash btn emptyAll' title='Empty All Text'></span>
+
+    <a href='' download="script.js" style="display:none" class='hidden download_content_link'></a>
+    <span class='fa fa-save btn download_content' title='Download Content'></span>
+
+
+    <span class='fa fa-hand-lizard-o fa-lg pull-right'></span>
+    <span class='pull-right txtsize' style='color:#aaa;font-weight:bolder'></span>
+    <span class='pull-right'>&nbsp;&nbsp;</span>
+    <span class='fa fa-hand-peace-o fa-lg pull-right'></span>
+    <span class='pull-right txtlength' style='color:#aaa;font-weight:bolder'></span>
+</div>
+
+<div id='textarea2' class='col-sm-6'>
+    <p>After (output)</p>
+    <textarea class='form-control mytextarea' rows='25' readonly id='after'></textarea>
+    <input type='file' class='hidden upload_input' />
+    <span class='fa fa-file-code-o btn file_btn hidden' title='Import a File'></span>
+    <span class='fa fa-copy btn copy_btn' title='Copy Text'></span>
+    <span class='fa fa-cut btn cut_btn hidden' title='Cut Text'></span>
+    <span class='fa fa-th-list btn selectAll' title='Select All Text'></span>
+    <span class='fa fa-trash btn emptyAll hidden' title='Empty All Text'></span>
+
+    <a href='' download="script.js" style="display:none" class='hidden download_content_link'></a>
+    <span class='fa fa-save btn download_content' title='Download Content'></span>
+
+
+    <span class='fa fa-hand-lizard-o fa-lg pull-right'></span>
+    <span class='pull-right txtsize' style='color:#aaa;font-weight:bolder'>size: </span>
+    <span class='pull-right'>&nbsp;&nbsp;</span>
+    <span class='fa fa-hand-peace-o fa-lg pull-right'></span>
+    <span class='pull-right txtlength' style='color:#aaa;font-weight:bolder'></span>
+
+</div>
+
+
+<div class="clearfix"></div>
+<br>
+
+<button onclick="generate_fake_data()" class='btn btn-primary btn-block btn-lg'>Refresh</button>
+
+</div>
+
+
+<h3>Faker.js API Functions:- </h3>
+
+
+<div class='well well-sm'>
+
+<ul class='col_row'>
+    <li>name</li>   
+    <ul>
+        <li>firstName</li>
+        <li>lastName</li>
+        <li>findName</li>
+        <li>jobTitle</li>
+        <li>prefix</li>
+        <li>suffix</li>
+        <li>title</li>
+        <li>jobDescriptor</li>
+        <li>jobArea</li>
+        <li>jobType</li>
+    </ul>
+</ul>
+
+<ul class='col_row'>
+    <li>address</li>   
+    <ul>
+        <li>zipCode</li>
+        <li>city</li>
+        <li>cityPrefix</li>
+        <li>citySuffix</li>
+        <li>streetName</li>
+        <li>streetAddress</li>
+        <li>streetSuffix</li>
+        <li>streetPrefix</li>
+        <li>secondaryAddress</li>
+        <li>county</li>
+        <li>country</li>
+        <li>countryCode</li>
+        <li>state</li>
+        <li>stateAbbr</li>
+        <li>latitude</li>
+        <li>longitude        </li>
+    </ul>
+</ul>
+
+<ul class='col_row'>
+    <li>commerce</li>   
+    <ul>
+        <li>color</li>
+        <li>department</li>
+        <li>productName</li>
+        <li>price</li>
+        <li>productAdjective</li>
+        <li>productMaterial</li>
+        <li>product</li>
+    </ul>
+</ul>
+
+<ul class='col_row'>
+    <li>company</li>   
+    <ul>
+        <li>suffixes</li>
+        <li>companyName</li>
+        <li>companySuffix</li>
+        <li>catchPhrase</li>
+        <li>bs</li>
+        <li>catchPhraseAdjective</li>
+        <li>catchPhraseDescriptor</li>
+        <li>catchPhraseNoun</li>
+        <li>bsAdjective</li>
+        <li>bsBuzz</li>
+        <li>bsNoun</li>
+    </ul>
+</ul>
+
+<ul class='col_row'>
+    <li>date</li>   
+    <ul>
+        <li>past</li>
+        <li>future</li>
+        <li>between</li>
+        <li>recent</li>
+        <li>month</li>
+        <li>weekday</li>
+    </ul>
+</ul>
+
+<ul class='col_row'>
+    <li>finance</li>   
+    <ul>
+        <li>account</li>
+        <li>accountName</li>
+        <li>mask</li>
+        <li>amount</li>
+        <li>transactionType</li>
+        <li>currencyCode</li>
+        <li>currencyName</li>
+        <li>currencySymbol</li>
+    </ul>
+</ul>
+
+
+<ul class='col_row'>
+    <li>hacker</li>   
+    <ul>
+        <li>abbreviation</li>
+        <li>adjective</li>
+        <li>noun</li>
+        <li>verb</li>
+        <li>ingverb</li>
+        <li>phrase</li>
+    </ul>
+</ul>
+
+<ul class='col_row'>
+    <li>helpers</li>   
+    <ul>
+        <li>randomize</li>
+        <li>slugify</li>
+        <li>replaceSymbolWithNumber</li>
+        <li>replaceSymbols</li>
+        <li>shuffle</li>
+        <li>mustache</li>
+        <li>createCard</li>
+        <li>contextualCard</li>
+        <li>userCard</li>
+        <li>createTransaction</li>
+    </ul>
+</ul>
+
+<ul class='col_row'>
+    <li>image</li>   
+    <ul>
+        <li>image</li>
+        <li>avatar</li>
+        <li>imageUrl</li>
+        <li>abstract</li>
+        <li>animals</li>
+        <li>business</li>
+        <li>cats</li>
+        <li>city</li>
+        <li>food</li>
+        <li>nightlife</li>
+        <li>fashion</li>
+        <li>people</li>
+        <li>nature</li>
+        <li>sports</li>
+        <li>technics</li>
+        <li>transport    </li>
+    </ul>
+</ul>
+
+
+<ul class='col_row'>
+    <li>internet</li>   
+    <ul>
+        <li>avatar</li>
+        <li>email</li>
+        <li>userName</li>
+        <li>protocol</li>
+        <li>url</li>
+        <li>domainName</li>
+        <li>domainSuffix</li>
+        <li>domainWord</li>
+        <li>ip</li>
+        <li>userAgent</li>
+        <li>color</li>
+        <li>mac</li>
+        <li>password</li>
+    </ul>
+</ul>
+
+
+<ul class='col_row'>
+    <li>lorem</li>   
+    <ul>
+        <li>words</li>
+        <li>sentence</li>
+        <li>sentences</li>
+        <li>paragraph</li>
+        <li>paragraphs</li>
+    </ul>
+</ul>
+
+<ul class='col_row'>
+    <li>phone</li>   
+    <ul>
+        <li>phoneNumber</li>
+        <li>phoneNumberFormat</li>
+        <li>phoneFormats</li>
+    </ul>
+</ul>
+
+<ul class='col_row'>
+    <li>random</li>   
+    <ul>
+        <li>number</li>
+        <li>arrayElement</li>
+        <li>objectElement</li>
+        <li>uuid</li>
+        <li>boolean</li>
+    </ul>
+</ul>
+
+<ul class='col_row'>
+    <li>fake</li>   
+</ul>
+    
+<div class="clearfix"></div>
+
+</div>
+
+
+
+
+
+
+<div class="clearfix"></div>
+<br>
+
+
+
+<div ng-include src='"../../../templates/footerarea.html"'></div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <script type="text/javascript" src='js/faker.min.js'></script>
+    <script type="text/javascript">
+        function set_before(type){
+            console.log(type);
+            if(type=="xml"){
+                new_text = '<?xml version="1.0" encoding="UTF-8"?>\n\n'+
+' <humans>\n'+
+'   <person id="{{random.number}}">\n'+
+'      <name>{{name.firstName}}, {{name.lastName}}</name>\n'+
+'      <title>{{name.jobType}}</title>\n'+
+'      <phone>{{phone.phoneNumber}}</phone>\n'+
+'      <age>{{random.number}}</age>\n'+
+'      <email>{{internet.email}}</email>\n'+
+'      <description>{{name.jobDescriptor}}</description>\n'+
+'   </person>\n'+
+'   <person id="{{random.number}}">\n'+
+'      <name>{{name.firstName}}, {{name.lastName}}</name>\n'+
+'      <title>{{name.jobType}}</title>\n'+
+'      <phone>{{phone.phoneNumber}}</phone>\n'+
+'      <age>{{random.number}}</age>\n'+
+'      <email>{{internet.email}}</email>\n'+
+'      <description>{{name.jobDescriptor}}</description>\n'+
+'   </person>\n'+
+'   <person id="{{random.number}}">\n'+
+'      <name>{{name.firstName}}, {{name.lastName}}</name>\n'+
+'      <title>{{name.jobType}}</title>\n'+
+'      <phone>{{phone.phoneNumber}}</phone>\n'+
+'      <age>{{random.number}}</age>\n'+
+'      <email>{{internet.email}}</email>\n'+
+'      <description>{{name.jobDescriptor}}</description>\n'+
+'   </person>\n'+
+'   </humans>\n';
+}else if(type=="csv"){ 
+    new_text = 'firstName   ,   lastName    ,   email    ,  website \n'+
+    '{{name.firstName}}     ,   {{name.lastName}}   ,   {{internet.email}}  ,   {{internet.url}}\n'+
+    '{{name.firstName}}     ,   {{name.lastName}}   ,   {{internet.email}}  ,   {{internet.url}}\n'+
+    '{{name.firstName}}     ,      {{name.lastName}}    ,   {{internet.email}}  ,   {{internet.url}}\n';
+
+
+}else if(type=="php_array"){ 
+    new_text = "[\n"+
+" [\n 'firstName'=>{{name.firstName}},\n'lastName'=>{{name.lastName}},\n'email'=>{{internet.email}},\n'url'=>{{internet.url}}\n ],\n"+
+" [\n 'firstName'=>{{name.firstName}},\n'lastName'=>{{name.lastName}},\n'email'=>{{internet.email}},\n'url'=>{{internet.url}}\n ],\n"+
+" [\n 'firstName'=>{{name.firstName}},\n'lastName'=>{{name.lastName}},\n'email'=>{{internet.email}},\n'url'=>{{internet.url}}\n ]"+             
+"\n]";
+
+}else if(type=="sql"){ 
+    new_text = "INSERT INTO Customers (firstName, lastName, email, site)\n"+
+    "    VALUES ('{{name.firstName}}' , '{{name.lastName}}' , '{{internet.email}}'  ,   '{{internet.url}}'); \n\n"+
+    "INSERT INTO Customers (firstName, lastName, email, site)\n"+
+    "    VALUES ('{{name.firstName}}' , '{{name.lastName}}' , '{{internet.email}}'  ,   '{{internet.url}}'); \n\n"+
+    "INSERT INTO Customers (firstName, lastName, email, site)\n"+
+    "    VALUES ('{{name.firstName}}' , '{{name.lastName}}' , '{{internet.email}}'  ,   '{{internet.url}}'); \n"
+    ;
+
+
+}else if(type=="json"){ 
+    new_text = '[ \n'+
+'        {\n"id":{{random.number}},         \n'+
+'        "name":"{{name.firstName}}",         \n'+
+'        "email":"{{internet.email}}",            \n'+
+'        "url":"{{internet.url}}"\n},         \n'+
+
+'        {\n"id":{{random.number}},         \n'+
+'        "name":"{{name.firstName}}",         \n'+
+'        "email":"{{internet.email}}",            \n'+
+'        "url":"{{internet.url}}"\n},         \n'+
+
+'        {\n"id":{{random.number}},         \n'+
+'        "name":"{{name.firstName}}",         \n'+
+'        "email":"{{internet.email}}",            \n'+
+'        "url":"{{internet.url}}"\n}         \n'+
+']';
+}else if(type=="yaml"){ 
+    new_text = "---\n"+
+"            -             \n"+
+"              - 'firstName'            \n"+
+"              - 'lastName '         \n"+
+"              - 'email'            \n"+
+"              - 'website'          \n"+
+"            -             \n"+
+"              - '{{name.firstName}}'\n"+
+"              - '{{name.lastName}}'         \n"+
+"              - '{{internet.email}}'            \n"+
+"              - '{{internet.url}}'         \n"+
+"            -             \n"+
+"              - '{{name.firstName}}'\n"+
+"              - '{{name.lastName}}'         \n"+
+"              - '{{internet.email}}'            \n"+
+"              - '{{internet.url}}'         \n"+
+"            -             \n"+
+"              - '{{name.firstName}}'\n"+
+"              - '{{name.lastName}}'         \n"+
+"              - '{{internet.email}}'            \n"+
+"              - '{{internet.url}}'         \n";
+}
+
+
+            get_id("before").value = new_text;
+            generate_fake_data();
+        }
+        function get_id(id_name){
+            return document.getElementById(id_name);
+        }
+        function generate_fake_data(){
+            before = get_id("before");
+            after = get_id("after");
+            if(before.value){
+                try{
+                    fake_data = faker.fake(before.value)
+                    // console.log(fake_data);
+                    after.innerHTML = fake_data;
+                }catch(e){
+                    after.innerHTML = "Error in Compiling the fake functions"
+                }
+            }else after.innerHTML = "";
+        }
+        generate_fake_data();
+
+        var myApp=angular.module('myApp',['ngRoute']);
+        myApp.controller('MainController',function($scope){
+
+        });
+
+
+
+
+
+
+window.onload = function(){
+
+
+/********************************Notify me**************************************/
+    function notifyUser(msgHeader,img,msg){
+        if(Notification.permission=='default'){
+            alert('please allow notification for our website...')
+        }else{
+            // alert("hi");
+            notify = new Notification(msgHeader,{
+                body: msg,
+                icon: (img) ? img : "1.jpg",
+                tag: Math.floor((Math.random() * 100) + 1)
+            });
+            notify.onclick = function(){
+                // console.log(this);
+                window.location = 'http://ahmed-badawy.com';
+            }
+        }
+    }
+/**********************************************************************/    
+
+function id(id){ return window.document.getElementById(id); }
+function get_id_class(id_name,class_name){ 
+    if(window.document.getElementById(id_name)==null) { console.log(id_name); console.log(class_name);}
+    return window.document.getElementById(id_name).getElementsByClassName(class_name)[0]; 
+}
+
+
+function apply_text_area(area_name,mime_type){
+    var txtarea = get_id_class(area_name,'mytextarea');
+
+/*********************************Read Text File*************************************/  
+    function read_text_file(file){
+        if(file.type != "text/plain"){ //stop if it'sn't a text file
+            alert("No Text File Inputed.");
+            // return;
+            // console.log(file);
+        }
+        var reader = new FileReader(); //call the FileReader class.
+        reader.readAsText(file); //then call the readAsText functnion
+        reader.onload = function(evt){ //what happens on loading the textfile.
+            // console.log(evt);
+            res = evt.target.result;
+            handle_onread(res);
+        }
+    }
+    function read_file_actions(evt){
+        evt.stopPropagation();
+        evt.preventDefault();
+
+        console.log(evt);
+
+        files = (evt.srcElement) ? evt.srcElement.files : evt.originalTarget.files;
+        var total_size= 0;
+        for(i=0; i<files.length ;i++){
+            total_size += files[i].size;
+        }
+        console.log("Total Size is: "+total_size+" Bytes...");
+        console.log("Files Count is: "+files.length+" Files...");
+
+        read_text_file(files[0]);
+    }
+    function handle_onread(file_text){
+        txtarea.value = file_text;
+        count_chars();
+        notifyUser('File Imported');
+    }
+    get_id_class(area_name,"upload_input").addEventListener('change',read_file_actions,false);
+    get_id_class(area_name,"file_btn").addEventListener('click',function(){ get_id_class(area_name,"upload_input").click(); },false);
+
+/********************************Copy TextArea Value**************************************/
+    var clipboard_copy = new Clipboard('#'+area_name+' .copy_btn', {
+        text: function() {
+            // notifyUser('Text Was Copied');
+            count_chars();
+            return txtarea.value;
+        }
+    });
+    clipboard_copy.on('success', function(e) { console.log(e); });
+    clipboard_copy.on('error', function(e) { console.log(e); });
+
+/********************************Cut TextArea Value**************************************/
+    var clipboard_cut = new Clipboard('#'+area_name+' .cut_btn', {
+        text: function() {
+            // notifyUser('Text Was Cut');
+            var return_text = txtarea.value;
+            txtarea.value = "";
+            count_chars();
+            return return_text;
+        }
+    });
+    clipboard_cut.on('success', function(e) { console.log(e); });
+    clipboard_cut.on('error', function(e) { console.log(e); });
+/********************************Select All TextArea Value**************************************/
+    get_id_class(area_name,'selectAll').addEventListener('click',(function(){
+        txtarea.setSelectionRange(0,txtarea.value.length);
+    }),false);
+/********************************Empty All**************************************/
+    get_id_class(area_name,'emptyAll').addEventListener('click',(function(){
+        txtarea.value = "";
+        count_chars();
+        notifyUser('Empty All TextArea');
+    }),false);
+/********************************Count Number Of Chars**************************************/
+    // txtarea.addEventListener('keyup',function(){ count_chars() },false);
+    function count_chars(){
+        get_id_class(area_name,"txtlength").innerHTML = txtarea.value.length;    
+        var Windowstxtsize = ByteSize.format(ByteSize.count(txtarea.value,{lineBreaks:2}));
+        get_id_class(area_name,"txtsize").innerHTML = "size: "+Windowstxtsize;
+    }
+    function timeout() { setTimeout(function(){ count_chars(); timeout(); },5000); }
+    timeout(); count_chars();
+/********************************Create Textarea Download**************************************/    
+    var textFile = false;
+    function makeTextFile(text) {
+        var data = new Blob([text], {type: mime_type});
+// If we are replacing a previously generated file we need to manually revoke the object URL to avoid memory leaks :
+        if (textFile) window.URL.revokeObjectURL(textFile);
+        textFile = window.URL.createObjectURL(data);
+        return textFile;
+    };
+    get_id_class(area_name,"download_content").addEventListener('click', function () {
+        get_id_class(area_name,"download_content_link").href = makeTextFile(txtarea.value);
+        get_id_class(area_name,"download_content_link").click();
+    },false);   
+/**********************************************************************/
+}
+
+apply_text_area('textarea1','text/javascript');
+apply_text_area('textarea2','text/javascript');
+
+
+}
+
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!doctype html>
+<html ng-app='myApp'>
+<head>
+
+<title>HTML Requests</title>
+<meta charset='utf-8'>
+<link rel="icon" type="image/x-icon" href="../../../images/icon.png" />
+
+<link rel="stylesheet" href="../../../assets/css/bootstrap.min.css">
+<link href="../../../css/simple-sidebar.css" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/plugins/font-awesome-4.5.0/css/font-awesome.min.css">
+
+<script  type="text/javascript" src="../../../assets/angular/angular.min.js"></script>
+<script  type="text/javascript" src="../../../assets/angular/angular-route.min.js"></script>
+
+<script src="../../../assets/js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src='../../../assets/plugins/bytesize.min.js'></script>
+
+<script type="text/javascript" src='../../../assets/plugins/clipboard.js/clipboard.min.js'></script>
+<link href="../../../assets/plugins/toastr/toastr.min.css" rel="stylesheet">
+<script type="text/javascript" src='../../../assets/plugins/toastr/toastr.min.js'></script>
+
+<script  type="text/javascript" src="../../../js-apps/layout.js"></script>
+
+<style type="text/css">
+    .add_btn{
+        background-color: #337ab7;
+        color:white;
+    }
+    .delete_btn{
+        background-color: #d9534f;
+        color:white;     
+    }
+</style>
+
+</head>
+<body ng-controller='MainController'>
+
+
+
+    <div id="wrapper">
+
+<div ng-include src='"../../../templates/sidebar.html"'></div>
+<a href="#menu-toggle" class="btn btn-default btn-xs fa fa-arrow-right" id="menu-toggle"></a> 
+
+
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+
+<div ng-include src='"../../../templates/headerarea.html"'></div>
+<legend><h2><span class='fa fa-recycle'></span> HTML Requests: <small>it's a simple CSRF attack. it just sends (GET or Post) request to a webpage.</small></h2></legend>
+
+<p class='well well-sm'>if you aren't satisfied with our (HTML Requests) Application Please use the <a href='https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en' target='_blank'>Postman Chrome Application</a> </p>
+
+<div class="row">
+
+<h4>Request type:</h4>
+    <button class='btn btn-default col-sm-3 btn-lg' ng-class={'btn-primary':(request_type=="get")} ng-click='request_type="get"'>Get</button>
+    <button class='btn btn-default col-sm-3 btn-lg' ng-class={'btn-primary':(request_type=="post")}  ng-click='request_type="post"'>Post</button>
+    <button class='btn btn-default col-sm-3 btn-lg' ng-class={'btn-primary':(request_type=="put")}  ng-click='request_type="put"'>Put</button>
+    <button class='btn btn-default col-sm-3 btn-lg' ng-class={'btn-primary':(request_type=="delete")}  ng-click='request_type="delete"'>Delete</button>
+
+
+    <div class="input-group">
+        <div class="input-group-addon">Webpage URL</div>
+      <input type="text" class="form-control" ng-model='webpate_url'>
+    </div>
+
+
+    <div class='panel panel-default panel-body'>
+        <div class='col-sm-6'>
+
+
+<h4 class='page-header'>Get Parameters:</h4>
+
+<div class="input-group" ng-repeat='pram in get_prams'>
+    <div class="input-group-addon">{{pram.name}}</div>
+  <input type="text" class="form-control" ng-model='pram.value'>
+    <div class="input-group-addon btn btn-danger delete_btn" ng-click='delete_pram("get",$index)'><span class="fa fa-lg fa-trash"></span></div>
+</div> 
+
+<form class="input-group">
+    <div class="input-group-addon">New Parameter</div>
+  <input type="text" class="form-control input-sm" placeholder='Name' ng-model='new_pram_get.name'>
+  <input type="text" class="form-control input-sm" placeholder='Value' ng-model='new_pram_get.value'>
+    <div class="input-group-addon btn btn-danger delete_btn" ng-click='new_pram_get={}'><span class="fa fa-lg fa-trash"></span></div>
+    <div class="input-group-addon btn btn-primary add_btn" id='save_new_get_pram' ng-click='add_pram("get")'><span class="fa fa-lg fa-save"></span></div>
+    <button type='submit' class='hidden' onclick='save_new_get_pram.click()    '></button>
+</form>
+
+
+        </div>
+        <div class='col-sm-6' ng-hide='request_type=="get"'>
+            <h4 class='page-header'>Post Parameters:</h4>
+
+<div class="input-group" ng-show='request_type!="get"&&request_type!="post"'>
+    <div class="input-group-addon">_method</div>
+  <input type="text" class="form-control" readonly value='{{request_type}}'>
+</div> 
+
+<div class="input-group" ng-repeat='pram in post_prams'>
+    <div class="input-group-addon">{{pram.name}}</div>
+  <input type="text" class="form-control" ng-model='pram.value'>
+    <div class="input-group-addon btn btn-danger delete_btn" ng-click='delete_pram("post",$index)'><span class="fa fa-lg fa-trash"></span></div>
+</div> 
+
+<form class="input-group">
+    <div class="input-group-addon">New Parameter</div>
+  <input type="text" class="form-control input-sm" placeholder='Name' ng-model='new_pram_post.name'>
+  <input type="text" class="form-control input-sm" placeholder='Value' ng-model='new_pram_post.value'>
+    <div class="input-group-addon btn btn-danger delete_btn" ng-click='new_pram_post={}'><span class="fa fa-lg fa-trash"></span></div>
+    <div class="input-group-addon btn btn-primary add_btn" id='save_new_post_pram' ng-click='add_pram("post")'><span class="fa fa-lg fa-save"></span></div>
+    <button type='submit' class='hidden' onclick='save_new_post_pram.click();'></button>
+</form>
+
+        </div>
+
+    </div>
+
+
+
+
+    <button class='btn btn-primary btn-lg btn-block' ng-click='submit_form()'>Submit Request</button>
+    <div class="input-group">
+        <div class="input-group-addon">Final Request URL</div>
+      <input type="text" class="form-control" readonly ng-model='final_url'>
+        <div class="input-group-addon">Request Type: {{request_type|uppercase}} </div>
+    </div> 
+    <div class="input-group" ng-hide='request_type=="get"'>
+        <div class="input-group-addon">Final Post Prams</div>
+        <textarea readonly class='form-control' rows='10'>{{final_post_request}}</textarea>
+    </div> 
+
+
+
+<div class="clearfix"></div>
+<br>
+
+</div>
+
+
+
+
+
+<div class='hidden'>
+    <form name='get_form' method='get' action='' target='_blank'></form>
+    <form name='post_form' method='post' action='' target='_blank'>
+        <input ng-repeat='pram in post_prams' name='{{pram.name}}' value='{{pram.value}}'>
+    </form>    
+</div>
+
+
+
+
+
+<div ng-include src='"../../../templates/footerarea.html"'></div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+
+
+    <script type="text/javascript">
+var myApp=angular.module('myApp',['ngRoute']);
+
+myApp.controller('MainController',function($scope,$http,$timeout){
+    $scope.request_type = "get";
+    $scope.webpate_url = "http://";
+    $scope.new_pram_get = {};
+    $scope.new_pram_post = {};
+    $scope.get_prams = [];
+    $scope.post_prams = [];
+
+    $scope.final_url = '';
+    $scope.final_post_request = ''
+
+    $scope.add_pram = function(request_type){
+        if(request_type=="get"){
+            if(!$scope.new_pram_get.name) return;
+            if(!$scope.new_pram_get.value) $scope.new_pram_get.value = '';
+            $scope.get_prams.push($scope.new_pram_get);
+            $scope.new_pram_get = {};
+        }
+        if(request_type=="post"){
+            if(!$scope.new_pram_post.name) return;
+            if(!$scope.new_pram_post.value) $scope.new_pram_post.value = '';
+            $scope.post_prams.push($scope.new_pram_post);
+            $scope.new_pram_post = {};
+        }        
+        $scope.final_prepare();
+    }
+
+    $scope.delete_pram = function(request_type,index){
+        if(request_type=="get"){
+            $scope.get_prams.splice(index,1);
+        }
+        if(request_type=="post"){
+            $scope.post_prams.splice(index,1);
+        }        
+        $scope.final_prepare();
+    }
+
+    $scope.$watchGroup(['webpate_url','request_type'],function(){$scope.final_prepare()});
+    $scope.final_prepare = function(){
+        get_uri = "";
+        for(i=0;i<$scope.get_prams.length;i++){
+            get_uri += encodeURIComponent($scope.get_prams[i].name)+"="+encodeURIComponent($scope.get_prams[i].value);
+            if(i!=$scope.get_prams.length-1) get_uri += "&";
+        }
+        $scope.final_url = $scope.webpate_url+"?"+get_uri;
+
+        final_post_request = '';
+        if($scope.request_type!='get'&&$scope.request_type!='post')final_post_request += "[_method] = "+$scope.request_type+"\n";
+        for(i=0;i<$scope.post_prams.length;i++){
+            final_post_request += "["+$scope.post_prams[i].name+"] = "+$scope.post_prams[i].value+"\n";
+        }
+        $scope.final_post_request = final_post_request;
+    }
+
+    $scope.submit_form = function(){
+        get_form = document.forms["get_form"];
+        post_form = document.forms["post_form"];
+        get_form.setAttribute('action',$scope.final_url);
+        post_form.setAttribute('action',$scope.final_url);
+        if($scope.request_type=='get'){
+            document.forms["get_form"].submit();
+            return;
+        }else{
+            if($scope.request_type!='post') 
+                $scope.post_prams.push({name:'_method',value:$scope.request_type});
+            // console.log(post_form);
+            $timeout(function(){
+                document.forms["post_form"].submit();
+            },500);
+        }
+    }
+
+
+});
+    </script>
+
+
+</body>
+</html>

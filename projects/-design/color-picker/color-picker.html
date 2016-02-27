@@ -1,0 +1,195 @@
+<!doctype html>
+<html ng-app='myApp'>
+<head>
+
+<title>Color Picker</title>
+<meta charset='utf-8'>
+<link rel="icon" type="image/x-icon" href="../../../images/icon.png" />
+
+
+<link rel="stylesheet" href="../../../assets/css/bootstrap.min.css">
+<link href="../../../css/simple-sidebar.css" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/plugins/font-awesome-4.5.0/css/font-awesome.min.css">
+
+<script  type="text/javascript" src="../../../assets/angular/angular.min.js"></script>
+<script  type="text/javascript" src="../../../assets/angular/angular-route.min.js"></script>
+
+<script src="../../../assets/js/jquery-2.1.4.min.js"></script>
+
+<script type="text/javascript" src='../../../assets/plugins/clipboard.js/clipboard.min.js'></script>
+<link href="../../../assets/plugins/toastr/toastr.min.css" rel="stylesheet">
+<script type="text/javascript" src='../../../assets/plugins/toastr/toastr.min.js'></script>
+
+<link href="index.css" rel="stylesheet" type="text/css">
+
+</head>
+<body ng-controller='MainController' class='container'>
+
+
+
+    <div id="wrapper">
+
+<div ng-include src='"../../../templates/sidebar.html"'></div>
+<!-- <a href="#menu-toggle" class="btn btn-default btn-xs fa fa-arrow-right" id="menu-toggle"></a>  -->
+
+
+
+
+
+
+<div class='container'>
+
+
+
+
+
+
+
+
+<div id="testPatch">.</div>
+
+<div id="contrastPatch"><div></div><i>-Test-</i></div>
+
+<div id="colorValues">.</div>
+
+<div id="sliders" class="sliders">
+  <div id="rgbR"><div></div></div>
+  <div id="rgbG"><div></div></div>
+  <div id="rgbB"><div></div></div>
+
+  <div id="hslH"><div></div></div>
+  <div id="hslS"><div></div></div>
+  <div id="hslL"><div></div></div>
+
+  <!-- <div id="cmyC"><div></div></div>
+  <div id="cmyM"><div></div></div>
+  <div id="cmyY"><div></div></div> -->
+</div>
+
+<div id="hsv_map">
+  <canvas id="surface" width="200" height="200"></canvas>
+  <div class="cover"></div>
+  <div class="hsv-cursor"></div>
+  <div class="bar-bg"></div>
+  <div class="bar-white"></div>
+  <canvas id="luminanceBar" width="25" height="200"></canvas>
+  <div class="hsv-barcursors" id="hsv_cursors">
+    <div class="hsv-barcursor-l"></div>
+    <div class="hsv-barcursor-r"></div>
+  </div>
+</div>
+
+<div id="color_squares">
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
+
+
+
+<div id="description" class='hidden'>
+Demo patches: demonstrate how to build color pickers and how Colors' / ColorPicker's API work. Patches are linked to 
+<select >
+  <option value="Colors">Colors</option>
+  <option value="ColorPicker">ColorPicker</option>
+</select>
+
+<p>See a simple jQuery implementation <a href="jQuery_implementation/">preview here</a> or a simple javaScript implementation <a href="javaScript_implementation/">preview here</a></p>
+</div>
+<!-- <div id="model_display"></div> -->
+<!--canvas style="position: absolute; left: 500px; width: 255px; height: 255px" id="canvas"></canvas-->
+
+
+
+</div>
+
+    <script type="text/javascript" src="colors.js"></script>
+    <script type="text/javascript" src="colorPicker.data.js"></script>
+    <script type="text/javascript" src="colorPicker.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+
+
+
+<div class="clearfix"></div>
+<br>
+<!-- <div style='margin-top:5%'></div> -->
+
+
+    </div>
+    <!-- /#wrapper -->
+
+
+
+<div style='margin-top:50px'></div>
+
+<div class='panel panel-default col-sm-9 col-sm-offset-3' id='color_copier'>
+  <legend style='margin-top:1%'><h2><span class='fa fa-eyedropper'></span> Color Picker</h2></legend>
+  <div>
+
+    <div class="input-group">
+      <div class="input-group-addon">Hex Color:</div>
+      <input type="text" class="form-control" id='c_hex'>
+      <div class="input-group-addon copy_btn" type='1'>Copy to Clipboard</div>
+    </div>
+    <br> 
+    <div class="input-group">
+      <div class="input-group-addon">RGBA Color:</div>
+      <input type="text" class="form-control" id='c_rgba'>
+      <div class="input-group-addon copy_btn" type='2'>Copy to Clipboard</div>
+    </div>
+    <br> 
+    <div class="input-group">
+      <div class="input-group-addon">HSLA Color:</div>
+      <input type="text" class="form-control" id='c_hsla'>
+      <div class="input-group-addon copy_btn" type='3'>Copy to Clipboard</div>
+    </div>
+    <br> 
+
+
+    <p class='well well-sm'>if you aren't satisfied with our color picker please consider using This Great Color Picker: <a href="http://colorizer.org/" target='_blank'>colorizer.org/</a></p>
+
+    <br>
+  </div>
+  
+  <!-- <button onclick="out_color()">Out Color</button> -->
+</div>
+
+
+</div>
+
+
+
+
+
+
+    <script type="text/javascript">
+
+        var clipboard_copy = new Clipboard('#color_copier .copy_btn', {
+            text: function(e) {
+                console.log();
+                var type = e.getAttribute('type');
+                if(type==1) copy_text = document.getElementById("c_hex").value;
+                if(type==2) copy_text = document.getElementById("c_rgba").value;
+                if(type==3) copy_text = document.getElementById("c_hsla").value;
+                toastr.warning("Color In Clipboard: "+copy_text);
+                return copy_text;
+            }
+        });
+        clipboard_copy.on('success', function(e) { console.log(e); });
+        clipboard_copy.on('error', function(e) { console.log(e); });    
+
+var myApp=angular.module('myApp',['ngRoute']);
+
+myApp.controller('MainController',function($scope){
+    console.log("you are in the controller");
+});
+    </script>
+    <script  type="text/javascript" src="../../../js-apps/layout.js"></script>
+
+
+</body>
+</html>

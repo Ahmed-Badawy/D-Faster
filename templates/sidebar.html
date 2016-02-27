@@ -2,96 +2,95 @@
 <span ng-init="
 side_links = {
         general: {name:'General Helpers' , in_array:[
-{name:'SandBox Project',location:'-general/sandbox',icon:'list-ul'}, 
-{name:'HTML Requests',location:'-general/requests',icon:'list-ul'}, 
-{name:'Markdown Parser',location:'-general/markdown-parser',icon:'reorder'}, 
-{name:'Regex Tester',location:'-general/regex-tester',icon:'reorder'}, 
-{name:'B-PasswordKeeper',location:'-general/password-keeper',icon:'list-ul'}, 
-{name:'B-Markup Notes',location:'-general/b-notes',icon:'list-ul'}, 
-{name:'B-Websites Saver',location:'-general/websites-saver',icon:'list-ul'}, 
+{name:'SandBox Project',location:'-general/sandbox/sandbox',icon:'list-ul'}, 
+{name:'JavaScript Logger',location:'-general/js-logger/js-logger',icon:'list-ul'}, 
+{name:'HTML Requests',location:'-general/html-requests/requests',icon:'list-ul'}, 
+{name:'Markdown Parser',location:'-general/markdown-parser/markdown-parser',icon:'reorder'}, 
+{name:'Regex Tester',location:'-general/regex-tester/regex-tester',icon:'reorder'}, 
+{name:'B-PasswordKeeper',location:'-general/password-keeper/password-keeper',icon:'list-ul'}, 
+{name:'B-Markup Notes',location:'-general/b-notes/b-notes',icon:'list-ul'}, 
+{name:'B-Websites Saver',location:'-general/B-website-saver/websites-saver',icon:'list-ul'}, 
         ]},
         
         data_conversions: {name:'Data Operations' , in_array:[
-{name:'Fake Data Generator',location:'-dataformats/fake-data-generator',icon:'cubes'}, 
-{name:'Data Formats Converter',location:'-dataformats/data-formats-converter',icon:'list-ul'},
-{name:'Excel/Table Converter',location:'-dataformats/tables-converter',icon:'spinner'}, 
+{name:'Fake Data Generator',location:'-dataformats/fake-data-generator/fake-data-generator',icon:'cubes'}, 
+{name:'Data Formats Converter',location:'-dataformats/data-formats-converter/data-formats-converter',icon:'list-ul'},
+{name:'Excel/Table Converter',location:'-dataformats/tables-converter/tables-converter',icon:'spinner'}, 
         ]},
 
 
         design: {name:'Design Tools',in_array:[
-{name:'FontAwesome Faster',location:'-design/fontawesome-helper',icon:'flag'},
-{name:'Bootstrap Faster',location:'-design/bootstrap-helper',icon:'flag'},
-{name:'Color Picker',location:'-design/color-picker',icon:'eyedropper'}, 
-{name:'Color Picker 2',location:'-design/color-picker2',icon:'cubes'}, 
-{name:'Color Palettes',location:'-design/color-palettes',icon:'paint-brush'}, 
-{name:'Color Palettes 2',location:'-design/color-palettes2',icon:'paint-brush'}, 
-{name:'Color Converter',location:'-design/color-converter',icon:'cubes'}, 
+{name:'FontAwesome Faster',location:'-design/fontawesome-helper/fontawesome-helper',icon:'flag'},
+{name:'Bootstrap Faster',location:'-design/bootstrap-helper/bootstrap-helper',icon:'flag'},
+{name:'Color Picker',location:'-design/color-picker/color-picker',icon:'eyedropper'}, 
+{name:'Color Picker 2',location:'-design/color-picker-2/color-picker2',icon:'cubes'}, 
+{name:'Color Palettes',location:'-design/color-palettes/color-palettes',icon:'paint-brush'}, 
+{name:'Color Palettes 2',location:'-design/color-palettes/color-palettes2',icon:'paint-brush'}, 
+{name:'Color Picker/Converter',location:'-design/color-converter/color-converter',icon:'cubes'}, 
         ]},
 
         img: {name:'Images & Graphics',in_array:[
-{name:'Img To Base64 Converter',location:'-img/img-base64-converter',icon:'list-ul',show_what:1},
-{name:'Base64 To Img Converter',location:'-img/img-base64-converter',icon:'list-ul',show_what:2},
+{name:'Img To Base64 Converter',location:'-img/base64-converter/img-base64-converter',icon:'list-ul',show_what:1},
+{name:'Base64 To Img Converter',location:'-img/base64-converter/img-base64-converter',icon:'list-ul',show_what:2},
         ]}, 
 
         converters: {name:'Converters',in_array:[
-{name:'Units Converter',location:'-general/units-converter',icon:'list-ul'}, 
-{name:'Number Systems',location:'-general/number-system-converter',icon:'list-ul'}, 
+{name:'Units Converter',location:'-general/units-converter/units-converter',icon:'list-ul'}, 
+{name:'Number Systems',location:'-general/number-system-converter/number-system-converter',icon:'list-ul'}, 
         ]}, 
 
         encoders: {name:'Encoders',in_array:[
-{name:'URI Encoder',location:'-security/uri',icon:'list-ul',show_what:1},
-{name:'URI Encoder',location:'-security/uri',icon:'list-ul',show_what:2},
-{name:'Escape Html',location:'-security/escape-html',icon:'list-ul',show_what:1}, 
-{name:'UnEscape Html',location:'-security/escape-html',icon:'list-ul',show_what:2}, 
+{name:'URI Encoder',location:'-security/uri-converter/uri',icon:'list-ul',show_what:1},
+{name:'URI Encoder',location:'-security/uri-converter/uri',icon:'list-ul',show_what:2},
+{name:'Escape Html',location:'-security/escape-html/escape-html',icon:'list-ul',show_what:1}, 
+{name:'UnEscape Html',location:'-security/escape-html/escape-html',icon:'list-ul',show_what:2}, 
         ]},    
 
         css: {name:'CSS Operations',in_array:[
-{name:'SCSS Compiler',location:'-css/css-compilers',icon:'recycle',show_what:1},
-{name:'Sass Compiler',location:'-css/css-compilers',icon:'recycle',show_what:2},
-{name:'LESS Compiler',location:'-css/css-compilers',icon:'recycle',show_what:3},
-{name:'Stylus Compiler',location:'-css/css-compilers',icon:'recycle',show_what:4},
+{name:'SCSS Compiler',location:'-css/css-compilers/css-compilers',icon:'recycle',show_what:1},
+{name:'Sass Compiler',location:'-css/css-compilers/css-compilers',icon:'recycle',show_what:2},
+{name:'LESS Compiler',location:'-css/css-compilers/css-compilers',icon:'recycle',show_what:3},
+{name:'Stylus Compiler',location:'-css/css-compilers/css-compilers',icon:'recycle',show_what:4},
         ]},  
 
         apis: {name:'API Helpers',in_array:[
-{name:'QR Generator',location:'-apis/QR-generator',icon:'qrcode'},
-{name:'UPC Barcode Generator',location:'-apis/UPC-code-generator',icon:'barcode'},
-{name:'Captcha Generator',location:'-apis/captcha-generator',icon:'image'},
+{name:'QR Generator',location:'-apis/QR-generator/QR-generator',icon:'qrcode'},
+{name:'UPC Barcode Generator',location:'-apis/UPC-code-generator/UPC-code-generator',icon:'barcode'},
+{name:'Captcha Generator',location:'-apis/captcha-generator/captcha-generator',icon:'image'},
         ]},  
 
         hashs: {name:'Hashing & Passwords',in_array:[
-    {name:'MD5 Hash',location:'-security/hash',icon:'hashtag',show_what:1}, 
-    {name:'HMAC-MD5 Hash',location:'-security/hash',icon:'hashtag',show_what:2}, 
-    {name:'SHA-512 Hash',location:'-security/hash',icon:'hashtag',show_what:3}, 
-    {name:'SHA-384 Hash',location:'-security/hash',icon:'hashtag',show_what:4}, 
-    {name:'SHA-256 Hash',location:'-security/hash',icon:'hashtag',show_what:5}, 
-    {name:'SHA-224 Hash',location:'-security/hash',icon:'hashtag',show_what:6}, 
-    {name:'Random Password',location:'-security/hash',icon:'hashtag',show_what:7},
+    {name:'MD5 Hash',location:'-security/hashes/hash',icon:'hashtag',show_what:1}, 
+    {name:'HMAC-MD5 Hash',location:'-security/hashes/hash',icon:'hashtag',show_what:2}, 
+    {name:'SHA-512 Hash',location:'-security/hashes/hash',icon:'hashtag',show_what:3}, 
+    {name:'SHA-384 Hash',location:'-security/hashes/hash',icon:'hashtag',show_what:4}, 
+    {name:'SHA-256 Hash',location:'-security/hashes/hash',icon:'hashtag',show_what:5}, 
+    {name:'SHA-224 Hash',location:'-security/hashes/hash',icon:'hashtag',show_what:6}, 
+    {name:'Random Password',location:'-security/hashes/hash',icon:'hashtag',show_what:7},
         ]},  
 
         time: {name:'Timers',in_array:[
-{name:'Stop Watch',location:'-general/timers',icon:'list-ul',show_what:1},
-{name:'CountDown Timer',location:'-general/timers',icon:'list-ul',show_what:2},
+{name:'Stop Watch',location:'-general/timers/timers',icon:'list-ul',show_what:1},
+{name:'CountDown Timer',location:'-general/timers/timers',icon:'list-ul',show_what:2},
         ]},
 
         pretty_print: {name:'Pretty Print Helpers',in_array:[
-{name:'Pretty Print JSON',location:'-dataformats/prettify',icon:'list-ul',show_what:1},
-{name:'Pretty Print CSS',location:'-dataformats/prettify',icon:'list-ul',show_what:2},
-{name:'Pretty Print XML',location:'-dataformats/prettify',icon:'list-ul',show_what:3},
-{name:'Pretty Print SQL',location:'-dataformats/prettify',icon:'list-ul',show_what:4},
-{name:'Pretty Print HTML',location:'-dataformats/prettify',icon:'list-ul',show_what:5},
+{name:'Pretty Print JSON',location:'-dataformats/prettify/prettify',icon:'list-ul',show_what:1},
+{name:'Pretty Print CSS',location:'-dataformats/prettify/prettify',icon:'list-ul',show_what:2},
+{name:'Pretty Print XML',location:'-dataformats/prettify/prettify',icon:'list-ul',show_what:3},
+{name:'Pretty Print SQL',location:'-dataformats/prettify/prettify',icon:'list-ul',show_what:4},
+{name:'Pretty Print HTML',location:'-dataformats/prettify/prettify',icon:'list-ul',show_what:5},
         ]},
 
         minifiers: {name:'MiniFiers',in_array:[
-{name:'Minify JavaScript',location:'-minifiers/minify-js',icon:'hand-lizard-o',show_what:1},
-{name:'Minify CSS',location:'-minifiers/minify-css',icon:'hand-lizard-o',show_what:2},
-{name:'Minify XML',location:'-minifiers/minify-xml',icon:'hand-lizard-o',show_what:3},
-{name:'Minify JSON',location:'-minifiers/minify-json',icon:'hand-lizard-o',show_what:4},
-{name:'Minify SQL',location:'-minifiers/minify-sql',icon:'hand-lizard-o',show_what:4},
-
-
-{name:'Minify PHP',location:'-minifiers/minify-json',icon:'hand-lizard-o',show_what:4},
-{name:'Minify JAVA',location:'-minifiers/minify-json',icon:'hand-lizard-o',show_what:4},
-{name:'Minify SQL',location:'-minifiers/minify-json',icon:'hand-lizard-o',show_what:4},
+{name:'Minify JavaScript',location:'-general/minifiers/minify-js',icon:'hand-lizard-o',show_what:1},
+{name:'Minify HTML',location:'-general/minifiers/minify-html',icon:'hand-lizard-o',show_what:2},
+{name:'Minify CSS',location:'-general/minifiers/minify-css',icon:'hand-lizard-o',show_what:2},
+{name:'Minify XML',location:'-general/minifiers/minify-xml',icon:'hand-lizard-o',show_what:3},
+{name:'Minify JSON',location:'-general/minifiers/minify-json',icon:'hand-lizard-o',show_what:4},
+{name:'Minify SQL',location:'-general/minifiers/minify-sql',icon:'hand-lizard-o',show_what:4},
+{name:'Minify PHP',location:'-general/minifiers/minify-php',icon:'hand-lizard-o',show_what:7},
+{name:'Minify JAVA',location:'-general/minifiers/minify-java',icon:'hand-lizard-o',show_what:8},
         ]},
 
 

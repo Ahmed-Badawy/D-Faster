@@ -1,0 +1,127 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+
+<title>URI Encoder/Decoder</title>
+<meta charset='utf-8'>
+<link rel="icon" type="image/x-icon" href="../../../images/icon.png" />
+
+
+<link rel="stylesheet" href="../../../assets/css/bootstrap.min.css">
+<link href="../../../css/simple-sidebar.css" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/plugins/font-awesome-4.5.0/css/font-awesome.min.css">
+
+<script  type="text/javascript" src="../../../assets/angular/angular.min.js"></script>
+<script  type="text/javascript" src="../../../assets/angular/angular-route.min.js"></script>
+
+<script src="../../../assets/js/jquery-2.1.4.min.js"></script>
+
+<script type="text/javascript" src='../../../assets/plugins/clipboard.js/clipboard.min.js'></script>
+<link href="../../../assets/plugins/toastr/toastr.min.css" rel="stylesheet">
+<script type="text/javascript" src='../../../assets/plugins/toastr/toastr.min.js'></script>
+
+<script  type="text/javascript" src="../../../js-apps/layout.js"></script>
+</head>
+
+<body>
+
+
+
+    <div id="wrapper" ng-controller='MainController'>
+
+<div ng-include src='"../../../templates/sidebar.html"'></div>
+<a href="#menu-toggle" class="btn btn-default btn-xs fa fa-arrow-right" id="menu-toggle"></a> 
+
+
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+
+<div ng-include src='"../../../templates/headerarea.html"'></div>
+
+
+<legend><h2> <span class='fa fa-hashtag'></span> URI Encoder/Decoder: <small>Encode/Decode URI in Seconds</small></h2></legend>
+
+
+<div class='row'>
+  <ul class="nav nav-tabs">
+    <li ng-class='{active:show_what==1}'><a href='#' ng-click='show_what=1'>URI Encoder</a></li>
+    <li ng-class='{active:show_what==2}'><a href='#' ng-click='show_what=2'>URI Decoder</a></li>
+  </ul>
+</div>
+    <div class="clearfix"></div><br>
+
+
+
+<div class='row' ng-show='show_what==1'>
+    <div class="col-sm-6">
+        <label>URI</label>
+        <textarea id="text-input" rows="2" class='form-control' ng-model='uri_str1'></textarea>
+    </div>
+    <div class="col-sm-6">
+        <label>Encoded URI</label>
+        <textarea id="text-input" rows="2" class='form-control' readonly>{{uri_str1|uri_encode}}</textarea>
+        <small class='btn btn-default btn-xs copy_btn' data-clipboard-text='{{uri_str1|uri_encode}}'>copy to clipboard</small>
+    </div>
+</div>
+
+<div class='row' ng-show='show_what==2'>
+    <div class="col-sm-6">
+        <label>URI</label>
+        <textarea id="text-input" rows="2" class='form-control' ng-model='uri_str2'></textarea>
+    </div>
+    <div class="col-sm-6">
+        <label>Decoded URI</label>
+        <textarea id="text-input" rows="2" class='form-control' readonly>{{uri_str2|uri_decode}}</textarea>
+        <small class='btn btn-default btn-xs copy_btn' data-clipboard-text='{{uri_str2|uri_decode}}'>copy to clipboard</small>
+    </div>
+</div>
+
+
+<div class="clearfix"></div>
+<br>
+
+<div ng-include src='"../../../templates/footerarea.html"'></div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <script type="text/javascript">
+
+    var clipboard_copy = new Clipboard('.copy_btn');
+    clipboard_copy.on('success', function(e) { toastr.warning('Clipboard: Hash Was Copied.') });
+
+        var myApp=angular.module('myApp',['ngRoute']);
+ 
+        myApp.filter('uri_encode',function(){
+            return function(string){
+                if(string) return encodeURIComponent(string);
+            }
+        });
+        myApp.filter('uri_decode',function(){
+            return function(string){
+                if(string) return decodeURIComponent(string);
+            }
+        });
+
+        myApp.controller('MainController',function($scope){
+            $scope.show_what = getParameterByName('show_what');
+            $scope.uri_str1 = "?show_what=1";
+            $scope.uri_str2 = "%3Fshow_what%3D1";
+        });
+    </script>
+
+
+</body>
+</html>
