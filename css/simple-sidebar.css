@@ -188,8 +188,9 @@ body{
     }
 
     li.sidebar_header{
-        color:#9E9E9E !important;
+        color:#ccc !important;
         font-size: 90%;
+        margin-bottom: 2px;
     }
 
 /**********************************************************************/
@@ -197,12 +198,19 @@ body{
         margin-left: 50px;
         padding:10px;
     }
-    .dropdown-menu li a{
-        color:#333;
+    .dropdown-menu>li a{
+        color:#333 !important;
         padding:0;
         text-indent: 0px;
+        transition: all 0.2s ease;
     }
 
+    .dropdown-menu>li a:hover{
+        color:#fff !important;
+        background-color: #333 !important;
+        padding:4px;
+        transition: all 0.2s ease;
+    }
 
 
 

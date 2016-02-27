@@ -13,9 +13,40 @@ side_links = {
         ]},
         
         data_conversions: {name:'Data Operations' , in_array:[
+
+{name:'Minifiers',location:'',icon:'hand-lizard-o',type:'minifiers',links_array:[
+    {name:'Minify JavaScript',location:'-general/minifiers/minify-js',icon:'hand-lizard-o',show_what:1},
+    {name:'Minify HTML',location:'-general/minifiers/minify-html',icon:'hand-lizard-o',show_what:2},
+    {name:'Minify CSS',location:'-general/minifiers/minify-css',icon:'hand-lizard-o',show_what:2},
+    {name:'Minify XML',location:'-general/minifiers/minify-xml',icon:'hand-lizard-o',show_what:3},
+    {name:'Minify JSON',location:'-general/minifiers/minify-json',icon:'hand-lizard-o',show_what:4},
+    {name:'Minify SQL',location:'-general/minifiers/minify-sql',icon:'hand-lizard-o',show_what:4},
+    {name:'Minify PHP',location:'-general/minifiers/minify-php',icon:'hand-lizard-o',show_what:7},
+    {name:'Minify JAVA',location:'-general/minifiers/minify-java',icon:'hand-lizard-o',show_what:8},
+]},
+
+
+{name:'Pretty Print',location:'',icon:'hand-lizard-o',type:'pretty_print',links_array:[
+    {name:'Pretty Print JSON',location:'-dataformats/prettify/prettify',icon:'list-ul',show_what:1},
+    {name:'Pretty Print CSS',location:'-dataformats/prettify/prettify',icon:'list-ul',show_what:2},
+    {name:'Pretty Print XML',location:'-dataformats/prettify/prettify',icon:'list-ul',show_what:3},
+    {name:'Pretty Print SQL',location:'-dataformats/prettify/prettify',icon:'list-ul',show_what:4},
+    {name:'Pretty Print HTML',location:'-dataformats/prettify/prettify',icon:'list-ul',show_what:5},
+]},
+
+
 {name:'Fake Data Generator',location:'-dataformats/fake-data-generator/fake-data-generator',icon:'cubes'}, 
 {name:'Data Formats Converter',location:'-dataformats/data-formats-converter/data-formats-converter',icon:'list-ul'},
 {name:'Excel/Table Converter',location:'-dataformats/tables-converter/tables-converter',icon:'spinner'}, 
+
+{name:'CSS Compilers',location:'',icon:'hand-lizard-o',type:'pretty_print',links_array:[
+    {name:'SCSS Compiler',location:'-css/css-compilers/css-compilers',icon:'recycle',show_what:1},
+    {name:'Sass Compiler',location:'-css/css-compilers/css-compilers',icon:'recycle',show_what:2},
+    {name:'LESS Compiler',location:'-css/css-compilers/css-compilers',icon:'recycle',show_what:3},
+    {name:'Stylus Compiler',location:'-css/css-compilers/css-compilers',icon:'recycle',show_what:4},
+]},
+
+
         ]},
 
 
@@ -40,18 +71,21 @@ side_links = {
         ]}, 
 
         encoders: {name:'Encoders',in_array:[
-{name:'URI Encoder',location:'-security/uri-converter/uri',icon:'list-ul',show_what:1},
-{name:'URI Encoder',location:'-security/uri-converter/uri',icon:'list-ul',show_what:2},
-{name:'Escape Html',location:'-security/escape-html/escape-html',icon:'list-ul',show_what:1}, 
-{name:'UnEscape Html',location:'-security/escape-html/escape-html',icon:'list-ul',show_what:2}, 
+
+
+{name:'URI (En/De)coder',location:'',icon:'hand-lizard-o',type:'pretty_print',links_array:[
+    {name:'URI Encoder',location:'-security/uri-converter/uri',icon:'list-ul',show_what:1},
+    {name:'URI Encoder',location:'-security/uri-converter/uri',icon:'list-ul',show_what:2},
+]},
+
+{name:'HTML (En/De)coder',location:'',icon:'hand-lizard-o',type:'pretty_print',links_array:[
+    {name:'Escape Html',location:'-security/escape-html/escape-html',icon:'list-ul',show_what:1}, 
+    {name:'UnEscape Html',location:'-security/escape-html/escape-html',icon:'list-ul',show_what:2}, 
+]},
+
+
         ]},    
 
-        css: {name:'CSS Operations',in_array:[
-{name:'SCSS Compiler',location:'-css/css-compilers/css-compilers',icon:'recycle',show_what:1},
-{name:'Sass Compiler',location:'-css/css-compilers/css-compilers',icon:'recycle',show_what:2},
-{name:'LESS Compiler',location:'-css/css-compilers/css-compilers',icon:'recycle',show_what:3},
-{name:'Stylus Compiler',location:'-css/css-compilers/css-compilers',icon:'recycle',show_what:4},
-        ]},  
 
         apis: {name:'API Helpers',in_array:[
 {name:'QR Generator',location:'-apis/QR-generator/QR-generator',icon:'qrcode'},
@@ -60,13 +94,22 @@ side_links = {
         ]},  
 
         hashs: {name:'Hashing & Passwords',in_array:[
+
     {name:'MD5 Hash',location:'-security/hashes/hash',icon:'hashtag',show_what:1}, 
     {name:'HMAC-MD5 Hash',location:'-security/hashes/hash',icon:'hashtag',show_what:2}, 
+    {name:'Random Password',location:'-security/hashes/hash',icon:'hashtag',show_what:7},
+
+{name:'Hashing & Encoding',location:'',icon:'hand-lizard-o',type:'pretty_print',links_array:[
+    {name:'MD5 Hash',location:'-security/hashes/hash',icon:'hashtag',show_what:1}, 
+    {name:'HMAC-MD5 Hash',location:'-security/hashes/hash',icon:'hashtag',show_what:2}, 
+    {name:'Random Password',location:'-security/hashes/hash',icon:'hashtag',show_what:7},
+
     {name:'SHA-512 Hash',location:'-security/hashes/hash',icon:'hashtag',show_what:3}, 
     {name:'SHA-384 Hash',location:'-security/hashes/hash',icon:'hashtag',show_what:4}, 
     {name:'SHA-256 Hash',location:'-security/hashes/hash',icon:'hashtag',show_what:5}, 
     {name:'SHA-224 Hash',location:'-security/hashes/hash',icon:'hashtag',show_what:6}, 
-    {name:'Random Password',location:'-security/hashes/hash',icon:'hashtag',show_what:7},
+]},
+
         ]},  
 
         time: {name:'Timers',in_array:[
@@ -74,24 +117,6 @@ side_links = {
 {name:'CountDown Timer',location:'-general/timers/timers',icon:'list-ul',show_what:2},
         ]},
 
-        pretty_print: {name:'Pretty Print Helpers',in_array:[
-{name:'Pretty Print JSON',location:'-dataformats/prettify/prettify',icon:'list-ul',show_what:1},
-{name:'Pretty Print CSS',location:'-dataformats/prettify/prettify',icon:'list-ul',show_what:2},
-{name:'Pretty Print XML',location:'-dataformats/prettify/prettify',icon:'list-ul',show_what:3},
-{name:'Pretty Print SQL',location:'-dataformats/prettify/prettify',icon:'list-ul',show_what:4},
-{name:'Pretty Print HTML',location:'-dataformats/prettify/prettify',icon:'list-ul',show_what:5},
-        ]},
-
-        minifiers: {name:'MiniFiers',in_array:[
-{name:'Minify JavaScript',location:'-general/minifiers/minify-js',icon:'hand-lizard-o',show_what:1},
-{name:'Minify HTML',location:'-general/minifiers/minify-html',icon:'hand-lizard-o',show_what:2},
-{name:'Minify CSS',location:'-general/minifiers/minify-css',icon:'hand-lizard-o',show_what:2},
-{name:'Minify XML',location:'-general/minifiers/minify-xml',icon:'hand-lizard-o',show_what:3},
-{name:'Minify JSON',location:'-general/minifiers/minify-json',icon:'hand-lizard-o',show_what:4},
-{name:'Minify SQL',location:'-general/minifiers/minify-sql',icon:'hand-lizard-o',show_what:4},
-{name:'Minify PHP',location:'-general/minifiers/minify-php',icon:'hand-lizard-o',show_what:7},
-{name:'Minify JAVA',location:'-general/minifiers/minify-java',icon:'hand-lizard-o',show_what:8},
-        ]},
 
 
 
@@ -112,13 +137,34 @@ base_url = 'http://localhost/_websites/ahmed-badawy.com/projects/Develop-Faster/
 <span ng-repeat="value in side_links">
     <li class='sidebar_header'>{{value.name}}</li>
     <li ng-repeat='link in value.in_array | filter:search_q'>
-        <a href='{{base_url}}projects/{{link.location}}.html?show_what={{link.show_what}}'><span class='fa fa-{{link.icon}}'></span> {{link.name}}</a>
+
+        <a ng-if='link.type==undefined' href='{{base_url}}projects/{{link.location}}.html?show_what={{link.show_what}}'><span class='fa fa-{{link.icon}}'></span> {{link.name}}</a>
+
+
+        <span ng-if='link.type!=undefined' class="dropdown">
+          <a href='' id="dLabel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class=''>
+            <span class='fa fa-{{link.icon}}'></span> {{link.name}}
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="dLabel">
+            <li ng-repeat='n in link.links_array'><a href="{{base_url}}projects/{{n.location}}.html?show_what={{n.show_what}}"><span class='fa fa-{{n.icon}}'></span> {{n.name}}</a></li>
+          </ul>
+        </span>
+
+
     </li>
+
+
+
+
+
+
     <hr>
 </span>
 
 
-<!-- <li>
+<!-- 
+<li>
 <span class="dropdown">
   <a href='' id="dLabel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class=''>
     <span class='fa fa-cog'></span> Minifiers
@@ -136,8 +182,8 @@ base_url = 'http://localhost/_websites/ahmed-badawy.com/projects/Develop-Faster/
     <li><a href=""><span class='fa fa-cog'></span> hello man</a></li>
   </ul>
 </span>
-</li> -->
-
+</li>
+ -->
 
 
 <div class="clearfix"></div><br><br><br>
