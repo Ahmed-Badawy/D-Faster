@@ -45,10 +45,10 @@
 
 <div class='row'>
   <ul class="nav nav-tabs">
-    <li ng-class='{active:show_what==1}'><a href='#' ng-click='show_what=1;type="scss"'>SCSS Compiler</a></li>
-    <li ng-class='{active:show_what==2}'><a href='#' ng-click='show_what=2;type="sass"'>Sass Compiler</a></li>
-    <li ng-class='{active:show_what==3}'><a href='#' ng-click='show_what=3;type="less"'>LESS Compiler</a></li>
-    <li ng-class='{active:show_what==4}'><a href='#' ng-click='show_what=4;type="stylus"'>Stylus Compiler</a></li>
+    <li ng-class='{active:type=="scss"}'><a href='#' ng-click='show_what=1;type="scss"'>SCSS Compiler</a></li>
+    <li ng-class='{active:type=="sass"}'><a href='#' ng-click='show_what=2;type="sass"'>Sass Compiler</a></li>
+    <li ng-class='{active:type=="less"}'><a href='#' ng-click='show_what=3;type="less"'>LESS Compiler</a></li>
+    <li ng-class='{active:type=="stylus"}'><a href='#' ng-click='show_what=4;type="stylus"'>Stylus Compiler</a></li>
   </ul>
 </div>
     <div class="clearfix"></div><br>
@@ -151,9 +151,10 @@ var myApp=angular.module('myApp',['ngRoute']);
 myApp.controller('MainController',function($scope,$http){
     $scope.show_what = getParameterByName('show_what');;
     if($scope.show_what==1) $scope.type = 'scss';
-    if($scope.show_what==2) $scope.type = 'sass';
-    if($scope.show_what==3) $scope.type = 'less';
-    if($scope.show_what==4) $scope.type = 'stylus';
+    else if($scope.show_what==2) $scope.type = 'sass';
+    else if($scope.show_what==3) $scope.type = 'less';
+    else if($scope.show_what==4) $scope.type = 'stylus';
+    else $scope.type='scss'
 
     $scope.button_text = "Compile";
 
