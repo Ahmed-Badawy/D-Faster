@@ -53,9 +53,9 @@
 
 <div class='row'>
   <ul class="nav nav-tabs">
-    <li class='btn btn-xs' ng-init='cur_list="general"'><a>General</a></li>
+    <li class='btn btn-xs' ng-init='cur_list="all links"' ng-click="set_cur_list(null)"><a>All</a></li>
 
-    <li class='btn btn-xs' ng-repeat='list in our_lists track by $index'><a ng-click='set_cur_list(list)'>{{list}}</a></li>
+    <li class='btn btn-xs' ng-repeat='list_name in our_lists track by $index'><a ng-click='set_cur_list(list_name)'>{{list_name|uc}}</a></li>
 
     <li class='btn btn-xs btn-default'><a data-toggle="modal" data-target="#edit_modal"><span class='fa fa-plus'></span> Create Link</a></li>
   </ul>
@@ -65,9 +65,17 @@
 
 
 <div class='panel panel-default panel-body'>
-    <a class='btn btn-default' ng-repeat='link in all_links | filter:cur_list' href='{{link.url}}'>{{link.name}}</a>
 
-<h1>{{cur_list}}</h1>
+<h3 class='page-header' ng-init='mode="edit"'> 
+    <span ng-if="cur_list">{{cur_list|uc}}</span> 
+    <span ng-if="!cur_list">All Links</span> 
+</h3>
+
+    <a class='btn btn-default btn-sm' ng-repeat='link in all_links | filter:cur_list' href='{{link.url}}' target='_blank'>{{link.name}} &nbsp;
+        <span href="" class='btn btn-warning btn-sm' ng-show='mode=="edit"'><span class='fa fa-edit'></span></span>
+        <span href="" class='btn btn-danger btn-sm' ng-show='mode=="edit"'><span class='fa fa-trash'></span></span>
+    </a>
+
 
 </div>
 
@@ -166,6 +174,13 @@ Create Link Modal
 
     <script type="text/javascript">
                var myApp=angular.module('myApp',['ngRoute','ngStorage']);
+
+               myApp.filter('uc',function(){
+                   return function( text ){
+                        return text.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+                   }
+               });
+
         myApp.factory('ngStorageControlService',function($http,$log,$q,$localStorage){ //$log is a service used to logout things.
             return obj = {
                 save: function(db_content){
@@ -198,24 +213,26 @@ $scope.create_link = _ =>{
     $scope.saveData();
 }
 
-$scope.set_cur_list = list => $scope.cur_list=list;
+$scope.set_cur_list = list => $scope.cur_list= (list) ? list : '';
 
+function attach_loaded_data(){
+    $scope.all_links = data;
+    final_our_lists = $scope.all_links.reduce((acc,item)=>{
+        item_lists_array = item.lists.split(/\s*-\s*/gim);
+        item_lists_array.forEach(function(list){
+            if(acc.indexOf(list) === -1) acc.push(list); //if unique add tag
+        });
+        return acc;
+        // return acc.concat(item.lists.split(/\s*-\s*/gim));
+    },[]);
+    // console.log(final_our_lists);
+    $scope.our_lists = final_our_lists;
+    $scope.set_cur_list(null);
+}
 
 $scope.loadData = function(){
     ngStorageControlService.load().then(function(data){
-        console.log(data);
-        $scope.all_links = data;
-        final_our_lists = $scope.all_links.reduce((acc,item)=>{
-            item_lists_array = item.lists.split(/\s*-\s*/gim);
-            item_lists_array.forEach(function(list){
-                if(acc.indexOf(list) === -1) acc.push(list); //if unique add tag
-            });
-            return acc;
-            // return acc.concat(item.lists.split(/\s*-\s*/gim));
-        },[]);
-        console.log(final_our_lists);
-
-        $scope.our_lists = final_our_lists;
+        attach_loaded_data();        
         toastr.success('Database Has Been Synced');
     },function(){
         toastr.error('Failed To Sync The Data');
