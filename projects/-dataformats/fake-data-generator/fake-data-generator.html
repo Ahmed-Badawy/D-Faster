@@ -362,96 +362,111 @@
         function set_before(type){
             console.log(type);
             if(type=="xml"){
-                new_text = '<?xml version="1.0" encoding="UTF-8"?>\n\n'+
-' <humans>\n'+
-'   <person id="{{random.number}}">\n'+
-'      <name>{{name.firstName}}, {{name.lastName}}</name>\n'+
-'      <title>{{name.jobType}}</title>\n'+
-'      <phone>{{phone.phoneNumber}}</phone>\n'+
-'      <age>{{random.number}}</age>\n'+
-'      <email>{{internet.email}}</email>\n'+
-'      <description>{{name.jobDescriptor}}</description>\n'+
-'   </person>\n'+
-'   <person id="{{random.number}}">\n'+
-'      <name>{{name.firstName}}, {{name.lastName}}</name>\n'+
-'      <title>{{name.jobType}}</title>\n'+
-'      <phone>{{phone.phoneNumber}}</phone>\n'+
-'      <age>{{random.number}}</age>\n'+
-'      <email>{{internet.email}}</email>\n'+
-'      <description>{{name.jobDescriptor}}</description>\n'+
-'   </person>\n'+
-'   <person id="{{random.number}}">\n'+
-'      <name>{{name.firstName}}, {{name.lastName}}</name>\n'+
-'      <title>{{name.jobType}}</title>\n'+
-'      <phone>{{phone.phoneNumber}}</phone>\n'+
-'      <age>{{random.number}}</age>\n'+
-'      <email>{{internet.email}}</email>\n'+
-'      <description>{{name.jobDescriptor}}</description>\n'+
-'   </person>\n'+
-'   </humans>\n';
+                new_text = `<?xml version="1.0" encoding="UTF-8"?>
+<humans>`;
+iti_text =`
+   <person id="{{random.number}}">
+      <name>{{name.firstName}}, {{name.lastName}}</name>
+      <title>{{name.jobType}}</title>
+      <phone>{{phone.phoneNumber}}</phone>
+      <age>{{random.number}}</age>
+      <email>{{internet.email}}</email>
+      <description>{{name.jobDescriptor}}</description>
+   </person>`;
+for(i=0;i<3;i++){
+    new_text+= iti_text;
+}
+new_text+=`\n</humans>`;
+
+
 }else if(type=="csv"){ 
-    new_text = 'firstName   ,   lastName    ,   email    ,  website \n'+
-    '{{name.firstName}}     ,   {{name.lastName}}   ,   {{internet.email}}  ,   {{internet.url}}\n'+
-    '{{name.firstName}}     ,   {{name.lastName}}   ,   {{internet.email}}  ,   {{internet.url}}\n'+
-    '{{name.firstName}}     ,      {{name.lastName}}    ,   {{internet.email}}  ,   {{internet.url}}\n';
+    new_text = `firstName   ,   lastName    ,   email    ,  website 
+{{name.firstName}}     ,   {{name.lastName}}   ,   {{internet.email}}  ,   {{internet.url}}
+{{name.firstName}}     ,   {{name.lastName}}   ,   {{internet.email}}  ,   {{internet.url}}
+{{name.firstName}}     ,      {{name.lastName}}    ,   {{internet.email}}  ,   {{internet.url}}
+`;
 
 
 }else if(type=="php_array"){ 
-    new_text = "[\n"+
-" [\n 'firstName'=>{{name.firstName}},\n'lastName'=>{{name.lastName}},\n'email'=>{{internet.email}},\n'url'=>{{internet.url}}\n ],\n"+
-" [\n 'firstName'=>{{name.firstName}},\n'lastName'=>{{name.lastName}},\n'email'=>{{internet.email}},\n'url'=>{{internet.url}}\n ],\n"+
-" [\n 'firstName'=>{{name.firstName}},\n'lastName'=>{{name.lastName}},\n'email'=>{{internet.email}},\n'url'=>{{internet.url}}\n ]"+             
-"\n]";
+    new_text = `[
+ [
+ 'firstName'=>{{name.firstName}},
+'lastName'=>{{name.lastName}},
+'email'=>{{internet.email}},
+'url'=>{{internet.url}}
+ ],
+ [
+ 'firstName'=>{{name.firstName}},
+'lastName'=>{{name.lastName}},
+'email'=>{{internet.email}},
+'url'=>{{internet.url}}
+ ],
+ [
+ 'firstName'=>{{name.firstName}},
+'lastName'=>{{name.lastName}},
+'email'=>{{internet.email}},
+'url'=>{{internet.url}}
+ ]
+]`;
 
 }else if(type=="sql"){ 
-    new_text = "INSERT INTO Customers (firstName, lastName, email, site)\n"+
-    "    VALUES ('{{name.firstName}}' , '{{name.lastName}}' , '{{internet.email}}'  ,   '{{internet.url}}'); \n\n"+
-    "INSERT INTO Customers (firstName, lastName, email, site)\n"+
-    "    VALUES ('{{name.firstName}}' , '{{name.lastName}}' , '{{internet.email}}'  ,   '{{internet.url}}'); \n\n"+
-    "INSERT INTO Customers (firstName, lastName, email, site)\n"+
-    "    VALUES ('{{name.firstName}}' , '{{name.lastName}}' , '{{internet.email}}'  ,   '{{internet.url}}'); \n"
-    ;
+    new_text = `INSERT INTO Table_Name (firstName, lastName, email, site)
+    VALUES ('{{name.firstName}}' , '{{name.lastName}}' , '{{internet.email}}'  ,   '{{internet.url}}'); 
+
+INSERT INTO Table_Name (firstName, lastName, email, site)
+    VALUES ('{{name.firstName}}' , '{{name.lastName}}' , '{{internet.email}}'  ,   '{{internet.url}}'); 
+
+INSERT INTO Table_Name (firstName, lastName, email, site)
+    VALUES ('{{name.firstName}}' , '{{name.lastName}}' , '{{internet.email}}'  ,   '{{internet.url}}'); 
+`;
 
 
 }else if(type=="json"){ 
-    new_text = '[ \n'+
-'        {\n"id":{{random.number}},         \n'+
-'        "name":"{{name.firstName}}",         \n'+
-'        "email":"{{internet.email}}",            \n'+
-'        "url":"{{internet.url}}"\n},         \n'+
+    new_text = `[ 
+                {
+                    "id":{{random.number}},         
+                    "name":"{{name.firstName}}",         
+                    "email":"{{internet.email}}",            
+                    "url":"{{internet.url}}"
+                },         
+                {
+                    "id":{{random.number}},         
+                    "name":"{{name.firstName}}",         
+                    "email":"{{internet.email}}",            
+                    "url":"{{internet.url}}"
+                },         
+                {
+                    "id":{{random.number}},         
+                    "name":"{{name.firstName}}",         
+                    "email":"{{internet.email}}",            
+                    "url":"{{internet.url}}"
+                }         
+]`;
 
-'        {\n"id":{{random.number}},         \n'+
-'        "name":"{{name.firstName}}",         \n'+
-'        "email":"{{internet.email}}",            \n'+
-'        "url":"{{internet.url}}"\n},         \n'+
-
-'        {\n"id":{{random.number}},         \n'+
-'        "name":"{{name.firstName}}",         \n'+
-'        "email":"{{internet.email}}",            \n'+
-'        "url":"{{internet.url}}"\n}         \n'+
-']';
 }else if(type=="yaml"){ 
-    new_text = "---\n"+
-"            -             \n"+
-"              - 'firstName'            \n"+
-"              - 'lastName '         \n"+
-"              - 'email'            \n"+
-"              - 'website'          \n"+
-"            -             \n"+
-"              - '{{name.firstName}}'\n"+
-"              - '{{name.lastName}}'         \n"+
-"              - '{{internet.email}}'            \n"+
-"              - '{{internet.url}}'         \n"+
-"            -             \n"+
-"              - '{{name.firstName}}'\n"+
-"              - '{{name.lastName}}'         \n"+
-"              - '{{internet.email}}'            \n"+
-"              - '{{internet.url}}'         \n"+
-"            -             \n"+
-"              - '{{name.firstName}}'\n"+
-"              - '{{name.lastName}}'         \n"+
-"              - '{{internet.email}}'            \n"+
-"              - '{{internet.url}}'         \n";
+    new_text = `---
+            -             
+              - 'firstName'            
+              - 'lastName '         
+              - 'email'            
+              - 'website'          
+            -             
+              - '{{name.firstName}}'
+              - '{{name.lastName}}'         
+              - '{{internet.email}}'            
+              - '{{internet.url}}'         
+            -             
+              - '{{name.firstName}}'
+              - '{{name.lastName}}'         
+              - '{{internet.email}}'            
+              - '{{internet.url}}'         
+            -             
+              - '{{name.firstName}}'
+              - '{{name.lastName}}'         
+              - '{{internet.email}}'            
+              - '{{internet.url}}'         
+
+`
 }
 
 
