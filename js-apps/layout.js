@@ -19,9 +19,9 @@ toastr.options = {
   "hideMethod": "fadeOut"
 }
 
-toastr.warning('<a target="_blank" href="http://cv.ahmed-badawy.com"><span class="fa fa-2x fa-briefcase"></span> Help Me get A Job</a>');
-toastr.warning('<a target="_blank" href="https://github.com/Ahmed-Badawy/Develop-Faster"><span class="fa fa-2x fa-github"></span> Star Us on Github</a>');
-toastr.warning('<a target="_blank" href=""><span class="fa fa-2x fa-google"></span> Star Us on Google Play</a>');
+toastr.warning('<a target="_blank" href="http://cv.ahmed-badawy.com"><span class="fa fa-2x fa-briefcase"></span> Help Me nail A Job</a>');
+// toastr.warning('<a target="_blank" href="https://github.com/Ahmed-Badawy/Develop-Faster"><span class="fa fa-2x fa-github"></span> Star Us on Github</a>');
+// toastr.warning('<a target="_blank" href=""><span class="fa fa-2x fa-google"></span> Star Us on Google Play</a>');
 
 
 
