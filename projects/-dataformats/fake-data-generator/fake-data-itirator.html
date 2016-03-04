@@ -2,7 +2,7 @@
 <html ng-app="myApp">
 <head>
 
-<title>Fake Data Generator</title>
+<title>Fake Data Iterator</title>
 <meta charset='utf-8'>
 <link rel="icon" type="image/x-icon" href="../../../images/icon.png" />
 
@@ -52,7 +52,7 @@
 <div ng-include src='"../../../templates/headerarea.html"'></div>
 
 
-<legend><h2> <span class='fa fa-hashtag'></span> Fake Data Generator: <small>The Fastest Way to Generate Fake Data</small></h2></legend>
+<legend><h2> <span class='fa fa-hashtag'></span> Fake Data Iterator: <small>The Fastest Way to Generate Fake Data iterations</small></h2></legend>
 
 
 <div class='row'>
@@ -94,8 +94,12 @@
 </div>
 
 <div id='textarea2' class='col-sm-6'>
+
+    <p>Iterator: {{iterator}} </p>
+    <input type='range' class='form form-control' value='1' min='1' max='1000' ng-model='iterator' id='iterator' ng-init='iterator=1' oninput='generate_fake_data()'> <br>
+
     <p>After (output)</p>
-    <textarea class='form-control mytextarea' rows='25' readonly id='after'></textarea>
+    <textarea class='form-control mytextarea' rows='20' readonly id='after'></textarea>
     <input type='file' class='hidden upload_input' />
     <span class='fa fa-file-code-o btn file_btn hidden' title='Import a File'></span>
     <span class='fa fa-copy btn copy_btn' title='Copy Text'></span>
@@ -360,128 +364,68 @@
     <script type="text/javascript" src='js/faker.min.js'></script>
     <script type="text/javascript">
         function set_before(type){
-            console.log(type);
+            // console.log(type);
+            new_text = '';
+
             if(type=="xml"){
-                new_text = `<?xml version="1.0" encoding="UTF-8"?>
-<humans>`;
-iti_text =`
-   <person id="{{random.number}}">
+new_text =`<person id="{{random.number}}">
       <name>{{name.firstName}}, {{name.lastName}}</name>
       <title>{{name.jobType}}</title>
       <phone>{{phone.phoneNumber}}</phone>
       <age>{{random.number}}</age>
       <email>{{internet.email}}</email>
       <description>{{name.jobDescriptor}}</description>
-   </person>`;
-for(i=0;i<3;i++){
-    new_text+= iti_text;
-}
-new_text+=`\n</humans>`;
-
+</person>`;
 
 }else if(type=="csv"){ 
-    new_text = `firstName   ,   lastName    ,   email    ,  website 
-{{name.firstName}}     ,   {{name.lastName}}   ,   {{internet.email}}  ,   {{internet.url}}
-{{name.firstName}}     ,   {{name.lastName}}   ,   {{internet.email}}  ,   {{internet.url}}
-{{name.firstName}}     ,      {{name.lastName}}    ,   {{internet.email}}  ,   {{internet.url}}
-`;
-
+    new_text = `{{name.firstName}} , {{name.lastName}}  ,  {{internet.email}}  ,  {{internet.url}}`;
 
 }else if(type=="php_array"){ 
     new_text = `[
- [
     'firstName'=>"{{name.firstName}}",
     'lastName'=>"{{name.lastName}}",
     'email'=>"{{internet.email}}",
     'url'=>"{{internet.url}}"
- ],
- [
-    'firstName'=>"{{name.firstName}}",
-    'lastName'=>"{{name.lastName}}",
-    'email'=>"{{internet.email}}",
-    'url'=>"{{internet.url}}"
- ],
- [
-    'firstName'=>"{{name.firstName}}",
-    'lastName'=>"{{name.lastName}}",
-    'email'=>"{{internet.email}}",
-    'url'=>"{{internet.url}}"
- ]
-]`;
+],`;
 
 }else if(type=="sql"){ 
     new_text = `INSERT INTO Table_Name (firstName, lastName, email, site)
-    VALUES ('{{name.firstName}}' , '{{name.lastName}}' , '{{internet.email}}'  ,   '{{internet.url}}'); 
-
-INSERT INTO Table_Name (firstName, lastName, email, site)
-    VALUES ('{{name.firstName}}' , '{{name.lastName}}' , '{{internet.email}}'  ,   '{{internet.url}}'); 
-
-INSERT INTO Table_Name (firstName, lastName, email, site)
-    VALUES ('{{name.firstName}}' , '{{name.lastName}}' , '{{internet.email}}'  ,   '{{internet.url}}'); 
-`;
-
+    VALUES ('{{name.firstName}}' , '{{name.lastName}}' , '{{internet.email}}'  ,   '{{internet.url}}');`;
 
 }else if(type=="json"){ 
-    new_text = `[ 
-                {
-                    "id":{{random.number}},         
-                    "name":"{{name.firstName}}",         
-                    "email":"{{internet.email}}",            
-                    "url":"{{internet.url}}"
-                },         
-                {
-                    "id":{{random.number}},         
-                    "name":"{{name.firstName}}",         
-                    "email":"{{internet.email}}",            
-                    "url":"{{internet.url}}"
-                },         
-                {
-                    "id":{{random.number}},         
-                    "name":"{{name.firstName}}",         
-                    "email":"{{internet.email}}",            
-                    "url":"{{internet.url}}"
-                }         
-]`;
+    new_text = `{
+    "id":{{random.number}},         
+    "name":"{{name.firstName}}",         
+    "email":"{{internet.email}}",            
+    "url":"{{internet.url}}"
+},`;
 
 }else if(type=="yaml"){ 
-    new_text = `---
-            -             
-              - 'firstName'            
-              - 'lastName '         
-              - 'email'            
-              - 'website'          
-            -             
-              - '{{name.firstName}}'
-              - '{{name.lastName}}'         
-              - '{{internet.email}}'            
-              - '{{internet.url}}'         
-            -             
-              - '{{name.firstName}}'
-              - '{{name.lastName}}'         
-              - '{{internet.email}}'            
-              - '{{internet.url}}'         
-            -             
-              - '{{name.firstName}}'
-              - '{{name.lastName}}'         
-              - '{{internet.email}}'            
-              - '{{internet.url}}'         
-
-`
+    new_text = 
+`-             
+  - 'firstName'            
+  - 'lastName '         
+  - 'email'            
+  - 'website'`;
 }
-
-
             get_id("before").value = new_text;
             generate_fake_data();
         }
         function get_id(id_name){
             return document.getElementById(id_name);
         }
+
         function generate_fake_data(){
             before = get_id("before");
             after = get_id("after");
-            if(before.value){
+            itirator = document.getElementById("iterator").value;
+            if(before_value = before.value){
                 try{
-                    fake_data = faker.fake(before.value)
+                    converted_value = '';
+                    for(i=0;i<itirator;i++){
+                        converted_value += before_value+"\n";
+                    }
+                    fake_data = faker.fake(converted_value);
                     // console.log(fake_data);
                     after.innerHTML = fake_data;
                 }catch(e){
@@ -493,7 +437,7 @@ INSERT INTO Table_Name (firstName, lastName, email, site)
 
         var myApp=angular.module('myApp',['ngRoute']);
         myApp.controller('MainController',function($scope){
-
+            $scope.generate_fake_data = generate_fake_data();
         });
 
 

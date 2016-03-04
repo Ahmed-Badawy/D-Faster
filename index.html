@@ -6,19 +6,19 @@
 <meta charset='utf-8'>
 <link rel="icon" type="image/x-icon" href="images/icon.png" />
 
-<link rel="stylesheet" href="_assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/bootstrap.min.css">
 <link href="css/simple-sidebar.css" rel="stylesheet">
-<link rel="stylesheet" href="_assets/plugins/font-awesome-4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="assets/plugins/font-awesome-4.5.0/css/font-awesome.min.css">
 
-<script  type="text/javascript" src="_assets/angular/angular.min.js"></script>
-<script  type="text/javascript" src="_assets/angular/angular-route.min.js"></script>
+<script  type="text/javascript" src="assets/angular/angular.min.js"></script>
+<script  type="text/javascript" src="assets/angular/angular-route.min.js"></script>
 
-<script src="_assets/js/jquery-2.1.4.min.js"></script>
-<script type="text/javascript" src='_assets/plugins/bytesize.min.js'></script>
+<script src="assets/js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src='assets/plugins/bytesize.min.js'></script>
 
-<script type="text/javascript" src='_assets/plugins/clipboard.js/clipboard.min.js'></script>
-<link href="_assets/plugins/toastr/toastr.min.css" rel="stylesheet">
-<script type="text/javascript" src='_assets/plugins/toastr/toastr.min.js'></script>
+<script type="text/javascript" src='assets/plugins/clipboard.js/clipboard.min.js'></script>
+<link href="assets/plugins/toastr/toastr.min.css" rel="stylesheet">
+<script type="text/javascript" src='assets/plugins/toastr/toastr.min.js'></script>
 
 
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
@@ -32,7 +32,7 @@
     </style>
 
 </head>
-<body ng-controller='MainController'>
+<body ng-controller='MainController' style='background-color:#110022;color:white;'>
 
 
 
@@ -41,8 +41,6 @@
 <div ng-include src='"templates/sidebar.html"'></div>
 <a href="#menu-toggle" class="btn btn-default btn-xs fa fa-arrow-right" id="menu-toggle"></a> 
 
-
-
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
@@ -50,21 +48,52 @@
                     <div class="col-lg-12">
 
 <div ng-include src='"templates/headerarea.html"'></div>
-<legend><h2><span class='fa fa-user'></span> Minification: <small>Minify Your Code</small></h2></legend>
-
 
 <div class="row">
 
 
+        <div id='main-panal' class="col-md-12 text-center v-center">
+          
+          <h1 style='font-size:500%'>Develop Faster</h1><br>
+          <h2>Hi, my name is Ahmed Badawy, and i am a developer located in Egypt.<h2>
+          <h3>This project is a set of tools/helpers for developers gathered from Github.<br> They are modified to help you increase your development process speed. It's made for fast. </h3>
+
+          <br><br>
+
+          <div class='panel' style='color:#222'>
+            <br>
+              <h2 class="page-header">Hire Me</h2>
+              <p class='h4'>Hi! I am a talented 25 years old Egyptian (Full Stack Web Developer) with a good Java & Android Development Background. searching for a full-time job in Europe & Canada. if you have any vacancy or you can help me in any way, please contact me. 
+        <a href="http://ahmed-badawy.com/site/cv" class='btn btn-default btn-xs' target="_blank">My C.V</a>
 
 
-<div class="clearfix"></div>
-<br>
+              </p>
+              <br>
+          </div>
+
+
+
+           Please have a look at <a class='text-link main-word' href="{!! route('projects') !!}">My Ideas</a>
+            or check out <a class='text-link main-word' href="{!! url('blog') !!}">My Blog</a> <br>
+            you can also get a sneak peek at my <a class='text-link' href="{!! route('site-tests') !!}"><small>API Tests & UnderConstruction Projects</small></a>.</h3>
+
+            <h3><a class="btn btn-primary btn-lg arabic" href='{{url("projects")}}'>بعض أفكارى</a></h3>
+
+            <br>
+
+
+
+
+
+
+
+
+<div class="clearfix"></div><br>
 </div>
 
 
 
-<div ng-include src='"templates/footerarea.html"'></div>
+<!-- <div ng-include src='"templates/footerarea.html"'></div> -->
 
 
 

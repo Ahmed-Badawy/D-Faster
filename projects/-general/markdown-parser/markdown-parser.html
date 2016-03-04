@@ -48,16 +48,39 @@
 <legend><h2><span class='fa fa-reorder'></span> MarkDown Parser: <small>Write Faster With Markdown</small></h2></legend>
 
 
-    <div class="col-sm-6">
-        <textarea id="text-input" ng-model='txt1' ng-change='markdownConverter()' rows="25" class='form-control'></textarea>
+
+<div id='textarea1' class="col-sm-6">
+    <p>CSS (input)</p>
+    <textarea class='form-control mytextarea' id="text-input" ng-model='txt1' ng-change='markdownConverter()' rows="25"></textarea>
+    <input type='file' class='hidden upload_input' />
+    <span class='fa fa-file-code-o btn file_btn' title='Import a File'></span>
+    <span class='fa fa-copy btn copy_btn' title='Copy Text'></span>
+    <span class='fa fa-cut btn cut_btn' title='Cut Text'></span>
+    <span class='fa fa-th-list btn selectAll' title='Select All Text'></span>
+    <span class='fa fa-trash btn emptyAll' title='Empty All Text'></span>
+
+    <a href='' download="script.js" style="display:none" class='hidden download_content_link'></a>
+    <span class='fa fa-save btn download_content' title='Download Content'></span>
+
+
+    <span class='fa fa-hand-lizard-o fa-lg pull-right'></span>
+    <span class='pull-right txtsize' style='color:#aaa;font-weight:bolder'></span>
+    <span class='pull-right'>&nbsp;&nbsp;</span>
+    <span class='fa fa-hand-peace-o fa-lg pull-right'></span>
+    <span class='pull-right txtlength' style='color:#aaa;font-weight:bolder'></span>
+
+
 <div class="clearfix"></div><br>
-        <a target='_blank' href="https://github.com/Ahmed-Badawy/Learning-Markdown" class='btn btn-primary btn-block'>Learn How to Write MarkDown</a>
+        <a target='_blank' href="https://github.com/Ahmed-Badawy/Learning-Markdown" class='btn btn-primary btn-block'>Learn How to Write MarkDown</a>  
+
+</div>
+
+
+
         
-    </div>
     <div id="preview" class='col-sm-6'></div>
 
-    <div id='hidden' class='hidden'>
-#Header 1
+    <div id="hidden">#Header 1
 ##Header 2
 ### Header 3
 ####Header 4
@@ -120,12 +143,7 @@ Markdown is a lightweight markup language based on the formatting conventions th
 
 * [plugins/dropbox/README.md] (PlDb)
 * [plugins/github/README.md] (PlGh)
-
-
 </div>
-
-
-
 
 
 
@@ -170,6 +188,12 @@ Markdown is a lightweight markup language based on the formatting conventions th
             $scope.markdownConverter();
 
         });
+
+
+window.onload = function(){
+    apply_text_area('textarea1','text/javascript');
+};
+
     </script>
 
 </body>
