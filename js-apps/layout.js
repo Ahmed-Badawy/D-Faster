@@ -58,7 +58,7 @@ toastr.warning('<a target="_blank" href="http://cv.ahmed-badawy.com"><span class
 
   var server_link = "http://ahmed-badawy.com/";
   // var server_link = "http://localhost/_websites/ahmed-badawy.com/";
-  var base_url = server_link+"projects/Develop-Faster/";
+  var base_url = server_link+"projects/D-Faster/";
 
   // function goProject(project,h,show_what){
   //   show_what = (show_what) ? show_what : 1;
