@@ -52,6 +52,8 @@ Temporary Items
 
 
 /js-apps
+/templates
+
+
+/js-apps/layout.js
 /templates/sidebar.html
-
-
