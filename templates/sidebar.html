@@ -4,6 +4,13 @@
 </script>
 
 <span ng-init="
+
+  server_link = 'http://ahmed-badawy.com/';
+  //server_link = 'http://localhost/_websites/ahmed-badawy.com/';
+  base_url = server_link+'projects/Develop-Faster/';
+
+
+
 side_links = {
         general: {name:'General Helpers' , in_array:[
 {name:'SandBox Project',location:'-general/sandbox/sandbox',icon:'clone'}, 
@@ -121,7 +128,8 @@ side_links = {
         ]},
 
 
-};"
+};
+"
 
  class='hidden'></span>
 
@@ -130,33 +138,26 @@ side_links = {
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
-                <li class="sidebar-brand"><a href="{{base_url}}">D-Faster</a></li>
+                <li class="sidebar-brand"><a ng-href="{{base_url}}">D-Faster</a></li>
 
 <li style='margin-bottom:10px'><input ng-model='search_q' class='form-control' placeholder='Search Text'></li>
 
 <span ng-repeat="value in side_links">
     <li class='sidebar_header'>{{value.name}}</li>
+
     <li ng-repeat='link in value.in_array | filter:search_q'>
-
-        <a ng-if='link.type==undefined' href='{{base_url}}projects/{{link.location}}.html?show_what={{link.show_what}}'><span class='fa fa-{{link.icon}}'></span> {{link.name}}</a>
-
+        <a ng-if='link.type==undefined' ng-href='{{base_url}}projects/{{link.location}}.html?show_what={{link.show_what}}'><span class='fa fa-{{link.icon}}'></span> {{link.name}}</a>
 
         <span ng-if='link.type!=undefined' class="dropdown">
-          <a href='' id="dLabel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class=''>
+          <a id="dLabel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class=''>
             <span class='fa fa-{{link.icon}}'></span> {{link.name}}
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" aria-labelledby="dLabel">
-            <li ng-repeat='n in link.links_array'><a href="{{base_url}}projects/{{n.location}}.html?show_what={{n.show_what}}"><span class='fa fa-{{n.icon}}'></span> {{n.name}}</a></li>
+            <li ng-repeat='n in link.links_array'><a ng-href="{{base_url}}projects/{{n.location}}.html?show_what={{n.show_what}}"><span class='fa fa-{{n.icon}}'></span> {{n.name}}</a></li>
           </ul>
         </span>
-
-
     </li>
-
-
-
-
 
 
     <hr>

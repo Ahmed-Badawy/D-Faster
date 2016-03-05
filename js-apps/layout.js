@@ -55,14 +55,15 @@ toastr.warning('<a target="_blank" href="http://cv.ahmed-badawy.com"><span class
       return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
   }
 
-  // var server_link = "http://ahmed-badawy.com/";
-  var server_link = "http://localhost/_websites/ahmed-badawy.com/";
+  var server_link = "http://ahmed-badawy.com/";
+  // var server_link = "http://localhost/_websites/ahmed-badawy.com/";
   var base_url = server_link+"projects/Develop-Faster/";
-  function goProject(project,h,show_what){
-    show_what = (show_what) ? show_what : 1;
-    console.log(project);
-    window.location = base_url+"projects/"+project+".html?h="+h+"&show_what="+show_what;
-  }
+  
+  // function goProject(project,h,show_what){
+  //   show_what = (show_what) ? show_what : 1;
+  //   console.log(project);
+  //   window.location = base_url+"projects/"+project+".html?h="+h+"&show_what="+show_what;
+  // }
 
 
 
