@@ -204,6 +204,9 @@ body{
         text-indent: 0px;
         transition: all 0.2s ease;
     }
+    .dropdown a{
+        cursor: pointer;
+    }
 
     .dropdown-menu>li a:hover{
         color:#fff !important;
