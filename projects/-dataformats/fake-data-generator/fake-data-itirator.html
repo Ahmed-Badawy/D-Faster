@@ -390,7 +390,7 @@ new_text =`<person id="{{random.number}}">
 
 }else if(type=="sql"){ 
     new_text = `INSERT INTO Table_Name (firstName, lastName, email, site)
-    VALUES ('{{name.firstName}}' , '{{name.lastName}}' , '{{internet.email}}'  ,   '{{internet.url}}');`;
+    VALUES ("{{name.firstName}}" , "{{name.lastName}}" , "{{internet.email}}"  ,   "{{internet.url}}");`;
 
 }else if(type=="json"){ 
     new_text = `{
