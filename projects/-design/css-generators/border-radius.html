@@ -1,0 +1,252 @@
+<!doctype html>
+<html ng-app='myApp' ng-controller='MainController'>
+<head>
+
+<title>Border Generator</title>
+<meta charset='utf-8'>
+<link rel="icon" type="image/x-icon" href="../../../images/icon.png" />
+
+<link rel="stylesheet" href="../../../assets/css/bootstrap.min.css">
+<link href="../../../css/simple-sidebar.css" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/plugins/font-awesome-4.5.0/css/font-awesome.min.css">
+
+<script  type="text/javascript" src="../../../assets/angular/angular.min.js"></script>
+<script  type="text/javascript" src="../../../assets/angular/angular-route.min.js"></script>
+
+<script src="../../../assets/js/jquery-2.1.4.min.js"></script>
+<script src="../../../assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src='../../../assets/plugins/clipboard.js/clipboard.min.js'></script>
+<link href="../../../assets/plugins/toastr/toastr.min.css" rel="stylesheet">
+<script type="text/javascript" src='../../../assets/plugins/toastr/toastr.min.js'></script>
+<script type="text/javascript" src='../../../assets/plugins/bytesize.min.js'></script>
+
+
+<script  type="text/javascript" src="../../../js-apps/layout.js"></script>
+
+<style type="text/css">
+    #box{
+        width: 200px;
+        height: 200px;
+        background-color: {{box_color}};
+        {{css_model}}
+    }
+</style>
+
+</head>
+
+<body>
+
+
+
+    <div id="wrapper">
+
+<div ng-include src='"../../../templates/sidebar.html"'></div>
+<a href="#menu-toggle" class="btn btn-default btn-xs fa fa-arrow-right" id="menu-toggle"></a> 
+
+
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+
+<div ng-include src='"../../../templates/headerarea.html"'></div>
+
+
+<legend><h2><span class='fa fa-reorder'></span> Border Generator: <small>help you generate Border CSS Code</small></h2></legend>
+
+
+
+
+<div class="row">
+<div class="col-sm-6">
+    <div>
+        <label>All Corners: {{all}}</label>
+        <input type='range' class='form-control' min='0' max='200' ng-model='all'>
+    </div>
+
+    <br><hr>
+
+    <div>
+        <label>Top Left: {{bs.tl}}</label>
+        <input type='range' class='form-control' min='0' max='200' ng-model='bs.tl'>
+    </div>
+    <div>
+        <label>Top Right: {{bs.tr}}</label>
+        <input type='range' class='form-control' min='0' max='200' ng-model='bs.tr'>
+    </div>
+    <div>
+        <label>Bottom Left: {{bs.bl}}</label>
+        <input type='range' class='form-control' min='0' max='200' ng-model='bs.bl'>
+    </div>
+    <div>
+        <label>Bottom Right: {{bs.br}}</label>
+        <input type='range' class='form-control' min='0' max='200' ng-model='bs.br'>
+    </div>
+
+    <br><hr>
+
+    <div>
+        <label>Border Width: {{bs.width}}</label>
+        <input type='range' class='form-control' min='0' max='200' ng-model='bs.width'>
+    </div>
+    <div>
+        <label>Border Style: {{bs.style}}</label>
+        <select class='form-control' ng-model='bs.style'>
+            <option value='solid'>Solid</option>
+            <option value='dotted'>Dotted</option>
+            <option value='dashed'>Dashed</option>
+            <option value='double'>Double</option>
+            <option value='groove'>Groove</option>
+            <option value='ridge'>Ridge</option>
+            <option value='inset'>Inset</option>
+            <option value='outset'>Outset</option>
+            <option value='inherit'>Inherit</option>
+            <option value='hidden'>Hidden</option>
+            <option value='none'>None</option>
+        </select>
+    </div>  
+    <br><hr>
+    <div>
+        <label>Border Color: {{bs.border_color}}</label>
+        <input type='color' class='form-control' ng-model='bs.border_color'>
+    </div>  
+    <div>
+        <label>Box Color: {{box_color}}</label>
+        <input type='color' class='form-control' ng-model='box_color'>
+    </div> 
+    <div>
+        <label>BackGround Color: {{bg_color}}</label>
+        <input type='color' class='form-control' ng-model='bg_color'>
+    </div>  
+
+</div>
+
+
+
+<div class="col-sm-6">
+
+    <div class='col-sm-12' style='background-color:{{bg_color}}'>
+        <div id="box" style='margin:30px;'></div>
+    </div>
+
+<div class="clearfix"></div><br>
+
+
+    <div id='textarea1'>
+        <p>CSS (input)</p>
+        <textarea class='form-control mytextarea' disabled rows='5' ng-model='css_model'></textarea>
+        <input type='file' class='hidden upload_input' />
+        <span class='fa fa-file-code-o btn file_btn hidden' title='Import a File'></span>
+        <span class='fa fa-copy btn copy_btn' title='Copy Text'></span>
+        <span class='fa fa-cut btn cut_btn hidden' title='Cut Text'></span>
+        <span class='fa fa-th-list btn selectAll' title='Select All Text'></span>
+        <span class='fa fa-trash btn emptyAll hidden' title='Empty All Text'></span>
+
+        <a href='' download="script.js" style="display:none" class='hidden download_content_link'></a>
+        <span class='fa fa-save btn download_content' title='Download Content'></span>
+
+
+        <span class='fa fa-hand-lizard-o fa-lg pull-right'></span>
+        <span class='pull-right txtsize' style='color:#aaa;font-weight:bolder'></span>
+        <span class='pull-right'>&nbsp;&nbsp;</span>
+        <span class='fa fa-hand-peace-o fa-lg pull-right'></span>
+        <span class='pull-right txtlength' style='color:#aaa;font-weight:bolder'></span>
+    </div>
+
+</div>
+
+</div>
+
+
+
+
+<div class="clearfix"></div><br>
+<div class="clearfix"></div><br>
+<div class="clearfix"></div><br>
+
+
+
+<div ng-include src='"../../../templates/footerarea.html"'></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+
+<script type="text/javascript">
+    
+window.onload = function(){
+    apply_text_area('textarea1','text/css');
+};
+    function hexToRgb(hex) {
+        // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+        var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+        hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+            return r + r + g + g + b + b;
+        });
+
+        var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16)
+        } : null;
+    }
+
+</script>
+<script type="text/javascript">
+    var myApp=angular.module('myApp',['ngRoute']);
+    myApp.controller('MainController',function($scope,$timeout){ 
+        $scope.bs = {
+            tr : 60 , 
+            tl : 10 ,
+            br : 60 ,
+            bl: 10, 
+            width: 13,
+            style: "double",
+            border_color: "#da551d"
+        };
+        $scope.box_color = "#5a5ee2";
+        $scope.bg_color = "#ffffff";
+        $scope.css_model = "";
+        $scope.all = 0;
+
+        $scope.$watch('all',_=>{ if($scope.all!=0){$scope.bs.tr = $scope.bs.tl = $scope.bs.br = $scope.bs.bl = $scope.all; $scope.compile();} });
+        $scope.$watchGroup(['bs.tr','bs.tl','bs.br','bs.bl','bs.width','bs.style','bs.border_color'],function(){
+            // if(promise) $timeout.cancel(promise);
+            // promise = $timeout(function(){
+                $scope.compile();
+            // },500);
+        });
+
+        $scope.compile = function(){
+            // color = hexToRgb($scope.bs.color);
+            out = str_parse("%spx %spx %spx %spx;",
+                $scope.bs.tl,
+                $scope.bs.tr,
+                $scope.bs.bl,
+                $scope.bs.br
+            );
+    $scope.css_model = str_parse(`border-radius: %s
+-moz-border-radius: %s
+-webkit-border-radius: %s
+border: %spx %s %s;`
+,out,out,out,$scope.bs.width,$scope.bs.style,$scope.bs.border_color);
+
+
+        }
+        $scope.compile();
+
+    });
+</script>
+
+
+</body>
+</html>
