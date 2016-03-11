@@ -96,18 +96,16 @@
 
 <div class="col-sm-6">
     <div class='col-sm-12' style='background-color:{{bg_color}}'>
-        <div id="box" class='css_animation'>Animations</div>
+        <div id="box" class='{{paly_status}}' ng-click='play_animation()'>Animation <br><small style='font-size:60%'><span class="fa fa-lg fa-play-circle"></span> Click Me</small></div>
     </div>   
 </div>
 
 </div>
 
-
-
 <div class="clearfix"></div><br>
 
 <div class="row">
-    <div class='col-sm-6'>
+    <div class='col-sm-4'>
         <label>Horizontal Distance: {{timing}}</label>
         <select ng-model='timing' class='form-control'>
             <option value='ease'>Ease</option>
@@ -117,10 +115,17 @@
             <option value='ease-in-out'>Ease-In-Out</option>
         </select>
     </div>
-    <div class='col-sm-6'>
-        <label>Transition Duration: {{after.duration}}</label>
-        <input type='range' class='form-control' min='0' max='5' step=".01" ng-model='after.duration'>
+
+
+    <div class='col-sm-4'>
+        <label>Transition Duration: {{duration}}</label>
+        <input type='range' class='form-control' min='0' max='5' step=".01" ng-model='duration'>
     </div>
+    <div class='col-sm-4'>
+        <label>Count: {{count}}</label>
+        <input type='range' class='form-control' min='0' max='10' ng-model='count'>
+    </div>
+
 
 
     <div class="col-sm-6">
@@ -135,7 +140,7 @@
         </div>
         <div>
             <label>Skew: {{before.skew}}</label>
-            <input type='range' class='form-control' min='-180' max='180' ng-model='before.skew'>
+            <input type='range' class='form-control' min='-75' max='75' ng-model='before.skew'>
         </div>
         <div>
             <label>Translate: {{before.translate}}</label>
@@ -154,7 +159,7 @@
         </div>
         <div>
             <label>Skew: {{after.skew}}</label>
-            <input type='range' class='form-control' min='-180' max='180' ng-model='after.skew'>
+            <input type='range' class='form-control' min='-75' max='75' ng-model='after.skew'>
         </div>
         <div>
             <label>Translate: {{after.translate}}</label>
@@ -162,6 +167,8 @@
         </div>    
     </div>
 </div>
+
+
 
 
 
@@ -213,29 +220,47 @@ window.onload = function(){
             scale : 1 ,
             skew : 0 ,
             translate: 0, 
-            duration: 0.300
         };
         $scope.after = {
             rotate : 60 , 
             scale : 1.5 ,
             skew : 20 ,
             translate: 20, 
-            duration: 1
         };
         $scope.timing = "ease";
+        $scope.duration = 1;
+        $scope.count = 3;
         $scope.css_model = "";
+        $scope.paly_status = "";
 
+        var promise = false;
 
         $scope.$watchGroup([
-            'timing',
-            'before.duration','before.rotate','before.scale','before.skew','before.translate',
-            'after.duration','after.rotate','after.scale','after.skew','after.translate'
-            ],function(){ $scope.compile(); });
+            'timing','duration','count',
+            'before.rotate','before.scale','before.skew','before.translate',
+            'after.rotate','after.scale','after.skew','after.translate'
+            ],function(){ 
+                if(promise) $timeout.cancel(promise);
+                promise = $timeout(function(){
+                    $scope.paly_status = "";
+                    $scope.compile(); 
+                },300);
+            });
+
+        $scope.play_animation = _=>{
+            $scope.paly_status = "";
+
+            if(promise) $timeout.cancel(promise);
+            promise = $timeout(function(){
+                $scope.paly_status = "css_animation";
+            },300);
+
+        }
 
         $scope.compile = function(){
             first = str_parse("cssAnimation %ss %s %s",
-                $scope.before.duration,
-                $scope.after.duration,
+                $scope.duration,
+                $scope.count,
                 $scope.timing
             );
 

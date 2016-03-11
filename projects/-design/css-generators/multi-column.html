@@ -157,7 +157,9 @@ window.onload = function(){
             font_color : "#000000"
         }
 
-        $scope.$watchGroup(['bs.col_count','bs.col_gap','bs.col_size','bs.border_size','bs.font_color','bs.font_size'],_=>$scope.compile());
+        $scope.$watchGroup(['bs.col_count','bs.col_gap','bs.font_size','bs.border_size','bs.font_color'],_=>{ 
+            $scope.compile();
+        });
 
         $scope.compile = _ =>{
             $scope.css_model = str_parse(`

@@ -96,7 +96,7 @@
 
 <div class="col-sm-6">
     <div class='col-sm-12' style='background-color:{{bg_color}}'>
-        <div id="box" class='animation_example'>Transitions</div>
+        <div id="box" class='animation_example'>Transitions <br><small style='font-size:40%'>Hover Over Me</small> </div>
     </div>   
 </div>
 
@@ -134,7 +134,7 @@
         </div>
         <div>
             <label>Skew: {{before.skew}}</label>
-            <input type='range' class='form-control' min='-180' max='180' ng-model='before.skew'>
+            <input type='range' class='form-control' min='-75' max='75' ng-model='before.skew'>
         </div>
         <div>
             <label>Translate: {{before.translate}}</label>
@@ -153,7 +153,7 @@
         </div>
         <div>
             <label>Skew: {{after.skew}}</label>
-            <input type='range' class='form-control' min='-180' max='180' ng-model='after.skew'>
+            <input type='range' class='form-control' min='-75' max='75' ng-model='after.skew'>
         </div>
         <div>
             <label>Translate: {{after.translate}}</label>
@@ -224,11 +224,18 @@ window.onload = function(){
 
         $scope.css_model = "";
 
+        var promise = false;
+
         $scope.$watchGroup([
             'duration','timing',
             'before.rotate','before.scale','before.skew','before.translate',
             'after.rotate','after.scale','after.skew','after.translate'
-            ],function(){ $scope.compile(); });
+            ],function(){
+            if(promise) $timeout.cancel(promise);
+            promise = $timeout(function(){
+                $scope.compile();
+            },300);
+        });
 
         $scope.compile = function(){
             first = str_parse("all %ss %s;",
