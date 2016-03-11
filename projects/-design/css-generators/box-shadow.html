@@ -64,11 +64,11 @@
 <div class="col-sm-6">
     <div>
         <label>Vertical Distance: {{bs.v}}</label>
-        <input type='range' class='form-control' min='0' max='360' ng-model='bs.v'>
+        <input type='range' class='form-control' min='-200' max='200' ng-model='bs.v'>
     </div>
     <div>
         <label>Horizontal Distance: {{bs.h}}</label>
-        <input type='range' class='form-control' min='-75' max='75' ng-model='bs.h'>
+        <input type='range' class='form-control' min='-200' max='200' ng-model='bs.h'>
     </div>
     <div>
         <label>Blur: {{bs.blur}}</label>
@@ -186,7 +186,7 @@ window.onload = function(){
         $scope.bs = {
             v : 15 , 
             h : -15 ,
-            blur : 5 ,
+            blur : 19 ,
             color: "#666666", 
             opacity : .75 ,
             spread : 0 , 

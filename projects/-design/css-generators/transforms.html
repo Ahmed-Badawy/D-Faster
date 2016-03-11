@@ -66,7 +66,15 @@
 
 <div class="row">
 <div class="col-sm-6">
-
+    <div>
+        <label>Translate X: {{bs.t_x}}</label>
+        <input type='range' class='form-control' min='-500' max='500' ng-model='bs.t_x'>
+    </div>
+    <div>
+        <label>Translate Y: {{bs.t_y}}</label>
+        <input type='range' class='form-control' min='-500' max='500' ng-model='bs.t_y'>
+    </div>
+    
     <div>
         <label>Scale: {{bs.scale}}</label>
         <input type='range' class='form-control' min='.1' max='3' step='.1' ng-model='bs.scale'>
@@ -77,21 +85,12 @@
     </div>
 
     <div>
-        <label>Translate X: {{bs.t_x}}</label>
-        <input type='range' class='form-control' min='-500' max='500' ng-model='bs.t_x'>
+        <label>Skew X: {{bs.s_x}}</label>
+        <input type='range' class='form-control' min='-70' max='70' ng-model='bs.s_x'>
     </div>
     <div>
-        <label>Translate Y: {{bs.t_y}}</label>
-        <input type='range' class='form-control' min='-500' max='500' ng-model='bs.t_y'>
-    </div>
-
-    <div>
-        <label>Translate X: {{bs.s_x}}</label>
-        <input type='range' class='form-control' min='0' max='70' ng-model='bs.s_x'>
-    </div>
-    <div>
-        <label>Translate Y: {{bs.s_y}}</label>
-        <input type='range' class='form-control' min='0' max='70' ng-model='bs.s_y'>
+        <label>Skew Y: {{bs.s_y}}</label>
+        <input type='range' class='form-control' min='-70' max='70' ng-model='bs.s_y'>
     </div>
 
 </div>

@@ -99,7 +99,7 @@
     <input type='range' class='form form-control' value='1' min='1' max='1000' ng-model='iterator' id='iterator' ng-init='iterator=1' oninput='generate_fake_data()'> <br>
 
     <p>After (output)</p>
-    <textarea class='form-control mytextarea' rows='20' readonly id='after'></textarea>
+    <textarea class='form-control mytextarea' rows='21' readonly id='after'></textarea>
     <input type='file' class='hidden upload_input' />
     <span class='fa fa-file-code-o btn file_btn hidden' title='Import a File'></span>
     <span class='fa fa-copy btn copy_btn' title='Copy Text'></span>
@@ -415,7 +415,8 @@ new_text =`<person id="{{random.number}}">
             return document.getElementById(id_name);
         }
 
-        function generate_fake_data(){
+
+        function do_generate_fake_data(){
             before = get_id("before");
             after = get_id("after");
             itirator = document.getElementById("iterator").value;
@@ -432,6 +433,13 @@ new_text =`<person id="{{random.number}}">
                     after.innerHTML = "Error in Compiling the fake functions"
                 }
             }else after.innerHTML = "";
+        }
+
+
+        var timeout_action = false;
+        function generate_fake_data(){
+            if(timeout_action) clearTimeout(timeout_action);
+            timeout_action = setTimeout(function(){ do_generate_fake_data(); }, 500);
         }
         generate_fake_data();
 

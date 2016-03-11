@@ -476,7 +476,8 @@ INSERT INTO Table_Name (firstName, lastName, email, site)
         function get_id(id_name){
             return document.getElementById(id_name);
         }
-        function generate_fake_data(){
+
+        function do_generate_fake_data(){
             before = get_id("before");
             after = get_id("after");
             if(before.value){
@@ -488,6 +489,12 @@ INSERT INTO Table_Name (firstName, lastName, email, site)
                     after.innerHTML = "Error in Compiling the fake functions"
                 }
             }else after.innerHTML = "";
+        }
+
+        var timeout_action = false;
+        function generate_fake_data(){
+            if(timeout_action) clearTimeout(timeout_action);
+            timeout_action = setTimeout(function(){ do_generate_fake_data(); }, 500);
         }
         generate_fake_data();
 
