@@ -20,8 +20,8 @@
 <script type="text/javascript" src='../../../assets/plugins/toastr/toastr.min.js'></script>
 <script type="text/javascript" src='../../../assets/plugins/bytesize.min.js'></script>
 
-
 <script  type="text/javascript" src="../../../js-apps/layout.js"></script>
+<script  type="text/javascript" src="../../../js-apps/txtarea.js"></script>
 
 <style type="text/css">
     #box{
@@ -41,8 +41,6 @@
     <div id="wrapper">
 
 <div ng-include src='"../../../templates/sidebar.html"'></div>
-<a href="#menu-toggle" class="btn btn-default btn-xs fa fa-arrow-right" id="menu-toggle"></a> 
-
 
 
         <!-- Page Content -->
@@ -54,7 +52,7 @@
 <div ng-include src='"../../../templates/headerarea.html"'></div>
 
 
-<legend><h2><span class='fa fa-reorder'></span> Border Generator: <small>help you generate Border CSS Code</small></h2></legend>
+<legend><h2><span class='fa fa-square-o'></span> Border Generator: <small>help you generate Border CSS Code</small></h2></legend>
 
 
 
@@ -156,7 +154,7 @@
         <span class='fa fa-th-list btn selectAll' title='Select All Text'></span>
         <span class='fa fa-trash btn emptyAll hidden' title='Empty All Text'></span>
 
-        <a href='' download="script.js" style="display:none" class='hidden download_content_link'></a>
+        <a href='' download="style.css" style="display:none" class='hidden download_content_link'></a>
         <span class='fa fa-save btn download_content' title='Download Content'></span>
 
 
@@ -221,7 +219,7 @@ window.onload = function(){
             tl : 10 ,
             br : 60 ,
             bl: 10, 
-            width: 13,
+            width: 30,
             style: "double",
             border_color: "#444444"
         };
@@ -260,5 +258,6 @@ border: %spx %s %s;`
 </script>
 
 
+<script type="text/javascript" src='../../../js-apps/sidebar_controller.js'></script>
 </body>
 </html>

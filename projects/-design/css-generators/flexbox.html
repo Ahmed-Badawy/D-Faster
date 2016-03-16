@@ -22,6 +22,7 @@
 
 
 <script  type="text/javascript" src="../../../js-apps/layout.js"></script>
+<script  type="text/javascript" src="../../../js-apps/txtarea.js"></script>
 
 <style type="text/css">
 
@@ -57,7 +58,6 @@
     <div id="wrapper">
 
 <div ng-include src='"../../../templates/sidebar.html"'></div>
-<a href="#menu-toggle" class="btn btn-default btn-xs fa fa-arrow-right" id="menu-toggle"></a> 
 
 
 
@@ -70,7 +70,7 @@
 <div ng-include src='"../../../templates/headerarea.html"'></div>
 
 
-<legend><h2><span class='fa fa-reorder'></span> CSS3 Flex Box Generator: <small>helps you generate Flex Box CSS Code</small></h2></legend>
+<legend><h2><span class='fa fa-list'></span> CSS3 Flex Box Generator: <small>helps you generate Flex Box CSS Code</small></h2></legend>
 
 
 
@@ -242,6 +242,7 @@
 </table>
 
 
+<div class="row">
     <div class='col-sm-6'>
         <label>Box Color: {{box_color}}</label>
         <input type='color' class='form-control' ng-model='box_color'>
@@ -249,7 +250,9 @@
     <div class='col-sm-6'>
         <label>BackGround Color: {{bg_color}}</label>
         <input type='color' class='form-control' ng-model='bg_color'>
-    </div>   
+    </div>      
+</div> 
+
 
 </div>
 
@@ -278,7 +281,7 @@
         <span class='fa fa-th-list btn selectAll' title='Select All Text'></span>
         <span class='fa fa-trash btn emptyAll hidden' title='Empty All Text'></span>
 
-        <a href='' download="script.js" style="display:none" class='hidden download_content_link'></a>
+        <a href='' download="style.css" style="display:none" class='hidden download_content_link'></a>
         <span class='fa fa-save btn download_content' title='Download Content'></span>
 
 
@@ -430,5 +433,6 @@ window.onload = function(){
 </script>
 
 
+<script type="text/javascript" src='../../../js-apps/sidebar_controller.js'></script>
 </body>
 </html>

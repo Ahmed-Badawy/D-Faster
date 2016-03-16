@@ -15,13 +15,15 @@
 
 <script src="../../../assets/js/jquery-2.1.4.min.js"></script>
 <script src="../../../assets/js/bootstrap.min.js"></script>
+
 <script type="text/javascript" src='../../../assets/plugins/clipboard.js/clipboard.min.js'></script>
+<script type="text/javascript" src='../../../assets/plugins/bytesize.min.js'></script>
+
 <link href="../../../assets/plugins/toastr/toastr.min.css" rel="stylesheet">
 <script type="text/javascript" src='../../../assets/plugins/toastr/toastr.min.js'></script>
 
-
-<script type="text/javascript" src='../../../assets/plugins/bytesize.min.js'></script>
-
+    <script  type="text/javascript" src="../../../js-apps/layout.js"></script>
+    <script  type="text/javascript" src="../../../js-apps/txtarea.js"></script>
 
 </head>
 
@@ -32,7 +34,6 @@
     <div id="wrapper">
 
 <div ng-include src='"../../../templates/sidebar.html"'></div>
-<a href="#menu-toggle" class="btn btn-default btn-xs fa fa-arrow-right" id="menu-toggle"></a> 
 
 
 
@@ -45,7 +46,7 @@
 <div ng-include src='"../../../templates/headerarea.html"'></div>
 
 
-<legend><h2><span class='fa fa-reorder'></span> MarkDown Parser: <small>Write Faster With Markdown</small></h2></legend>
+<legend><h2><span class='fa fa-pencil'></span> MarkDown Parser: <small>Write Faster With Markdown</small></h2></legend>
 
 
 
@@ -59,7 +60,7 @@
     <span class='fa fa-th-list btn selectAll' title='Select All Text'></span>
     <span class='fa fa-trash btn emptyAll' title='Empty All Text'></span>
 
-    <a href='' download="script.js" style="display:none" class='hidden download_content_link'></a>
+    <a href='' download="index.html" style="display:none" class='hidden download_content_link'></a>
     <span class='fa fa-save btn download_content' title='Download Content'></span>
 
 
@@ -80,7 +81,41 @@
         
     <div id="preview" class='col-sm-6'></div>
 
-    <div id="hidden">#Header 1
+
+
+<div class="clearfix"></div>
+<br>
+
+
+
+<div ng-include src='"../../../templates/footerarea.html"'></div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+
+    <script type="text/javascript" src='js/markdown.min.js'></script>
+
+    <script type="text/javascript">
+        var myApp=angular.module('myApp',['ngRoute']);
+        // myApp.filter('markdownFilter',function( ){
+        //     return function(string){
+        //         if(string) return markdown.toHTML(string);    
+        //         else return "";
+        //     }
+        // });
+        myApp.controller('MainController',function($scope){
+            var preview = document.getElementById("preview");
+
+            $scope.txt1 = `#Header 1
 ##Header 2
 ### Header 3
 ####Header 4
@@ -97,7 +132,7 @@ normal paragraph  **Bold Text** here
 
     this is a pre tag
 
-```this is how we write code ```
+\`\`\`this is how we write code \`\`\`
 
 ##### Link:  [ahmed-badawy.com](http://ahmed-badawy.com)
 ---
@@ -142,45 +177,9 @@ Markdown is a lightweight markup language based on the formatting conventions th
 > or formatting instructions.
 
 * [plugins/dropbox/README.md] (PlDb)
-* [plugins/github/README.md] (PlGh)
-</div>
+* [plugins/github/README.md] (PlGh)`;
 
 
-
-<div class="clearfix"></div>
-<br>
-
-
-
-<div ng-include src='"../../../templates/footerarea.html"'></div>
-
-
-
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- /#page-content-wrapper -->
-
-    </div>
-    <!-- /#wrapper -->
-
-
-    <script type="text/javascript" src='js/markdown.min.js'></script>
-    <script  type="text/javascript" src="../../../js-apps/layout.js"></script>
-
-    <script type="text/javascript">
-        var myApp=angular.module('myApp',['ngRoute']);
-        // myApp.filter('markdownFilter',function( ){
-        //     return function(string){
-        //         if(string) return markdown.toHTML(string);    
-        //         else return "";
-        //     }
-        // });
-        myApp.controller('MainController',function($scope){
-            var preview = document.getElementById("preview");
-            var hidden = document.getElementById("hidden");
-            $scope.txt1 = hidden.innerHTML;
 
             $scope.markdownConverter = function(){
                 if($scope.txt1) preview.innerHTML = markdown.toHTML($scope.txt1);    
@@ -191,10 +190,11 @@ Markdown is a lightweight markup language based on the formatting conventions th
 
 
 window.onload = function(){
-    apply_text_area('textarea1','text/javascript');
+    apply_text_area('textarea1','text/html');
 };
 
     </script>
 
+<script type="text/javascript" src='../../../js-apps/sidebar_controller.js'></script>
 </body>
 </html>

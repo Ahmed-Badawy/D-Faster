@@ -14,7 +14,9 @@
 <script  type="text/javascript" src="../../../assets/angular/angular-route.min.js"></script>
 
 <script src="../../../assets/js/jquery-2.1.4.min.js"></script>
-<script src="../../../assets/js/bootstrap.min.js"></script><script type="text/javascript" src='../../../assets/plugins/bytesize.min.js'></script>
+<script src="../../../assets/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src='../../../assets/plugins/bytesize.min.js'></script>
 
 <script type="text/javascript" src='../../../assets/plugins/clipboard.js/clipboard.min.js'></script>
 <link href="../../../assets/plugins/toastr/toastr.min.css" rel="stylesheet">
@@ -22,6 +24,7 @@
 
     <script  type="text/javascript" src="js/minification-apps.js"></script>
     <script  type="text/javascript" src="../../../js-apps/layout.js"></script>
+    <script  type="text/javascript" src="../../../js-apps/txtarea.js"></script>
 
 </head>
 <body ng-controller='MainController'>
@@ -30,7 +33,6 @@
     <div id="wrapper">
 
 <div ng-include src='"../../../templates/sidebar.html"'></div>
-<a href="#menu-toggle" class="btn btn-default btn-xs fa fa-arrow-right" id="menu-toggle"></a> 
 
 
         <!-- Page Content -->
@@ -48,7 +50,7 @@
 
 
 
-<legend><h2><span class='fa fa-file-text-o'></span> JavaScript Minifier: <small>Minify Your JavaScript Code</small></h2></legend>
+<legend><h2><span class='fa fa-compress'></span> JavaScript Minifier: <small>Minify Your JavaScript Code</small></h2></legend>
 
 
 <div class="row">
@@ -156,6 +158,12 @@
             commaspaces: true,
         }
     });
+    
+window.onload = function(){
+    apply_text_area('textarea1','text/javascript');
+    apply_text_area('textarea2','text/javascript');
+};
+
 </script>
 
 <div ng-include src='"../../../templates/minification-footer.html"'></div>
@@ -174,5 +182,6 @@
 
 
 
+<script type="text/javascript" src='../../../js-apps/sidebar_controller.js'></script>
 </body>
 </html>

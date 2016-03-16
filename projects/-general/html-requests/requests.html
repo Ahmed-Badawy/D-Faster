@@ -14,7 +14,7 @@
 <script  type="text/javascript" src="../../../assets/angular/angular-route.min.js"></script>
 
 <script src="../../../assets/js/jquery-2.1.4.min.js"></script>
-<script src="../../../assets/js/bootstrap.min.js"></script><script type="text/javascript" src='../../../assets/plugins/bytesize.min.js'></script>
+<script src="../../../assets/js/bootstrap.min.js"></script>
 
 <script type="text/javascript" src='../../../assets/plugins/clipboard.js/clipboard.min.js'></script>
 <link href="../../../assets/plugins/toastr/toastr.min.css" rel="stylesheet">
@@ -41,7 +41,6 @@
     <div id="wrapper">
 
 <div ng-include src='"../../../templates/sidebar.html"'></div>
-<a href="#menu-toggle" class="btn btn-default btn-xs fa fa-arrow-right" id="menu-toggle"></a> 
 
 
 
@@ -52,7 +51,7 @@
                     <div class="col-lg-12">
 
 <div ng-include src='"../../../templates/headerarea.html"'></div>
-<legend><h2><span class='fa fa-recycle'></span> HTML Requests: <small>it's a simple CSRF attack. it just sends (GET or Post) request to a webpage.</small></h2></legend>
+<legend><h2><span class='fa fa-external-link-square'></span> HTML Requests: <small>it's a simple CSRF attack. it just sends (GET or Post) request to a webpage.</small></h2></legend>
 
 <p class='well well-sm'>if you aren't satisfied with our (HTML Requests) Application Please use the <a href='https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en' target='_blank'>Postman Chrome Application</a> </p>
 
@@ -252,5 +251,6 @@ myApp.controller('MainController',function($scope,$http,$timeout){
     </script>
 
 
+<script type="text/javascript" src='../../../js-apps/sidebar_controller.js'></script>
 </body>
 </html>

@@ -22,6 +22,7 @@
 
 
 <script  type="text/javascript" src="../../../js-apps/layout.js"></script>
+<script  type="text/javascript" src="../../../js-apps/txtarea.js"></script>
 
 <style type="text/css">
     #box{
@@ -45,7 +46,6 @@
     <div id="wrapper">
 
 <div ng-include src='"../../../templates/sidebar.html"'></div>
-<a href="#menu-toggle" class="btn btn-default btn-xs fa fa-arrow-right" id="menu-toggle"></a> 
 
 
 
@@ -58,7 +58,7 @@
 <div ng-include src='"../../../templates/headerarea.html"'></div>
 
 
-<legend><h2><span class='fa fa-reorder'></span> CSS3 Transforms Generator: <small>helps you generate CSS3 Transforms</small></h2></legend>
+<legend><h2><span class='fa fa-toggle-right'></span> CSS3 Transforms Generator: <small>helps you generate CSS3 Transforms</small></h2></legend>
 
 
 
@@ -66,32 +66,43 @@
 
 <div class="row">
 <div class="col-sm-6">
-    <div>
+
+<div class="row">
+    <div class='col-sm-6'>
         <label>Translate X: {{bs.t_x}}</label>
         <input type='range' class='form-control' min='-500' max='500' ng-model='bs.t_x'>
     </div>
-    <div>
+    <div class='col-sm-6'>
         <label>Translate Y: {{bs.t_y}}</label>
         <input type='range' class='form-control' min='-500' max='500' ng-model='bs.t_y'>
-    </div>
-    
-    <div>
+    </div>    
+</div>
+<br>
+
+<div class="row">
+    <div class='col-sm-6'>
         <label>Scale: {{bs.scale}}</label>
         <input type='range' class='form-control' min='.1' max='3' step='.1' ng-model='bs.scale'>
     </div>
-    <div>
+    <div class='col-sm-6'>
         <label>Rotate: {{bs.rotate}}</label>
         <input type='range' class='form-control' min='0' max='360' ng-model='bs.rotate'>
-    </div>
+    </div>    
+</div>
+<br>
 
-    <div>
+<div class="row">
+    <div class='col-sm-6'>
         <label>Skew X: {{bs.s_x}}</label>
         <input type='range' class='form-control' min='-70' max='70' ng-model='bs.s_x'>
     </div>
-    <div>
+    <div class='col-sm-6'>
         <label>Skew Y: {{bs.s_y}}</label>
         <input type='range' class='form-control' min='-70' max='70' ng-model='bs.s_y'>
-    </div>
+    </div>    
+</div>
+
+
 
 </div>
 
@@ -116,7 +127,7 @@
         <span class='fa fa-th-list btn selectAll' title='Select All Text'></span>
         <span class='fa fa-trash btn emptyAll hidden' title='Empty All Text'></span>
 
-        <a href='' download="script.js" style="display:none" class='hidden download_content_link'></a>
+        <a href='' download="style.css" style="display:none" class='hidden download_content_link'></a>
         <span class='fa fa-save btn download_content' title='Download Content'></span>
 
 
@@ -220,5 +231,6 @@ transform: %s
 </script>
 
 
+<script type="text/javascript" src='../../../js-apps/sidebar_controller.js'></script>
 </body>
 </html>

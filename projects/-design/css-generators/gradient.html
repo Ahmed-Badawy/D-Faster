@@ -22,12 +22,19 @@
 
 
 <script  type="text/javascript" src="../../../js-apps/layout.js"></script>
+<script  type="text/javascript" src="../../../js-apps/txtarea.js"></script>
 
 <style type="text/css">
-    #box{
-        width: 200px;
-        height: 200px;
-        {{css_model}}
+
+    html {
+        height: 100%;
+    }
+    body {
+        height: 100%;
+        margin: 0;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        {{css_model}}      
     }
 </style>
 
@@ -40,7 +47,6 @@
     <div id="wrapper">
 
 <div ng-include src='"../../../templates/sidebar.html"'></div>
-<a href="#menu-toggle" class="btn btn-default btn-xs fa fa-arrow-right" id="menu-toggle"></a> 
 
 
 
@@ -53,7 +59,7 @@
 <div ng-include src='"../../../templates/headerarea.html"'></div>
 
 
-<legend><h2><span class='fa fa-reorder'></span> Gradient Generator: <small>helps you generate Gradient CSS Code</small></h2></legend>
+<legend><h2><span class='fa fa-file-picture-o'></span> Gradient Generator: <small>helps you generate Gradient CSS Code</small></h2></legend>
 
 
 
@@ -65,47 +71,41 @@
         <label>Angle: {{bs.angle}}</label>
         <input type='range' class='form-control' min='0' max='360' ng-model='bs.angle'>
     </div>
-    <div>
-        <label>Start: {{bs.start}}</label>
-        <input type='range' class='form-control' min='0' max='100' ng-model='bs.start'>
-    </div>
-    <div>
+
+<div class="clearfix"></div><br>
+<div class="row">
+    <div class='col-sm-6'>
         <label>Start Color: {{bs.start_color}}</label>
         <input type='color' class='form-control' ng-model='bs.start_color'>
     </div>
 
-    <div>
+    <div class='col-sm-6'>
+        <label>End Color: {{bs.end_color}}</label>
+        <input type='color' class='form-control' ng-model='bs.end_color'>
+    </div>
+<div class="clearfix"></div><br>
+    <div class='col-sm-6'>
+        <label>Start: {{bs.start}}</label>
+        <input type='range' class='form-control' min='0' max='100' ng-model='bs.start'>
+    </div>
+    <div class='col-sm-6'>
         <label>End: {{bs.end}}</label>
         <input type='range' class='form-control' min='0' max='100' ng-model='bs.end'>
     </div>
-    <div>
-        <label>Shadow Color: {{bs.end_color}}</label>
-        <input type='color' class='form-control' ng-model='bs.end_color'>
-    </div>
-
-<br><hr>
-
-    <div>
-        <label>BackGround Color: {{bg_color}}</label>
-        <input type='color' class='form-control' ng-model='bg_color'>
-    </div>  
-
 </div>
+
+<br>
+</div>
+
+
+
+
 
 <div class="col-sm-6">
 
-
-    <div class='col-sm-12' style='background-color:{{bg_color}}'>
-        <div id="box" style='margin:30px;'></div>
-    </div>
-
-
-<div class="clearfix"></div><br>
-
-
     <div id='textarea1'>
         <p>CSS (input)</p>
-        <textarea class='form-control mytextarea' disabled rows='13' ng-model='css_model'></textarea>
+        <textarea class='form-control mytextarea' disabled rows='7' ng-model='css_model'></textarea>
         <input type='file' class='hidden upload_input' />
         <span class='fa fa-file-code-o btn file_btn hidden' title='Import a File'></span>
         <span class='fa fa-copy btn copy_btn' title='Copy Text'></span>
@@ -113,7 +113,7 @@
         <span class='fa fa-th-list btn selectAll' title='Select All Text'></span>
         <span class='fa fa-trash btn emptyAll hidden' title='Empty All Text'></span>
 
-        <a href='' download="script.js" style="display:none" class='hidden download_content_link'></a>
+        <a href='' download="style.css" style="display:none" class='hidden download_content_link'></a>
         <span class='fa fa-save btn download_content' title='Download Content'></span>
 
 
@@ -127,6 +127,16 @@
 </div>
 
 </div>
+
+<hr>
+
+<div class='text-left'>
+    <a ng-repeat='grad in gradients' class='btn' ng-click='set_gradient(grad)' style='background-color:rgba(255,255,255,.3);color:#333;margin:1px;'>{{grad.name}}</a>   
+</div>
+
+<hr>
+
+
 
 
 
@@ -148,7 +158,7 @@
     </div>
     <!-- /#wrapper -->
 
-
+<script type="text/javascript" src='gradients.js'></script>
 <script type="text/javascript">
     
 window.onload = function(){
@@ -174,11 +184,11 @@ window.onload = function(){
     var myApp=angular.module('myApp',['ngRoute']);
     myApp.controller('MainController',function($scope,$timeout){ 
         $scope.bs = {
-            angle : 40 ,
+            angle : 90 ,
             start: 15,
             end: 75,
-            start_color:"#7bde21",
-            end_color:"#36862b" 
+            start_color:"#114357",
+            end_color:"#F29492" 
         };
 
         $scope.bg_color = "#ffffff";
@@ -225,9 +235,28 @@ window.onload = function(){
         }
         $scope.compile();
 
+
+
+    $scope.gradients = gradients;
+
+    $scope.set_gradient = grad =>{
+        $scope.bs = {
+            angle : 90 ,
+            start: 10,
+            end: 90,
+            start_color: grad.start_color,
+            end_color: grad.end_color 
+        };
+        $scope.compile();
+    }
+
+
+
     });
+
 </script>
 
 
+<script type="text/javascript" src='../../../js-apps/sidebar_controller.js'></script>
 </body>
 </html>

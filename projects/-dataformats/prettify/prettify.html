@@ -47,7 +47,6 @@
     <div id="wrapper">
 
 <div ng-include src='"../../../templates/sidebar.html"'></div>
-<a href="#menu-toggle" class="btn btn-default btn-xs fa fa-arrow-right" id="menu-toggle"></a> 
 
 
 
@@ -60,16 +59,16 @@
 <div ng-include src='"../../../templates/headerarea.html"'></div>
 
 
-<legend><h2><span class='fa fa-list-ul'></span> Code Prettify : <small>Generates a Readable Code (prettify then highlight code)</small></h2></legend>
+<legend><h2><span class='fa fa-file-text-o'></span> Code Prettify : <small>Generates a Readable Code (prettify then highlight code)</small></h2></legend>
 
 
 <div class='row'>
   <ul class="nav nav-tabs">
-    <li ng-class='{active:show_what==1}'><a href='#' ng-click='show_what=1'>Pretty Json</a></li>
-    <li ng-class='{active:show_what==2}'><a href='#' ng-click='show_what=2'>Pretty CSS</a></li>
-    <li ng-class='{active:show_what==3}'><a href='#' ng-click='show_what=3'>Pretty XML</a></li>
-    <li ng-class='{active:show_what==4}'><a href='#' ng-click='show_what=4'>Pretty SQL</a></li>
-    <li ng-class='{active:show_what==5}'><a href='#' ng-click='show_what=5'>Pretty HTML</a></li>
+    <li ng-class='{active:show_what==1}'><a href='#' ng-click='show_what=1'><span class="fa fa-lg fa-file-text-o"></span> Pretty Json</a></li>
+    <li ng-class='{active:show_what==2}'><a href='#' ng-click='show_what=2'><span class="fa fa-lg fa-file-text-o"></span> Pretty CSS</a></li>
+    <li ng-class='{active:show_what==3}'><a href='#' ng-click='show_what=3'><span class="fa fa-lg fa-file-text-o"></span> Pretty XML</a></li>
+    <li ng-class='{active:show_what==4}'><a href='#' ng-click='show_what=4'><span class="fa fa-lg fa-file-text-o"></span> Pretty SQL</a></li>
+    <li ng-class='{active:show_what==5}'><a href='#' ng-click='show_what=5'><span class="fa fa-lg fa-file-text-o"></span> Pretty HTML</a></li>
   </ul>
 </div>
     <div class="clearfix"></div><br>
@@ -221,10 +220,10 @@ function escapeHtml(html_text) {
          .replace(/'/g, "&#039;");
 }
 
-
     </script>
     <script  type="text/javascript" src="../../../js-apps/layout.js"></script>
 
 
+<script type="text/javascript" src='../../../js-apps/sidebar_controller.js'></script>
 </body>
 </html>

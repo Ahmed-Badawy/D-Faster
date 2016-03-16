@@ -22,6 +22,7 @@
 
 
 <script  type="text/javascript" src="../../../js-apps/layout.js"></script>
+<script  type="text/javascript" src="../../../js-apps/txtarea.js"></script>
 
 <style type="text/css">
     #box{
@@ -41,7 +42,6 @@
     <div id="wrapper">
 
 <div ng-include src='"../../../templates/sidebar.html"'></div>
-<a href="#menu-toggle" class="btn btn-default btn-xs fa fa-arrow-right" id="menu-toggle"></a> 
 
 
 
@@ -54,7 +54,7 @@
 <div ng-include src='"../../../templates/headerarea.html"'></div>
 
 
-<legend><h2><span class='fa fa-reorder'></span> CSS3 Box Shadow Generator: <small>helps you generate Box Shadow CSS Code</small></h2></legend>
+<legend><h2><span class='fa fa-stop'></span> CSS3 Box Shadow Generator: <small>helps you generate Box Shadow CSS Code</small></h2></legend>
 
 
 
@@ -62,44 +62,61 @@
 
 <div class="row">
 <div class="col-sm-6">
-    <div>
+
+<div class="row">
+    <div class='col-sm-6'>
         <label>Vertical Distance: {{bs.v}}</label>
         <input type='range' class='form-control' min='-200' max='200' ng-model='bs.v'>
     </div>
-    <div>
+    <div class='col-sm-6'>
         <label>Horizontal Distance: {{bs.h}}</label>
         <input type='range' class='form-control' min='-200' max='200' ng-model='bs.h'>
-    </div>
-    <div>
+    </div>    
+</div>
+<br>
+<div class="row">
+    <div class='col-sm-6'>
         <label>Blur: {{bs.blur}}</label>
         <input type='range' class='form-control' min='0' max='30' ng-model='bs.blur'>
-    </div>
-    <div>
+    </div>   
+    <div class='col-sm-6'>
+        <label>Shadow Opacity: {{bs.opacity}}</label>
+        <input type='range' class='form-control' min='0' max='1' step='.01' ng-model='bs.opacity'>
+    </div>     
+</div>
+<br>
+
+<div class="row">
+    <div class='col-sm-6'>
         <label>Shadow Color: {{bs.color}}</label>
         <input type='color' class='form-control' ng-model='bs.color'>
     </div>  
-    <div>
-        <label>Shadow Opacity: {{bs.opacity}}</label>
-        <input type='range' class='form-control' min='0' max='1' step='.01' ng-model='bs.opacity'>
-    </div>
-    <div>
+
+    <div class='col-sm-6'>
         <label>Shadow Spread: {{bs.spread}}</label>
         <input type='range' class='form-control' min='-50' max='50' ng-model='bs.spread'>
-    </div>
+    </div>    
+</div>
+<br>
+
     <div>
         <label>Inset: &nbsp; </label>
         <label> &nbsp; False <input type='radio' ng-model='bs.inset' value=' '> </label>  
         <label> &nbsp; True <input type='radio' ng-model='bs.inset' value='inset'></label> 
     </div>
 
-    <div>
+<br>
+<div class="row">
+    <div class='col-sm-6'>
         <label>Box Color: {{box_color}}</label>
         <input type='color' class='form-control' ng-model='box_color'>
     </div>
-    <div>
+    <div class='col-sm-6'>
         <label>BackGround Color: {{bg_color}}</label>
         <input type='color' class='form-control' ng-model='bg_color'>
-    </div>      
+    </div>       
+</div> 
+
 </div>
 
 <div class="col-sm-6">
@@ -123,7 +140,7 @@
         <span class='fa fa-th-list btn selectAll' title='Select All Text'></span>
         <span class='fa fa-trash btn emptyAll hidden' title='Empty All Text'></span>
 
-        <a href='' download="script.js" style="display:none" class='hidden download_content_link'></a>
+        <a href='' download="style.css" style="display:none" class='hidden download_content_link'></a>
         <span class='fa fa-save btn download_content' title='Download Content'></span>
 
 
@@ -228,5 +245,6 @@ box-shadow:         %s`
 </script>
 
 
+<script type="text/javascript" src='../../../js-apps/sidebar_controller.js'></script>
 </body>
 </html>

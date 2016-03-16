@@ -14,9 +14,11 @@
 <script  type="text/javascript" src="../../../assets/angular/angular-route.min.js"></script>
 
 <script src="../../../assets/js/jquery-2.1.4.min.js"></script>
-<script src="../../../assets/js/bootstrap.min.js"></script><script type="text/javascript" src='../../../assets/plugins/bytesize.min.js'></script>
+<script src="../../../assets/js/bootstrap.min.js"></script>
+
 
 <script type="text/javascript" src='../../../assets/plugins/clipboard.js/clipboard.min.js'></script>
+
 <link href="../../../assets/plugins/toastr/toastr.min.css" rel="stylesheet">
 <script type="text/javascript" src='../../../assets/plugins/toastr/toastr.min.js'></script>
 
@@ -49,7 +51,6 @@
     <div id="wrapper">
 
 <div ng-include src='"../../../templates/sidebar.html"'></div>
-<a href="#menu-toggle" class="btn btn-default btn-xs fa fa-arrow-right" id="menu-toggle"></a> 
 
 
 
@@ -60,9 +61,20 @@
                     <div class="col-lg-12">
 
 <div ng-include src='"../../../templates/headerarea.html"'></div>
-<legend><h2><span class='fa fa-recycle'></span> Regex Tester: <small>this is where you can test your regex expressions.</small></h2></legend>
+<legend><h2><span class='fa fa-newspaper-o'></span> Regex Tester: <small>Can test regex expressions</small></h2></legend>
 
-<p class='well well-sm'>if you aren't satisfied with our (Regex Tester) Application Please use the <a href='http://www.regexpal.com' target='_blank'>RegexPal.com</a> </p>
+
+
+
+
+
+
+<p class='well well-sm'>
+- <span style='color:red'>Our Regex Tester is still under development. Currently i advice you to use this: <a href='http://www.regexpal.com' target='_blank'>RegexPal.com</a> </span>
+<br>
+- if you aren't satisfied with our (Regex Tester) Application Please use the <a href='http://www.regexpal.com' target='_blank'>RegexPal.com</a> 
+</p> 
+
 
 <div class="row">
 
@@ -362,12 +374,13 @@ var myApp=angular.module('myApp',['ngRoute']);
 
 myApp.controller('MainController',function($scope,$timeout){
     $scope.regex = {
-        regex:'',
+        regex:'c.t',
         g:true,
         m:true,
         i:true,
     };
     var output = document.getElementById("output");
+    output.innerHTML = "This is a cat"
     var promise = false;
 
     $scope.output = (str,regex,target) => {
@@ -423,24 +436,10 @@ myApp.controller('MainController',function($scope,$timeout){
 });
 
 
-// const output = (str,regex,target) => {
-//     str = str.replace(/[\n\r]/gm,"<br>");
-//     target.innerHTML = str.replace(regex, str => `<span>${str}</span>` );
-// }
-
-// var str = `Is this this ?
-// hello world this is what i mean of 
-// this string 
-
-// ok...
-// `;
-// var regex = /is/gi;
-
-// output( str, regex, document.querySelector('#output') );
-
-
     </script>
 
+    
 
+<script type="text/javascript" src='../../../js-apps/sidebar_controller.js'></script>
 </body>
 </html>

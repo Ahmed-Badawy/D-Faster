@@ -22,6 +22,7 @@
 
     <script  type="text/javascript" src="js/minification-apps.js"></script>
     <script  type="text/javascript" src="../../../js-apps/layout.js"></script>
+    <script  type="text/javascript" src="../../../js-apps/txtarea.js"></script>
 
 </head>
 <body ng-controller='MainController'>
@@ -30,7 +31,6 @@
     <div id="wrapper">
 
 <div ng-include src='"../../../templates/sidebar.html"'></div>
-<a href="#menu-toggle" class="btn btn-default btn-xs fa fa-arrow-right" id="menu-toggle"></a> 
 
 
         <!-- Page Content -->
@@ -47,7 +47,7 @@
 
 
 
-<legend><h2><span class='fa fa-file-text-o'></span> JSON Minifier: <small>Minify Your JSON Code</small></h2></legend>
+<legend><h2><span class='fa fa-compress'></span> JSON Minifier: <small>Minify Your JSON Code</small></h2></legend>
 
 
 <div class="row">
@@ -63,7 +63,7 @@
     <span class='fa fa-th-list btn selectAll' title='Select All Text'></span>
     <span class='fa fa-trash btn emptyAll' title='Empty All Text'></span>
 
-    <a href='' download="script.js" style="display:none" class='hidden download_content_link'></a>
+    <a href='' download="feed.json" style="display:none" class='hidden download_content_link'></a>
     <span class='fa fa-save btn download_content' title='Download Content'></span>
 
 
@@ -84,7 +84,7 @@
     <span class='fa fa-th-list btn selectAll' title='Select All Text'></span>
     <span class='fa fa-trash btn emptyAll hidden' title='Empty All Text'></span>
 
-    <a href='' download="script.js" style="display:none" class='hidden download_content_link'></a>
+    <a href='' download="feed.json" style="display:none" class='hidden download_content_link'></a>
     <span class='fa fa-save btn download_content' title='Download Content'></span>
 
 
@@ -127,6 +127,10 @@
     $scope.show_what = getParameterByName('show_what');
 
     });
+window.onload = function(){
+    apply_text_area('textarea1','text/json');
+    apply_text_area('textarea2','text/json');
+};
 </script>
 
 <div ng-include src='"../../../templates/minification-footer.html"'></div>
@@ -145,5 +149,6 @@
 
 
 
+<script type="text/javascript" src='../../../js-apps/sidebar_controller.js'></script>
 </body>
 </html>

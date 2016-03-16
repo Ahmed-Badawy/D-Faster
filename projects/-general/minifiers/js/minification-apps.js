@@ -97,9 +97,6 @@ function Strip(str,type){
 
 
 
-window.onload = function(){
-    apply_text_area('textarea1','text/javascript');
-    apply_text_area('textarea2','text/javascript');
-};
+
 
 

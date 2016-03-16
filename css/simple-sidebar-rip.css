@@ -168,3 +168,65 @@
 
 
 
+
+    .input-group-addon.copy_btn{
+        color: white;
+        background-color: #2e6da4;
+        cursor: pointer;
+    }
+    .copy_btn{
+        color: white;
+        background-color: #2e6da4;
+        cursor: pointer;
+    }
+    .fa-copy.copy_btn{
+        color: #000;
+        background-color: white;
+    }
+
+    hr{
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    pre {
+        outline: 1px solid #222;
+        padding: 5px;
+        color:white;
+        font-size: 120%;
+        background-color: #333 !important;
+    }
+
+    li.sidebar_header{
+        color:#ccc !important;
+        font-size: 90%;
+        margin-bottom: 2px;
+    }
+
+/**********************************************************************/
+    .dropdown-menu{
+        margin-left: 50px;
+        padding:10px;
+    }
+    .dropdown-menu>li a{
+        color:#333 !important;
+        padding:0;
+        text-indent: 0px;
+        transition: all 0.2s ease;
+    }
+    .dropdown a{
+        cursor: pointer;
+    }
+
+    .dropdown-menu>li a:hover{
+        color:#fff !important;
+        background-color: #333 !important;
+        padding:4px;
+        transition: all 0.2s ease;
+    }
+
+
+
+    .panel > .page-header{
+        margin-top:0;
+    }
+

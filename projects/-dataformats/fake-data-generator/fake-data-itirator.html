@@ -22,6 +22,7 @@
 <script type="text/javascript" src='../../../assets/plugins/toastr/toastr.min.js'></script>
 
 <script  type="text/javascript" src="../../../js-apps/layout.js"></script>
+<script  type="text/javascript" src="../../../js-apps/txtarea.js"></script>
 
 <style type="text/css">
     .col_row{
@@ -39,7 +40,6 @@
     <div id="wrapper">
 
 <div ng-include src='"../../../templates/sidebar.html"'></div>
-<a href="#menu-toggle" class="btn btn-default btn-xs fa fa-arrow-right" id="menu-toggle"></a> 
 
 
 
@@ -52,17 +52,17 @@
 <div ng-include src='"../../../templates/headerarea.html"'></div>
 
 
-<legend><h2> <span class='fa fa-hashtag'></span> Fake Data Iterator: <small>The Fastest Way to Generate Fake Data iterations</small></h2></legend>
+<legend><h2> <span class='fa fa-cubes'></span> Fake Data Iterator: <small>The Fastest Way to Generate Fake Data iterations</small></h2></legend>
 
 
 <div class='row'>
   <ul class="nav nav-bills">
-    <li><a class='btn btn-default btn-sm col-sm-2' onclick='set_before("json")'>Generate Fake JSON</a></li>
-    <li><a class='btn btn-default btn-sm col-sm-2' onclick='set_before("yaml")'>Generate Fake Yaml</a></li>
-    <li><a class='btn btn-default btn-sm col-sm-2' onclick='set_before("xml")'>Generate Fake XML</a></li>
-    <li><a class='btn btn-default btn-sm col-sm-2' onclick='set_before("csv")'>Generate Fake CSV</a></li>
-    <li><a class='btn btn-default btn-sm col-sm-2' onclick='set_before("sql")'>Generate Fake SQL</a></li>
-    <li><a class='btn btn-default btn-sm col-sm-2' onclick='set_before("php_array")'>Generate Fake PHP Array</a></li>
+    <li><a class='btn btn-default btn-sm col-sm-2' onclick='set_before("json")'>Generate JSON</a></li>
+    <li><a class='btn btn-default btn-sm col-sm-2' onclick='set_before("yaml")'>Generate Yaml</a></li>
+    <li><a class='btn btn-default btn-sm col-sm-2' onclick='set_before("xml")'>Generate XML</a></li>
+    <li><a class='btn btn-default btn-sm col-sm-2' onclick='set_before("csv")'>Generate CSV</a></li>
+    <li><a class='btn btn-default btn-sm col-sm-2' onclick='set_before("sql")'>Generate SQL</a></li>
+    <li><a class='btn btn-default btn-sm col-sm-2' onclick='set_before("php_array")'>Generate PHP Array</a></li>
   </ul>
 </div>
     <div class="clearfix"></div><br>
@@ -82,7 +82,7 @@
     <span class='fa fa-th-list btn selectAll' title='Select All Text'></span>
     <span class='fa fa-trash btn emptyAll' title='Empty All Text'></span>
 
-    <a href='' download="script.js" style="display:none" class='hidden download_content_link'></a>
+    <a href='' download="data.txt" style="display:none" class='hidden download_content_link'></a>
     <span class='fa fa-save btn download_content' title='Download Content'></span>
 
 
@@ -107,7 +107,7 @@
     <span class='fa fa-th-list btn selectAll' title='Select All Text'></span>
     <span class='fa fa-trash btn emptyAll hidden' title='Empty All Text'></span>
 
-    <a href='' download="script.js" style="display:none" class='hidden download_content_link'></a>
+    <a href='' download="data.txt" style="display:none" class='hidden download_content_link'></a>
     <span class='fa fa-save btn download_content' title='Download Content'></span>
 
 
@@ -468,12 +468,13 @@ new_text =`<person id="{{random.number}}">
 
 
 window.onload = function(){
-    apply_text_area('textarea1','text/javascript');
-    apply_text_area('textarea2','text/javascript');
+    apply_text_area('textarea1','text/plain');
+    apply_text_area('textarea2','text/plain');
 }
 
     </script>
 
 
+<script type="text/javascript" src='../../../js-apps/sidebar_controller.js'></script>
 </body>
 </html>
