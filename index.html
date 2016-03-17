@@ -32,6 +32,8 @@
         }
     </style>
 
+    <script  type="text/javascript" src="js-apps/layout.js"></script>
+
 </head>
 <body ng-controller='MainController' style='background-color:#110022;color:white;'>
 
@@ -40,7 +42,6 @@
     <div id="wrapper">
 
 <div ng-include src='"templates/sidebar.html"'></div>
-<a href="#menu-toggle" class="btn btn-default btn-xs fa fa-arrow-right" id="menu-toggle"></a> 
 
         <!-- Page Content -->
         <div id="page-content-wrapper">
@@ -56,8 +57,7 @@
         <div id='main-panal' class="col-md-12 text-center v-center">
           
           <h1 style='font-size:500%'>D-Faster</h1><br>
-          <h2>Hi, my name is Ahmed Badawy, and i am a developer currently located in Egypt.<h2>
-          <h3 style='line-height:1.2em'>D-Faster is a set of Utilities for Developers/Designers.<br> It's based on open projects from Github & redesigned to help you increase your development speed.<br> D-Faster made for fast. </h3>
+          <h3 style='line-height:1.5em'>D-Faster is a set of Utilities for Developers/Designers.<br> It's based on open projects from Github & redesigned to help you increase your development speed.<br> D-Faster made for fast.</h3>
 
           <h4>The Project Still a baby & I work on it as a hobby in my spare time which isn't much.<br> D-Faster has a great potential but i need your help. You can contribute on github <a href="https://github.com/Ahmed-Badawy/D-Faster" target='_blank'>D-Faster On Github</a></h4>
 
@@ -117,8 +117,8 @@ myApp.controller('MainController',function($scope){
     console.log("you are in the controller");
 });
     </script>
-    <script  type="text/javascript" src="js-apps/layout.js"></script>
 
 
+<script type="text/javascript" src='./js-apps/sidebar_controller.js'></script>
 </body>
 </html>
