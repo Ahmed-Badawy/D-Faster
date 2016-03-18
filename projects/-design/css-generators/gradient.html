@@ -193,12 +193,13 @@ window.onload = function(){
 
         $scope.bg_color = "#ffffff";
         $scope.css_model = "";
+        var promise = false;
 
         $scope.$watchGroup(['bs.angle','bs.start','bs.end','bs.start_color','bs.end_color'],function(){
-            // if(promise) $timeout.cancel(promise);
-            // promise = $timeout(function(){
+            if(promise) $timeout.cancel(promise);
+            promise = $timeout(function(){
                 $scope.compile();
-            // },500);
+            },50);
         });
 
         $scope.compile = function(){
@@ -218,12 +219,13 @@ window.onload = function(){
                 $scope.bs.end
                 )
 
-    $scope.css_model = str_parse(`background: %s;
-        background: -moz-linear-gradient%s
-        background: -webkit-linear-gradient%s
-        background: -o-linear-gradient%s
-        background: -ms-linear-gradient%s
-        background: linear-gradient%s`,
+    $scope.css_model = str_parse(
+`background: %s;
+background: -moz-linear-gradient%s
+background: -webkit-linear-gradient%s
+background: -o-linear-gradient%s
+background: -ms-linear-gradient%s
+background: linear-gradient%s`,
         start_color,
         start_and_end_color,
         start_and_end_color,

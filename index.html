@@ -14,9 +14,7 @@
 <script  type="text/javascript" src="assets/angular/angular-route.min.js"></script>
 
 <script src="assets/js/jquery-2.1.4.min.js"></script>
-<script type="text/javascript" src='assets/plugins/bytesize.min.js'></script>
 
-<script type="text/javascript" src='assets/plugins/clipboard.js/clipboard.min.js'></script>
 <link href="assets/plugins/toastr/toastr.min.css" rel="stylesheet">
 <script type="text/javascript" src='assets/plugins/toastr/toastr.min.js'></script>
 
@@ -25,17 +23,32 @@
     <style type="text/css">
         body{
             font-family: 'Open Sans','Lato', Helvetica, sans-serif;
-            color:#222;
+
+            height: 100%;
+            margin: 0;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            line-height: 1.5;
+            color:white;
+
+
+background: rgb(10,56,73);
+background: -moz-linear-gradient(90deg, rgb(10,56,73) 10%, rgb(33,103,98) 90%);
+background: -webkit-linear-gradient(90deg, rgb(10,56,73) 10%, rgb(33,103,98) 90%);
+background: -o-linear-gradient(90deg, rgb(10,56,73) 10%, rgb(33,103,98) 90%);
+background: -ms-linear-gradient(90deg, rgb(10,56,73) 10%, rgb(33,103,98) 90%);
+background: linear-gradient(90deg, rgb(10,56,73) 10%, rgb(33,103,98) 90%);
+
         }
     </style>
 
+    <script type="text/javascript" src='assets/js/bootstrap.min.js'></script>
     <script  type="text/javascript" src="js-apps/layout.js"></script>
 
 </head>
-<body ng-controller='MainController' style='background-color:#110022;color:white;'>
+<body ng-controller='MainController'>
 
 
 
@@ -57,17 +70,19 @@
         <div id='main-panal' class="col-md-12 text-center v-center">
           
           <h1 style='font-size:500%'>D-Faster</h1><br>
-          <h3 style='line-height:1.5em'>D-Faster is a set of Utilities for Developers/Designers.<br> It's based on open projects from Github & redesigned to help you increase your development speed.<br> D-Faster made for fast.</h3>
+          <h3 style='line-height:1.5em;font-size:200%'>D-Faster is a set of Utilities for Developers/Designers.<br> It's based on open projects from Github to help you increase your development speed.<br> D-Faster made for fast.</h3>
 
-          <h4>The Project Still a baby & I work on it as a hobby in my spare time which isn't much.<br> D-Faster has a great potential but i need your help. You can contribute on github <a href="https://github.com/Ahmed-Badawy/D-Faster" target='_blank'>D-Faster On Github</a></h4>
+          <h4 style='line-height:130%'>The Project Still a baby & I work on it as a hobby in my spare time which isn't much.<br> D-Faster has a great potential but i need your help. You can contribute Here: <a href="https://github.com/Ahmed-Badawy/D-Faster" target='_blank'>D-Faster On Github</a>
+          <br>
+          Also you are more than welcome to tell me your <a href="https://github.com/Ahmed-Badawy/D-Faster/issues" target='_blank'>opinion or a suggestion</a></h4>
 
           <br><br>
 
-          <div class='panel' style='color:#222'>
-            <br>
-              <h2 class="page-header">Hire Me</h2>
-              <p class='h4' style='line-height:1.4em'>I am a talented 25 years old Egyptian (Full Stack Web Developer) with a good Java & Android Development Background. Currently searching for a full-time job in Europe & Canada. if you have any vacancy or you can help me in any way, please contact me. 
-        <a href="http://ahmed-badawy.com/site/cv" class='btn btn-default btn-xs' target="_blank">My C.V</a>
+          <div class='alert' style='border:5px double #333;padding:10px;background-color:rgba(255,255,255,.1)'>
+              <h2>Hire Me</h2>
+              <p class='h4' style='line-height:1.4em'>Hi! My name is Ahmed Badawy & i am the developer of D-Faster . I am a talented 25 years old Egyptian (Full Stack Web Developer) with a basic Java & Android Development Background. searching for a full-time job in US, Europe & Canada. if you have any vacancy or you can help me in any way, please contact me. 
+        <br><br>
+        <a href="http://ahmed-badawy.com/site/cv" class='btn btn-default' target="_blank">My C.V</a>
 
 
               </p>
@@ -76,9 +91,8 @@
 
 
 
-           Please Star this Project's Repository on Github: <a class='text-link main-word' href="https://github.com/Ahmed-Badawy/D-Faster">D-Faster Repo</a>
-            or check out <a class='text-link main-word' href="{!! url('blog') !!}">My Blog</a> <br>
-            you can also get a sneak peek at my <a class='text-link' href="{!! route('site-tests') !!}"><small>API Tests & UnderConstruction Projects</small></a>.</h3>
+           Please Star D-Faster Repository on Github: <a class='text-link main-word' href="https://github.com/Ahmed-Badawy/D-Faster" target='_blank'>D-Faster Repo</a>
+            or rate our <a class='text-link main-word' href="https://chrome.google.com/webstore/detail/d-faster-developdesign-fa/gpnmdoddfenngflamdbiigbecalmkfdf" target='_blank'>Chrome APP</a></h3>
 
 
             <br>
@@ -114,9 +128,10 @@
 var myApp=angular.module('myApp',['ngRoute']);
 
 myApp.controller('MainController',function($scope){
-    console.log("you are in the controller");
+    
 });
     </script>
+
 
 
 <script type="text/javascript" src='./js-apps/sidebar_controller.js'></script>

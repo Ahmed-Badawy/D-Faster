@@ -8,10 +8,10 @@
 
 
 <li style='margin-bottom:20px'>
-    <button class='btn btn-default col-sm-6 side_nav_filter_button btn-primary' ng-click='view_links("all_links")'>All</button>
-    <button class='btn btn-default col-sm-6 side_nav_filter_button' ng-click='view_links("utils_links")'>Utilities</button>
-    <button class='btn btn-default col-sm-6 side_nav_filter_button' ng-click='view_links("designer_links")'>Design</button>
-    <button class='btn btn-default col-sm-6 side_nav_filter_button' ng-click='view_links("developer_links")'>Develop</button>
+    <button class='btn btn-default col-sm-6' ng-class='{"btn-primary":cate=="all_links"}' ng-click='view_links("all_links")'>All</button>
+    <button class='btn btn-default col-sm-6' ng-class='{"btn-primary":cate=="utils_links"}' ng-click='view_links("utils_links")'>Utilities</button>
+    <button class='btn btn-default col-sm-6' ng-class='{"btn-primary":cate=="designer_links"}' ng-click='view_links("designer_links")'>Design</button>
+    <button class='btn btn-default col-sm-6' ng-class='{"btn-primary":cate=="developer_links"}' ng-click='view_links("developer_links")'>Develop</button>
 </li>
 
 
@@ -22,8 +22,8 @@
 <span ng-repeat="value in side_links">
     <li class='sidebar_header'>{{value.name}}</li>
 
-    <li ng-repeat='link in value.in_array | filter:search_q'>
-        <a ng-if='link.type==undefined' ng-href='{{base_url}}projects/{{link.location}}.html?show_what={{link.show_what}}'><span class='fa fa-{{link.icon}}'></span> {{link.name}}</a>
+    <li ng-repeat='(key,link) in value.in_array | filter:search_q'>
+        <a ng-if='link.type==undefined' href='' ng-click='go_to(cate,key,link)'><span class='fa fa-{{link.icon}}'></span> {{link.name}}</a>
 
         <span ng-if='link.type!=undefined' class="dropdown">
           <a id="dLabel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class=''>
@@ -31,7 +31,7 @@
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" aria-labelledby="dLabel">
-            <li ng-repeat='n in link.links_array'><a ng-href="{{base_url}}projects/{{n.location}}.html?show_what={{n.show_what}}"><span class='fa fa-{{n.icon}}'></span> {{n.name}}</a></li>
+            <li ng-repeat='(k,n) in link.links_array'><a href='' ng-click="go_to(cate,key,n,k)"><span class='fa fa-{{n.icon}}'></span> {{n.name}}</a></li>
           </ul>
         </span>
     </li>

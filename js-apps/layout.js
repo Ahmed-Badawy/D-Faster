@@ -19,32 +19,28 @@ toastr.options = {
   "hideMethod": "fadeOut"
 }
 
-toastr.warning('<a target="_blank" href="http://cv.ahmed-badawy.com"><span class="fa fa-2x fa-briefcase"></span> Help Me nail A Job</a>');
-// toastr.warning('<a target="_blank" href="https://github.com/Ahmed-Badawy/Develop-Faster"><span class="fa fa-2x fa-github"></span> Star Us on Github</a>');
-// toastr.warning('<a target="_blank" href=""><span class="fa fa-2x fa-google"></span> Star Us on Google Play</a>');
+toastr.info('<a target="_blank" href="http://cv.ahmed-badawy.com"><span class="fa fa-2x fa-briefcase"></span> Help Me get my dream job</a>');
+toastr.info('<a target="_blank" href="https://github.com/Ahmed-Badawy/Develop-Faster"><span class="fa fa-2x fa-github"></span> Star Us on Github</a>');
+toastr.info('<a target="_blank" href="https://chrome.google.com/webstore/detail/d-faster-developdesign-fa/gpnmdoddfenngflamdbiigbecalmkfdf"><span class="fa fa-2x fa-google"></span> Rate Us on Chrome Store</a>');
 
 
 
 
 
 
+  setTimeout(function(){
 
+    // $(".side_nav_filter_button").click(function(){
+    //   $(".side_nav_filter_button").removeClass("btn-primary");
+    //   $(this).addClass("btn-primary");
+    // });
 
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     });
 
-
-
-  setTimeout(function(){
-
-    $(".side_nav_filter_button").click(function(){
-      $(".side_nav_filter_button").removeClass("btn-primary");
-      $(this).addClass("btn-primary");
-    });
-
-  },500)
+  },1000)
 
 });
 
@@ -59,9 +55,12 @@ toastr.warning('<a target="_blank" href="http://cv.ahmed-badawy.com"><span class
   }
 
 
-  // var server_link = 'http://ahmed-badawy.com/';
+  var server_link = 'http://ahmed-badawy.com/';
   var server_link = 'http://localhost/_websites/ahmed-badawy.com/';
   var base_url = server_link+'projects/D-Faster/';
+
+
+
 
   // function goProject(project,h,show_what){
   //   show_what = (show_what) ? show_what : 1;

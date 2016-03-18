@@ -47,7 +47,6 @@
     <div id="wrapper" ng-controller='MainController'>
 
 <div ng-include src='"../../../templates/sidebar.html"'></div>
-<a href="#menu-toggle" class="btn btn-default btn-xs fa fa-arrow-right" id="menu-toggle"></a> 
 
 
 
@@ -60,7 +59,7 @@
 <div ng-include src='"../../../templates/headerarea.html"'></div>
 
 
-<legend><h2> <span class='fa fa-hashtag'></span> Timers: <small>Create A CountDown or a Stop Watch Timer in a second</small></h2></legend>
+<legend><h2> <span class='fa fa-clock-o'></span> Timers: <small>Create A CountDown or a Stop Watch Timer in a second</small></h2></legend>
 
 
 <div class='row'>
@@ -82,10 +81,13 @@
         </div>
 <div class="clearfix"></div><br>
 
+
+<div class="row">
         <input type="button" class='btn btn-default btn-lg col-sm-3' value="Start" onclick="start();">
         <input type="button" class='btn btn-default btn-lg col-sm-3' id='stop_btn' value="Pause" onclick="stop();">
         <input type="button" class='btn btn-danger btn-lg col-sm-3' value="Reset" onclick="reset()">
-        <button class='btn btn-primary btn-lg col-sm-3' onclick="save_time()">Save Time</button>
+        <button class='btn btn-primary btn-lg col-sm-3' onclick="save_time()">Save Time</button>    
+</div>
 
 
 
@@ -123,10 +125,13 @@
     <div class="col-sm-3">  Minutes: <input type='number' ng-model='mins' class='form-control' />  </div>
     <div class="col-sm-3">  Seconds: <input type='number' ng-model='secs' class='form-control' />  </div>
 
-    <div class="row col-sm-12">
+<div class="clearfix"></div><br>
+
+    <div class="col-sm-12">
         <button class='btn btn-default btn-lg col-sm-6' ng-click='ng_begin_countdown()'>Begin CountDown</button>
         <button class='btn btn-default btn-lg col-sm-6' onclick='stop_countdown()'>Stop CountDown</button>
     </div>
+
     <div class="clearfix"></div>
 </div>
 

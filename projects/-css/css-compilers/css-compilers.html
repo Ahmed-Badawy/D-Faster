@@ -166,11 +166,14 @@ myApp.controller('MainController',function($scope,$http){
 
     $scope.compile = function(){
         $scope.button_text = "Loading";
+        toastr.info("Run Compiler");
         $http.post($scope.compiler_api_link,{type:$scope.type,source:$scope.before,url:"http://alloy.divshot.com/compile"}).then(function(data){
+            toastr.info("Compiler Finished");
             console.log(data);
             $scope.after = data.data;
             $scope.button_text = "Compile";
         }, function(){
+            $scope.button_text = "Compile";
             console.log("error has happend");
         });
     }
