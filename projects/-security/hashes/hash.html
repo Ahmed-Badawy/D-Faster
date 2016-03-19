@@ -206,7 +206,6 @@
     <!-- /#wrapper -->
 
 
-    <script  type="text/javascript" src="js/md4.min.js"></script>
     <script  type="text/javascript" src="js/md5.min.js"></script>
     <script  type="text/javascript" src="js/sha512.min.js"></script>
     <script type="text/javascript">
@@ -222,12 +221,6 @@
             }
         });
 
-        myApp.filter('md4',function(){
-            return function(string){
-                if(string) return md5(string);
-                else return "MD5 hash";
-            }
-        });
 
         myApp.filter('hmd5',function(){
             return function(string,hash){
