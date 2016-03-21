@@ -107,16 +107,21 @@
 <div class='col-sm-6'>
 <label>Convert to Data Format</label>
 <SELECT class='form-control' ng-model='to_type' ng-change='convert()'>
-    <!-- <option value='javascript'>JavaScript</option> -->
+        <optgroup label="Data Formats">
     <option value='json'>JSON</option>
     <option value='xml'>XML</option>
     <option value='yaml'>YAML</option> 
     <option value='csv'>CSV</option>
     <option value='sql'>SQL Statement</option>
+        </optgroup>
+        <optgroup label="Rendable HTML">
     <option value='html_table_single'>HTML Table (Single Dimension Array)</option>
     <option value='html_table_multi'>HTML Table (Multible Dimensions Array)</option>
+        </optgroup>
+        <optgroup label="Programable Data">
     <option value='php_array'>PHP Arrays</option>
     <option value='php_object'>PHP Objects</option>
+        </optgroup>
 </SELECT>
 </div>
 <div class='col-sm-6'>

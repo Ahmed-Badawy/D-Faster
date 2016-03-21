@@ -60,6 +60,13 @@
 <div class="row">
 <div class="col-sm-6">
 
+
+<div>
+    <label>Text:</label>
+    <input class='form-control' ng-model='mytext' ng-init='mytext="Change My Shadow"'>
+</div>
+    <br>
+
 <div class="row">
     <div class='col-sm-6'>
         <label>Vertical Distance: {{bs.v}}</label>
@@ -106,7 +113,7 @@
 
 
     <div class='col-sm-12' style='background-color:{{bg_color}};border:10px double #333;border-radius:10px;padding:10px'>
-        <h1 id="shadow-txt" style='margin:30px;color:{{box_color}}'>Change My Shadow</h1>
+        <h1 id="shadow-txt" style='margin:30px;color:{{box_color}}'>{{mytext}}</h1>
     </div>
 
 

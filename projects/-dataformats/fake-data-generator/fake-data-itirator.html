@@ -63,9 +63,12 @@
     <li><a class='btn btn-default btn-sm col-sm-2' onclick='set_before("csv")'>Generate CSV</a></li>
     <li><a class='btn btn-default btn-sm col-sm-2' onclick='set_before("sql")'>Generate SQL</a></li>
     <li><a class='btn btn-default btn-sm col-sm-2' onclick='set_before("php_array")'>Generate PHP Array</a></li>
+    <li><a class='btn btn-default btn-sm col-sm-2' onclick='set_before("laravel_seed")'>Generate Laravel Seed</a></li>
   </ul>
 </div>
-    <div class="clearfix"></div><br>
+
+
+<div class="clearfix"></div><br>
 
 
 
@@ -96,7 +99,7 @@
 <div id='textarea2' class='col-sm-6'>
 
     <p>Iterator: {{iterator}} </p>
-    <input type='range' class='form form-control' value='1' min='1' max='600' ng-model='iterator' id='iterator' ng-init='iterator=1' oninput='generate_fake_data()'> <br>
+    <input type='range' class='form form-control' value='1' min='1' max='600' ng-model='iterator' id='iterator' ng-init='iterator=3' oninput='generate_fake_data()'> <br>
 
     <p>After (output)</p>
     <textarea class='form-control mytextarea' rows='21' readonly id='after'></textarea>
@@ -424,7 +427,20 @@ new_text =`<person id="{{random.number}}">
   - 'firstName'            
   - 'lastName '         
   - 'email'            
-  - 'website'`;
+  - 'website'
+-             
+  - '{{name.firstName}}'
+  - '{{name.lastName}}'         
+  - '{{internet.email}}'            
+  - '{{internet.url}}'`;
+
+}else if(type=="laravel_seed"){ 
+    new_text = 
+`DB::table('users')->insert([
+    'firstName' => "{{name.firstName}}",
+    'email' => "{{internet.email}}",
+    'password' => "{{internet.password}}",
+]);`;
 }
             get_id("before").value = new_text;
             generate_fake_data();
