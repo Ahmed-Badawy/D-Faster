@@ -167,6 +167,8 @@ legend{
 
 
 
+
+
     .input-group-addon.copy_btn{
         color: white;
         background-color: #2e6da4;
@@ -199,6 +201,9 @@ legend{
         font-size: 90%;
         margin-bottom: 2px;
     }
+
+
+
 
 /**********************************************************************/
     .dropdown-menu{

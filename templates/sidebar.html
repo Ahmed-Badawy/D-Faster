@@ -3,16 +3,16 @@
             <ul class="sidebar-nav">
                 <li class="sidebar-brand"><a ng-href="{{base_url}}">D-Faster </a></li>
 
-<li style='margin-bottom:10px'><input ng-model='search_q' class='form-control' placeholder='Search Text'></li>
-
-
-
 <li style='margin-bottom:20px'>
     <button class='btn btn-default btn-xs col-sm-6' ng-class='{"btn-primary":cate=="all_links"}' ng-click='view_links("all_links")'>All</button>
     <button class='btn btn-default btn-xs col-sm-6' ng-class='{"btn-primary":cate=="utils_links"}' ng-click='view_links("utils_links")'>Utilities</button>
     <button class='btn btn-default btn-xs col-sm-6' ng-class='{"btn-primary":cate=="designer_links"}' ng-click='view_links("designer_links")'>Design</button>
     <button class='btn btn-default btn-xs col-sm-6' ng-class='{"btn-primary":cate=="developer_links"}' ng-click='view_links("developer_links")'>Develop</button>
 </li>
+
+<div class="clearfix"></div>
+
+<li style='margin-top:10px'><input ng-model='search_q' class='form-control' placeholder='Search Box'></li>
 
 
 <div class="clearfix"></div><br>
@@ -36,9 +36,17 @@
         </span>
     </li>
 
-
     <hr>
 </span>
+
+
+<span>
+    <li class='sidebar_header'>Prefrences</li>
+    <li>
+        <a href='#'><span class='fa fa-cogs'></span> pref</a>
+    </li>      
+</span>  
+
 
 
 <div class="clearfix"></div><br><br><br>

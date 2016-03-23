@@ -451,50 +451,43 @@ INSERT INTO Table_Name (firstName, lastName, email, site)
 
 }else if(type=="json"){ 
     new_text = `[ 
-                {
-                    "id":{{random.number}},         
-                    "name":"{{name.firstName}}",         
-                    "email":"{{internet.email}}",            
-                    "url":"{{internet.url}}"
-                },         
-                {
-                    "id":{{random.number}},         
-                    "name":"{{name.firstName}}",         
-                    "email":"{{internet.email}}",            
-                    "url":"{{internet.url}}"
-                },         
-                {
-                    "id":{{random.number}},         
-                    "name":"{{name.firstName}}",         
-                    "email":"{{internet.email}}",            
-                    "url":"{{internet.url}}"
-                }         
+    {
+        "id":{{random.number}},         
+        "name":"{{name.firstName}}",         
+        "email":"{{internet.email}}",            
+        "url":"{{internet.url}}"
+    },         
+    {
+        "id":{{random.number}},         
+        "name":"{{name.firstName}}",         
+        "email":"{{internet.email}}",            
+        "url":"{{internet.url}}"
+    },         
+    {
+        "id":{{random.number}},         
+        "name":"{{name.firstName}}",         
+        "email":"{{internet.email}}",            
+        "url":"{{internet.url}}"
+    }         
 ]`;
 
 }else if(type=="yaml"){ 
-    new_text = `---
-            -             
-              - 'firstName'            
-              - 'lastName '         
-              - 'email'            
-              - 'website'          
-            -             
-              - '{{name.firstName}}'
-              - '{{name.lastName}}'         
-              - '{{internet.email}}'            
-              - '{{internet.url}}'         
-            -             
-              - '{{name.firstName}}'
-              - '{{name.lastName}}'         
-              - '{{internet.email}}'            
-              - '{{internet.url}}'         
-            -             
-              - '{{name.firstName}}'
-              - '{{name.lastName}}'         
-              - '{{internet.email}}'            
-              - '{{internet.url}}'         
-
-`
+    new_text = `---      
+-             
+  - firstName:'{{name.firstName}}'
+  - '{{name.lastName}}'         
+  - '{{internet.email}}'            
+  - '{{internet.url}}'         
+-             
+  - '{{name.firstName}}'
+  - '{{name.lastName}}'         
+  - '{{internet.email}}'            
+  - '{{internet.url}}'         
+-             
+  - '{{name.firstName}}'
+  - '{{name.lastName}}'         
+  - '{{internet.email}}'            
+  - '{{internet.url}}'`
 }
 
 
