@@ -36,6 +36,7 @@
         text-align: center;
         font-size: 200%;
         border-radius: 10px;
+        {{from_now}}
     }
     {{css_model}}
 </style>
@@ -136,7 +137,7 @@
         </div>
         <div>
             <label>Scale: {{before.scale}}</label>
-            <input type='range' class='form-control' min='0' max='3' step=".1" ng-model='before.scale'>
+            <input type='range' class='form-control' min='0' max='5' step=".1" ng-model='before.scale'>
         </div>
         <div>
             <label>Skew: {{before.skew}}</label>
@@ -144,7 +145,7 @@
         </div>
         <div>
             <label>Translate: {{before.translate}}</label>
-            <input type='range' class='form-control' min='-300' max='300' ng-model='before.translate'>
+            <input type='range' class='form-control' min='-600' max='600' ng-model='before.translate'>
         </div>            
     </div>
     <div class="col-sm-6">
@@ -163,7 +164,7 @@
         </div>
         <div>
             <label>Translate: {{after.translate}}</label>
-            <input type='range' class='form-control' min='-300' max='300' ng-model='after.translate'>
+            <input type='range' class='form-control' min='-600' max='600' ng-model='after.translate'>
         </div>    
     </div>
 </div>
@@ -216,22 +217,23 @@ window.onload = function(){
     var myApp=angular.module('myApp',['ngRoute']);
     myApp.controller('MainController',function($scope,$timeout){ 
         $scope.before = {
-            rotate : 5 , 
+            rotate : 0 , 
             scale : 1 ,
             skew : 0 ,
             translate: 0, 
         };
         $scope.after = {
-            rotate : 60 , 
-            scale : 1.5 ,
-            skew : 20 ,
-            translate: 20, 
+            rotate : 360 , 
+            scale : 0 ,
+            skew : 0 ,
+            translate: 500, 
         };
-        $scope.timing = "ease";
-        $scope.duration = 1;
+        $scope.timing = "ease-out";
+        $scope.duration = 1.5;
         $scope.count = 3;
         $scope.css_model = "";
         $scope.paly_status = "";
+        $scope.from_now = "";
 
         var promise = false;
 
@@ -244,7 +246,7 @@ window.onload = function(){
                 promise = $timeout(function(){
                     $scope.paly_status = "";
                     $scope.compile(); 
-                },300);
+                },20);
             });
 
         $scope.play_animation = _=>{
@@ -253,7 +255,7 @@ window.onload = function(){
             if(promise) $timeout.cancel(promise);
             promise = $timeout(function(){
                 $scope.paly_status = "css_animation";
-            },300);
+            },50);
 
         }
 
@@ -276,6 +278,13 @@ window.onload = function(){
                 $scope.after.skew,
                 $scope.after.translate
             );
+
+$scope.from_now = `
+    -webkit-transform: ${second}
+    -moz-transform: ${second}
+    -o-transform: ${second}
+`;
+
 
             from = str_parse(`
 from {

@@ -56,7 +56,7 @@ toastr.info('<a target="_blank" href="https://chrome.google.com/webstore/detail/
 
 
   var server_link = 'http://ahmed-badawy.com/';
-  var server_link = 'http://localhost/_websites/ahmed-badawy.com/';
+  // var server_link = 'http://localhost/_websites/ahmed-badawy.com/';
   var base_url = server_link+'projects/D-Faster/';
 
 
