@@ -2,7 +2,7 @@
 <html ng-app='myApp' ng-controller='MainController'>
 <head>
 
-<title>CSS Text Effects</title>
+<title>Web Fonts Viewer</title>
 <meta charset='utf-8'>
 <link rel="icon" type="image/x-icon" href="../../../images/icon.png" />
 
@@ -25,7 +25,10 @@
 <script  type="text/javascript" src="../../../js-apps/txtarea.js"></script>
 
 <style type="text/css">
-
+    h3{
+        margin-bottom: 0;
+        margin-top: 0;
+    }
 </style>
 
 </head>
@@ -49,7 +52,7 @@
 <div ng-include src='"../../../templates/headerarea.html"'></div>
 
 
-<legend><h2><span class='fa fa-reorder'></span> CSS3 Multi Column: <small>Layout Your Columns in ease</small></h2></legend>
+<legend><h2><span class='fa fa-css3'></span> Web Fonts Viewer: <small>View web-safe fonts for you to choose from.</small></h2></legend>
 
 
 
@@ -57,34 +60,19 @@
 
 <div class="row">
 
-<div class="col-sm-4">
-    <div>
-        <label>Column Count: {{bs.col_count}}</label>
-        <input type='range' class='form-control' min='2' max='8' ng-model='bs.col_count'>
-    </div>
-    <div>
-        <label>Column Gap: {{bs.col_gap}}</label>
-        <input type='range' class='form-control' min='0' max='50' ng-model='bs.col_gap'>
-    </div>
-    <div>
-        <label>Font size: {{bs.font_size}}</label>
-        <input type='range' class='form-control' min='5' max='40' ng-model='bs.font_size'>
-    </div>
-    <div>
-        <label>Border size: {{bs.border_size}}</label>
-        <input type='range' class='form-control' min='0' max='20' ng-model='bs.border_size'>
-    </div>  
-    <div>
-        <label>Font Color: {{bs.font_color}}</label>
-        <input type='color' class='form-control' ng-model='bs.font_color'>
-    </div>  
-</div>
+
+<div class="col-sm-12">
+<input class='form-control' ng-model='text_model' placeholder='Printed Text'></input>
 
 
-<div class="col-sm-8">
+    <h3 class='col-sm-6' ng-repeat='font in fonts'>
+    <label>{{font.name}}</label>
+    <pre style='font-family: "{{font.name}}"'>{{text_model}}</pre>
+    <p style='font-family: "{{font.name}}"'>{{text_model}}</p>
+
+    </h3>
 
 
-<div class="multi-column" style="{{css_model}}">With CSS3 multiple columns, you can create table like column just like column section that you see in newspapers and books. It’s properties of are column-count, column-gap, column-fill, column-rule-color, column-rule-style, column-rule-width, column-span, column-width and column-rule. Column-gap property are the space between each columns. Column-rule are the width, style and color for each column. Column-count is the number column you desired for your content. It is supported by the latest IE 10, Chrome 4+, Firefox 2+, Safari 3.1+ and Opera 15+. Below are the configurations with many options for your multi column needs. Play around with it and share with your fellow developers.</div>
 
 
 
@@ -147,54 +135,79 @@ window.onload = function(){
 <script type="text/javascript">
     var myApp=angular.module('myApp',['ngRoute']);
     myApp.controller('MainController',function($scope,$timeout){
-        $scope.css_model = "";
-        $scope.select_style = style => $scope.css_model=style.css;
-        $scope.bs = {
-            col_count : 3,
-            col_gap : 40,
-            font_size : 16, 
-            border_size : 5,
-            font_color : "#444444"
-        }
-
-        $scope.$watchGroup(['bs.col_count','bs.col_gap','bs.font_size','bs.border_size','bs.font_color'],_=>{ 
-            $scope.compile();
-        });
-
-        $scope.compile = _ =>{
-            $scope.css_model = str_parse(
-`-moz-column-count:%s;
--webkit-column-count:%s;
-column-count:%s;
--moz-column-gap:%spx;
--webkit-column-gap:%spx;
-column-gap:%spx;
-font-size:%spx;
--moz-column-rule:%spx solid #000;
--webkit-column-rule:%spx solid #000;
-column-rule:%spx solid #000;
-color:%s;`,
-                $scope.bs.col_count,
-                $scope.bs.col_count,
-                $scope.bs.col_count,
-                $scope.bs.col_gap,
-                $scope.bs.col_gap,
-                $scope.bs.col_gap,
-                $scope.bs.font_size,
-                $scope.bs.border_size,
-                $scope.bs.border_size,
-                $scope.bs.border_size,
-                $scope.bs.font_color
-            );
-        }
-
-        $scope.compile();
+        $scope.text_model = "Test Text";
+        $scope.fonts = [
+            {name:"Arial"},
+            {name:"Arial Black"},
+            {name:"Arial Narrow"},
+            {name:"Arial Rounded MT Bold"},
+            {name:"Avant Garde"},
+            {name:"Calibri"},
+            {name:"Candara"},
+            {name:"Century Gothic"},
+            {name:"Franklin Gothic Medium"},
+            {name:"Futura"},
+            {name:"Geneva"},
+            {name:"Gill Sans"},
+            {name:"Helvetica"},
+            {name:"Impact"},
+            {name:"Lucida Grande"},
+            {name:"Optima"},
+            {name:"Segoe UI"},
+            {name:"Tahoma"},
+            {name:"Trebuchet MS"},
+            {name:"Verdana"},
 
 
+
+
+
+            {name:"Big Caslon"},
+            {name:"Bodoni MT"},
+            {name:"Book Antiqua"},
+            {name:"Calisto MT"},
+            {name:"Cambria"},
+            {name:"Didot"},
+            {name:"Garamond"},
+            {name:"Georgia"},
+            {name:"Didot"},
+            {name:"Didot"},
+            {name:"Didot"},
+            {name:"Didot"},
+        ];
+
+        // $scope.css_model = "";
+        // $scope.select_style = style => $scope.css_model=style.css;
+        // $scope.css_model = $scope.styles[4].css;
     });
 </script>
 
 
 <script type="text/javascript" src='../../../js-apps/sidebar_controller.js'></script>
+</body>
+</html>
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style type="text/css">
+.green{
+    color:green;
+}
+    </style>
+</head>
+<body>
+
+
+<h1>Hello World</h1>
+<p>this is it man</p>
+<h3 style='color:red'>Hello Red style</h3>
+<h3 class='green'>Hello Green Class</h3>
+
 </body>
 </html>
