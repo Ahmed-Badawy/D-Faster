@@ -422,12 +422,11 @@ new_text =`<person id="{{random.number}}">
 },`;
 
 }else if(type=="yaml"){ 
-    new_text = 
-`-             
-  - '{{name.firstName}}'
-  - '{{name.lastName}}'         
-  - '{{internet.email}}'            
-  - '{{internet.url}}'`;
+    new_text = `-             
+  - firstName: {{name.firstName}}
+  - lastName: {{name.lastName}}        
+  - email: {{internet.email}}            
+  - url: {{internet.url}}`;
 
 }else if(type=="laravel_seed"){ 
     new_text = 

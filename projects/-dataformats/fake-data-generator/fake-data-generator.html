@@ -63,6 +63,7 @@
     <li><a class='btn btn-default btn-sm col-sm-2' onclick='set_before("csv")'>Generate CSV</a></li>
     <li><a class='btn btn-default btn-sm col-sm-2' onclick='set_before("sql")'>Generate SQL</a></li>
     <li><a class='btn btn-default btn-sm col-sm-2' onclick='set_before("php_array")'>Generate PHP Array</a></li>
+    <li><a class='btn btn-default btn-sm col-sm-2' onclick='set_before("laravel_seed")'>Generate Laravel Seed</a></li>    
   </ul>
 </div>
     <div class="clearfix"></div><br>
@@ -474,20 +475,38 @@ INSERT INTO Table_Name (firstName, lastName, email, site)
 }else if(type=="yaml"){ 
     new_text = `---      
 -             
-  - firstName:'{{name.firstName}}'
-  - '{{name.lastName}}'         
-  - '{{internet.email}}'            
-  - '{{internet.url}}'         
+  - firstName: {{name.firstName}}
+  - lastName: {{name.lastName}}        
+  - email: {{internet.email}}            
+  - url: {{internet.url}}         
 -             
-  - '{{name.firstName}}'
-  - '{{name.lastName}}'         
-  - '{{internet.email}}'            
-  - '{{internet.url}}'         
+  - firstName: {{name.firstName}}
+  - lastName: {{name.lastName}}        
+  - email: {{internet.email}}            
+  - url: {{internet.url}}  
 -             
-  - '{{name.firstName}}'
-  - '{{name.lastName}}'         
-  - '{{internet.email}}'            
-  - '{{internet.url}}'`
+  - firstName: {{name.firstName}}
+  - lastName: {{name.lastName}}        
+  - email: {{internet.email}}            
+  - url: {{internet.url}}`
+}
+else if(type=="laravel_seed"){ 
+    new_text = 
+`DB::table('users')->insert([
+    'firstName' => "{{name.firstName}}",
+    'email' => "{{internet.email}}",
+    'password' => "{{internet.password}}",
+]);
+DB::table('users')->insert([
+    'firstName' => "{{name.firstName}}",
+    'email' => "{{internet.email}}",
+    'password' => "{{internet.password}}",
+]);
+DB::table('users')->insert([
+    'firstName' => "{{name.firstName}}",
+    'email' => "{{internet.email}}",
+    'password' => "{{internet.password}}",
+]);`;
 }
 
 

@@ -104,9 +104,9 @@
 <div class="clearfix"></div><br>
 
 
-<div class="row">
+<div class="row alert">
 
-<div class="alert alert-warning col-sm-9">
+<div class="col-sm-9">
     <p>
     - If you have any problems with our Minifier please use <a href='http://closure-compiler.appspot.com' target='_blank'>Google's Closure Compiler</a>
     <br>
@@ -116,7 +116,7 @@
     <p>
     - Does every line end with semicolon ? &nbsp; 
     <label><input type='checkbox' value='true' ng-model='prams.newline'> Yes</label>
-    <span  class='help-block'>- javascript allows the lines to end with a return break but it isn't recommended. <span><br>
+    <span>- javascript allows the lines to end with a return break but it isn't recommended. <span><br>
     <span style='color:red'>Why am i telling you this ?</span> our minifier assumes all lines end with semicolon if you end a line without the ; it will gets appended to the next line & that produces an error in your code. so we gave you the option to remove the (return key) or remove it for minifications purposes.<br>
     </p>
     <p>- <span style='color:red'>Alert: </span> if you use regex expression in your code please review the output of the minification because it might be an error in the regex expression area.</p>
