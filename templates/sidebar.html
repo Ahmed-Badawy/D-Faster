@@ -1,7 +1,7 @@
         <!-- Sidebar -->
         <div id="sidebar-wrapper" ng-controller='sidebar_controller'>
             <ul class="sidebar-nav">
-                <li class="sidebar-brand"><a ng-href="{{base_url}}">D-Faster </a></li>
+                <li class="sidebar-brand"><a ng-href="{{base_url}}">D-Faster  <small style='font-size:60%'>(Beta)</small></a></li>
 
 <li style='margin-bottom:20px'>
     <button class='btn btn-default btn-xs col-sm-6' ng-class='{"btn-primary":cate=="all_links"}' ng-click='view_links("all_links")'>All</button>
@@ -43,10 +43,10 @@
 <span>
     <li class='sidebar_header'>Additional</li>
     <li>
-        <a href='{{base_url}}' target="_blank"><span class='fa fa-cogs'></span> About D-Faster</a>
         <a href='https://chrome.google.com/webstore/detail/d-faster/gpnmdoddfenngflamdbiigbecalmkfdf' target="_blank"><span class='fa fa-chrome'></span> Chrome APP Link</a>
+        <a href='https://github.com/Ahmed-Badawy/D-Faster' target="_blank"><span class='fa fa-github'></span> D-Faster On Github</a>
+        <a href='{{base_url}}' target="_blank"><span class='fa fa-cogs'></span> About D-Faster</a>
         <a href='http://cv.ahmed-badawy.com' target="_blank"><span class='fa fa-code'></span> About Developer</a>
-
     </li>      
 </span>  
 
