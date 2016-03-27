@@ -1,3 +1,12 @@
+  var server_link = 'http://ahmed-badawy.com/';
+  var server_link = 'http://localhost/_websites/ahmed-badawy.com/';
+  var base_url = server_link+'projects/D-Faster/';
+  
+  var cv_link = "http://cv.ahmed-badawy.com";
+  var chrome_app_link = "https://chrome.google.com/webstore/detail/d-faster/gpnmdoddfenngflamdbiigbecalmkfdf";
+
+
+
 $( document ).ready(function() {
 
 //toaster options
@@ -19,12 +28,9 @@ toastr.options = {
   "hideMethod": "fadeOut"
 }
 
-toastr.info('<a target="_blank" href="http://cv.ahmed-badawy.com"><span class="fa fa-2x fa-briefcase"></span> Help Me get my dream job</a>');
-toastr.info('<a target="_blank" href="https://github.com/Ahmed-Badawy/Develop-Faster"><span class="fa fa-2x fa-github"></span> Star Us on Github</a>');
-toastr.info('<a target="_blank" href="https://chrome.google.com/webstore/detail/d-faster-developdesign-fa/gpnmdoddfenngflamdbiigbecalmkfdf"><span class="fa fa-2x fa-google"></span> Rate Us on Chrome Store</a>');
-
-
-
+toastr.warning(`<a target="_blank" href="${cv_link}"><span class="fa fa-2x fa-briefcase"></span> Help Me get my dream job</a>`);
+toastr.warning(`<a target="_blank" href="${base_url}"><span class="fa fa-2x fa-github"></span> Star Us on Github</a>`);
+toastr.warning(`<a target="_blank" href="${chrome_app_link}"><span class="fa fa-2x fa-google"></span> Rate Us on Chrome Store</a>`);
 
 
 
@@ -55,9 +61,6 @@ toastr.info('<a target="_blank" href="https://chrome.google.com/webstore/detail/
   }
 
 
-  var server_link = 'http://ahmed-badawy.com/';
-  // var server_link = 'http://localhost/_websites/ahmed-badawy.com/';
-  var base_url = server_link+'projects/D-Faster/';
 
 
 
