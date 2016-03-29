@@ -246,5 +246,11 @@ legend{
     color:#ffffff;
 }
 .btn{
+    color:#333 !important;
+    transition: all .1s linear;
+}
+.btn:hover{
     /*padding:5px;*/
+    color:#111 !important;
+    border:3px solid #333;
 }
