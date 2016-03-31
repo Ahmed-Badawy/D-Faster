@@ -58,11 +58,13 @@
 <div class="row">
 
 <h4>Request type:</h4>
-    <button class='btn btn-default col-sm-3 btn-lg' ng-class={'btn-primary':(request_type=="get")} ng-click='request_type="get"'>Get</button>
-    <button class='btn btn-default col-sm-3 btn-lg' ng-class={'btn-primary':(request_type=="post")}  ng-click='request_type="post"'>Post</button>
-    <button class='btn btn-default col-sm-3 btn-lg' ng-class={'btn-primary':(request_type=="put")}  ng-click='request_type="put"'>Put</button>
-    <button class='btn btn-default col-sm-3 btn-lg' ng-class={'btn-primary':(request_type=="delete")}  ng-click='request_type="delete"'>Delete</button>
+    <button class='btn btn-default col-sm-2 btn-lg' ng-class={'btn-primary':(request_type=="get")} ng-click='request_type="get"'>Get</button>
+    <button class='btn btn-default col-sm-2 btn-lg' ng-class={'btn-primary':(request_type=="post")}  ng-click='request_type="post"'>Post</button>
+    <button class='btn btn-default col-sm-2 btn-lg' ng-class={'btn-primary':(request_type=="put")}  ng-click='request_type="put"'>Put</button>
+    <button class='btn btn-default col-sm-2 btn-lg' ng-class={'btn-primary':(request_type=="patch")}  ng-click='request_type="patch"'>Patch</button>
+    <button class='btn btn-default col-sm-2 btn-lg' ng-class={'btn-primary':(request_type=="delete")}  ng-click='request_type="delete"'>Delete</button>
 
+<div class="clearfix"></div><br>
 
     <div class="input-group">
         <div class="input-group-addon">Webpage URL</div>

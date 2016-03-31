@@ -50,7 +50,7 @@
 
 
 
-<div id='textarea1' class="col-sm-6">
+<div id='textarea1' class="col-sm-5">
     <p>CSS (input)</p>
     <textarea class='form-control mytextarea' id="text-input" ng-model='txt1' ng-change='markdownConverter()' rows="25"></textarea>
     <input type='file' class='hidden upload_input' />
@@ -77,9 +77,9 @@
 </div>
 
 
-
         
-    <div id="preview" class='col-sm-6'></div>
+    <div id="preview" class='col-sm-7'></div>
+    <textarea id="html_preview" class='col-sm-7'></textarea>
 
 
 
@@ -114,6 +114,7 @@
         // });
         myApp.controller('MainController',function($scope){
             var preview = document.getElementById("preview");
+            var html_preview = document.getElementById("html_preview");
 
             $scope.txt1 = `#Header 1
 ##Header 2
@@ -182,7 +183,9 @@ Markdown is a lightweight markup language based on the formatting conventions th
 
 
             $scope.markdownConverter = function(){
-                if($scope.txt1) preview.innerHTML = markdown.toHTML($scope.txt1);    
+                var markdown_value = markdown.toHTML($scope.txt1);
+                if($scope.txt1) preview.innerHTML = markdown_value;    
+                if($scope.txt1) html_preview.value = markdown_value;    
             }
             $scope.markdownConverter();
 
