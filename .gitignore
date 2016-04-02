@@ -51,10 +51,6 @@ Temporary Items
 #/assets
 
 
-/js-apps
-/templates
+#/js-apps
+#/templates
 
-
-/js-apps/layout.js
-/templates/sidebar.html
-js-apps/layout.js
