@@ -2,7 +2,7 @@
 <html ng-app='myApp' ng-controller='MainController'>
 <head>
 
-<title>Gradient Generator</title>
+<title>Single Page Colors</title>
 <meta charset='utf-8'>
 <link rel="icon" type="image/x-icon" href="../../../images/icon.png" />
 
@@ -34,11 +34,10 @@
         margin: 0;
         background-repeat: no-repeat;
         background-attachment: fixed;
-        transition: all .5s linear;    
+        transition:all .8s linear;
     }
-    body{
-        {{css_model}}  
-    }
+    #text{ transition:all .8s linear; }
+    {{css_model}}      
 </style>
 
 </head>
@@ -62,40 +61,48 @@
 <div ng-include src='"../../../templates/headerarea.html"'></div>
 
 
-<legend><h2><span class='fa fa-file-picture-o'></span> Gradient Generator: <small>helps you generate Gradient CSS Code</small></h2></legend>
+<!-- <legend><h2><span class='fa fa-file-picture-o'></span> Solid Color Page Background: <small>helps you choose your page single background color</small></h2></legend> -->
 
 
+
+<h1 class='text-center' id="text">{{bs.text}} 
+<br>
+ {{bs.text_color}} - {{bs.bg_color}} </h1>
 
 
 
 <div class="row">
 <div class="col-sm-6">
-    <div>
-        <label>Angle: {{bs.angle}}</label>
-        <input type='range' class='form-control' min='0' max='360' ng-model='bs.angle'>
-    </div>
 
-<div class="clearfix"></div><br>
 <div class="row">
     <div class='col-sm-6'>
-        <label>Start Color: {{bs.start_color}}</label>
-        <input type='color' class='form-control' ng-model='bs.start_color'>
+        <label>Text:</label>
+        <input class='form-control' ng-model='bs.text'>
+    </div>
+    <div class='col-sm-6'>
+        <label>Font Size: {{bs.font_size}}</label>
+        <input type='range' class='form-control' min='0' max='200' ng-model='bs.font_size'>
+    </div>
+
+<div class="clearfix"></div><br>
+
+    <div class='col-sm-6'>
+        <label>BackGround Color: {{bs.bg_color}}</label>
+        <input type='color' class='form-control' ng-model='bs.bg_color'>
     </div>
 
     <div class='col-sm-6'>
-        <label>End Color: {{bs.end_color}}</label>
-        <input type='color' class='form-control' ng-model='bs.end_color'>
-    </div>
-<div class="clearfix"></div><br>
-    <div class='col-sm-6'>
-        <label>Start: {{bs.start}}</label>
-        <input type='range' class='form-control' min='0' max='100' ng-model='bs.start'>
-    </div>
-    <div class='col-sm-6'>
-        <label>End: {{bs.end}}</label>
-        <input type='range' class='form-control' min='0' max='100' ng-model='bs.end'>
+        <label>Text Color: {{bs.text_color}}</label>
+        <input type='color' class='form-control' ng-model='bs.text_color'>
     </div>
 </div>
+
+<div class="clearfix"></div><br>
+    
+    <label>Choose your SolidColor</label>
+    <select class='form-control' ng-model='select_model' ng-change='set_color(select_model)'>
+        <option ng-repeat='color in preset_colors' ng-click='color=color' style='background-color:{{color.bg}}' value='{{color}}' selected>{{color.bg}}</option>
+    </select>
 
 <br>
 </div>
@@ -131,16 +138,6 @@
 
 </div>
 
-<hr>
-
-<div class='text-left'>
-    <a ng-repeat='grad in gradients' class='btn' ng-click='set_gradient(grad)' style='background-color:rgba(255,255,255,.3);color:#333;margin:1px;'>{{grad.name}}</a>   
-</div>
-
-<hr>
-
-
-
 
 
 
@@ -161,44 +158,28 @@
     </div>
     <!-- /#wrapper -->
 
-<script type="text/javascript" src='includes/gradients.js'></script>
+<script type="text/javascript" src='includes/colors.js'></script>
 <script type="text/javascript">
     
 window.onload = function(){
     apply_text_area('textarea1','text/css');
 };
-    function hexToRgb(hex) {
-        // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
-        var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-        hex = hex.replace(shorthandRegex, function(m, r, g, b) {
-            return r + r + g + g + b + b;
-        });
-
-        var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-        return result ? {
-            r: parseInt(result[1], 16),
-            g: parseInt(result[2], 16),
-            b: parseInt(result[3], 16)
-        } : null;
-    }
 
 </script>
 <script type="text/javascript">
     var myApp=angular.module('myApp',['ngRoute']);
     myApp.controller('MainController',function($scope,$timeout){ 
         $scope.bs = {
-            angle : 90 ,
-            start: 15,
-            end: 75,
-            start_color:"#DD5E89",
-            end_color:"#F7BB97" 
+            text : "Choose Design Colors" ,
+            font_size: 100,
+            text_color: "#ffffff",
+            bg_color:"#0e78b1",
         };
 
-        $scope.bg_color = "#ffffff";
         $scope.css_model = "";
         var promise = false;
 
-        $scope.$watchGroup(['bs.angle','bs.start','bs.end','bs.start_color','bs.end_color'],function(){
+        $scope.$watchGroup(['bs.font_size','bs.text_color','bs.bg_color'],function(){
             if(promise) $timeout.cancel(promise);
             promise = $timeout(function(){
                 $scope.compile();
@@ -206,53 +187,34 @@ window.onload = function(){
         });
 
         $scope.compile = function(){
-            start_color = hexToRgb($scope.bs.start_color);
-            end_color = hexToRgb($scope.bs.end_color);
-            // console.log(start_color);
-            // console.log(end_color);
-
-            start_color = str_parse("rgb(%s,%s,%s)",start_color.r,start_color.g,start_color.b);
-            end_color = str_parse("rgb(%s,%s,%s)",end_color.r,end_color.g,end_color.b);
-
-            start_and_end_color = str_parse("(%sdeg, %s %s%, %s %s%);",
-                $scope.bs.angle,
-                start_color,
-                $scope.bs.start,
-                end_color,
-                $scope.bs.end
-                )
-
-    $scope.css_model = str_parse(
-`background: %s;
-background: -moz-linear-gradient%s
-background: -webkit-linear-gradient%s
-background: -o-linear-gradient%s
-background: -ms-linear-gradient%s
-background: linear-gradient%s`,
-        start_color,
-        start_and_end_color,
-        start_and_end_color,
-        start_and_end_color,
-        start_and_end_color,
-        start_and_end_color
-    );
+    $scope.css_model = `body{
+    background-color: ${$scope.bs.bg_color}; 
+    color: ${$scope.bs.text_color}; 
+}
+#text{
+    color: ${$scope.bs.text_color};
+    font-size: ${$scope.bs.font_size}px;    
+}
+`;
 
         }
         $scope.compile();
 
 
-
-    $scope.gradients = gradients;
-
-    $scope.set_gradient = grad =>{
-        $scope.bs = {
-            angle : 90 ,
-            start: 10,
-            end: 90,
-            start_color: grad.start_color,
-            end_color: grad.end_color 
-        };
-        $scope.compile();
+    $scope.preset_colors = colors;
+    $scope.set_color = color =>{
+        color = JSON.parse(color);
+        // console.log(color);        
+        if(color.bg){
+            console.log(color);
+            $scope.bs = {
+                text: $scope.bs.text,
+                font_size: color.size,
+                text_color: color.text,
+                bg_color: color.bg,
+            };
+            $scope.compile();            
+        }
     }
 
 
