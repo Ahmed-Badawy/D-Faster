@@ -215,6 +215,10 @@ $scope.go_to = function(cate,key,link,inside_key){
   // window.location = `${$scope.base_url}projects/${link.location}.html?${show_what}cate=${cate}&key=${key}${inside_key}`;
   return `${$scope.base_url}projects/${link.location}.html?${show_what}cate=${cate}&key=${key}${inside_key}`;
 }
+$scope.get_target = function(link){
+  return (link.redirect) ? "'_blank'" : "''";
+}
+
 
 $scope.open_page_compilation = function(){
   show_what = getParameterByName("show_what");

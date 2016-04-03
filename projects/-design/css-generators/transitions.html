@@ -234,7 +234,7 @@ window.onload = function(){
             if(promise) $timeout.cancel(promise);
             promise = $timeout(function(){
                 $scope.compile();
-            },300);
+            },100);
         });
 
         $scope.compile = function(){
