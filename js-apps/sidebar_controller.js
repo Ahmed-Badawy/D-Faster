@@ -210,7 +210,7 @@ $scope.view_links("all_links");
 
 $scope.go_to = function(cate,key,link,inside_key){
   // if(link.redirect) return window.open(link.location,'_blank');
-  if(link.redirect) return link.location;
+  // if(link.redirect) return link.location;
   show_what = link.show_what ? `show_what=${link.show_what}&` : '';
   inside_key = inside_key ? `&inside_key=${inside_key}` : '';
   // window.location = `${$scope.base_url}projects/${link.location}.html?${show_what}cate=${cate}&key=${key}${inside_key}`;
