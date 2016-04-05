@@ -90,6 +90,7 @@ designer_links = {
         design: {name:'Design Tools',in_array:[
 
 {name:'FontAwesome Faster',location:'-design/fontawesome-helper/fontawesome-helper',icon:'flag'},
+{name:'Emoji Helper',location:'-design/emoji/emoji',icon:'smile-o'},
 {name:'Bootstrap Faster',location:server_link+'projects/bootstrap-helper',icon:'twitter-square',redirect:true},
         ]},
 
