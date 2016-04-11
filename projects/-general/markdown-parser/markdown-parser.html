@@ -77,9 +77,22 @@
 </div>
 
 
-        
-    <div id="preview" class='col-sm-7'></div>
-    <textarea id="html_preview" class='col-sm-7'></textarea>
+       
+      <div class='col-sm-7'>
+
+<div class='row'>
+  <ul class="nav nav-tabs">
+    <li ng-class='{active:show_what==1}'><a href='#' ng-click='show_what=1'>Render Markdown</a></li>
+    <li ng-class='{active:show_what==2}'><a href='#' ng-click='show_what=2'>Markdown to HTML</a></li>
+  </ul>
+</div>
+<div class="clearfix"></div><br>
+
+    <div id="preview" ng-show='show_what==1'></div>
+    <textarea id="html_preview" ng-show='show_what==2' class='form-control' rows='25'></textarea>
+
+      </div>  
+
 
 
 
@@ -113,6 +126,7 @@
         //     }
         // });
         myApp.controller('MainController',function($scope){
+            $scope.show_what = 1;
             var preview = document.getElementById("preview");
             var html_preview = document.getElementById("html_preview");
 
