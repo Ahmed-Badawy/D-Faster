@@ -174,7 +174,7 @@ legend{
         background-color: #2e6da4;
         cursor: pointer;
     }
-    .copy_btn{
+/*    .copy_btn{
         color: white;
         background-color: #2e6da4;
         cursor: pointer;
@@ -182,7 +182,7 @@ legend{
     .fa-copy.copy_btn{
         color: #000;
         background-color: white;
-    }
+    }*/
 
     hr{
         margin-top: 5px;
