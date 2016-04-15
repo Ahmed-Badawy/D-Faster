@@ -56,7 +56,7 @@
 <legend><h4>Converting Image to Base-64 Data format</h4></legend>
 <div class="col-sm-6">
     <label>Image File (Image File) (input)</label><br>
-    <img id='show_img' src='../../../images/upload-img.png' width=100>
+    <img id='show_img' src='../../../images/upload-img.png' style='max-width: 100%'>
     <input type='file' class='form-control' id='img_upload'/>
 </div>
 <div class="col-sm-6">
@@ -127,6 +127,7 @@ myApp.controller('MainController',function($scope){
         reader.readAsDataURL(file);
         reader.onload = function(evt){
             res = evt.target.result;
+            toastr.info("Image Was Converted");
             document.getElementById('show_img').src = evt.target.result;
             document.getElementById("img_data").innerHTML = reader.result;
         }
