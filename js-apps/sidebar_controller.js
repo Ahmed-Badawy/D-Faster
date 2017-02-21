@@ -8,7 +8,6 @@
 
 myApp.controller('sidebar_controller',function($scope){
 
-
   $scope.server_link = server_link;
   $scope.base_url = base_url;
   $scope.cv_link = cv_link;
@@ -24,7 +23,6 @@ developer_links = {
         ]},
         
         data_conversions: {name:'Data Operations' , in_array:[
-
 {name:'Minifiers',location:'',icon:'compress',type:'minifiers',links_array:[
     {name:'Minify JavaScript',location:'-general/minifiers/minify-js',icon:'compress',show_what:1},
     {name:'Minify HTML',location:'-general/minifiers/minify-html',icon:'compress',show_what:2},
@@ -91,7 +89,7 @@ designer_links = {
 
 {name:'FontAwesome Faster',location:'-design/fontawesome-helper/fontawesome-helper',icon:'flag'},
 {name:'Emoji Helper',location:'-design/emoji/emoji',icon:'smile-o'},
-{name:'Bootstrap Faster',location:server_link+'projects/bootstrap-helper',icon:'twitter-square',redirect:true},
+{name:'Bootstrap Faster',location:server_link+'projects/bootstrap-helper/',icon:'twitter-square',redirect:true},
         ]},
 
         color: {name:'Color Controller',in_array:[
@@ -210,15 +208,15 @@ $scope.view_links("all_links");
 
 $scope.go_to = function(cate,key,link,inside_key){
   // if(link.redirect) return window.open(link.location,'_blank');
-  // if(link.redirect) return link.location;
+  if(link.redirect) return link.location;
   show_what = link.show_what ? `show_what=${link.show_what}&` : '';
   inside_key = inside_key ? `&inside_key=${inside_key}` : '';
   // window.location = `${$scope.base_url}projects/${link.location}.html?${show_what}cate=${cate}&key=${key}${inside_key}`;
   return `${$scope.base_url}projects/${link.location}.html?${show_what}cate=${cate}&key=${key}${inside_key}`;
 }
-$scope.get_target = function(link){
-  return (link.redirect) ? "'_blank'" : "''";
-}
+// $scope.get_target = function(link){
+//   return (link.redirect) ? "_blank" : "";
+// }
 
 
 $scope.open_page_compilation = function(){

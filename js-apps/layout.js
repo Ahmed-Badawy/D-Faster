@@ -1,6 +1,8 @@
   var server_link = 'http://ahmed-badawy.com/';
   // var server_link = 'http://localhost/_websites/ahmed-badawy.com/';
+  // var server_link = 'http://localhost/';
   var base_url = server_link+'projects/D-Faster/';
+  // var base_url = server_link+'D-Faster/';
   
   var cv_link = "http://cv.ahmed-badawy.com";
   var chrome_app_link = "https://chrome.google.com/webstore/detail/d-faster/gpnmdoddfenngflamdbiigbecalmkfdf";

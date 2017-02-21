@@ -23,7 +23,7 @@
     <li class='sidebar_header'>{{value.name}}</li>
 
     <li ng-repeat='(key,link) in value.in_array | filter:search_q'>
-        <a ng-if='link.type==undefined' ng-href='{{go_to(cate,key,link)}}' target='{{get_target(link)}}'><span class='fa fa-{{link.icon}}'></span> {{link.name}}</a>
+        <a ng-if='link.type==undefined' ng-href='{{go_to(cate,key,link)}}' target='{{ (link.redirect==true) ? "_blank":"_self" }}'><span class='fa fa-{{link.icon}}'></span> {{link.name}}</a>
 
         <span ng-if='link.type!=undefined' class="dropdown">
           <a id="dLabel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class=''>
@@ -31,7 +31,7 @@
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" aria-labelledby="dLabel">
-            <li ng-repeat='(k,n) in link.links_array'><a ng-href='{{go_to(cate,key,n,k)}}'><span class='fa fa-{{n.icon}}' target='{{get_target(link)}}'></span> {{n.name}}</a></li>
+            <li ng-repeat='(k,n) in link.links_array'><a ng-href='{{go_to(cate,key,n,k)}}' target='{{ (n.redirect==true) ? "_blank":"_self" }}'><span class='fa fa-{{n.icon}}'></span> {{n.name}}</a></li>
           </ul>
         </span>
     </li>
