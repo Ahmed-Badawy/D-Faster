@@ -1,0 +1,302 @@
+<!doctype html>
+<html ng-app='myApp'>
+<head>
+
+<title>B-Link Lists</title>
+<meta charset='utf-8'>
+<link rel="icon" type="image/x-icon" href="../../../images/icon.png" />
+
+<link rel="stylesheet" href="../../../assets/css/bootstrap.min.css">
+<link href="../../../css/simple-sidebar.css" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/plugins/font-awesome-4.5.0/css/font-awesome.min.css">
+
+<script  type="text/javascript" src="../../../assets/angular/angular.min.js"></script>
+<script  type="text/javascript" src="../../../assets/angular/angular-route.min.js"></script>
+
+<script src="../../../assets/js/jquery-2.1.4.min.js"></script>
+<script src="../../../assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src='../../../assets/plugins/clipboard.js/clipboard.min.js'></script>
+<link href="../../../assets/plugins/toastr/toastr.min.css" rel="stylesheet">
+<script type="text/javascript" src='../../../assets/plugins/toastr/toastr.min.js'></script>
+
+<script type="text/javascript" src='../../../assets/plugins/bytesize.min.js'></script>
+
+<script type="text/javascript" src='../../../assets/plugins/FileSaver.js'></script>
+<script  type="text/javascript" src="../../../assets/plugins/ngStorage.min.js"></script>
+
+
+</head>
+
+<body ng-controller='MainController'>
+
+
+
+    <div id="wrapper">
+
+<div ng-include src='"../../../templates/sidebar.html"'></div>
+<a href="#menu-toggle" class="btn btn-default btn-xs fa fa-arrow-right" id="menu-toggle"></a> 
+
+
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+
+<div ng-include src='"../../../templates/headerarea.html"'></div>
+
+
+<legend><h2><span class='fa fa-reorder'></span> B-Link Lists: <small>A fast BookMarks Manager with lists that can be Listed & Searched</small></h2></legend>
+
+
+
+<div class='row'>
+  <ul class="nav nav-tabs">
+    <li class='btn btn-xs' ng-init='cur_list="all links"' ng-click="set_cur_list(null)"><a>All</a></li>
+
+    <li class='btn btn-xs' ng-repeat='list_name in our_lists track by $index'><a ng-click='set_cur_list(list_name)'>{{list_name|uc}}</a></li>
+
+    <li class='btn btn-xs btn-default'><a data-toggle="modal" data-target="#edit_modal"><span class='fa fa-plus'></span> Create Link</a></li>
+  </ul>
+</div>
+    <div class="clearfix"></div><br>
+
+
+
+<div class='panel panel-default panel-body'>
+
+<h3 class='page-header' ng-init='mode="edit"'> 
+    <span ng-if="cur_list">{{cur_list|uc}}</span> 
+    <span ng-if="!cur_list">All Links</span> 
+</h3>
+
+    <a class='btn btn-default btn-sm' ng-repeat='link in all_links | filter:cur_list' href='{{link.url}}' target='_blank'>{{link.name}} &nbsp;
+        <span href="" class='btn btn-warning btn-sm' ng-show='mode=="edit"'><span class='fa fa-edit'></span></span>
+        <span href="" class='btn btn-danger btn-sm' ng-show='mode=="edit"'><span class='fa fa-trash'></span></span>
+    </a>
+
+
+</div>
+
+
+
+
+
+
+<div class="clearfix"></div>
+<br>
+
+
+
+
+
+<!--*******************************************************************
+Create Link Modal
+********************************************************************-->
+<!-- Modal -->
+<div class="modal fade" id="edit_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title text-left" id="myModalLabel">Create Link</h3>
+      </div>
+
+      <form ng-submit='create_link()'>
+
+      <div class="modal-body col-sm-12">
+
+
+        <div class="col-sm-6">        
+            <label>Link Name </label>
+            <input type='text' ng-model='new_link.name' class='form-control' required/>
+        </div>
+        <div class="col-sm-6">        
+            <label>Link Description </label>
+            <input type='text' ng-model='new_link.desc' class='form-control' />
+        </div>
+        <div class="clearfix"></div><br>
+
+        <div class="col-sm-12">        
+            <label>Link URL </label>
+            <input type='text' ng-model='new_link.url' class='form-control' required/>
+        </div>
+        <div class="clearfix"></div><br>
+
+        <div class="col-sm-12">        
+            <label>Link Type </label><br>
+            <button class='btn btn-default' ng-init='new_link.type="normal"' ng-class={"btn-primary":new_link.type=="normal"} ng-click='new_link.type="normal"'>Normal Link</button>
+            <button class='btn btn-default'  ng-class={"btn-primary":new_link.type=="search"} ng-click='new_link.type="search"'>Search Link</button>
+        </div>
+        <div class="clearfix"></div><br>
+
+
+        <div class="col-sm-12">        
+            <label>Lists (link can belong to multiple lists) ( seperated by dash - )</label>
+            <textarea type='text' ng-model='new_link.lists' class='form-control' rows='5' ng-focus='focus="lists"' required></textarea>
+            <p class='help-block' style='color:#F45959' ng-show='focus=="lists"'>type the lists name seperated by dash - </p>
+        </div>
+
+        <div class="clearfix"></div><br>
+        <hr>
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-lg" data-dismiss="modal"><span class="fa fa-close"></span> Close</button>
+        <button type="submit" class="btn btn-primary btn-lg"><span class="fa fa-save"></span> Create</button>
+      </div>
+
+</form>
+
+    </div>
+  </div>
+</div>
+<!-- ******************************************************************** -->
+
+
+<div ng-include src='"../../../templates/footerarea.html"'></div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <script  type="text/javascript" src="../../../js-apps/layout.js"></script>
+
+    <script type="text/javascript">
+               var myApp=angular.module('myApp',['ngRoute','ngStorage']);
+
+               myApp.filter('uc',function(){
+                   return function( text ){
+                        return text.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+                   }
+               });
+
+        myApp.factory('ngStorageControlService',function($http,$log,$q,$localStorage){ //$log is a service used to logout things.
+            return obj = {
+                save: function(db_content){
+                    var deferred = $q.defer();
+                    $log.warn(db_content); 
+                    $localStorage.B_link_lists = db_content;
+                    deferred.resolve();
+                    return deferred.promise;    
+                },
+                load: function(){
+                    var deferred = $q.defer(); 
+                    data = $localStorage.B_link_lists;
+                    return_data = (data) ? data : null;
+                    deferred.resolve(return_data);
+                    return deferred.promise;
+                },
+            }
+        });       
+
+        myApp.controller('MainController',function($scope,$timeout,$interval,$localStorage,ngStorageControlService){
+
+$scope.all_links = [];
+$scope.new_link = {};
+$scope.our_lists = [];
+
+$scope.create_link = _ =>{
+    console.log($scope.new_link);
+    $scope.all_links.push($scope.new_link);
+    $scope.new_link = {type:"normal"};
+    $scope.saveData();
+}
+
+$scope.set_cur_list = list => $scope.cur_list= (list) ? list : '';
+
+function attach_loaded_data(){
+    $scope.all_links = data;
+    final_our_lists = $scope.all_links.reduce((acc,item)=>{
+        item_lists_array = item.lists.split(/\s*-\s*/gim);
+        item_lists_array.forEach(function(list){
+            if(acc.indexOf(list) === -1) acc.push(list); //if unique add tag
+        });
+        return acc;
+        // return acc.concat(item.lists.split(/\s*-\s*/gim));
+    },[]);
+    // console.log(final_our_lists);
+    $scope.our_lists = final_our_lists;
+    $scope.set_cur_list(null);
+}
+
+$scope.loadData = function(){
+    ngStorageControlService.load().then(function(data){
+        attach_loaded_data();        
+        toastr.success('Database Has Been Synced');
+    },function(){
+        toastr.error('Failed To Sync The Data');
+    });
+}
+$scope.saveData = function(){
+    ngStorageControlService.save($scope.all_links);
+    toastr.success("Your Data Was Saved");
+}
+
+// $interval(function(){
+//     toastr.info('Automatic Save every 10 seconds');
+//     $scope.saveData();
+// },10000);
+
+
+$scope.loadData();
+$timeout(function(){
+    // $scope.markdownConverter();            
+},500);
+
+$scope.export_db = function(){
+    var jsonString= JSON.stringify($scope.txt1,null,' ');
+    var blob = new Blob([jsonString], {type: "text/plain;charset=utf-8"});
+    // saveAs(blob, "Extracted-Links.txt");
+    saveAs(blob, "B-NoteTaker.json");
+    toastr.warning('Success ! database Saved');
+}    
+
+$scope.import_db = function(evt){
+    reader = read_text_file(evt);
+    reader.onload = function(evt){ //what happens on loading the textfile.
+        var json_string = evt.target.result;
+        var db_data = JSON.parse( json_string );
+        ngStorageControlService.save(db_data);
+        location.reload();
+    }
+}            
+
+        });
+
+
+
+
+    // document.getElementById("db_uploader").addEventListener('change',function(evt){
+    //     angular.element(this).scope().import_db(evt);
+    // },false);
+
+    function read_text_file(evt){
+        var file = evt.target.files[0];
+
+        // if(file.type != "text/plain"){ //stop if it'sn't a text file
+        //     var res = "this isn't a text import file...";
+        //     alert(res);
+        //     // document.getElementById('textarea').innerHTML = res;
+        //     return;
+        // }
+        var reader = new FileReader(); //call the FileReader class.
+        reader.readAsText(file); //then call the readAsText functnion
+        return reader;
+    }    
+
+    </script>
+
+<script type="text/javascript" src='../../../js-apps/sidebar_controller.js'></script>
+</body>
+</html>

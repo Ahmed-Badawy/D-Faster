@@ -1,0 +1,195 @@
+<!doctype html>
+<html ng-app='myApp' ng-controller='MainController'>
+<head>
+
+<title>SandBox</title>
+<meta charset='utf-8'>
+<link rel="icon" type="image/x-icon" href="../../../images/icon.png" />
+
+<link rel="stylesheet" href="../../../assets/css/bootstrap.min.css">
+<link href="../../../css/simple-sidebar.css" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/plugins/font-awesome-4.5.0/css/font-awesome.min.css">
+
+<script  type="text/javascript" src="../../../assets/angular/angular.min.js"></script>
+<script  type="text/javascript" src="../../../assets/angular/angular-route.min.js"></script>
+
+<script src="../../../assets/js/jquery-2.1.4.min.js"></script>
+<script src="../../../assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src='../../../assets/plugins/clipboard.js/clipboard.min.js'></script>
+<link href="../../../assets/plugins/toastr/toastr.min.css" rel="stylesheet">
+<script type="text/javascript" src='../../../assets/plugins/toastr/toastr.min.js'></script>
+
+<script type="text/javascript" src='../../../assets/plugins/bytesize.min.js'></script>
+
+<script type="text/javascript" src='../../../assets/plugins/FileSaver.js'></script>
+
+<script  type="text/javascript" src="../../../js-apps/layout.js"></script>
+<script  type="text/javascript" src="../../../js-apps/txtarea.js"></script>
+
+
+<style type="text/css">
+    {{css_model}}
+</style>
+
+</head>
+
+<body>
+
+
+
+    <div id="wrapper">
+
+<div ng-include src='"../../../templates/sidebar.html"'></div>
+
+
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+
+<div ng-include src='"../../../templates/headerarea.html"'></div>
+
+
+<legend><h2><span class='fa fa-clone'></span> SandBox: <small>the fastest way to examine html/css/javascript code</small></h2></legend>
+
+
+
+
+
+<div class="row">
+
+
+<div id='textarea1' class='col-sm-4'>
+    <p>HTML (input)</p>
+    <textarea class='form-control mytextarea' rows='12' ng-model='html_model'></textarea>
+    <input type='file' class='hidden upload_input' />
+    <span class='fa fa-file-code-o btn file_btn' title='Import a File'></span>
+    <span class='fa fa-copy btn copy_btn' title='Copy Text'></span>
+    <span class='fa fa-cut btn cut_btn' title='Cut Text'></span>
+    <span class='fa fa-th-list btn selectAll' title='Select All Text'></span>
+    <span class='fa fa-trash btn emptyAll' title='Empty All Text'></span>
+
+    <a href='' download="index.html" style="display:none" class='hidden download_content_link'></a>
+    <span class='fa fa-save btn download_content' title='Download Content'></span>
+
+
+    <span class='fa fa-hand-lizard-o fa-lg pull-right'></span>
+    <span class='pull-right txtsize' style='color:#aaa;font-weight:bolder'></span>
+    <span class='pull-right'>&nbsp;&nbsp;</span>
+    <span class='fa fa-hand-peace-o fa-lg pull-right'></span>
+    <span class='pull-right txtlength' style='color:#aaa;font-weight:bolder'></span>
+</div>
+
+<div id='textarea2' class='col-sm-4'>
+    <p>CSS (input)</p>
+    <textarea class='form-control mytextarea' rows='12' ng-model='css_model'></textarea>
+    <input type='file' class='hidden upload_input' />
+    <span class='fa fa-file-code-o btn file_btn' title='Import a File'></span>
+    <span class='fa fa-copy btn copy_btn' title='Copy Text'></span>
+    <span class='fa fa-cut btn cut_btn' title='Cut Text'></span>
+    <span class='fa fa-th-list btn selectAll' title='Select All Text'></span>
+    <span class='fa fa-trash btn emptyAll' title='Empty All Text'></span>
+
+    <a href='' download="style.css" style="display:none" class='hidden download_content_link'></a>
+    <span class='fa fa-save btn download_content' title='Download Content'></span>
+
+
+    <span class='fa fa-hand-lizard-o fa-lg pull-right'></span>
+    <span class='pull-right txtsize' style='color:#aaa;font-weight:bolder'></span>
+    <span class='pull-right'>&nbsp;&nbsp;</span>
+    <span class='fa fa-hand-peace-o fa-lg pull-right'></span>
+    <span class='pull-right txtlength' style='color:#aaa;font-weight:bolder'></span>
+</div>
+
+<div id='textarea3' class='col-sm-4'>
+    <p>JavaScript (input)</p>
+    <textarea class='form-control mytextarea' rows='12' ng-model='js_model'></textarea>
+    <input type='file' class='hidden upload_input' />
+    <span class='fa fa-file-code-o btn file_btn' title='Import a File'></span>
+    <span class='fa fa-copy btn copy_btn' title='Copy Text'></span>
+    <span class='fa fa-cut btn cut_btn' title='Cut Text'></span>
+    <span class='fa fa-th-list btn selectAll' title='Select All Text'></span>
+    <span class='fa fa-trash btn emptyAll' title='Empty All Text'></span>
+
+    <a href='' download="script.js" style="display:none" class='hidden download_content_link'></a>
+    <span class='fa fa-save btn download_content' title='Download Content'></span>
+
+
+    <span class='fa fa-hand-lizard-o fa-lg pull-right'></span>
+    <span class='pull-right txtsize' style='color:#aaa;font-weight:bolder'></span>
+    <span class='pull-right'>&nbsp;&nbsp;</span>
+    <span class='fa fa-hand-peace-o fa-lg pull-right'></span>
+    <span class='pull-right txtlength' style='color:#aaa;font-weight:bolder'></span>
+</div>
+
+</div>
+
+
+<div class="clearfix"></div><br>
+
+
+<div class="row">
+
+<div class="panel panel-default panel-body" id='final_output'></div>
+
+<button ng-click='compile()' class='btn btn-primary btn-block btn-lg'>Force Compile</button>
+</div>
+
+
+
+
+</div>
+
+
+
+<div class="clearfix"></div>
+<br>
+
+
+
+<div ng-include src='"../../../templates/footerarea.html"'></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+<script type="text/javascript">
+    var myApp=angular.module('myApp',['ngRoute']);
+    myApp.controller('MainController',function($scope,$timeout){ 
+        var promise = false;
+
+        $scope.$watchGroup(['html_model','css_model','js_model'],function(){
+            if(promise) $timeout.cancel(promise);
+            promise = $timeout(function(){
+                $scope.compile();
+            },1000);
+        });
+
+        $scope.compile = function(){
+            // console.log("you are here");
+            if($scope.html_model) document.getElementById('final_output').innerHTML = $scope.html_model;
+            eval($scope.js_model);
+        }
+    });
+</script>
+
+<script type="text/javascript">
+    
+window.onload = function(){
+    apply_text_area('textarea1','text/html');
+    apply_text_area('textarea2','text/css');
+    apply_text_area('textarea3','text/javascript');
+};
+
+</script>
+
+<script type="text/javascript" src='../../../js-apps/sidebar_controller.js'></script>
+</body>
+</html>

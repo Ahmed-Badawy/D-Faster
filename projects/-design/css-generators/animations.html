@@ -1,0 +1,339 @@
+<!doctype html>
+<html ng-app='myApp' ng-controller='MainController'>
+<head>
+
+<title>CSS Animations</title>
+<meta charset='utf-8'>
+<link rel="icon" type="image/x-icon" href="../../../images/icon.png" />
+
+<link rel="stylesheet" href="../../../assets/css/bootstrap.min.css">
+<link href="../../../css/simple-sidebar.css" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/plugins/font-awesome-4.5.0/css/font-awesome.min.css">
+
+<script  type="text/javascript" src="../../../assets/angular/angular.min.js"></script>
+<script  type="text/javascript" src="../../../assets/angular/angular-route.min.js"></script>
+
+<script src="../../../assets/js/jquery-2.1.4.min.js"></script>
+<script src="../../../assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src='../../../assets/plugins/clipboard.js/clipboard.min.js'></script>
+<link href="../../../assets/plugins/toastr/toastr.min.css" rel="stylesheet">
+<script type="text/javascript" src='../../../assets/plugins/toastr/toastr.min.js'></script>
+<script type="text/javascript" src='../../../assets/plugins/bytesize.min.js'></script>
+
+
+<script  type="text/javascript" src="../../../js-apps/layout.js"></script>
+<script  type="text/javascript" src="../../../js-apps/txtarea.js"></script>
+
+<style type="text/css">
+    #box{
+        width: 250px;
+        height: 250px;
+        background-color: #337ab7;
+        margin:20px;
+        color:white;
+        display:table-cell;
+        vertical-align:middle;
+        text-align: center;
+        font-size: 200%;
+        border-radius: 10px;
+        {{from_now}}
+    }
+    {{css_model}}
+</style>
+
+</head>
+
+<body>
+
+
+
+    <div id="wrapper">
+
+<div ng-include src='"../../../templates/sidebar.html"'></div>
+
+
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+
+<div ng-include src='"../../../templates/headerarea.html"'></div>
+
+
+<legend><h2><span class='fa fa-expand'></span> CSS Animations Generator: <small>Generate Your CSS Animations </small></h2></legend>
+
+
+
+
+
+<div class="row">
+
+<div class="col-sm-6">
+    <div id='textarea1'>
+        <p>CSS (input)</p>
+        <textarea class='form-control mytextarea' disabled rows='10' ng-model='css_model'></textarea>
+        <input type='file' class='hidden upload_input' />
+        <span class='fa fa-file-code-o btn file_btn hidden' title='Import a File'></span>
+        <span class='fa fa-copy btn copy_btn' title='Copy Text'></span>
+        <span class='fa fa-cut btn cut_btn hidden' title='Cut Text'></span>
+        <span class='fa fa-th-list btn selectAll' title='Select All Text'></span>
+        <span class='fa fa-trash btn emptyAll hidden' title='Empty All Text'></span>
+
+        <a href='' download="style.css" style="display:none" class='hidden download_content_link'></a>
+        <span class='fa fa-save btn download_content' title='Download Content'></span>
+
+
+        <span class='fa fa-hand-lizard-o fa-lg pull-right'></span>
+        <span class='pull-right txtsize' style='color:#aaa;font-weight:bolder'></span>
+        <span class='pull-right'>&nbsp;&nbsp;</span>
+        <span class='fa fa-hand-peace-o fa-lg pull-right'></span>
+        <span class='pull-right txtlength' style='color:#aaa;font-weight:bolder'></span>
+    </div>
+
+</div>
+
+
+<div class="col-sm-6">
+    <div class='col-sm-12' style='background-color:{{bg_color}}'>
+        <div id="box" class='{{paly_status}}' ng-click='play_animation()'>Animation <br><small style='font-size:60%'><span class="fa fa-lg fa-play-circle"></span> Click Me</small></div>
+    </div>   
+</div>
+
+</div>
+
+<div class="clearfix"></div><br>
+
+<div class="row">
+    <div class='col-sm-4'>
+        <label>Horizontal Distance: {{timing}}</label>
+        <select ng-model='timing' class='form-control'>
+            <option value='ease'>Ease</option>
+            <option value='linear'>Linear</option>
+            <option value='ease-in'>Ease-In</option>
+            <option value='ease-out'>Ease-Out</option>
+            <option value='ease-in-out'>Ease-In-Out</option>
+        </select>
+    </div>
+
+
+    <div class='col-sm-4'>
+        <label>Transition Duration: {{duration}}</label>
+        <input type='range' class='form-control' min='0' max='5' step=".01" ng-model='duration'>
+    </div>
+    <div class='col-sm-4'>
+        <label>Count: {{count}}</label>
+        <input type='range' class='form-control' min='0' max='10' ng-model='count'>
+    </div>
+
+
+
+    <div class="col-sm-6">
+        <h3 class='page-header'>Before Animation</h3>
+        <div>
+            <label>Rotate: {{before.rotate}}</label>
+            <input type='range' class='form-control' min='0' max='360' ng-model='before.rotate'>
+        </div>
+        <div>
+            <label>Scale: {{before.scale}}</label>
+            <input type='range' class='form-control' min='0' max='5' step=".1" ng-model='before.scale'>
+        </div>
+        <div>
+            <label>Skew: {{before.skew}}</label>
+            <input type='range' class='form-control' min='-75' max='75' ng-model='before.skew'>
+        </div>
+        <div>
+            <label>Translate: {{before.translate}}</label>
+            <input type='range' class='form-control' min='-600' max='600' ng-model='before.translate'>
+        </div>            
+    </div>
+    <div class="col-sm-6">
+        <h3 class='page-header'>After Animation</h3>
+        <div>
+            <label>Rotate: {{after.rotate}}</label>
+            <input type='range' class='form-control' min='0' max='360' ng-model='after.rotate'>
+        </div>
+        <div>
+            <label>Scale: {{after.scale}}</label>
+            <input type='range' class='form-control' min='0' max='3' step=".1" ng-model='after.scale'>
+        </div>
+        <div>
+            <label>Skew: {{after.skew}}</label>
+            <input type='range' class='form-control' min='-75' max='75' ng-model='after.skew'>
+        </div>
+        <div>
+            <label>Translate: {{after.translate}}</label>
+            <input type='range' class='form-control' min='-600' max='600' ng-model='after.translate'>
+        </div>    
+    </div>
+</div>
+
+
+
+
+
+
+<div class="clearfix"></div><br>
+<div class="clearfix"></div><br>
+<div class="clearfix"></div><br>
+
+
+
+<div ng-include src='"../../../templates/footerarea.html"'></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+
+<script type="text/javascript">
+    
+window.onload = function(){
+    apply_text_area('textarea1','text/css');
+};
+    function hexToRgb(hex) {
+        // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+        var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+        hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+            return r + r + g + g + b + b;
+        });
+
+        var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16)
+        } : null;
+    }
+
+</script>
+<script type="text/javascript">
+    var myApp=angular.module('myApp',['ngRoute']);
+    myApp.controller('MainController',function($scope,$timeout){ 
+        $scope.before = {
+            rotate : 0 , 
+            scale : 1 ,
+            skew : 0 ,
+            translate: 0, 
+        };
+        $scope.after = {
+            rotate : 360 , 
+            scale : 0 ,
+            skew : 0 ,
+            translate: 500, 
+        };
+        $scope.timing = "ease-out";
+        $scope.duration = 1.5;
+        $scope.count = 3;
+        $scope.css_model = "";
+        $scope.paly_status = "";
+        $scope.from_now = "";
+
+        var promise = false;
+
+        $scope.$watchGroup([
+            'timing','duration','count',
+            'before.rotate','before.scale','before.skew','before.translate',
+            'after.rotate','after.scale','after.skew','after.translate'
+            ],function(){ 
+                if(promise) $timeout.cancel(promise);
+                promise = $timeout(function(){
+                    $scope.paly_status = "";
+                    $scope.compile(); 
+                },20);
+            });
+
+        $scope.play_animation = _=>{
+            $scope.paly_status = "";
+
+            if(promise) $timeout.cancel(promise);
+            promise = $timeout(function(){
+                $scope.paly_status = "css_animation";
+            },50);
+
+        }
+
+        $scope.compile = function(){
+            first = str_parse("cssAnimation %ss %s %s",
+                $scope.duration,
+                $scope.count,
+                $scope.timing
+            );
+
+            second = str_parse("rotate(%sdeg) scale(%s) skew(%sdeg) translate(%spx);",
+                $scope.before.rotate,
+                $scope.before.scale,
+                $scope.before.skew,
+                $scope.before.translate
+            );
+            third = str_parse("rotate(%sdeg) scale(%s) skew(%sdeg) translate(%spx);",
+                $scope.after.rotate,
+                $scope.after.scale,
+                $scope.after.skew,
+                $scope.after.translate
+            );
+
+$scope.from_now = `
+    -webkit-transform: ${second}
+    -moz-transform: ${second}
+    -o-transform: ${second}
+`;
+
+
+            from = str_parse(`
+from {
+    -webkit-transform: %s
+    -moz-transform: %s
+    -o-transform: %s
+}`,
+    second,second,second
+            );
+
+            to = str_parse(`
+to {
+    -webkit-transform: %s
+    -moz-transform: %s
+    -o-transform: %s
+}`,
+    third,third,third
+            );
+
+
+    $scope.css_model = str_parse(`
+.css_animation {
+    -webkit-animation: %s;
+    -moz-animation:  %s;
+    -o-animation: %s;
+}
+@-webkit-keyframes cssAnimation {
+%s
+%s
+}
+@-moz-keyframes cssAnimation {
+%s
+%s
+}
+@-o-keyframes cssAnimation {
+%s
+%s
+}
+`
+,first,first,first,
+from,to,from,to,from,to);
+
+        }
+        $scope.compile();
+
+    });
+</script>
+
+
+<script type="text/javascript" src='../../../js-apps/sidebar_controller.js'></script>
+</body>
+</html>

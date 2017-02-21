@@ -1,0 +1,203 @@
+<!doctype html>
+<html ng-app='myApp' ng-controller='MainController'>
+<head>
+
+<title>CSS Text Effects</title>
+<meta charset='utf-8'>
+<link rel="icon" type="image/x-icon" href="../../../images/icon.png" />
+
+<link rel="stylesheet" href="../../../assets/css/bootstrap.min.css">
+<link href="../../../css/simple-sidebar.css" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/plugins/font-awesome-4.5.0/css/font-awesome.min.css">
+
+<script  type="text/javascript" src="../../../assets/angular/angular.min.js"></script>
+<script  type="text/javascript" src="../../../assets/angular/angular-route.min.js"></script>
+
+<script src="../../../assets/js/jquery-2.1.4.min.js"></script>
+<script src="../../../assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src='../../../assets/plugins/clipboard.js/clipboard.min.js'></script>
+<link href="../../../assets/plugins/toastr/toastr.min.css" rel="stylesheet">
+<script type="text/javascript" src='../../../assets/plugins/toastr/toastr.min.js'></script>
+<script type="text/javascript" src='../../../assets/plugins/bytesize.min.js'></script>
+
+
+<script  type="text/javascript" src="../../../js-apps/layout.js"></script>
+<script  type="text/javascript" src="../../../js-apps/txtarea.js"></script>
+
+<style type="text/css">
+    #main_text{
+        padding:30px;
+        /*border:10px solid #333;*/
+        border-radius: 20px;
+        text-align: center;
+        font-size: 400%;
+    }
+</style>
+
+</head>
+
+<body>
+
+
+
+    <div id="wrapper">
+
+<div ng-include src='"../../../templates/sidebar.html"'></div>
+
+
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+
+<div ng-include src='"../../../templates/headerarea.html"'></div>
+
+
+<legend><h2><span class='fa fa-css3'></span> CSS Text Effects: <small>Choose Your Favorite text effect</small></h2></legend>
+
+
+
+
+
+<div class="row">
+<div class="col-sm-4">
+    <div class="btn-group-vertical" style='width:100%'>
+        <a class="btn btn-default" ng-repeat='s in styles' ng-click='select_style(s)'>{{s.name}}</a>
+    </div>
+</div>
+
+<div class="col-sm-8">
+
+
+    <h1 style='{{css_model}}' id='main_text'>CSS TEXT EFEECTS</h1>
+
+
+<div class="clearfix"></div><br>
+
+
+    <div id='textarea1'>
+        <p>CSS (input)</p>
+        <textarea class='form-control mytextarea' disabled rows='13' ng-model='css_model'></textarea>
+        <input type='file' class='hidden upload_input' />
+        <span class='fa fa-file-code-o btn file_btn hidden' title='Import a File'></span>
+        <span class='fa fa-copy btn copy_btn' title='Copy Text'></span>
+        <span class='fa fa-cut btn cut_btn hidden' title='Cut Text'></span>
+        <span class='fa fa-th-list btn selectAll' title='Select All Text'></span>
+        <span class='fa fa-trash btn emptyAll hidden' title='Empty All Text'></span>
+
+        <a href='' download="style.css" style="display:none" class='hidden download_content_link'></a>
+        <span class='fa fa-save btn download_content' title='Download Content'></span>
+
+
+        <span class='fa fa-hand-lizard-o fa-lg pull-right'></span>
+        <span class='pull-right txtsize' style='color:#aaa;font-weight:bolder'></span>
+        <span class='pull-right'>&nbsp;&nbsp;</span>
+        <span class='fa fa-hand-peace-o fa-lg pull-right'></span>
+        <span class='pull-right txtlength' style='color:#aaa;font-weight:bolder'></span>
+    </div>
+
+</div>
+
+</div>
+
+
+
+
+<div class="clearfix"></div><br>
+<div class="clearfix"></div><br>
+<div class="clearfix"></div><br>
+
+
+
+<div ng-include src='"../../../templates/footerarea.html"'></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+
+<script type="text/javascript">
+    
+window.onload = function(){
+    apply_text_area('textarea1','text/css');
+};
+</script>
+
+<script type="text/javascript">
+    var myApp=angular.module('myApp',['ngRoute']);
+    myApp.controller('MainController',function($scope,$timeout){
+        $scope.styles = [
+
+            { name:"Simple Shadow",css:`color:#fff;
+background-color:#ece9e9;
+text-shadow:#474747 3px 5px 2px;` },
+
+            { name:"Inset",css:`color:#616161;
+background-color:#bababa;
+text-shadow:#e0e0e0 1px 1px 0;` },
+
+            { name:"Retro",css:`color:#fff;
+background-color:#b8b8b8;
+text-shadow:#7a7a7a 4px 3px 0;` },
+
+            { name:"Glow",css:`color:#fff;
+background-color:#474747;
+text-shadow:#fff 0 0 10px;` },
+
+            { name:"Neon",css:`color:#fff;
+background-color:#232323;
+text-shadow:0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #49ff18, 0 0 30px #49ff18, 0 0 40px #49ff18, 0 0 55px #49ff18, 0 0 75px #49ff18` },
+
+            { name:"Fire",css:`color:#fff;
+background-color:#333;
+text-shadow:#fff 0 -1px 4px, #ff0 0 -2px 10px, #ff8000 0 -10px 20px, red 0 -18px 40px;` },
+
+            { name:"Blur",css:`color:rgba(255,255,255,.3);
+background-color:#1a1a1a;
+text-shadow:rgba(255,255,255,.5) 0 0 15px, rgba(255,255,255,.5) 0 0 10px;` },
+
+            { name:"Simple Emboss",css:`color:rgba(0,0,0,.6);
+background-color:#6e6e6e;
+text-shadow:rgba(255,255,255,.2) 3px 2px 3px;` },
+
+            { name:"Realistic Emboss",css:`color:rgba(0,0,0,.6);
+background-color:#dadada;
+text-shadow:rgba(0,0,0,.2) 2px 6px 5px,rgba(255,255,255,.4) 0 -4px 30px;` },
+
+            { name:"Artistic Emboss",css:`color:#d9d9d9;
+background-color:#e8e8e8; text-shadow:rgba(255,255,255,.1) -1px -1px 1px,rgba(0,0,0,.5) 1px 1px 1px;` },
+
+            { name:"Bold & Sharp",css:`color:#d9d9d9;
+background-color:#bababa;
+text-shadow:#2e2e2e 0 4px 5px;` },
+
+            { name:"Classic Movie",css:`color:#000000;
+background-color:#ffffff;
+text-shadow:2px 2px 0 #bcbcbc, 4px 4px 0 #9c9c9c;` },
+            { name:"Simple 3D",css:`color:#000000;
+background-color:#ffffff;
+text-shadow:2px 2px 0 #bcbcbc, 4px 4px 0 #9c9c9c;` },
+
+            { name:"Realistic 3D",css:`color:#fff;
+background-color:#696969;
+text-shadow:#ccc 0 1px 0, #c9c9c9 0 2px 0, #bbb 0 3px 0, #b9b9b9 0 4px 0, #aaa 0 5px 0,rgba(0,0,0,.1) 0 6px 1px, rgba(0,0,0,.1) 0 0 5px, rgba(0,0,0,.3) 0 1px 3px, rgba(0,0,0,.15) 0 3px 5px, rgba(0,0,0,.2) 0 5px 10px, rgba(0,0,0,.2) 0 10px 10px, rgba(0,0,0,.1) 0 20px 20px;` },
+
+        ];
+
+        $scope.css_model = "";
+        $scope.select_style = style => $scope.css_model=style.css;
+        $scope.css_model = $scope.styles[4].css;
+    });
+</script>
+
+
+<script type="text/javascript" src='../../../js-apps/sidebar_controller.js'></script>
+</body>
+</html>

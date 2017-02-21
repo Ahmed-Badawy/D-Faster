@@ -1,0 +1,490 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+
+<title>Fake Data Iterator</title>
+<meta charset='utf-8'>
+<link rel="icon" type="image/x-icon" href="../../../images/icon.png" />
+
+
+<link rel="stylesheet" href="../../../assets/css/bootstrap.min.css">
+<link href="../../../css/simple-sidebar.css" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/plugins/font-awesome-4.5.0/css/font-awesome.min.css">
+
+<script  type="text/javascript" src="../../../assets/angular/angular.min.js"></script>
+<script  type="text/javascript" src="../../../assets/angular/angular-route.min.js"></script>
+
+<script src="../../../assets/js/jquery-2.1.4.min.js"></script>
+<script src="../../../assets/js/bootstrap.min.js"></script><script type="text/javascript" src='../../../assets/plugins/bytesize.min.js'></script>
+
+<script type="text/javascript" src='../../../assets/plugins/clipboard.js/clipboard.min.js'></script>
+<link href="../../../assets/plugins/toastr/toastr.min.css" rel="stylesheet">
+<script type="text/javascript" src='../../../assets/plugins/toastr/toastr.min.js'></script>
+
+<script  type="text/javascript" src="../../../js-apps/layout.js"></script>
+<script  type="text/javascript" src="../../../js-apps/txtarea.js"></script>
+
+<style type="text/css">
+    .col_row{
+        float:left;
+        display: inline;
+    }
+</style>
+
+</head>
+
+<body ng-controller='MainController'>
+
+
+
+    <div id="wrapper">
+
+<div ng-include src='"../../../templates/sidebar.html"'></div>
+
+
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+
+<div ng-include src='"../../../templates/headerarea.html"'></div>
+
+
+<legend><h2> <span class='fa fa-cubes'></span> Fake Data Iterator: <small>Useful to populate fake data inside data formats. Like Populating SQL table or Json file.</small></h2></legend>
+
+
+<div class='row'>
+  <ul class="nav nav-bills">
+    <li><a class='btn btn-default btn-sm col-sm-2' onclick='set_before("json")'>Generate JSON</a></li>
+    <li><a class='btn btn-default btn-sm col-sm-2' onclick='set_before("yaml")'>Generate Yaml</a></li>
+    <li><a class='btn btn-default btn-sm col-sm-2' onclick='set_before("xml")'>Generate XML</a></li>
+    <li><a class='btn btn-default btn-sm col-sm-2' onclick='set_before("csv")'>Generate CSV</a></li>
+    <li><a class='btn btn-default btn-sm col-sm-2' onclick='set_before("sql")'>Generate SQL</a></li>
+    <li><a class='btn btn-default btn-sm col-sm-2' onclick='set_before("php_array")'>Generate PHP Array</a></li>
+    <li><a class='btn btn-default btn-sm col-sm-2' onclick='set_before("laravel_seed")'>Generate Laravel Seed</a></li>
+  </ul>
+</div>
+
+
+<div class="clearfix"></div><br>
+
+
+
+<div class="row">
+
+
+<div id='textarea1' class='col-sm-6'>
+    <p>Before (input)</p>
+    <textarea class='form-control mytextarea' rows='25' id='before' oninput='generate_fake_data()'></textarea>
+    <input type='file' class='hidden upload_input' />
+    <span class='fa fa-file-code-o btn file_btn' title='Import a File'></span>
+    <span class='fa fa-copy btn copy_btn' title='Copy Text'></span>
+    <span class='fa fa-cut btn cut_btn' title='Cut Text'></span>
+    <span class='fa fa-th-list btn selectAll' title='Select All Text'></span>
+    <span class='fa fa-trash btn emptyAll' title='Empty All Text'></span>
+
+    <a href='' download="data.txt" style="display:none" class='hidden download_content_link'></a>
+    <span class='fa fa-save btn download_content' title='Download Content'></span>
+
+
+    <span class='fa fa-hand-lizard-o fa-lg pull-right'></span>
+    <span class='pull-right txtsize' style='color:#aaa;font-weight:bolder'></span>
+    <span class='pull-right'>&nbsp;&nbsp;</span>
+    <span class='fa fa-hand-peace-o fa-lg pull-right'></span>
+    <span class='pull-right txtlength' style='color:#aaa;font-weight:bolder'></span>
+</div>
+
+<div id='textarea2' class='col-sm-6'>
+
+    <p>Iterator: {{iterator}} </p>
+    <input type='range' class='form form-control' value='1' min='1' max='600' ng-model='iterator' id='iterator' ng-init='iterator=3' oninput='generate_fake_data()'> <br>
+
+    <p>After (output)</p>
+    <textarea class='form-control mytextarea' rows='21' readonly id='after'></textarea>
+    <input type='file' class='hidden upload_input' />
+    <span class='fa fa-file-code-o btn file_btn hidden' title='Import a File'></span>
+    <span class='fa fa-copy btn copy_btn' title='Copy Text'></span>
+    <span class='fa fa-cut btn cut_btn hidden' title='Cut Text'></span>
+    <span class='fa fa-th-list btn selectAll' title='Select All Text'></span>
+    <span class='fa fa-trash btn emptyAll hidden' title='Empty All Text'></span>
+
+    <a href='' download="data.txt" style="display:none" class='hidden download_content_link'></a>
+    <span class='fa fa-save btn download_content' title='Download Content'></span>
+
+
+    <span class='fa fa-hand-lizard-o fa-lg pull-right'></span>
+    <span class='pull-right txtsize' style='color:#aaa;font-weight:bolder'>size: </span>
+    <span class='pull-right'>&nbsp;&nbsp;</span>
+    <span class='fa fa-hand-peace-o fa-lg pull-right'></span>
+    <span class='pull-right txtlength' style='color:#aaa;font-weight:bolder'></span>
+
+</div>
+
+
+<div class="clearfix"></div>
+<br>
+
+<button type="button" class="btn btn-warning col-sm-6 btn-lg" data-toggle="modal" data-target=".bs-example-modal-lg">Fake Data API</button>
+
+<button onclick="generate_fake_data()" class='btn btn-primary btn-lg col-sm-6'>Regenerate</button>
+
+</div>
+
+
+
+<!-- Large modal -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content modal-body">
+
+
+
+
+<h3>Faker.js API Functions:- </h3>
+
+
+<div class='well well-sm'>
+
+<ul class='col_row'>
+    <li>name</li>   
+    <ul>
+        <li>firstName</li>
+        <li>lastName</li>
+        <li>findName</li>
+        <li>jobTitle</li>
+        <li>prefix</li>
+        <li>suffix</li>
+        <li>title</li>
+        <li>jobDescriptor</li>
+        <li>jobArea</li>
+        <li>jobType</li>
+    </ul>
+</ul>
+
+<ul class='col_row'>
+    <li>address</li>   
+    <ul>
+        <li>zipCode</li>
+        <li>city</li>
+        <li>cityPrefix</li>
+        <li>citySuffix</li>
+        <li>streetName</li>
+        <li>streetAddress</li>
+        <li>streetSuffix</li>
+        <li>streetPrefix</li>
+        <li>secondaryAddress</li>
+        <li>county</li>
+        <li>country</li>
+        <li>countryCode</li>
+        <li>state</li>
+        <li>stateAbbr</li>
+        <li>latitude</li>
+        <li>longitude        </li>
+    </ul>
+</ul>
+
+<ul class='col_row'>
+    <li>commerce</li>   
+    <ul>
+        <li>color</li>
+        <li>department</li>
+        <li>productName</li>
+        <li>price</li>
+        <li>productAdjective</li>
+        <li>productMaterial</li>
+        <li>product</li>
+    </ul>
+</ul>
+
+<ul class='col_row'>
+    <li>company</li>   
+    <ul>
+        <li>suffixes</li>
+        <li>companyName</li>
+        <li>companySuffix</li>
+        <li>catchPhrase</li>
+        <li>bs</li>
+        <li>catchPhraseAdjective</li>
+        <li>catchPhraseDescriptor</li>
+        <li>catchPhraseNoun</li>
+        <li>bsAdjective</li>
+        <li>bsBuzz</li>
+        <li>bsNoun</li>
+    </ul>
+</ul>
+
+<ul class='col_row'>
+    <li>date</li>   
+    <ul>
+        <li>past</li>
+        <li>future</li>
+        <li>between</li>
+        <li>recent</li>
+        <li>month</li>
+        <li>weekday</li>
+    </ul>
+</ul>
+
+<ul class='col_row'>
+    <li>finance</li>   
+    <ul>
+        <li>account</li>
+        <li>accountName</li>
+        <li>mask</li>
+        <li>amount</li>
+        <li>transactionType</li>
+        <li>currencyCode</li>
+        <li>currencyName</li>
+        <li>currencySymbol</li>
+    </ul>
+</ul>
+
+
+<ul class='col_row'>
+    <li>hacker</li>   
+    <ul>
+        <li>abbreviation</li>
+        <li>adjective</li>
+        <li>noun</li>
+        <li>verb</li>
+        <li>ingverb</li>
+        <li>phrase</li>
+    </ul>
+</ul>
+
+<ul class='col_row'>
+    <li>helpers</li>   
+    <ul>
+        <li>randomize</li>
+        <li>slugify</li>
+        <li>replaceSymbolWithNumber</li>
+        <li>replaceSymbols</li>
+        <li>shuffle</li>
+        <li>mustache</li>
+        <li>createCard</li>
+        <li>contextualCard</li>
+        <li>userCard</li>
+        <li>createTransaction</li>
+    </ul>
+</ul>
+
+<ul class='col_row'>
+    <li>image</li>   
+    <ul>
+        <li>image</li>
+        <li>avatar</li>
+        <li>imageUrl</li>
+        <li>abstract</li>
+        <li>animals</li>
+        <li>business</li>
+        <li>cats</li>
+        <li>city</li>
+        <li>food</li>
+        <li>nightlife</li>
+        <li>fashion</li>
+        <li>people</li>
+        <li>nature</li>
+        <li>sports</li>
+        <li>technics</li>
+        <li>transport    </li>
+    </ul>
+</ul>
+
+
+<ul class='col_row'>
+    <li>internet</li>   
+    <ul>
+        <li>avatar</li>
+        <li>email</li>
+        <li>userName</li>
+        <li>protocol</li>
+        <li>url</li>
+        <li>domainName</li>
+        <li>domainSuffix</li>
+        <li>domainWord</li>
+        <li>ip</li>
+        <li>userAgent</li>
+        <li>color</li>
+        <li>mac</li>
+        <li>password</li>
+    </ul>
+</ul>
+
+
+<ul class='col_row'>
+    <li>lorem</li>   
+    <ul>
+        <li>words</li>
+        <li>sentence</li>
+        <li>sentences</li>
+        <li>paragraph</li>
+        <li>paragraphs</li>
+    </ul>
+</ul>
+
+<ul class='col_row'>
+    <li>phone</li>   
+    <ul>
+        <li>phoneNumber</li>
+        <li>phoneNumberFormat</li>
+        <li>phoneFormats</li>
+    </ul>
+</ul>
+
+<ul class='col_row'>
+    <li>random</li>   
+    <ul>
+        <li>number</li>
+        <li>arrayElement</li>
+        <li>objectElement</li>
+        <li>uuid</li>
+        <li>boolean</li>
+    </ul>
+</ul>
+
+<ul class='col_row'>
+    <li>fake</li>   
+</ul>
+    
+<div class="clearfix"></div>
+
+</div>
+
+
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<div class="clearfix"></div>
+<br>
+
+
+
+<div ng-include src='"../../../templates/footerarea.html"'></div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <script type="text/javascript" src='js/faker.min.js'></script>
+    <script type="text/javascript">
+        function set_before(type){
+            // console.log(type);
+            new_text = '';
+
+            if(type=="xml"){
+new_text =`<person id="{{random.number}}">
+      <name>{{name.firstName}}, {{name.lastName}}</name>
+      <title>{{name.jobType}}</title>
+      <phone>{{phone.phoneNumber}}</phone>
+      <age>{{random.number}}</age>
+      <email>{{internet.email}}</email>
+      <description>{{name.jobDescriptor}}</description>
+</person>`;
+
+}else if(type=="csv"){ 
+    new_text = `{{name.firstName}} , {{name.lastName}}  ,  {{internet.email}}  ,  {{internet.url}}`;
+
+}else if(type=="php_array"){ 
+    new_text = `[
+    'firstName'=>"{{name.firstName}}",
+    'lastName'=>"{{name.lastName}}",
+    'email'=>"{{internet.email}}",
+    'url'=>"{{internet.url}}"
+],`;
+
+}else if(type=="sql"){ 
+    new_text = `INSERT INTO Table_Name (firstName, lastName, email, site)
+    VALUES ("{{name.firstName}}" , "{{name.lastName}}" , "{{internet.email}}"  ,   "{{internet.url}}");`;
+
+}else if(type=="json"){ 
+    new_text = `{
+    "id":{{random.number}},         
+    "name":"{{name.firstName}}",         
+    "email":"{{internet.email}}",            
+    "url":"{{internet.url}}"
+},`;
+
+}else if(type=="yaml"){ 
+    new_text = `-             
+  - firstName: {{name.firstName}}
+  - lastName: {{name.lastName}}        
+  - email: {{internet.email}}            
+  - url: {{internet.url}}`;
+
+}else if(type=="laravel_seed"){ 
+    new_text = 
+`DB::table('users')->insert([
+    'firstName' => "{{name.firstName}}",
+    'email' => "{{internet.email}}",
+    'password' => "{{internet.password}}",
+]);`;
+}
+            get_id("before").value = new_text;
+            generate_fake_data();
+        }
+        function get_id(id_name){
+            return document.getElementById(id_name);
+        }
+
+
+        function do_generate_fake_data(){
+            before = get_id("before");
+            after = get_id("after");
+            itirator = document.getElementById("iterator").value;
+            if(before_value = before.value){
+                try{
+                    converted_value = '';
+                    for(i=0;i<itirator;i++){
+                        converted_value += before_value+"\n";
+                    }
+                    fake_data = faker.fake(converted_value);
+                    // console.log(fake_data);
+                    after.innerHTML = fake_data;
+                }catch(e){
+                    after.innerHTML = "Error in Compiling the fake functions"
+                }
+            }else after.innerHTML = "";
+        }
+
+
+        var timeout_action = false;
+        function generate_fake_data(){
+            if(timeout_action) clearTimeout(timeout_action);
+            timeout_action = setTimeout(function(){ do_generate_fake_data(); }, 500);
+        }
+        generate_fake_data();
+
+        var myApp=angular.module('myApp',['ngRoute']);
+        myApp.controller('MainController',function($scope){
+            $scope.generate_fake_data = generate_fake_data();
+        });
+
+
+window.onload = function(){
+    apply_text_area('textarea1','text/plain');
+    apply_text_area('textarea2','text/plain');
+}
+
+    </script>
+
+
+<script type="text/javascript" src='../../../js-apps/sidebar_controller.js'></script>
+</body>
+</html>

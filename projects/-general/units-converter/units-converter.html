@@ -1,0 +1,128 @@
+<!doctype html>
+<html ng-app='myApp'>
+<head>
+
+<title>Units Converter</title>
+<meta charset='utf-8'>
+<link rel="icon" type="image/x-icon" href="../../../images/icon.png" />
+
+<link rel="stylesheet" href="../../../assets/css/bootstrap.min.css">
+<link href="../../../css/simple-sidebar.css" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/plugins/font-awesome-4.5.0/css/font-awesome.min.css">
+
+<script  type="text/javascript" src="../../../assets/angular/angular.min.js"></script>
+<script  type="text/javascript" src="../../../assets/angular/angular-route.min.js"></script>
+
+<script src="../../../assets/js/jquery-2.1.4.min.js"></script>
+<script src="../../../assets/js/bootstrap.min.js"></script><script type="text/javascript" src='../../../assets/plugins/bytesize.min.js'></script>
+
+<script type="text/javascript" src='../../../assets/plugins/clipboard.js/clipboard.min.js'></script>
+<link href="../../../assets/plugins/toastr/toastr.min.css" rel="stylesheet">
+<script type="text/javascript" src='../../../assets/plugins/toastr/toastr.min.js'></script>
+
+    <script  type="text/javascript" src="../../../js-apps/layout.js"></script>
+
+</head>
+<body ng-controller='MainController'>
+
+
+    <div id="wrapper">
+
+<div ng-include src='"../../../templates/sidebar.html"'></div>
+
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+
+
+
+<div ng-include src='"../../../templates/headerarea.html"'></div>
+
+
+
+<legend><h2><span class='fa fa-exchange'></span> Units Converter: <small>Converts Between different Units Fast & reliable</small></h2></legend>
+
+
+<div class="row">
+
+    <script type="text/javascript" src='js/units-converter-app.js'></script>
+
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <a class="navbar-brand" style='color:white'>
+        Units Converter
+      </a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="#" ng-click='set_itirator("iti_time")'>Time - الزمن</a></li>
+        <li><a href="#" ng-click='set_itirator("iti_acceleration")'>Acceleration - السرعة</a></li>
+        <li><a href="#" ng-click='set_itirator("iti_area")'>Area - المساحة</a></li>
+        <li><a href="#" ng-click='set_itirator("iti_length")'>Length - الطول</a></li>
+        <li><a href="#" ng-click='set_itirator("iti_pressure")'>Pressure - الضغط</a></li>
+        <li><a href="#" ng-click='set_itirator("iti_density")'>Density - الحجم</a></li>
+        <li><a href="#" ng-click='set_itirator("iti_weight")'>Weight - الوزن</a></li>
+        <li><a href="#" ng-click='set_itirator("iti_heat")'>Heat - الحرارة</a></li>
+        <li><a href="#" ng-click='set_itirator("iti_energy")'>Energy - الطاقة</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+    <h5>
+
+  <section>
+
+
+  <div ng-repeat='n in itiration_array' class="col-sm-4">    
+  <label class="input-group">{{n.name}}</label>
+  <div class="input-group">
+      <input type="text" autofocus="autofocus" placeholder="Enter Number" class="form-control input-sm" 
+      ng-model="itiration_array[$index]['model_value']" ng-change='calc($index)'>
+      <div class="input-group-addon">{{n.unit}}</div>
+  </div>
+  <br>
+  </div>
+
+  </section>
+
+
+    </h5>
+
+
+<div class="clearfix"></div>
+  <br><br>
+
+
+
+
+</div>
+
+
+<div ng-include src='"../../../templates/minification-footer.html"'></div>
+<div ng-include src='"../../../templates/footerarea.html"'></div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+
+
+<script type="text/javascript" src='../../../js-apps/sidebar_controller.js'></script>
+</body>
+</html>

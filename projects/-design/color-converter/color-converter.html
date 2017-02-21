@@ -1,0 +1,412 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+
+<title>Color Converter</title>
+<meta charset='utf-8'>
+<link rel="icon" type="image/x-icon" href="../../../images/icon.png" />
+
+
+<link rel="stylesheet" href="../../../assets/css/bootstrap.min.css">
+<link href="../../../css/simple-sidebar.css" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/plugins/font-awesome-4.5.0/css/font-awesome.min.css">
+
+<script  type="text/javascript" src="../../../assets/angular/angular.min.js"></script>
+<script  type="text/javascript" src="../../../assets/angular/angular-route.min.js"></script>
+
+<script src="../../../assets/js/jquery-2.1.4.min.js"></script>
+<script src="../../../assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src='../../../assets/plugins/clipboard.js/clipboard.min.js'></script>
+<link href="../../../assets/plugins/toastr/toastr.min.css" rel="stylesheet">
+<script type="text/javascript" src='../../../assets/plugins/toastr/toastr.min.js'></script>
+
+<script  type="text/javascript" src="../../../js-apps/layout.js"></script>
+
+<style type="text/css">
+    .if{
+        width:150px;
+        /*display: inline;*/
+    }
+</style>
+
+
+
+</head>
+
+<body ng-controller='MainController' style='background-color:#{{cur_color}}'>
+
+
+
+    <div id="wrapper">
+
+<div ng-include src='"../../../templates/sidebar.html"'></div>
+
+
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+
+<div ng-include src='"../../../templates/headerarea.html"'></div>
+
+
+<legend><h2> <span class='fa fa-eyedropper'></span> Color Converter: <small>The Fastest way to Convert a color</small></h2></legend>
+
+
+<div class='row'>
+
+
+<div class="col-sm-10" style='border:8px double {{color.hex}};padding:10px'>
+<table class='table'>
+
+    <tr>
+        <th>Named Values</th>
+        <td>
+            <input class='form-control input-sm' ng-model="color.hex" >
+        </td>
+        <td>
+            <select ng-model='color.hex' class='form-control'>
+                <option ng-repeat='(named_color,hex_color) in named_colors' value='{{hex_color|lowercase}}'>{{named_color}}</option>
+            </select>
+        </td>
+        <td class='text-center' style='background-color:{{color.hex}};color:#ccc;'>{{color.name|ucfirst}}</td>
+    </tr>
+
+    <tr>
+        <th>HEX</th>
+        <td>
+        <input class='form-control input-sm' ng-model="color.hex" >
+        </td>
+        <td>
+            <input class='form-control input-sm' type='color' ng-model="color.hex">
+        </td>
+        <td class='text-center' style='background-color:{{color.hex}};color:#ccc;'>{{color.hex}}</td>
+    </tr>
+
+    <tr>
+        <th>RGB</th>
+        <td>
+        Red: <input class='form-control input-sm' type='text' ng-model='color.rgb.r' > 
+        Green: <input class='form-control input-sm' type='text' ng-model='color.rgb.g'>
+        Blue: <input class='form-control input-sm' type='text' ng-model='color.rgb.b'>
+        </td>
+        <td>
+        Red:{{color.rgb.r}} <input class='form-control input-sm if' type='range' min='0' max='255' ng-model='color.rgb.r'>
+        Green:{{color.rgb.g}} <input class='form-control input-sm if' type='range' min='0' max='255' ng-model='color.rgb.g'>
+        Blue:{{color.rgb.b}} <input class='form-control input-sm if' type='range' min='0' max='255' ng-model='color.rgb.b'>
+        </td>
+        <td class='text-center' style='background-color:{{color.hex}};color:#ccc;'>rgb({{color.rgb.r}},{{color.rgb.g}},{{color.rgb.b}}) <br>rgba({{color.rgb.r}},{{color.rgb.g}},{{color.rgb.b}},{{color.rgb.a}})</td>
+    </tr>
+
+    <tr>
+        <th>HSL</th>
+        <td>
+        Hue: <input class='form-control input-sm' type='text' ng-model='color.hsl.h' > 
+        Saturation: <input class='form-control input-sm' type='text' ng-model='color.hsl.s'>
+        Lightness: <input class='form-control input-sm' type='text' ng-model='color.hsl.l'>
+        </td>
+        <td>
+<!--         Hue:{{color.hsl.h}} ° <input class='form-control input-sm if' type='range' min='0' max='359' ng-model='color.hsl.h'>
+        Saturation:{{color.hsl.s}} <input class='form-control input-sm if' type='range' min='0' max='100' ng-model='color.hsl.s'>
+        Lightness:{{color.hsl.l}} <input class='form-control input-sm if' type='range' min='0' max='100' ng-model='color.hsl.l'> -->
+        </td>
+        <td class='text-center' style='background-color:{{color.hex}};color:#ccc;'>{{color.hsl_name}} </td>
+    </tr>
+
+</table>
+</div>
+
+<div class="col-sm-2">
+    <table class='table'>
+        <tr ng-repeat='n in lightness_array track by $index' style='background-color:{{n}}'><th style='color:#444'>{{n}} <span ng-if='n==color.hex'>- Selected Color</span></th></tr>
+    </table>
+</div>
+
+
+
+
+<!-- <button ng-click='cout()'>output</button> -->
+
+</div>
+
+
+
+<div class="clearfix"></div>
+<br>
+
+
+
+<div ng-include src='"../../../templates/footerarea.html"'></div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <script type="text/javascript" src='js/tinycolor-min.js'></script>
+    <script type="text/javascript">
+        var myApp=angular.module('myApp',['ngRoute']);
+
+        myApp.filter('ucfirst', function() {
+            return function(input,arg) {
+                return input.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
+            };
+        });
+
+        myApp.controller('MainController',function($scope){
+
+            $scope.color = {
+                rgb: {r:0,g:0,b:0},
+                hex: "#000000",
+                hsl: {h:0,s:0,l:0},
+                hsl_name: "hsl(0,0,0)" ,
+                name: "black",
+                is_dark: true
+            }
+
+            $scope.cout = function(){
+                console.log($scope.hex);
+                // console.log(out);
+            }
+
+    $scope.color_calc = function(color,type){
+        // console.log(color);
+        if(type!='hex') $scope.color.hex = color.toHexString();
+        if(type!='rgb') $scope.color.rgb = color.toRgb();
+        if(type!='hsl') $scope.color.hsl = color.toHsl();
+        $scope.color.is_dark = color.isDark();
+        $scope.color.hsl_name = color.toHslString();
+        $scope.color.name = (color.toName()) ? color.toName() : "";
+
+        function get_degres(){
+            // console.log("--------------");
+            var org_color = color.toHexString();
+            lightness_array = [];
+            lightness_array.push( tinycolor(org_color).lighten(60).toHexString() );
+            lightness_array.push( tinycolor(org_color).lighten(50).toHexString() );
+            lightness_array.push( tinycolor(org_color).lighten(35).toHexString() );
+            lightness_array.push( tinycolor(org_color).lighten(25).toHexString() );
+            lightness_array.push( tinycolor(org_color).lighten(15).toHexString() );
+            lightness_array.push( tinycolor(org_color).lighten(10).toHexString() );
+            lightness_array.push( tinycolor(org_color).lighten(5).toHexString() );
+
+            lightness_array.push( tinycolor(org_color).toHexString() );
+
+            lightness_array.push( tinycolor(org_color).darken(5).toHexString() );
+            lightness_array.push( tinycolor(org_color).darken(10).toHexString() );
+            lightness_array.push( tinycolor(org_color).darken(15).toHexString() );
+            lightness_array.push( tinycolor(org_color).darken(25).toHexString() );
+            lightness_array.push( tinycolor(org_color).darken(35).toHexString() );
+            lightness_array.push( tinycolor(org_color).darken(50).toHexString() );
+            lightness_array.push( tinycolor(org_color).darken(60).toHexString() );
+
+            // console.log(lightness_array);
+            $scope.lightness_array = arrayUnique(lightness_array);
+            // console.log( color.lighten(10).toHexString() );
+        }
+        get_degres();
+    }
+
+
+
+    $scope.$watch('color.hex',function(newValue, oldValue){
+        if (typeof newValue !== 'undefined' && newValue !== oldValue) {
+            color = tinycolor($scope.color.hex);
+            $scope.color_calc(color,"hex");
+        }        
+    });
+    $scope.$watchGroup(['color.rgb.r','color.rgb.g','color.rgb.b'],function(){
+        color = tinycolor($scope.color.rgb);
+        $scope.color_calc(color,"rgb");
+    });
+    $scope.$watchGroup(['color.hsl.h','color.hsl.s','color.hsl.l'],function(){
+        // color = tinycolor("hsl("+$scope.color.hsl.h+","
+        //                     +$scope.color.hsl.s+"%,"
+        //                     +$scope.color.hsl.l+"%)");
+        if($scope.color.hsl.h==0 && 
+            $scope.color.hsl.s==0 &&
+            $scope.color.hsl.l==0) return;
+        color = tinycolor($scope.color.hsl);
+        // console.log(color);
+
+        $scope.color_calc(color,"hsl");
+    });
+
+
+
+            // var color = tinycolor("red");
+            $scope.named_colors = {
+Black : "#000000",
+Navy : "#000080",
+DarkBlue : "#00008B",
+MediumBlue : "#0000CD",
+Blue : "#0000FF",
+DarkGreen : "#006400",
+Green : "#008000",
+Teal : "#008080",
+DarkCyan : "#008B8B",
+DeepSkyBlue : "#00BFFF",
+DarkTurquoise : "#00CED1",
+MediumSpringGreen : "#00FA9A",
+Lime : "#00FF00",
+SpringGreen : "#00FF7F",
+Aqua : "#00FFFF",
+Cyan : "#00FFFF",
+MidnightBlue : "#191970",
+DodgerBlue : "#1E90FF",
+LightSeaGreen : "#20B2AA",
+ForestGreen : "#228B22",
+SeaGreen : "#2E8B57",
+DarkSlateGray : "#2F4F4F",
+DarkSlateGrey : "#2F4F4F",
+LimeGreen : "#32CD32",
+MediumSeaGreen : "#3CB371",
+Turquoise : "#40E0D0",
+RoyalBlue : "#4169E1",
+SteelBlue : "#4682B4",
+DarkSlateBlue : "#483D8B",
+MediumTurquoise : "#48D1CC",
+Indigo  : "#4B0082",
+DarkOliveGreen : "#556B2F",
+CadetBlue : "#5F9EA0",
+CornflowerBlue : "#6495ED",
+RebeccaPurple : "#663399",
+MediumAquaMarine : "#66CDAA",
+DimGray : "#696969",
+DimGrey : "#696969",
+SlateBlue : "#6A5ACD",
+OliveDrab : "#6B8E23",
+SlateGray : "#708090",
+SlateGrey : "#708090",
+LightSlateGray : "#778899",
+LightSlateGrey : "#778899",
+MediumSlateBlue : "#7B68EE",
+LawnGreen : "#7CFC00",
+Chartreuse : "#7FFF00",
+Aquamarine : "#7FFFD4",
+Maroon : "#800000",
+Purple : "#800080",
+Olive : "#808000",
+Gray : "#808080",
+Grey : "#808080",
+SkyBlue : "#87CEEB",
+LightSkyBlue : "#87CEFA",
+BlueViolet : "#8A2BE2",
+DarkRed : "#8B0000",
+DarkMagenta : "#8B008B",
+SaddleBrown : "#8B4513",
+DarkSeaGreen : "#8FBC8F",
+LightGreen : "#90EE90",
+MediumPurple : "#9370DB",
+DarkViolet : "#9400D3",
+PaleGreen : "#98FB98",
+DarkOrchid : "#9932CC",
+YellowGreen : "#9ACD32",
+Sienna : "#A0522D",
+Brown : "#A52A2A",
+DarkGray : "#A9A9A9",
+DarkGrey : "#A9A9A9",
+LightBlue : "#ADD8E6",
+GreenYellow : "#ADFF2F",
+PaleTurquoise : "#AFEEEE",
+LightSteelBlue : "#B0C4DE",
+PowderBlue : "#B0E0E6",
+FireBrick : "#B22222",
+DarkGoldenRod : "#B8860B",
+MediumOrchid : "#BA55D3",
+RosyBrown : "#BC8F8F",
+DarkKhaki : "#BDB76B",
+Silver : "#C0C0C0",
+MediumVioletRed : "#C71585",
+IndianRed  : "#CD5C5C",
+Peru : "#CD853F",
+Chocolate : "#D2691E",
+Tan : "#D2B48C",
+LightGray : "#D3D3D3",
+LightGrey : "#D3D3D3",
+Thistle : "#D8BFD8",
+Orchid : "#DA70D6",
+GoldenRod : "#DAA520",
+PaleVioletRed : "#DB7093",
+Crimson : "#DC143C",
+Gainsboro : "#DCDCDC",
+Plum : "#DDA0DD",
+BurlyWood : "#DEB887",
+LightCyan : "#E0FFFF",
+Lavender : "#E6E6FA",
+DarkSalmon : "#E9967A",
+Violet : "#EE82EE",
+PaleGoldenRod : "#EEE8AA",
+LightCoral : "#F08080",
+Khaki : "#F0E68C",
+AliceBlue : "#F0F8FF",
+HoneyDew : "#F0FFF0",
+Azure : "#F0FFFF",
+SandyBrown : "#F4A460",
+Wheat : "#F5DEB3",
+Beige : "#F5F5DC",
+WhiteSmoke : "#F5F5F5",
+MintCream : "#F5FFFA",
+GhostWhite : "#F8F8FF",
+Salmon : "#FA8072",
+AntiqueWhite : "#FAEBD7",
+Linen : "#FAF0E6",
+LightGoldenRodYellow : "#FAFAD2",
+OldLace : "#FDF5E6",
+Red : "#FF0000",
+Fuchsia : "#FF00FF",
+Magenta : "#FF00FF",
+DeepPink : "#FF1493",
+OrangeRed : "#FF4500",
+Tomato : "#FF6347",
+HotPink : "#FF69B4",
+Coral : "#FF7F50",
+DarkOrange : "#FF8C00",
+LightSalmon : "#FFA07A",
+Orange : "#FFA500",
+LightPink : "#FFB6C1",
+Pink : "#FFC0CB",
+Gold : "#FFD700",
+PeachPuff : "#FFDAB9",
+NavajoWhite : "#FFDEAD",
+Moccasin : "#FFE4B5",
+Bisque : "#FFE4C4",
+MistyRose : "#FFE4E1",
+BlanchedAlmond : "#FFEBCD",
+PapayaWhip : "#FFEFD5",
+LavenderBlush : "#FFF0F5",
+SeaShell : "#FFF5EE",
+Cornsilk : "#FFF8DC",
+LemonChiffon : "#FFFACD",
+FloralWhite : "#FFFAF0",
+Snow : "#FFFAFA",
+Yellow : "#FFFF00",
+LightYellow : "#FFFFE0",
+Ivory : "#FFFFF0",
+White : "#FFFFFF"
+            }
+        });
+
+
+
+var arrayUnique = function(a) {
+    return a.reduce(function(p, c) {
+        if (p.indexOf(c) < 0) p.push(c);
+        return p;
+    }, []);
+};
+
+    </script>
+
+
+<script type="text/javascript" src='../../../js-apps/sidebar_controller.js'></script>
+</body>
+</html>

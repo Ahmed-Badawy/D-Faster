@@ -1,0 +1,167 @@
+<!doctype html>
+<html ng-app='myApp'>
+<head>
+
+<title>D-Faster</title>
+<meta charset='utf-8'>
+<link rel="icon" type="image/x-icon" href="images/icon.png" />
+
+<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+<link href="css/simple-sidebar.css" rel="stylesheet">
+<link rel="stylesheet" href="assets/plugins/font-awesome-4.5.0/css/font-awesome.min.css">
+
+<script  type="text/javascript" src="assets/angular/angular.min.js"></script>
+<script  type="text/javascript" src="assets/angular/angular-route.min.js"></script>
+
+<script src="assets/js/jquery-2.1.4.min.js"></script>
+
+<link href="assets/plugins/toastr/toastr.min.css" rel="stylesheet">
+<script type="text/javascript" src='assets/plugins/toastr/toastr.min.js'></script>
+
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
+    <style type="text/css">
+        body{
+            font-family: 'Open Sans','Lato', Helvetica, sans-serif;
+
+            height: 100%;
+            margin: 0;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            color:white;
+
+
+background: rgb(10,56,73);
+background: -moz-linear-gradient(90deg, rgb(10,56,73) 10%, rgb(33,103,98) 90%);
+background: -webkit-linear-gradient(90deg, rgb(10,56,73) 10%, rgb(33,103,98) 90%);
+background: -o-linear-gradient(90deg, rgb(10,56,73) 10%, rgb(33,103,98) 90%);
+background: -ms-linear-gradient(90deg, rgb(10,56,73) 10%, rgb(33,103,98) 90%);
+background: linear-gradient(90deg, rgb(10,56,73) 10%, rgb(33,103,98) 90%);
+
+        }
+
+        h3,h4{
+          line-height: 130%;
+        }
+
+        #main-panal a{
+          color:white;
+          background-color: rgba(255,255,255,.2);
+          border-radius: 5px;
+          padding:1px;
+          transition:all .2s linear;
+        }
+        #main-panal a:hover{
+          color:#333;
+          text-decoration: none;
+          padding:2px;
+          background-color: rgba(255,255,255,.8);
+        }
+
+    </style>
+
+    <script type="text/javascript" src='assets/js/bootstrap.min.js'></script>
+    <script  type="text/javascript" src="js-apps/layout.js"></script>
+
+</head>
+<body ng-controller='MainController'>
+
+
+
+    <div id="wrapper">
+
+<div ng-include src='"templates/sidebar.html"'></div>
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+
+<div ng-include src='"templates/headerarea.html"'></div>
+
+<div class="row">
+
+
+        <div id='main-panal' class="col-md-12 text-center v-center">
+          
+          <h1 style='font-size:500%;'>D-Faster <small style='font-size:60%'>(Beta)</small></h1><br>
+
+          <h3>D-Faster is a set of Utilities for Developers/Designers.<br> It's based on open projects from Github to help you increase your development speed.
+          <br> D-Faster is made for fast.</h3>
+
+          <h4>The Project Still a baby & I work on it as a hobby in my spare time which isn't much.<br>
+          D-Faster has a great potential but i need your help. You can contribute Here: <a href="https://github.com/Ahmed-Badawy/D-Faster" target='_blank'>D-Faster On Github</a>
+          <br>
+          Also you are more than welcome to tell me your <a href="https://github.com/Ahmed-Badawy/D-Faster/issues" target='_blank'>opinion or a suggestion</a></h4>
+          <br>
+
+
+          <h4>
+             The project uses plain HTML,CSS,JS with extensive use of AngularJs V1.<br> D-Faster also uses local-storage HTML 5 API as a DB manager.
+             <br> Currently D-Faster doesn't use any backend technology, However the project is intended to be transfered to NodeJS & Express at some point.
+          </h4>
+          <br><br>
+
+          <div class='alert' style='border:5px double #333;padding:10px;background-color:rgba(255,255,255,.1)'>
+              <h2>Hire Me</h2>
+              <p class='h4' style='line-height:1.4em'>Hi! My name is Ahmed Badawy & i am the developer of D-Faster . I am a talented 25 years old Egyptian (Full Stack Web Developer) with a basic Java & Android Development Background. Currently Searching for a full-time job in US, Europe & Canada. if you have any vacancy or you can help me in any way, please contact me. 
+        <br><br>
+        <a href="http://ahmed-badawy.com/site/cv" class='btn btn-default' target="_blank" style='padding:10px'>My C.V</a>
+
+
+              </p>
+              <br>
+          </div>
+
+
+
+           Please Star D-Faster Repository on Github: <a class='text-link main-word' href="https://github.com/Ahmed-Badawy/D-Faster" target='_blank'>D-Faster Repo</a>
+            or rate our <a class='text-link main-word' href="https://chrome.google.com/webstore/detail/d-faster/gpnmdoddfenngflamdbiigbecalmkfdf" target='_blank'>Chrome APP</a></h3>
+
+
+            <br>
+
+
+
+
+
+
+
+
+<div class="clearfix"></div><br>
+</div>
+
+
+
+<!-- <div ng-include src='"templates/footerarea.html"'></div> -->
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+
+
+    <script type="text/javascript">
+var myApp=angular.module('myApp',['ngRoute']);
+
+myApp.controller('MainController',function($scope){
+    
+});
+    </script>
+
+
+
+<script type="text/javascript" src='./js-apps/sidebar_controller.js'></script>
+</body>
+</html>

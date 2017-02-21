@@ -1,0 +1,438 @@
+<!doctype html>
+<html ng-app='myApp' ng-controller='MainController'>
+<head>
+
+<title>Flex Box</title>
+<meta charset='utf-8'>
+<link rel="icon" type="image/x-icon" href="../../../images/icon.png" />
+
+<link rel="stylesheet" href="../../../assets/css/bootstrap.min.css">
+<link href="../../../css/simple-sidebar.css" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/plugins/font-awesome-4.5.0/css/font-awesome.min.css">
+
+<script  type="text/javascript" src="../../../assets/angular/angular.min.js"></script>
+<script  type="text/javascript" src="../../../assets/angular/angular-route.min.js"></script>
+
+<script src="../../../assets/js/jquery-2.1.4.min.js"></script>
+<script src="../../../assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src='../../../assets/plugins/clipboard.js/clipboard.min.js'></script>
+<link href="../../../assets/plugins/toastr/toastr.min.css" rel="stylesheet">
+<script type="text/javascript" src='../../../assets/plugins/toastr/toastr.min.js'></script>
+<script type="text/javascript" src='../../../assets/plugins/bytesize.min.js'></script>
+
+
+<script  type="text/javascript" src="../../../js-apps/layout.js"></script>
+<script  type="text/javascript" src="../../../js-apps/txtarea.js"></script>
+
+<style type="text/css">
+
+    #box-wrapper-inner{
+        display: -moz-box;
+        display: -webkit-box;
+        display: -ms-box;
+        display: box;
+        /*width: 100%;*/
+        /*height: 400px;*/
+        background-color: #ccc;
+        min-height: 400px;
+    }
+
+    #box-wrapper-inner div{
+        margin: 5px;
+        width: 100px;
+        /*height: 20px;*/
+        /*text-align: center;*/
+        min-height: 60px;
+
+    }
+
+
+</style>
+
+</head>
+
+<body>
+
+
+
+    <div id="wrapper">
+
+<div ng-include src='"../../../templates/sidebar.html"'></div>
+
+
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+
+<div ng-include src='"../../../templates/headerarea.html"'></div>
+
+
+<legend><h2><span class='fa fa-list'></span> CSS3 Flex Box Generator: <small>helps you generate Flex Box CSS Code</small></h2></legend>
+
+
+
+
+
+
+<div class="row">
+<div class="col-sm-6">
+
+
+
+
+<table style='width:100%' class='table'>
+    <tr>
+        <th>Box Orient:</th>
+        <td>
+            <select class='form-control' ng-model='bs.orient'>
+                <option value='horizontal'>Horizontal</option>
+                <option value='vertical'>Vertical</option>
+                <option value='inline-axis'>Inline Axis</option>
+                <option value='block-axis'>Block Axis</option>
+            </select>            
+        </td>
+
+        <th>Box Pack:</th>
+        <td>
+            <select class='form-control' ng-model='bs.pack'>
+                <option value='start'>Start</option>
+                <option value='end'>End</option>
+                <option value='center'>Center</option>
+                <option value='justify'>Justify</option>
+            </select>            
+        </td>
+    </tr>
+
+
+    <tr>
+        <th>Box Direction: </th>
+        <td>
+            <select class='form-control' ng-model='bs.direction'>
+                <option value='normal'>Normal</option>
+                <option value='reverse'>Reverse</option>
+                <option value='inherit'>Inherit</option>
+            </select>       
+        </td>
+
+        <th>Box Align: </th>
+        <td>
+            <select class='form-control' ng-model='bs.align'>
+                <option value='stretch'>Stretch</option>
+                <option value='start'>Start</option>
+                <option value='end'>End</option>
+                <option value='center'>Center</option>
+                <option value='baseline'>BaseLine</option>
+            </select>           
+        </td>
+    </tr>
+
+
+<tr>
+    <td colspan='4' class='text-center'><h4>Boxes Attributes</h4></td>
+</tr>
+
+
+    <tr>
+        <th>Box 1 Ordinal Group: </th>
+        <td>
+            <select class='form-control' ng-model='bs.b1_group'>
+                <option value='1'>1</option>
+                <option value='2'>2</option>
+                <option value='3'>3</option>
+                <option value='4'>4</option>
+                <option value='5'>5</option>
+                <option value='6'>6</option>
+                <option value='7'>7</option>
+                <option value='8'>8</option>
+                <option value='9'>9</option>
+            </select>       
+        </td>
+
+        <th>Box 1 Flex: </th>
+        <td>
+            <select class='form-control' ng-model='bs.b1_flex'>
+                            <option value='0'>0</option>
+
+                <option value='1'>1</option>
+                <option value='2'>2</option>
+                <option value='3'>3</option>
+                <option value='4'>4</option>
+                <option value='5'>5</option>
+                <option value='6'>6</option>
+                <option value='7'>7</option>
+                <option value='8'>8</option>
+                <option value='9'>9</option>
+            </select>           
+        </td>
+    </tr>
+
+
+
+
+    <tr>
+        <th>Box 2 Ordinal Group: </th>
+        <td>
+            <select class='form-control' ng-model='bs.b2_group'>
+                <option value='1'>1</option>
+                <option value='2'>2</option>
+                <option value='3'>3</option>
+                <option value='4'>4</option>
+                <option value='5'>5</option>
+                <option value='6'>6</option>
+                <option value='7'>7</option>
+                <option value='8'>8</option>
+                <option value='9'>9</option>
+            </select>       
+        </td>
+
+        <th>Box 2 Flex: </th>
+        <td>
+            <select class='form-control' ng-model='bs.b2_flex'>
+                            <option value='0'>0</option>
+                <option value='1'>1</option>
+                <option value='2'>2</option>
+                <option value='3'>3</option>
+                <option value='4'>4</option>
+                <option value='5'>5</option>
+                <option value='6'>6</option>
+                <option value='7'>7</option>
+                <option value='8'>8</option>
+                <option value='9'>9</option>
+            </select>           
+        </td>
+    </tr>
+
+
+    <tr>
+        <th>Box 3 Ordinal Group: </th>
+        <td>
+            <select class='form-control' ng-model='bs.b3_group'>
+                <option value='1'>1</option>
+                <option value='2'>2</option>
+                <option value='3'>3</option>
+                <option value='4'>4</option>
+                <option value='5'>5</option>
+                <option value='6'>6</option>
+                <option value='7'>7</option>
+                <option value='8'>8</option>
+                <option value='9'>9</option>
+            </select>       
+        </td>
+
+        <th>Box 3 Flex: </th>
+        <td>
+            <select class='form-control' ng-model='bs.b3_flex'>
+                <option value='0'>0</option>
+                <option value='1'>1</option>
+                <option value='2'>2</option>
+                <option value='3'>3</option>
+                <option value='4'>4</option>
+                <option value='5'>5</option>
+                <option value='6'>6</option>
+                <option value='7'>7</option>
+                <option value='8'>8</option>
+                <option value='9'>9</option>
+            </select>           
+        </td>
+    </tr>
+
+</table>
+
+
+<div class="row">
+    <div class='col-sm-6'>
+        <label>Box Color: {{box_color}}</label>
+        <input type='color' class='form-control' ng-model='box_color'>
+    </div>
+    <div class='col-sm-6'>
+        <label>BackGround Color: {{bg_color}}</label>
+        <input type='color' class='form-control' ng-model='bg_color'>
+    </div>      
+</div> 
+
+
+</div>
+
+<div class="col-sm-6">
+
+
+    <div class='col-sm-12' style='background-color:{{bg_color}};{{main_box_style}}' id='box-wrapper-inner'>
+        <div id="box1" style='background-color:{{box_color}};{{box1_style}}'></div>
+        <div id="box2" style='background-color:{{box_color}};{{box2_style}}'></div>
+        <div id="box3" style='background-color:{{box_color}};{{box3_style}}'></div>
+    </div>
+
+
+<div class="clearfix"></div><br>
+
+</div>
+
+
+    <div id='textarea1'>
+        <p>CSS (input)</p>
+        <textarea class='form-control mytextarea' disabled rows='15' ng-model='css_model'></textarea>
+        <input type='file' class='hidden upload_input' />
+        <span class='fa fa-file-code-o btn file_btn hidden' title='Import a File'></span>
+        <span class='fa fa-copy btn copy_btn' title='Copy Text'></span>
+        <span class='fa fa-cut btn cut_btn hidden' title='Cut Text'></span>
+        <span class='fa fa-th-list btn selectAll' title='Select All Text'></span>
+        <span class='fa fa-trash btn emptyAll hidden' title='Empty All Text'></span>
+
+        <a href='' download="style.css" style="display:none" class='hidden download_content_link'></a>
+        <span class='fa fa-save btn download_content' title='Download Content'></span>
+
+
+        <span class='fa fa-hand-lizard-o fa-lg pull-right'></span>
+        <span class='pull-right txtsize' style='color:#aaa;font-weight:bolder'></span>
+        <span class='pull-right'>&nbsp;&nbsp;</span>
+        <span class='fa fa-hand-peace-o fa-lg pull-right'></span>
+        <span class='pull-right txtlength' style='color:#aaa;font-weight:bolder'></span>
+    </div>
+
+
+
+</div>
+
+
+
+
+<div class="clearfix"></div><br>
+<div class="clearfix"></div><br>
+<div class="clearfix"></div><br>
+
+
+
+<div ng-include src='"../../../templates/footerarea.html"'></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+
+<script type="text/javascript">
+    
+window.onload = function(){
+    apply_text_area('textarea1','text/css');
+};
+
+</script>
+<script type="text/javascript">
+    var myApp=angular.module('myApp',['ngRoute']);
+    myApp.controller('MainController',function($scope,$timeout){ 
+        $scope.bs = {
+            orient: "horizontal", 
+            pack : "start" ,
+            direction : "normal" ,
+            align : "stretch" , 
+            b1_group : "1" ,
+            b1_flex : "0" , 
+            b2_group : "1" ,
+            b2_flex : "0" , 
+            b3_group : "1" ,
+            b3_flex : "0" , 
+        };
+
+        $scope.box_color = "#337ab7";
+        $scope.bg_color = "#eeeeee";
+        $scope.css_model = "";
+        var promise = false;
+
+        $scope.$watchGroup(['bs.orient','bs.pack','bs.direction','bs.align',
+            'bs.b1_group','bs.b1_flex','bs.b2_group','bs.b2_flex','bs.b3_group','bs.b3_flex'],function(){
+            if(promise) $timeout.cancel(promise);
+            promise = $timeout(function(){
+                $scope.compile();
+            },200);
+        });
+
+        $scope.compile = function(){
+
+            $scope.main_box_style = `
+    display: -webkit-box;
+    display: -moz-box;
+    display: box;
+
+    -webkit-box-orient: ${$scope.bs.orient};
+    -moz-box-orient: ${$scope.bs.orient};
+    box-orient: ${$scope.bs.orient};
+
+    -webkit-box-pack: ${$scope.bs.pack};
+    -moz-box-pack: ${$scope.bs.pack};
+    box-pack: ${$scope.bs.pack};
+
+    -webkit-box-direction: ${$scope.bs.direction};
+    -moz-box-direction: ${$scope.bs.direction};
+    box-direction: ${$scope.bs.direction};
+
+    -webkit-box-align: ${$scope.bs.align};
+    -moz-box-align: ${$scope.bs.align};
+    box-align: ${$scope.bs.align};
+            `;
+
+    $scope.box1_style = `
+    -webkit-box-ordinal-group: ${$scope.bs.b1_group};
+    -moz-box-ordinal-group: ${$scope.bs.b1_group};
+    box-ordinal-group: ${$scope.bs.b1_group};
+
+    -webkit-box-flex: ${$scope.bs.b1_flex};
+    -moz-box-flex: ${$scope.bs.b1_flex};
+    box-flex: ${$scope.bs.b1_flex};
+    `;    
+
+    $scope.box2_style = `
+    -webkit-box-ordinal-group: ${$scope.bs.b2_group};
+    -moz-box-ordinal-group: ${$scope.bs.b2_group};
+    box-ordinal-group: ${$scope.bs.b2_group};
+
+    -webkit-box-flex: ${$scope.bs.b2_flex};
+    -moz-box-flex: ${$scope.bs.b2_flex};
+    box-flex: ${$scope.bs.b2_flex};
+    `;    
+
+    $scope.box3_style = `
+    -webkit-box-ordinal-group: ${$scope.bs.b3_group};
+    -moz-box-ordinal-group: ${$scope.bs.b3_group};
+    box-ordinal-group: ${$scope.bs.b3_group};
+
+    -webkit-box-flex: ${$scope.bs.b3_flex};
+    -moz-box-flex: ${$scope.bs.b3_flex};
+    box-flex: ${$scope.bs.b3_flex};
+    `;    
+
+
+    $scope.css_model = `
+#box-wrapper-inner{
+    ${$scope.main_box_style}
+}
+#box1 {
+    ${$scope.box1_style}
+}
+
+#box2 {
+    ${$scope.box2_style}
+}
+
+#box3 {
+    ${$scope.box3_style}
+}
+
+`;
+
+        }
+        $scope.compile();
+
+    });
+</script>
+
+
+<script type="text/javascript" src='../../../js-apps/sidebar_controller.js'></script>
+</body>
+</html>
