@@ -1,0 +1,279 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+
+<title>Hash Encoder</title>
+<meta charset='utf-8'>
+<link rel="icon" type="image/x-icon" href="../../../images/icon.png" />
+
+
+<link rel="stylesheet" href="../../../assets/css/bootstrap.min.css">
+<link href="../../../css/simple-sidebar.css" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/plugins/font-awesome-4.5.0/css/font-awesome.min.css">
+
+<script  type="text/javascript" src="../../../assets/angular/angular.min.js"></script>
+<script  type="text/javascript" src="../../../assets/angular/angular-route.min.js"></script>
+
+<script src="../../../assets/js/jquery-2.1.4.min.js"></script>
+<script src="../../../assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src='../../../assets/plugins/clipboard.js/clipboard.min.js'></script>
+<link href="../../../assets/plugins/toastr/toastr.min.css" rel="stylesheet">
+<script type="text/javascript" src='../../../assets/plugins/toastr/toastr.min.js'></script>
+
+<script  type="text/javascript" src="../../../js-apps/layout.js"></script>
+</head>
+
+<body>
+
+
+
+    <div id="wrapper" ng-controller='MainController'>
+
+<div ng-include src='"../../../templates/sidebar.html"'></div>
+
+
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+
+<div ng-include src='"../../../templates/headerarea.html"'></div>
+
+
+<legend><h2> <span class='fa fa-hashtag'></span> Hash Encoder: <small>Generate a Hash in a second</small></h2></legend>
+
+
+<div class='row'>
+  <ul class="nav nav-tabs">
+    <li ng-class='{active:show_what==1}'><a href='#' ng-click='show_what=1'>MD5 Hash</a></li>
+    <li ng-class='{active:show_what==2}'><a href='#' ng-click='show_what=2'>HMAC-MD5 Hash</a></li>
+    <li ng-class='{active:show_what==3}'><a href='#' ng-click='show_what=3'>SHA-512 Hash</a></li>
+    <li ng-class='{active:show_what==4}'><a href='#' ng-click='show_what=4'>SHA-384 Hash</a></li>
+    <li ng-class='{active:show_what==5}'><a href='#' ng-click='show_what=5'>SHA-512/256 Hash</a></li>
+    <li ng-class='{active:show_what==6}'><a href='#' ng-click='show_what=6'>SHA-512/224 Hash</a></li>
+    <li ng-class='{active:show_what==7}'><a href='#' ng-click='show_what=7'>Generate Random Hash</a></li>
+  </ul>
+</div>
+    <div class="clearfix"></div><br>
+
+
+
+<div class='row' ng-show='show_what==1'>
+    <div class="col-sm-7">
+        <label>Input string (input)</label>
+        <textarea id="text-input" rows="2" class='form-control' ng-model='md5_hash_text'></textarea>
+    </div>
+    <div class="col-sm-5">
+        <label>MD5 Hash (output)</label>
+        <br>
+        <div class="input-group">
+          <input type="text" class="form-control" value='{{md5_hash_text | md5}}'>
+          <div class="input-group-addon copy_btn" data-clipboard-text='{{md5_hash_text | md5}}'>Copy to Clipboard</div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class='row' ng-show='show_what==2'>
+    <div class='col-sm-12 alert alert-info'>MD5 Hashing Using preshared keyword system.
+    <br>means hash md5 but salt the hashed-text with this key.</div>
+    <div class="col-sm-7">
+        <label>Input string (input)</label>
+        <textarea id="text-input" rows="2" class='form-control' ng-model='hmac_hash_text'></textarea>
+        <label>HMAC-MD5 key (optional) (input)</label>
+        <input type='text' class='form-control' ng-model='hmac_key_word'/>  
+    </div>
+    <div class="col-sm-5">
+        <label>HMAC-MD5 Hash (output)</label>
+        <br>
+        <div class="input-group">
+          <input type="text" class="form-control" value='{{hmac_hash_text | hmd5:hmac_key_word}}'>
+          <div class="input-group-addon copy_btn" data-clipboard-text='{{hmac_hash_text | hmd5:hmac_key_word}}'>Copy to Clipboard</div>
+        </div>
+    </div>
+</div>
+
+
+<div class='row' ng-show='show_what==3'>
+    <div class="col-sm-7">
+        <label>Input string (input)</label>
+        <textarea id="text-input" rows="2" class='form-control' ng-model='sha512_hash_text'></textarea>
+    </div>
+    <div class="col-sm-5">
+        <label>SHA-512 Hash (output)</label>
+        <br>
+        <div class="input-group">
+          <input type="text" class="form-control" value='{{sha512_hash_text | sha512_filter}}'>
+          <div class="input-group-addon copy_btn" data-clipboard-text='{{sha512_hash_text | sha512_filter}}'>Copy to Clipboard</div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class='row' ng-show='show_what==4'>
+    <div class="col-sm-7">
+        <label>Input string (input)</label>
+        <textarea id="text-input" rows="2" class='form-control' ng-model='sha384_hash_text'></textarea>
+    </div>
+    <div class="col-sm-5">
+        <label>SHA-384 Hash (output)</label>
+        <br>
+        <div class="input-group">
+          <input type="text" class="form-control" value='{{sha384_hash_text | sha384_filter}}'>
+          <div class="input-group-addon copy_btn" data-clipboard-text='{{sha384_hash_text | sha384_filter}}'>Copy to Clipboard</div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class='row' ng-show='show_what==5'>
+    <div class="col-sm-7">
+        <label>Input string (input)</label>
+        <textarea id="text-input" rows="2" class='form-control' ng-model='sha256_hash_text'></textarea>
+    </div>
+    <div class="col-sm-5">
+        <label>SHA-256 Hash (output)</label>
+        <br>
+        <div class="input-group">
+          <input type="text" class="form-control" value='{{sha256_hash_text | sha256_filter}}'>
+          <div class="input-group-addon copy_btn" data-clipboard-text='{{sha256_hash_text | sha256_filter}}'>Copy to Clipboard</div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class='row' ng-show='show_what==6'>
+    <div class="col-sm-7">
+        <label>Input string (input)</label>
+        <textarea id="text-input" rows="2" class='form-control' ng-model='sha224_hash_text'></textarea>
+    </div>
+    <div class="col-sm-5">
+        <label>SHA-224 Hash (output)</label>
+        <br>
+        <div class="input-group">
+          <input type="text" class="form-control" value='{{sha224_hash_text | sha224_filter}}'>
+          <div class="input-group-addon copy_btn" data-clipboard-text='{{sha224_hash_text | sha224_filter}}'>Copy to Clipboard</div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row" ng-show='show_what==7'>
+<p>Generate complix randrom password in a second</p>
+    <div class="col-sm-5">
+        <label>Allowed Password Characters</label>
+        <textarea class='form-control' ng-model='allowed_chars' rows='3'></textarea>
+        <br>
+        <label>Password Length</label>
+        <input type='number' class='form-control' ng-model='pass_size'/>
+    </div>
+    <div class="col-sm-7">
+        <label>Generated Text (string) (output)</label>
+        <textarea class='form-control' readonly rows='3' ng-model='output'></textarea>
+        <small class='btn btn-xs btn-default copy_btn' data-clipboard-text='{{output}}'>copy to clipboard</small>
+        <div class="clearfix"></div><br><br>
+        <button class='btn btn-primary btn-block btn-lg' ng-click='generate_pass()'>Refresh</button>
+    </div>
+</div>
+
+
+
+
+
+<div class="clearfix"></div>
+<br>
+
+
+
+<div ng-include src='"../../../templates/footerarea.html"'></div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+
+    <script  type="text/javascript" src="js/md5.min.js"></script>
+    <script  type="text/javascript" src="js/sha512.min.js"></script>
+    <script type="text/javascript">
+
+    var clipboard_copy = new Clipboard('.copy_btn');
+    clipboard_copy.on('success', function(e) { toastr.warning('Clipboard: Hash Was Copied.') });
+
+        var myApp=angular.module('myApp',['ngRoute']);
+        myApp.filter('md5',function(){
+            return function(string){
+                if(string) return md5(string);
+                else return "MD5 hash";
+            }
+        });
+
+
+        myApp.filter('hmd5',function(){
+            return function(string,hash){
+                if(string) return md5(string,hash);   
+                else return "HMD5 hash";
+            }
+        });
+
+        myApp.filter('sha512_filter',function(){
+            return function(string){
+                if(string) return sha512(string);   
+                else return "SHA-512 Hash";
+            }
+        });
+        myApp.filter('sha384_filter',function(){
+            return function(string){
+                if(string) return sha384(string);   
+                else return "SHA-384 Hash";
+            }
+        });
+        myApp.filter('sha256_filter',function(){
+            return function(string){
+                if(string) return sha512_256(string);   
+                else return "SHA-256 Hash";
+            }
+        });
+        myApp.filter('sha224_filter',function(){
+            return function(string){
+                if(string) return sha512_224(string);   
+                else return "SHA-224 Hash";
+            }
+        });
+
+
+
+
+
+        myApp.controller('MainController',function($scope){
+$scope.show_what = getParameterByName('show_what');
+$scope.allowed_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@-_/\\[](){}";
+$scope.pass_size = 14;
+    $scope.generate_pass = function(){
+            $scope.output = "";
+            for( var i=0; i < $scope.pass_size ; i++ ){
+                $scope.output += $scope.allowed_chars.charAt(Math.floor(Math.random() * $scope.allowed_chars.length));
+            }
+            toastr.info('Hash Was Generated');
+    }
+$scope.generate_pass();
+        });
+    </script>
+
+
+<script type="text/javascript" src='../../../js-apps/sidebar_controller.js'></script>
+</body>
+</html>

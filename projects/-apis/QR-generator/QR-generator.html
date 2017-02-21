@@ -1,0 +1,138 @@
+<!doctype html>
+<html ng-app='myApp'>
+<head>
+
+<title>QR Code Generator</title>
+<meta charset='utf-8'>
+<link rel="icon" type="image/x-icon" href="../../../images/icon.png" />
+
+<link rel="stylesheet" href="../../../assets/css/bootstrap.min.css">
+<link href="../../../css/simple-sidebar.css" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/plugins/font-awesome-4.5.0/css/font-awesome.min.css">
+
+<script  type="text/javascript" src="../../../assets/angular/angular.min.js"></script>
+<script  type="text/javascript" src="../../../assets/angular/angular-route.min.js"></script>
+
+<script src="../../../assets/js/jquery-2.1.4.min.js"></script>
+<script src="../../../assets/js/bootstrap.min.js"></script><script type="text/javascript" src='../../../assets/plugins/bytesize.min.js'></script>
+
+<script type="text/javascript" src='../../../assets/plugins/clipboard.js/clipboard.min.js'></script>
+<link href="../../../assets/plugins/toastr/toastr.min.css" rel="stylesheet">
+<script type="text/javascript" src='../../../assets/plugins/toastr/toastr.min.js'></script>
+
+</head>
+<body ng-controller='MainController'>
+
+
+
+    <div id="wrapper">
+
+<div ng-include src='"../../../templates/sidebar.html"'></div>
+
+
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+
+<div ng-include src='"../../../templates/headerarea.html"'></div>
+<legend><h2><span class='fa fa-qrcode'></span> QR Generator : <small>Generate A QR code for Any (Word,Link,Code)</small></h2></legend>
+
+
+<div class="row">
+
+<h5 class='well'>
+- Generate a QR code for a (link,word,name) in less than a second. <br>
+- Normaly you read a QR code with a Barcode Scanner like in the stores & supermarkets. <br>
+- For QR scanning purposes: On android you can use this app <a href="https://play.google.com/store/apps/details?id=me.scan.android.client&hl=en">QR Code Reader</a> <br>
+- There is also Online QR scanning app in this link : <a href="https://webqr.com/">QR Code scanner</a> <br>
+- did you know, you can generate a QR code for your map location, when the user read the code it will redirect him to your map location. <br>
+</h5>
+
+
+
+<div class="row">
+    <div class="col-sm-12">    
+        <label>(Word/Link/Code) to Convert - الكلمة المراد تحويلها</label>
+      <input type="text" autofocus="autofocus" class="form-control" ng-model='text'>
+    </div>
+
+    <div class="clearfix"></div>
+    <br>
+
+    <div class="col-sm-6">    
+        <label>Size of Image [ {{size}}px ]</label>
+      <input type="range" class="form-control widthfix" ng-model='size' min='40' max='800' step='10'>
+    </div>
+    <div class="col-sm-6">    
+        <label>Image Padding [ {{padding}}px ]</label>
+      <input type="range" class="form-control widthfix" ng-model='padding' min='0' max='30'>
+    </div>    
+</div>
+
+
+<div class="clearfix"></div>
+<br>
+
+
+    <image class='img img-rounded' ng-src='{{link}}' style='border:2px dashed #333'>
+    <h5>To Download just use (Save Image As)</h5>
+    <div class="clearfix"></div>
+
+    <div class='well well-sm'>
+
+    <b>Image Tag: </b><br>
+    {{image}}
+    <br><b>Linking: </b><br>
+    <code>API Link: </code> {{link}}
+<br>
+    </div>
+
+
+</div>
+
+
+
+<div ng-include src='"../../../templates/footerarea.html"'></div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+
+
+    <script type="text/javascript">
+var myApp=angular.module('myApp',['ngRoute']);
+myApp.controller('MainController',function($scope){
+    var base_url = 'http://ahmed-badawy.com/site/'
+    $scope.text = "Hello World";
+    $scope.size = 200;
+    $scope.padding = 5;
+
+    $scope.construct_img = function(){
+        $scope.link = base_url+"api/qr-gene/"+$scope.text+"?size="+$scope.size+"&padding="+$scope.padding;
+        $scope.image = "<img src='"+$scope.link+"' />";
+    }
+    $scope.construct_img();
+
+    $scope.$watchGroup(["text","size","padding"],function(){
+        console.log("hello");
+        $scope.construct_img();
+    })
+});
+    </script>
+    <script  type="text/javascript" src="../../../js-apps/layout.js"></script>
+
+
+<script type="text/javascript" src='../../../js-apps/sidebar_controller.js'></script>
+</body>
+</html>

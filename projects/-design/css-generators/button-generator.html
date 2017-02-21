@@ -1,0 +1,410 @@
+<!doctype html>
+<html ng-app='myApp' ng-controller='MainController'>
+<head>
+
+<title>Button Generator</title>
+<meta charset='utf-8'>
+<link rel="icon" type="image/x-icon" href="../../../images/icon.png" />
+
+<link rel="stylesheet" href="../../../assets/css/bootstrap.min.css">
+<link href="../../../css/simple-sidebar.css" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/plugins/font-awesome-4.5.0/css/font-awesome.min.css">
+
+<script  type="text/javascript" src="../../../assets/angular/angular.min.js"></script>
+<script  type="text/javascript" src="../../../assets/angular/angular-route.min.js"></script>
+
+<script src="../../../assets/js/jquery-2.1.4.min.js"></script>
+<script src="../../../assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src='../../../assets/plugins/clipboard.js/clipboard.min.js'></script>
+<link href="../../../assets/plugins/toastr/toastr.min.css" rel="stylesheet">
+<script type="text/javascript" src='../../../assets/plugins/toastr/toastr.min.js'></script>
+<script type="text/javascript" src='../../../assets/plugins/bytesize.min.js'></script>
+
+
+<script  type="text/javascript" src="../../../js-apps/layout.js"></script>
+<script  type="text/javascript" src="../../../js-apps/txtarea.js"></script>
+
+<style type="text/css">
+    #the_button{
+        text-align: center;
+        {{css_model}}
+    }
+    .panel div .col-sm-6{
+        margin-bottom:5px;
+    }
+
+    h4.panel-title a{
+        display:block;
+        width:100%;
+    }
+    h4.panel-title:hover{
+        background-color: #333;
+        color:white;
+    }
+</style>
+
+</head>
+
+<body>
+
+
+
+    <div id="wrapper">
+
+<div ng-include src='"../../../templates/sidebar.html"'></div>
+
+
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+
+<div ng-include src='"../../../templates/headerarea.html"'></div>
+
+
+<legend><h2><span class='fa fa-minus-square'></span> CSS3 Button Generator : <small>helps you generate Button's CSS Code</small></h2></legend>
+
+
+
+
+
+<div class="row">
+<div class="col-sm-6">
+
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  
+
+
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Basic Settings</a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+    <div class='col-sm-6'>
+        <label>Text: {{bs.text}}</label>
+        <input type='text' class='form-control' ng-model='bs.text'>
+    </div>
+    <div class='col-sm-6'>
+        <label>Text Color: {{bs.text_color}}</label>
+        <input type='color' class='form-control' ng-model='bs.text_color'>
+    </div>  
+
+    <div class='col-sm-6'>
+        <label>Font Size: {{bs.font_size}}</label>
+        <input type='range' class='form-control' min='9' max='100' ng-model='bs.font_size'>
+    </div>
+
+    <div class='col-sm-6'>
+        <label>Padding: {{bs.padding}}</label>
+        <input type='range' class='form-control' min='0' max='100' ng-model='bs.padding'>
+    </div>
+    <div class='col-sm-6'>
+        <label>Radius: {{bs.radius}}</label>
+        <input type='range' class='form-control' min='0' max='90' ng-model='bs.radius'>
+    </div>  
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Background</a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+
+    <div class='col-sm-6'>
+        <label>Angle: {{bs.bg_angle}}</label>
+        <input type='range' class='form-control' min='0' max='360' ng-model='bs.bg_angle'>
+    </div>  
+
+    <div class='col-sm-6'>
+        <label>Start: {{bs.bg_start}}</label>
+        <input type='range' class='form-control' min='0' max='100' ng-model='bs.bg_start'>
+    </div>  
+    <div class='col-sm-6'>
+        <label>End: {{bs.bg_end}}</label>
+        <input type='range' class='form-control' min='0' max='100' ng-model='bs.bg_end'>
+    </div> 
+
+    <div class='col-sm-6'>
+        <label>Start Color: {{bs.bg_start_color}}</label>
+        <input type='color' class='form-control' ng-model='bs.bg_start_color'>
+    </div>  
+    <div class='col-sm-6'>
+        <label>End Color: {{bs.bg_end_color}}</label>
+        <input type='color' class='form-control' ng-model='bs.bg_end_color'>
+    </div>  
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingThree">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Drop Shadow </a>
+      </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+      <div class="panel-body">
+    <div class='col-sm-6'>
+        <label>Shadow Vertical: {{bs.button_shadow_v}}</label>
+        <input type='range' class='form-control' min='-100' max='100' ng-model='bs.button_shadow_v'>
+    </div> 
+    <div class='col-sm-6'>
+        <label>Shadow Horizontal: {{bs.button_shadow_h}}</label>
+        <input type='range' class='form-control' min='-100' max='100' ng-model='bs.button_shadow_h'>
+    </div> 
+
+    <div class='col-sm-6'>
+        <label>Blur: {{bs.button_shadow_blur}}</label>
+        <input type='range' class='form-control' min='0' max='30' ng-model='bs.button_shadow_blur'>
+    </div> 
+    <div class='col-sm-6'>
+        <label>Opacity: {{bs.button_shadow_opacity}}</label>
+        <input type='range' class='form-control' min='0' max='1' step='.01' ng-model='bs.button_shadow_opacity'>
+    </div> 
+    <div class='col-sm-6'>
+        <label>Button Shadow Color: {{bs.button_shadow_color}}</label>
+        <input type='color' class='form-control' ng-model='bs.button_shadow_color'>
+    </div>  
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingFour">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Text Shadow</a>
+      </h4>
+    </div>
+    <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+      <div class="panel-body">
+
+    <div class='col-sm-6'>
+        <label>Text Shadow Vertical: {{bs.text_shadow_v}}</label>
+        <input type='range' class='form-control' min='-100' max='100' ng-model='bs.text_shadow_v'>
+    </div> 
+    <div class='col-sm-6'>
+        <label>Text Shadow Horizontal: {{bs.text_shadow_h}}</label>
+        <input type='range' class='form-control' min='-100' max='100' ng-model='bs.text_shadow_h'>
+    </div> 
+    <div class='col-sm-6'>
+        <label>Blur: {{bs.text_shadow_blur}}</label>
+        <input type='range' class='form-control' min='0' max='30' ng-model='bs.text_shadow_blur'>
+    </div> 
+    <div class='col-sm-6'>
+        <label>Opacity: {{bs.text_shadow_opacity}}</label>
+        <input type='range' class='form-control' min='0' max='1' step='.01' ng-model='bs.text_shadow_opacity'>
+    </div> 
+
+    <div class='col-sm-6'>
+        <label>Text Shadow Color: {{bs.text_shadow_color}}</label>
+        <input type='color' class='form-control' ng-model='bs.text_shadow_color'>
+    </div> 
+
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+  
+</div>
+
+
+
+
+
+
+
+
+<div class="col-sm-6">
+
+<div class="clearfix"></div><br><br><br>
+    <div class='col-sm-12'>
+        <a id="the_button" style=''>{{bs.text}}</a>
+    </div>
+<div class="clearfix"></div><br><br><br>
+
+
+    <div id='textarea1'>
+        <p>CSS (input)</p>
+        <textarea class='form-control mytextarea' disabled rows='20' ng-model='css_model'></textarea>
+        <input type='file' class='hidden upload_input' />
+        <span class='fa fa-file-code-o btn file_btn hidden' title='Import a File'></span>
+        <span class='fa fa-copy btn copy_btn' title='Copy Text'></span>
+        <span class='fa fa-cut btn cut_btn hidden' title='Cut Text'></span>
+        <span class='fa fa-th-list btn selectAll' title='Select All Text'></span>
+        <span class='fa fa-trash btn emptyAll hidden' title='Empty All Text'></span>
+
+        <a href='' download="style.css" style="display:none" class='hidden download_content_link'></a>
+        <span class='fa fa-save btn download_content' title='Download Content'></span>
+
+
+        <span class='fa fa-hand-lizard-o fa-lg pull-right'></span>
+        <span class='pull-right txtsize' style='color:#aaa;font-weight:bolder'></span>
+        <span class='pull-right'>&nbsp;&nbsp;</span>
+        <span class='fa fa-hand-peace-o fa-lg pull-right'></span>
+        <span class='pull-right txtlength' style='color:#aaa;font-weight:bolder'></span>
+    </div>
+
+</div>
+
+</div>
+
+
+
+
+<div class="clearfix"></div><br>
+<div class="clearfix"></div><br>
+<div class="clearfix"></div><br>
+
+
+
+<div ng-include src='"../../../templates/footerarea.html"'></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+
+<script type="text/javascript">
+    
+window.onload = function(){
+    apply_text_area('textarea1','text/css');
+};
+    function hexToRgb(hex) {
+        // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+        var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+        hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+            return r + r + g + g + b + b;
+        });
+
+        var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16)
+        } : null;
+    }
+
+</script>
+<script type="text/javascript">
+    var myApp=angular.module('myApp',['ngRoute']);
+    myApp.controller('MainController',function($scope,$timeout){
+
+        $scope.bs = {
+text:"My Button",
+text_color: "#ffffff",
+font_size:50,
+padding:30,
+radius:30,
+
+bg_angle:270,
+bg_start:30,
+bg_end:70,
+bg_start_color:"#5e1b17",
+bg_end_color:"#aa0900",
+
+button_shadow_v:8,
+button_shadow_h:-14,
+button_shadow_blur:26,
+button_shadow_opacity:.75,
+button_shadow_color:"#363537",
+
+text_shadow_v:6,
+text_shadow_h:-9,
+text_shadow_blur:19,
+text_shadow_opacity:1,
+text_shadow_color:"#272727"
+        };
+
+        $scope.css_model = "";
+        var promise = false;
+
+
+        $scope.$watchGroup([
+"bs.text","bs.text_color","bs.font_size","bs.padding","bs.radius",
+"bs.bg_angle","bs.bg_start","bs.bg_end","bs.bg_start_color","bs.bg_end_color",
+"bs.button_shadow_v","bs.button_shadow_h","bs.button_shadow_blur","bs.button_shadow_opacity","bs.button_shadow_color",
+"bs.text_shadow_v","bs.text_shadow_h","bs.text_shadow_blur","bs.text_shadow_opacity","bs.text_shadow_color"
+],function(){
+            if(promise) $timeout.cancel(promise);
+            promise = $timeout(function(){
+                $scope.compile();
+            },10);
+        });
+
+        $scope.compile = function(){
+            text_color = hexToRgb($scope.bs.text_color);
+            text_shadow_color = hexToRgb($scope.bs.text_shadow_color);
+            background_start_color = hexToRgb($scope.bs.bg_start_color);
+            background_end_color = hexToRgb($scope.bs.bg_end_color);
+            button_shadow_color = hexToRgb($scope.bs.button_shadow_color);
+
+    $scope.css_model = 
+`color: rgb(${text_color.r}, ${text_color.g}, ${text_color.b});
+font-size: ${$scope.bs.font_size}px;
+padding: ${$scope.bs.padding}px;
+text-shadow: ${$scope.bs.text_shadow_v}px ${$scope.bs.text_shadow_h}px ${$scope.bs.text_shadow_blur}px rgba(${text_shadow_color.r}, ${text_shadow_color.g}, ${text_shadow_color.b}, ${$scope.bs.text_shadow_opacity});
+-webkit-border-radius: ${$scope.bs.radius}px;
+-moz-border-radius: ${$scope.bs.radius}px;
+border-radius: ${$scope.bs.radius}px;
+
+background: rgb(${background_start_color.r}, ${background_start_color.g}, ${background_start_color.b});
+background: -moz-linear-gradient(${$scope.bs.bg_angle}deg, rgb(${background_start_color.r}, ${background_start_color.g}, ${background_start_color.b}) ${$scope.bs.bg_start}%, rgb(${background_end_color.r}, ${background_end_color.g}, ${background_end_color.b}) ${$scope.bs.bg_end}%);
+background: -webkit-linear-gradient(${$scope.bs.bg_angle}deg, rgb(${background_start_color.r}, ${background_start_color.g}, ${background_start_color.b}) ${$scope.bs.bg_start}%, rgb(${background_end_color.r}, ${background_end_color.g}, ${background_end_color.b}) ${$scope.bs.bg_end}%);
+background: -o-linear-gradient(${$scope.bs.bg_angle}deg, rgb(${background_start_color.r}, ${background_start_color.g}, ${background_start_color.b}) ${$scope.bs.bg_start}%, rgb(${background_end_color.r}, ${background_end_color.g}, ${background_end_color.b}) ${$scope.bs.bg_end}%);
+background: -ms-linear-gradient(${$scope.bs.bg_angle}deg, rgb(${background_start_color.r}, ${background_start_color.g}, ${background_start_color.b}) ${$scope.bs.bg_start}%, rgb(${background_end_color.r}, ${background_end_color.g}, ${background_end_color.b}) ${$scope.bs.bg_end}%);
+background: linear-gradient(${$scope.bs.bg_angle}deg, rgb(${background_start_color.r}, ${background_start_color.g}, ${background_start_color.b}) ${$scope.bs.bg_start}%, rgb(${background_end_color.r}, ${background_end_color.g}, ${background_end_color.b}) ${$scope.bs.bg_end}%);
+
+-webkit-box-shadow: ${$scope.bs.button_shadow_v}px ${$scope.bs.button_shadow_h}px ${$scope.bs.button_shadow_blur}px rgba(${button_shadow_color.r}, ${button_shadow_color.g}, ${button_shadow_color.b}, ${$scope.bs.button_shadow_opacity});
+-moz-box-shadow:    ${$scope.bs.button_shadow_v}px ${$scope.bs.button_shadow_h}px ${$scope.bs.button_shadow_blur}px rgba(${button_shadow_color.r}, ${button_shadow_color.g}, ${button_shadow_color.b}, ${$scope.bs.button_shadow_opacity});
+box-shadow:         ${$scope.bs.button_shadow_v}px ${$scope.bs.button_shadow_h}px ${$scope.bs.button_shadow_blur}px rgba(${button_shadow_color.r}, ${button_shadow_color.g}, ${button_shadow_color.b}, ${$scope.bs.button_shadow_opacity});
+
+    `;
+        }
+        $scope.compile();
+
+    });
+</script>
+
+
+<script type="text/javascript" src='../../../js-apps/sidebar_controller.js'></script>
+</body>
+</html>

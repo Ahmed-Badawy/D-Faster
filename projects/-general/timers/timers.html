@@ -1,0 +1,361 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+
+<title>Timers</title>
+<meta charset='utf-8'>
+<link rel="icon" type="image/x-icon" href="../../../images/icon.png" />
+
+
+<link rel="stylesheet" href="../../../assets/css/bootstrap.min.css">
+<link href="../../../css/simple-sidebar.css" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/plugins/font-awesome-4.5.0/css/font-awesome.min.css">
+
+<script  type="text/javascript" src="../../../assets/angular/angular.min.js"></script>
+<script  type="text/javascript" src="../../../assets/angular/angular-route.min.js"></script>
+
+<script src="../../../assets/js/jquery-2.1.4.min.js"></script>
+<script src="../../../assets/js/bootstrap.min.js"></script>
+<link href="../../../assets/plugins/toastr/toastr.min.css" rel="stylesheet">
+<script type="text/javascript" src='../../../assets/plugins/toastr/toastr.min.js'></script>
+
+<script  type="text/javascript" src="../../../js-apps/layout.js"></script>
+
+<style type="text/css">
+    .center-timer{
+        color:#666;
+        font-size: 400%;
+        /*width:100%;*/
+    }
+
+
+    #clockdiv{
+        font-size: 300%;
+    }
+    .smalltext{
+        display:block;
+    }
+</style>
+
+
+</head>
+
+<body onload="show();">
+
+
+
+    <div id="wrapper" ng-controller='MainController'>
+
+<div ng-include src='"../../../templates/sidebar.html"'></div>
+
+
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+
+<div ng-include src='"../../../templates/headerarea.html"'></div>
+
+
+<legend><h2> <span class='fa fa-clock-o'></span> Timers: <small>Create A CountDown or a Stop Watch Timer in a second</small></h2></legend>
+
+
+<div class='row'>
+  <ul class="nav nav-tabs">
+    <li ng-class='{active:show_what==1}'><a href='#' ng-click='show_what=1'>Stop Watch</a></li>
+    <li ng-class='{active:show_what==2}'><a href='#' ng-click='show_what=2'>CountDown Timer</a></li>
+  </ul>
+</div>
+    <div class="clearfix"></div><br>
+
+
+
+<div class='row' ng-show='show_what==1'>
+    <div class="col-sm-12">
+
+        <div class='text-center center-timer' id='time'>Stop Watch</div>
+        <div class='text-center center-timer' id='saved_times'>
+            
+        </div>
+<div class="clearfix"></div><br>
+
+
+<div class="row">
+        <input type="button" class='btn btn-default btn-lg col-sm-3' value="Start" onclick="start();">
+        <input type="button" class='btn btn-default btn-lg col-sm-3' id='stop_btn' value="Pause" onclick="stop();">
+        <input type="button" class='btn btn-danger btn-lg col-sm-3' value="Reset" onclick="reset()">
+        <button class='btn btn-primary btn-lg col-sm-3' onclick="save_time()">Save Time</button>    
+</div>
+
+
+
+    </div>
+</div>
+
+
+<div class='row' ng-show='show_what==2'>
+    <div class="col-sm-12">
+<div class='text-center center-timer' id="clockdiv">
+  <div class='col-sm-3'>
+    <span class="smalltext">Days</span>
+    <span class="days"></span>
+  </div>
+  <div class='col-sm-3'>
+    <span class="smalltext">Hours</span>
+    <span class="hours"></span>
+  </div>
+  <div class='col-sm-3'>
+    <span class="smalltext">Minutes</span>
+    <span class="minutes"></span>
+  </div>
+  <div class='col-sm-3'>
+    <span class="smalltext">Seconds</span>
+    <span class="seconds"></span>
+  </div>
+</div>
+
+<div class="clearfix"></div><br>
+
+
+<div class="well">
+    <div class="col-sm-3">  Days: <input type='number' ng-model='days' class='form-control' />     </div>
+    <div class="col-sm-3">  Hours: <input type='number' ng-model='hours' class='form-control' />    </div>
+    <div class="col-sm-3">  Minutes: <input type='number' ng-model='mins' class='form-control' />  </div>
+    <div class="col-sm-3">  Seconds: <input type='number' ng-model='secs' class='form-control' />  </div>
+
+<div class="clearfix"></div><br>
+
+    <div class="col-sm-12">
+        <button class='btn btn-default btn-lg col-sm-6' ng-click='ng_begin_countdown()'>Begin CountDown</button>
+        <button class='btn btn-default btn-lg col-sm-6' onclick='stop_countdown()'>Stop CountDown</button>
+    </div>
+
+    <div class="clearfix"></div>
+</div>
+
+
+    </div>
+</div>
+
+
+<div class="clearfix"></div>
+<br>
+
+<div ng-include src='"../../../templates/footerarea.html"'></div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+
+    <script type="text/javascript">
+        var myApp=angular.module('myApp',['ngRoute']);
+
+        myApp.controller('MainController',function($scope,$timeout){
+            $scope.show_what = getParameterByName('show_what');
+            $scope.days = 0;
+            $scope.hours = 0; 
+            $scope.mins = 0;
+            $scope.secs = 0;
+
+            $scope.ng_begin_countdown = function(){
+                if( $scope.days==0 && 
+                    $scope.hours==0 && 
+                    $scope.mins==0 && 
+                    $scope.secs==0
+                    )return;
+                begin_countdown($scope.days,$scope.hours,$scope.mins,$scope.secs);
+            }
+        });
+
+var clsStopwatch = function() {
+        var startAt = 0;    // Time of last start / resume. (0 if not running)
+        var lapTime = 0;    // Time on the clock when last stopped in milliseconds
+        var now = function() {
+            return (new Date()).getTime(); 
+        }; 
+        // Public methods
+        // Start or resume
+        this.start = function() {
+            startAt = startAt ? startAt : now();
+        };
+        this.stop = function() {
+            // If running, update elapsed time otherwise keep it
+            lapTime = startAt ? lapTime + now() - startAt : lapTime;
+            startAt = 0; // Paused
+        };
+        // Reset
+        this.reset = function() {
+                lapTime = startAt = 0;
+        };
+        // Duration
+        this.time = function() {
+                return lapTime + (startAt ? now() - startAt : 0); 
+        };
+    };
+
+
+var x = new clsStopwatch();
+var $time;
+var clocktimer;
+
+function pad(num, size) {
+    // if(strip_which_side==undefined) strip_which_side = false;
+    var s = "0000" + num;
+    return s.substr(s.length - size );
+}
+function formatTime(time) {
+    var h = m = s = ms = 0;
+    var newTime = '';
+
+    h = Math.floor( time / (60 * 60 * 1000) );
+    time = time % (60 * 60 * 1000);
+    m = Math.floor( time / (60 * 1000) );
+    time = time % (60 * 1000);
+    s = Math.floor( time / 1000 );
+    ms = time % 1000;
+
+    newTime = pad(h,2) + ':' + pad(m,2) + ':' + pad(s,2) + ':' + pad(ms,3);
+    return newTime;
+}
+
+function show() {
+    $time = document.getElementById('time');
+    update();
+}
+function update() {
+    $time.innerHTML = formatTime(x.time());
+}
+function start() {
+    clocktimer = setInterval("update()",100);
+    x.start();
+}
+function reset() {
+    stop();
+    x.reset();
+    update();
+}
+
+function stop() {
+    x.stop();
+    clearInterval(clocktimer);
+    toastr.info("Stop Watch Has Stopped");
+}
+document.onkeypress = function() {
+    // key_dtl = key_dtl || window.event;
+    // var uni_code = key_dtl.keyCode || key_dtl.which;
+    // var key_name = String.fromCharCode(uni_code);
+    // alert(key_name);
+    x.stop();
+    clearInterval(clocktimer);
+    // document.getElementById("stop_btn").click();
+    // stop();
+}
+function save_time() {
+    var cur_time_obj = {
+        time : x.time(),
+        formated_time : formatTime(x.time())
+    }
+    // console.log(cur_time_obj);
+    document.getElementById('saved_times').innerHTML += "<h3 class='col-sm-2'>"+cur_time_obj.formated_time+"</h3>";
+}
+
+
+
+
+
+/*--------------------------------------------------------------
+CountDown Timer
+--------------------------------------------------------------*/
+function getTimeRemaining(endtime) {
+  var t = Date.parse(endtime) - Date.parse(new Date());
+  var seconds = Math.floor((t / 1000) % 60);
+  var minutes = Math.floor((t / 1000 / 60) % 60);
+  var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+  var days = Math.floor(t / (1000 * 60 * 60 * 24));
+  return {
+    'total': t,
+    'days': days,
+    'hours': hours,
+    'minutes': minutes,
+    'seconds': seconds
+  };
+}
+
+
+var timeinterval; 
+var new_timer = true;
+
+
+function initializeClock(id, endtime) {
+  new_timer = true;
+
+  var clock = document.getElementById(id);
+  var daysSpan = clock.querySelector('.days');
+  var hoursSpan = clock.querySelector('.hours');
+  var minutesSpan = clock.querySelector('.minutes');
+  var secondsSpan = clock.querySelector('.seconds');
+
+  function updateClock() {
+    if(new_timer){
+        console.log(new_timer);
+        clearInterval(timeinterval);
+        new_timer = false;
+        return;
+    }
+
+    var t = getTimeRemaining(endtime);
+
+    daysSpan.innerHTML = t.days;
+    hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+    minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+    secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+
+    if (t.total <= 0) {
+      clearInterval(timeinterval);
+      new_timer = true;
+      clockdiv.innerHTML += "<h1>CountDown Has Finished</h1>";
+    }
+  }
+
+ updateClock();
+ timeinterval = setInterval(updateClock, 1000);
+}
+
+
+function stop_countdown(){
+    new_timer = true;
+    toastr.info("Timer Has Stopped");
+}
+function begin_countdown(days,hours,mins,secs){
+// function begin_countdown(){
+    // var days = 0, hours = 0, mins = 0, secs = 3;
+    // var deadline = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000);
+
+
+    days = days * 24 * 60 * 60 * 1000;
+    hours = hours * 60 * 60 * 1000;
+    mins = mins * 60 * 1000;
+    secs = secs * 1000;
+    // var deadline_date = 3 * 24 * 60 * 60 * 1000;
+    // var deadline_date = (days * 24) * (hous * 60) * (mins * 1000);
+    var deadline_date = days+hours+mins+secs;
+    var deadline = new Date(Date.parse(new Date()) + deadline_date);
+    initializeClock('clockdiv', deadline);
+}
+
+    </script>
+
+
+<script type="text/javascript" src='../../../js-apps/sidebar_controller.js'></script>
+</body>
+</html>

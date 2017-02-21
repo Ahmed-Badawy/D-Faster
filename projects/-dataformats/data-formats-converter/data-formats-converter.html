@@ -1,0 +1,219 @@
+<!doctype html>
+<html ng-app='myApp'>
+<head>
+
+<title>Data Formats Converter</title>
+<meta charset='utf-8'>
+<link rel="icon" type="image/x-icon" href="../../../images/icon.png" />
+
+<link rel="stylesheet" href="../../../assets/css/bootstrap.min.css">
+<link href="../../../css/simple-sidebar.css" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/plugins/font-awesome-4.5.0/css/font-awesome.min.css">
+
+<script  type="text/javascript" src="../../../assets/angular/angular.min.js"></script>
+<script  type="text/javascript" src="../../../assets/angular/angular-route.min.js"></script>
+
+<script src="../../../assets/js/jquery-2.1.4.min.js"></script>
+<script src="../../../assets/js/bootstrap.min.js"></script><script type="text/javascript" src='../../../assets/plugins/bytesize.min.js'></script>
+
+<script type="text/javascript" src='../../../assets/plugins/clipboard.js/clipboard.min.js'></script>
+<link href="../../../assets/plugins/toastr/toastr.min.css" rel="stylesheet">
+<script type="text/javascript" src='../../../assets/plugins/toastr/toastr.min.js'></script>
+
+<script  type="text/javascript" src="../../../js-apps/layout.js"></script>
+<script  type="text/javascript" src="../../../js-apps/txtarea.js"></script>
+
+</head>
+<body ng-controller='MainController'>
+
+
+
+    <div id="wrapper">
+
+<div ng-include src='"../../../templates/sidebar.html"'></div>
+
+
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+
+<div ng-include src='"../../../templates/headerarea.html"'></div>
+<legend><h2><span class='fa fa-exchange'></span> Data Formats Converter: <small>Convert Between Data Formats With Ease (JSON , XML , CSV , YAML , HTML tables , SQL Statements , PHP_arrays , PHP_Objects)</small></h2></legend>
+
+
+<div class="row">
+<p class='well well-sm'>
+- This APP will do it's Best to convert between data formats. if it couldn't convert you will get an error Message. <br>
+- ps: Both CSV & SQL formats doesn't allow multidimensional arrays. <br>
+- Sorry! we still have some problems in converting to XML.(working on it)
+</p>
+
+
+<div id='textarea1' class='col-sm-6'>
+
+<label>Input Data Format</label>
+<SELECT class='form-control' ng-model='from_type'>
+    <option value='json'>JSON</option>
+    <option value='xml'>XML</option>
+    <option value='yaml'>YAML</option> 
+    <option value='csv'>CSV</option>
+    <option value='php_array'>PHP Arrays</option>
+    <option value='php_object'>PHP Objects</option>
+</SELECT>
+<br>
+
+    <p>{{from_type}} Data (input)</p>
+    <textarea class='form-control mytextarea' rows='20' ng-model='before'></textarea>
+    <input type='file' class='hidden upload_input' />
+    <span class='fa fa-file-code-o btn file_btn' title='Import a File'></span>
+    <span class='fa fa-copy btn copy_btn' title='Copy Text'></span>
+    <span class='fa fa-cut btn cut_btn' title='Cut Text'></span>
+    <span class='fa fa-th-list btn selectAll' title='Select All Text'></span>
+    <span class='fa fa-trash btn emptyAll' title='Empty All Text'></span>
+
+    <a href='' download="data.{{from_type}}" style="display:none" class='hidden download_content_link'></a>
+    <span class='fa fa-save btn download_content' title='Download Content'></span>
+
+
+    <span class='fa fa-hand-lizard-o fa-lg pull-right'></span>
+    <span class='pull-right txtsize' style='color:#aaa;font-weight:bolder'></span>
+    <span class='pull-right'>&nbsp;&nbsp;</span>
+    <span class='fa fa-hand-peace-o fa-lg pull-right'></span>
+    <span class='pull-right txtlength' style='color:#aaa;font-weight:bolder'></span>
+</div>
+
+<div id='textarea2' class='col-sm-6'>
+
+<label>Output Data Format</label>
+<SELECT class='form-control' ng-model='to_type' ng-change='convert()'>
+    <!-- <option value='javascript'>JavaScript</option> -->
+        <optgroup label="Data Formats">
+    <option value='json'>JSON</option>
+    <option value='xml'>XML</option>
+    <option value='yaml'>YAML</option> 
+    <option value='csv'>CSV</option>
+    <option value='sql'>SQL Statement</option>
+        </optgroup>
+        <optgroup label="Rendable HTML">
+    <option value='html_table_single'>HTML Table (Single Dimension Array)</option>
+    <option value='html_table_multi'>HTML Table (Multible Dimensions Array)</option>
+        </optgroup>
+        <optgroup label="Programable Data">
+    <option value='php_array'>PHP Arrays</option>
+    <option value='php_object'>PHP Objects</option>
+        </optgroup>
+</SELECT>
+<br>
+
+    <p>{{to_type}} Data (output)</p>
+    <textarea class='form-control mytextarea' rows='20' readonly>{{after}}</textarea>
+    <input type='file' class='hidden upload_input' />
+    <span class='fa fa-file-code-o btn file_btn hidden' title='Import a File'></span>
+    <span class='fa fa-copy btn copy_btn' title='Copy Text'></span>
+    <span class='fa fa-cut btn cut_btn hidden' title='Cut Text'></span>
+    <span class='fa fa-th-list btn selectAll' title='Select All Text'></span>
+    <span class='fa fa-trash btn emptyAll hidden' title='Empty All Text'></span>
+
+    <a href='' download="data.{{to_type}}" style="display:none" class='hidden download_content_link'></a>
+    <span class='fa fa-save btn download_content' title='Download Content'></span>
+
+
+    <span class='fa fa-hand-lizard-o fa-lg pull-right'></span>
+    <span class='pull-right txtsize' style='color:#aaa;font-weight:bolder'></span>
+    <span class='pull-right'>&nbsp;&nbsp;</span>
+    <span class='fa fa-hand-peace-o fa-lg pull-right'></span>
+    <span class='pull-right txtlength' style='color:#aaa;font-weight:bolder'></span>
+
+</div>
+
+
+
+<div class="clearfix"></div>
+<br>
+<button class='btn btn-primary btn-lg btn-block' ng-click='convert()'>{{button_text}}</button>
+
+<div class="clearfix"></div><br>
+</div>
+
+
+
+<div ng-include src='"../../../templates/footerarea.html"'></div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+
+
+    <script type="text/javascript">
+
+var myApp=angular.module('myApp',['ngRoute']);
+
+myApp.controller('MainController',function($scope,$http,$timeout){
+    $scope.from_type = "json";
+    $scope.to_type = "csv";
+
+    $scope.button_text = "Convert";
+    $scope.compiler_api_link = server_link+"site/api/data-types-converter";
+    $scope.before = '[{"id":1,"name":"ahmed","age":12,"height":190,"phone":585,"img":"1.png"},{"id":2,"name":"mohamed","age":40,"height":160,"phone":3040,"img":"2.png"},{"id":3,"name":"ali","age":50,"height":180,"phone":8080,"img":"3.png"}]';
+    $scope.after = '';
+
+    var counter = false;
+    $scope.$watch('before',function(){
+        if(counter) { $timeout.cancel(counter); counter=false;}
+        counter = $timeout(function(){
+            $scope.convert();
+        },1000)
+    })
+
+    $scope.convert = function(){
+        if($scope.to_type=="javascript"){
+            $scope.after = JSON.stringify($scope.before);
+            return;
+        }else if($scope.to_type==$scope.from_type){
+            $scope.after = $scope.before;
+            return;
+        }
+
+        $scope.button_text = "Loading";
+        $http.post($scope.compiler_api_link,{"from-type":$scope.from_type,"to-type":$scope.to_type,"data-content":$scope.before}).then(function(data){
+            // console.log(data);
+            if(data.data && data.data!="NULL") {
+                $scope.after = data.data;
+                toastr.success("Converting Data Done");
+            }else $scope.output_failure();
+                $scope.button_text = "Convert";
+        }, function(){
+            $scope.output_failure();
+            $scope.button_text = "Convert";
+        });
+    }
+    $scope.convert();
+    $scope.output_failure = function(){
+        console.log("error has happend");
+        $scope.after = "Sorry! Error Has Happened (Maybe Inserted Text isn't Valid)";
+    }
+
+
+});
+
+window.onload = function(){
+    apply_text_area('textarea1','text/plain');
+    apply_text_area('textarea2','text/plain');
+}
+
+    </script>
+
+<script type="text/javascript" src='../../../js-apps/sidebar_controller.js'></script>
+</body>
+</html>
