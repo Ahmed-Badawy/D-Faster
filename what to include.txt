@@ -1,6 +1,0 @@
-- page title
-- favicon
-- utf-8
-- title for page with fontawesome icon
-- usage tips
-- what is this application
