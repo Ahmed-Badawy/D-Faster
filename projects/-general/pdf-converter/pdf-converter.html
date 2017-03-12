@@ -1,0 +1,117 @@
+<!doctype html>
+<html ng-app='myApp'>
+<head>
+
+<title>HTML to PDf Converter</title>
+<meta charset='utf-8'>
+<link rel="icon" type="image/x-icon" href="../../../images/icon.png" />
+
+<link rel="stylesheet" href="../../../assets/css/bootstrap.min.css">
+<link href="../../../css/simple-sidebar.css" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/plugins/font-awesome-4.5.0/css/font-awesome.min.css">
+
+<script  type="text/javascript" src="../../../assets/angular/angular.min.js"></script>
+<script  type="text/javascript" src="../../../assets/angular/angular-route.min.js"></script>
+
+<script src="../../../assets/js/jquery-2.1.4.min.js"></script>
+<script src="../../../assets/js/bootstrap.min.js"></script><script type="text/javascript" src='../../../assets/plugins/bytesize.min.js'></script>
+
+<script type="text/javascript" src='../../../assets/plugins/clipboard.js/clipboard.min.js'></script>
+<link href="../../../assets/plugins/toastr/toastr.min.css" rel="stylesheet">
+<script type="text/javascript" src='../../../assets/plugins/toastr/toastr.min.js'></script>
+
+    <script  type="text/javascript" src="../../../js-apps/layout.js"></script>
+
+</head>
+<body ng-controller='MainController'>
+
+  <script type="text/javascript" src='jspdf.min.js'></script>
+
+    <div id="wrapper">
+<div ng-include src='"../../../templates/sidebar.html"'></div>
+
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+
+
+
+<div ng-include src='"../../../templates/headerarea.html"'></div>
+
+
+
+<legend><h2><span class='fa fa-file-pdf-o'></span> HTML to PDf Converter: <small>Converts HTML text to PDF format</small></h2></legend>
+
+
+<div class="row">
+
+    <h5>
+  <section>
+
+  <div class='col-sm-6'><textarea class="form-control" rows='10' ng-model='inputed_html'></textarea></div>
+  <div class='col-sm-6'>
+      <div style='border: 1px solid #dce4ec;height:auto;padding:10px' id='rendered_html'></div>
+      <button ng-click='download_as_pdf()' class='btn btn-primary btn-block btn-lg'>Download PDF file</button>
+  </div>
+
+
+  </section>
+    </h5>
+
+
+<div class="clearfix"></div>
+  <br><br>
+
+
+
+
+</div>
+
+
+<div ng-include src='"../../../templates/minification-footer.html"'></div>
+<div ng-include src='"../../../templates/footerarea.html"'></div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+
+<script type="text/javascript">
+var myApp = angular.module('myApp',[]);
+
+myApp.controller('MainController',function($scope,$timeout){
+  $scope.inputed_html = `<h1 style='color:red'>Hello World</h1>`;
+  var promise = false;
+
+  $scope.$watchGroup(['inputed_html'],function(){
+      if(promise) $timeout.cancel(promise);
+      promise = $timeout(function(){
+          $scope.render_html();
+      },1000);
+  });
+  $scope.render_html = function(){
+    document.getElementById('rendered_html').innerHTML = $scope.inputed_html;
+  }
+  $scope.render_html();
+  $scope.download_as_pdf = function(){
+    let doc = new jsPDF({})
+    doc.fromHTML( $scope.inputed_html ,10,10)
+    doc.autoPrint()
+    doc.save('my-pdf-file.pdf')    
+  }
+});
+</script>
+
+<script type="text/javascript" src='../../../js-apps/sidebar_controller.js'></script>
+</body>
+</html>

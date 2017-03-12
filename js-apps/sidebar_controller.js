@@ -150,6 +150,7 @@ utils_links = {
         converters: {name:'Converters',in_array:[
 {name:'Units Converter',location:'-general/units-converter/units-converter',icon:'exchange'}, 
 {name:'Number Systems',location:'-general/number-system-converter/number-system-converter',icon:'calculator'}, 
+{name:'HTML to PDF Converter',location:'-general/pdf-converter/pdf-converter',icon:'file-pdf-o'}, 
         ]}, 
 
 
